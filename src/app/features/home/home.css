@@ -4,26 +4,63 @@
   gap: 4rem;
   align-items: center;
   padding: 4rem 3rem;
-  background: linear-gradient(135deg, rgba(233, 69, 96, 0.05), rgba(96, 165, 250, 0.03));
-  border-radius: 16px;
-  margin-bottom: 3rem;
+  background:
+    linear-gradient(135deg, rgba(233, 69, 96, 0.15), rgba(233, 69, 96, 0.02)),
+    linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5)),
+    #0f0f1a;
+  border: 1px solid rgba(233, 69, 96, 0.3);
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #e94560, transparent);
+  box-shadow: 0 0 15px #e94560;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(233, 69, 96, 0.15), transparent 70%);
+  pointer-events: none;
 }
 
 .hero-content h1 {
   font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
+  font-weight: 900;
   line-height: 1.1;
   margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #f0f0f0 0%, #a0a0b0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 10px rgba(233, 69, 96, 0.5), 0 0 30px rgba(233, 69, 96, 0.3);
+}
+
+.hero-content h1 br {
+  display: block;
 }
 
 .hero-content p {
   font-size: 1.2rem;
-  color: #7a7a8a;
+  color: #a0a0b0;
   margin-bottom: 2rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
 }
 
 .hero-actions {
@@ -35,34 +72,42 @@
   display: inline-flex;
   align-items: center;
   padding: 0.85rem 1.75rem;
-  border-radius: 999px;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   transition: all 0.2s ease;
   border: none;
   cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: 'Courier New', monospace;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #e94560, #ff6b6b);
+  background: linear-gradient(135deg, #e94560, #b83549);
   color: white;
+  border: 2px solid #e94560;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  box-shadow: 0 0 20px rgba(233, 69, 96, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(233, 69, 96, 0.3);
+  box-shadow: 0 0 30px rgba(233, 69, 96, 0.5);
+  background: linear-gradient(135deg, #ff5566, #e94560);
 }
 
 .btn-secondary {
   background: transparent;
   color: #a0a0b0;
-  border: 1px solid #2a2a3e;
+  border: 2px solid #2a2a3e;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
 .btn-secondary:hover {
   border-color: #e94560;
   color: #e94560;
+  box-shadow: 0 0 15px rgba(233, 69, 96, 0.2);
 }
 
 .hero-stats {
@@ -72,40 +117,70 @@
 }
 
 .stat-box {
-  background: #1a1a2e;
-  border: 1px solid #2a2a3e;
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(15, 15, 26, 0.9), rgba(26, 26, 46, 0.9));
+  border: 1px solid rgba(233, 69, 96, 0.2);
   padding: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+  position: relative;
+}
+
+.stat-box::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #e94560;
+  box-shadow: 0 0 5px #e94560;
 }
 
 .stat-number {
   font-size: 2rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #e94560, #ff6b6b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-weight: 900;
+  color: #e94560;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 10px rgba(233, 69, 96, 0.6);
 }
 
 .stat-desc {
   color: #7a7a8a;
   font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Courier New', monospace;
 }
 
 .highlights {
   margin-bottom: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #2a2a3e;
 }
 
 .highlights h2 {
   font-size: 1.75rem;
-  color: #f0f0f0;
-  font-weight: 700;
+  color: #ffffff;
+  font-weight: 800;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #2a2a3e;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+  position: relative;
+}
+
+.highlights h2::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100px;
+  height: 2px;
+  background: #e94560;
+  box-shadow: 0 0 10px #e94560;
 }
 
 .highlights-grid {
@@ -115,9 +190,9 @@
 }
 
 .highlight-card {
-  background: #1a1a2e;
-  border: 1px solid #2a2a3e;
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(15, 15, 26, 0.95), rgba(26, 26, 46, 0.95));
+  border: 1px solid rgba(233, 69, 96, 0.2);
+  border-radius: 0;
   padding: 2rem;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -125,12 +200,29 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.highlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #e94560, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .highlight-card:hover {
   border-color: #e94560;
   transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(233, 69, 96, 0.1);
+  box-shadow: 0 8px 32px rgba(233, 69, 96, 0.15), 0 0 15px rgba(233, 69, 96, 0.1);
+}
+
+.highlight-card:hover::before {
+  opacity: 1;
 }
 
 .highlight-tag {
@@ -138,14 +230,17 @@
   color: #e94560;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  font-family: 'Courier New', monospace;
 }
 
 .highlight-card h3 {
-  color: #f0f0f0;
+  color: #ffffff;
   font-size: 1.25rem;
   margin: 0;
   font-weight: 700;
+  letter-spacing: 1px;
+  font-family: 'Courier New', monospace;
 }
 
 .highlight-card p {

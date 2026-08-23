@@ -4,18 +4,35 @@
 
 .maps-section h1 {
   font-size: 2.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #e94560, #ff6b6b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-weight: 900;
+  color: #ffffff;
   margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-family: 'Courier New', monospace;
+  position: relative;
+  display: inline-block;
+}
+
+.maps-section h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, #e94560, transparent);
+  box-shadow: 0 0 10px #e94560, 0 0 20px rgba(233, 69, 96, 0.5);
 }
 
 .section-subtitle {
   color: #7a7a8a;
   font-size: 1.1rem;
   margin-bottom: 3rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .maps-grid {
@@ -25,16 +42,34 @@
 }
 
 .map-card {
-  background: #1a1a2e;
-  border: 1px solid #2a2a3e;
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(15, 15, 26, 0.95), rgba(26, 26, 46, 0.95));
+  border: 1px solid rgba(233, 69, 96, 0.2);
+  border-radius: 0;
   padding: 1.5rem;
   transition: all 0.3s ease;
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.map-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #e94560, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .map-card:hover {
   border-color: #e94560;
-  box-shadow: 0 4px 20px rgba(233, 69, 96, 0.1);
+  box-shadow: 0 0 20px rgba(233, 69, 96, 0.2);
+}
+
+.map-card:hover::before {
+  opacity: 1;
 }
 
 .map-header {
@@ -46,17 +81,23 @@
 
 .map-header h3 {
   font-size: 1.3rem;
+  color: #ffffff;
   font-weight: 700;
-  color: #f0f0f0;
-  margin: 0;
+  letter-spacing: 1px;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
 }
 
 .map-type {
   font-size: 0.75rem;
   color: #7a7a8a;
-  background: #0a0a0a;
+  background: rgba(233, 69, 96, 0.1);
+  border: 1px solid rgba(233, 69, 96, 0.3);
   padding: 0.3rem 0.6rem;
-  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
 }
 
 .map-description {
@@ -64,6 +105,7 @@
   font-size: 0.9rem;
   line-height: 1.4;
   margin-bottom: 1.5rem;
+  font-family: 'Courier New', monospace;
 }
 
 .map-stats {
@@ -71,29 +113,30 @@
   gap: 2rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #2a2a3e;
+  border-bottom: 1px solid rgba(233, 69, 96, 0.1);
 }
 
 .map-stats .stat-label {
   font-size: 0.8rem;
-  color: #5a5a6a;
+  color: #7a7a8a;
   display: block;
   margin-bottom: 0.25rem;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
 }
 
 .map-stats .stat-value {
   font-size: 0.95rem;
-  color: #f0f0f0;
-  font-weight: 600;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
 }
 
 .win-bar {
   height: 8px;
-  border-radius: 4px;
   display: flex;
-  overflow: hidden;
   background: #0a0a0a;
   margin-bottom: 0.75rem;
+  border: 1px solid rgba(233, 69, 96, 0.2);
 }
 
 .win-segment {
@@ -102,11 +145,12 @@
 }
 
 .win-segment.CT {
-  background: linear-gradient(90deg, #60a5fa, #4ade80);
+  background: linear-gradient(90deg, #e94560, #ff6b6b);
+  box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
 }
 
 .win-segment.T {
-  background: linear-gradient(90deg, #f59e42, #f87171);
+  background: #0a0a0a;
 }
 
 .win-legend {
@@ -114,20 +158,16 @@
   gap: 1.5rem;
   font-size: 0.8rem;
   color: #7a7a8a;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .legend-dot {
   display: inline-block;
   width: 8px;
   height: 8px;
-  border-radius: 50%;
   margin-right: 0.35rem;
-}
-
-.legend-dot.CT {
-  background: #60a5fa;
-}
-
-.legend-dot.T {
-  background: #f87171;
+  background: #e94560;
+  box-shadow: 0 0 5px #e94560;
 }

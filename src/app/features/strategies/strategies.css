@@ -4,18 +4,35 @@
 
 .strategies-section h1 {
   font-size: 2.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #e94560, #ff6b6b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-weight: 900;
+  color: #ffffff;
   margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-family: 'Courier New', monospace;
+  position: relative;
+  display: inline-block;
+}
+
+.strategies-section h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, #e94560, transparent);
+  box-shadow: 0 0 10px #e94560, 0 0 20px rgba(233, 69, 96, 0.5);
 }
 
 .section-subtitle {
   color: #7a7a8a;
   font-size: 1.1rem;
   margin-bottom: 2rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .map-filter {
@@ -27,42 +44,64 @@
 }
 
 .filter-btn {
-  background: #1a1a2e;
-  border: 1px solid #2a2a3e;
-  color: #a0a0b0;
+  background: linear-gradient(135deg, rgba(15, 15, 26, 0.9), #0a0a0a);
+  border: 1px solid rgba(233, 69, 96, 0.2);
+  color: #7a7a8a;
   padding: 0.6rem 1.25rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
 }
 
 .filter-btn:hover {
   border-color: #e94560;
-  color: #e94560;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(233, 69, 96, 0.3);
 }
 
 .filter-btn.active {
-  background: linear-gradient(135deg, #e94560, #ff6b6b);
+  background: linear-gradient(135deg, #e94560, #b83549);
   color: white;
-  border-color: transparent;
+  border-color: #e94560;
+  box-shadow: 0 0 20px rgba(233, 69, 96, 0.4);
 }
 
 .side-header {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #f0f0f0;
+  color: #ffffff;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   gap: 1rem;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #e94560;
+  margin-top: 3rem;
+}
+
+.side-header::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 24px;
+  background: #e94560;
+  box-shadow: 0 0 10px #e94560;
 }
 
 .side-label {
   font-size: 0.9rem;
   color: #7a7a8a;
   font-weight: 400;
+  letter-spacing: 1px;
 }
 
 .strategies-list {
@@ -73,16 +112,29 @@
 }
 
 .strategy-card {
-  background: #1a1a2e;
-  border: 1px solid #2a2a3e;
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(15, 15, 26, 0.95), rgba(26, 26, 46, 0.95));
+  border: 1px solid rgba(233, 69, 96, 0.2);
+  border-radius: 0;
   padding: 2rem;
   transition: all 0.3s ease;
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.strategy-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: #e94560;
+  box-shadow: 0 0 10px #e94560;
 }
 
 .strategy-card:hover {
   border-color: #e94560;
-  box-shadow: 0 4px 20px rgba(233, 69, 96, 0.1);
+  box-shadow: 0 0 25px rgba(233, 69, 96, 0.2);
 }
 
 .strategy-header {
@@ -94,9 +146,12 @@
 
 .strategy-header h3 {
   font-size: 1.4rem;
-  color: #f0f0f0;
+  color: #ffffff;
   margin: 0;
   font-weight: 700;
+  letter-spacing: 1px;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
 }
 
 .strategy-tags {
@@ -106,23 +161,25 @@
 
 .tag {
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 0.3rem 0.75rem;
-  border-radius: 999px;
+  font-family: 'Courier New', monospace;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 
 .side-CT {
-  background: rgba(96, 165, 250, 0.15);
-  color: #60a5fa;
-  border: 1px solid rgba(96, 165, 250, 0.3);
+  background: rgba(233, 69, 96, 0.15);
+  color: #ff6b6b;
+  border: 1px solid rgba(233, 69, 96, 0.4);
+  box-shadow: 0 0 10px rgba(233, 69, 96, 0.2);
 }
 
 .side-T {
-  background: rgba(248, 113, 113, 0.15);
-  color: #f87171;
-  border: 1px solid rgba(248, 113, 113, 0.3);
+  background: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.2);
 }
 
 .map-tag {
@@ -136,6 +193,7 @@
   font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 2rem;
+  font-family: 'Courier New', monospace;
 }
 
 .timing-section,
@@ -146,9 +204,12 @@
 .timing-section h4,
 .roles-section h4 {
   font-size: 1rem;
-  color: #f0f0f0;
-  font-weight: 600;
+  color: #e94560;
+  font-weight: 700;
   margin-bottom: 1rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .timeline {
@@ -161,15 +222,26 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  position: relative;
+}
+
+.timeline-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 20px;
+  height: calc(100% - 10px);
+  width: 1px;
+  background: linear-gradient(180deg, #e94560, transparent);
 }
 
 .timeline-dot {
   width: 12px;
   height: 12px;
-  border-radius: 50%;
   background: #e94560;
   flex-shrink: 0;
-  box-shadow: 0 0 8px rgba(233, 69, 96, 0.4);
+  box-shadow: 0 0 8px #e94560, 0 0 15px rgba(233, 69, 96, 0.5);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 }
 
 .timeline-content {
@@ -179,8 +251,8 @@
   flex: 1;
   background: #0a0a0a;
   padding: 0.75rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #2a2a3e;
+  border: 1px solid rgba(233, 69, 96, 0.2);
+  font-family: 'Courier New', monospace;
 }
 
 .timeline-time {
@@ -188,11 +260,13 @@
   color: #e94560;
   font-weight: 700;
   min-width: 40px;
+  font-family: 'Courier New', monospace;
 }
 
 .timeline-action {
   font-size: 0.9rem;
   color: #a0a0b0;
+  font-family: 'Courier New', monospace;
 }
 
 .roles-grid {
@@ -203,21 +277,23 @@
 
 .role-item {
   background: #0a0a0a;
-  border: 1px solid #2a2a3e;
-  border-radius: 8px;
+  border: 1px solid rgba(233, 69, 96, 0.2);
   padding: 0.75rem 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
 .role-player {
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #e94560;
+  font-family: 'Courier New', monospace;
 }
 
 .role-task {
   font-size: 0.8rem;
   color: #7a7a8a;
+  font-family: 'Courier New', monospace;
 }

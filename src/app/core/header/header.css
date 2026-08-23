@@ -1,10 +1,21 @@
 .header {
-  background-color: #1a1a2e;
-  border-bottom: 1px solid #2a2a3e;
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+  border-bottom: 2px solid #e94560;
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(233, 69, 96, 0.2);
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e94560, transparent);
+  box-shadow: 0 0 10px #e94560, 0 0 20px #e94560, 0 0 30px rgba(233, 69, 96, 0.5);
 }
 
 .header-container {
@@ -14,27 +25,32 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 70px;
+  position: relative;
 }
 
 .logo {
-  font-size: 1.75rem;
-  font-weight: 800;
+  font-size: 2rem;
+  font-weight: 900;
   color: #f0f0f0;
   text-decoration: none;
-  letter-spacing: 2px;
-  transition: opacity 0.2s ease;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .logo:hover {
-  opacity: 0.8;
+  text-shadow: 2px 2px 8px rgba(233, 69, 96, 0.6), 0 0 20px rgba(233, 69, 96, 0.4);
+  transform: scale(1.05);
 }
 
 .logo-accent {
-  background: linear-gradient(135deg, #e94560, #ff6b6b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #e94560;
+  text-shadow: 0 0 10px rgba(233, 69, 96, 0.8), 0 0 20px rgba(233, 69, 96, 0.6);
 }
 
 .nav {
@@ -46,49 +62,71 @@
 .nav a {
   color: #a0a0b0;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 0.95rem;
-  padding: 0.5rem 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.2rem;
   position: relative;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(135deg, rgba(233, 69, 96, 0.05), rgba(233, 69, 96, 0.02));
+  border: 1px solid rgba(233, 69, 96, 0.1);
+  border-radius: 4px;
 }
 
-.nav a::after {
+.nav a::before {
   content: '';
   position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(135deg, #e94560, #ff6b6b);
-  transition: width 0.3s ease;
+  top: 0;
+  left: -5px;
+  width: 2px;
+  height: 0;
+  background: #e94560;
+  transition: height 0.3s ease;
+  box-shadow: 0 0 5px #e94560;
 }
 
 .nav a:hover {
-  color: #f0f0f0;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(233, 69, 96, 0.15), rgba(233, 69, 96, 0.05));
+  border-color: rgba(233, 69, 96, 0.3);
+  box-shadow: 0 0 15px rgba(233, 69, 96, 0.2);
+  transform: translateY(-2px);
 }
 
-.nav a:hover::after {
-  width: 100%;
+.nav a::before {
+  height: 100%;
 }
 
 .nav a.active {
-  color: #e94560;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(233, 69, 96, 0.25), rgba(233, 69, 96, 0.1));
+  border-color: #e94560;
+  box-shadow: 0 0 20px rgba(233, 69, 96, 0.3), inset 0 0 10px rgba(233, 69, 96, 0.1);
 }
 
-.nav a.active::after {
-  width: 100%;
-  background: linear-gradient(135deg, #e94560, #ff6b6b);
+.nav a.active:before {
+  height: 100%;
+  background: #e94560;
+  box-shadow: 0 0 10px #e94560, 0 0 20px #e94560;
 }
 
 .menu-toggle {
   display: none;
   background: none;
-  border: none;
+  border: 1px solid #e94560;
+  border-radius: 4px;
   cursor: pointer;
   padding: 0.5rem;
   flex-direction: column;
   gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background: rgba(233, 69, 96, 0.1);
+  box-shadow: 0 0 10px rgba(233, 69, 96, 0.3);
 }
 
 .hamburger {
@@ -97,6 +135,8 @@
   height: 2px;
   background-color: #f0f0f0;
   transition: all 0.3s ease;
+  border-radius: 1px;
+  box-shadow: 0 0 3px rgba(240, 240, 240, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -107,14 +147,15 @@
   .nav {
     display: none;
     position: absolute;
-    top: 64px;
+    top: 70px;
     left: 0;
     right: 0;
-    background-color: #1a1a2e;
+    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
     flex-direction: column;
     padding: 1.5rem 2rem;
-    gap: 1rem;
-    border-bottom: 1px solid #2a2a3e;
+    gap: 0.75rem;
+    border-bottom: 2px solid #e94560;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
 
   .nav.mobile-open {
@@ -122,7 +163,10 @@
   }
 
   .nav a {
-    font-size: 1.1rem;
-    padding: 0.75rem 0;
+    font-size: 1rem;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(233, 69, 96, 0.1), rgba(233, 69, 96, 0.03));
   }
 }

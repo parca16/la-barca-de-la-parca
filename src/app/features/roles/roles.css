@@ -4,18 +4,35 @@
 
 .roles-section h1 {
   font-size: 2.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #e94560, #ff6b6b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-weight: 900;
+  color: #ffffff;
   margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-family: 'Courier New', monospace;
+  position: relative;
+  display: inline-block;
+}
+
+.roles-section h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, #e94560, transparent);
+  box-shadow: 0 0 10px #e94560, 0 0 20px rgba(233, 69, 96, 0.5);
 }
 
 .section-subtitle {
   color: #7a7a8a;
   font-size: 1.1rem;
   margin-bottom: 3rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .roles-overview {
@@ -26,17 +43,36 @@
 }
 
 .role-card-main {
-  background: #1a1a2e;
-  border: 1px solid #2a2a3e;
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(15, 15, 26, 0.95), #0a0a0a);
+  border: 1px solid rgba(233, 69, 96, 0.2);
+  border-radius: 0;
   padding: 1.5rem;
   border-top: 3px solid transparent;
   transition: all 0.3s ease;
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.role-card-main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(180deg, var(--role-color, #e94560), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .role-card-main:hover {
   border-color: #e94560;
   transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(233, 69, 96, 0.2);
+}
+
+.role-card-main:hover::before {
+  opacity: 1;
 }
 
 .role-icon {
@@ -45,15 +81,20 @@
 }
 
 .role-card-main h3 {
-  color: #f0f0f0;
+  color: #ffffff;
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .role-player-names {
   color: #7a7a8a;
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
+  font-family: 'Courier New', monospace;
 }
 
 .role-details {
@@ -67,13 +108,16 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0;
-  border-bottom: 1px solid #2a2a3e;
+  border-bottom: 1px solid rgba(233, 69, 96, 0.1);
 }
 
 .detail-label {
   font-size: 0.8rem;
-  color: #5a5a6a;
+  color: #7a7a8a;
   font-weight: 500;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .detail-value {
@@ -81,13 +125,31 @@
   color: #a0a0b0;
   text-align: right;
   max-width: 60%;
+  font-family: 'Courier New', monospace;
 }
 
 .detail-header {
   font-size: 1.5rem;
-  color: #f0f0f0;
+  color: #ffffff;
   font-weight: 700;
   margin-bottom: 2rem;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.75rem;
+}
+
+.detail-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #e94560, transparent);
+  box-shadow: 0 0 10px #e94560;
 }
 
 .player-detail-grid {
@@ -97,16 +159,34 @@
 }
 
 .player-detail-card {
-  background: #1a1a2e;
-  border: 1px solid #2a2a3e;
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(15, 15, 26, 0.95), #0a0a0a);
+  border: 1px solid rgba(233, 69, 96, 0.2);
+  border-radius: 0;
   padding: 1.5rem;
   transition: all 0.3s ease;
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.player-detail-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #e94560, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .player-detail-card:hover {
   border-color: #e94560;
-  box-shadow: 0 4px 20px rgba(233, 69, 96, 0.1);
+  box-shadow: 0 0 20px rgba(233, 69, 96, 0.2);
+}
+
+.player-detail-card:hover::before {
+  opacity: 1;
 }
 
 .player-detail-header {
@@ -119,20 +199,26 @@
 .detail-avatar {
   width: 60px;
   height: 60px;
-  border-radius: 50%;
-  border: 3px solid #2a2a3e;
+  border: 2px solid rgba(233, 69, 96, 0.3);
 }
 
 .player-detail-header h3 {
-  color: #f0f0f0;
+  color: #ffffff;
   font-size: 1.25rem;
   margin: 0;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .detail-role {
   color: #e94560;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .player-stats {
@@ -140,8 +226,8 @@
   gap: 1.5rem;
   margin-bottom: 1.5rem;
   padding: 1rem 0;
-  border-top: 1px solid #2a2a3e;
-  border-bottom: 1px solid #2a2a3e;
+  border-top: 1px solid rgba(233, 69, 96, 0.1);
+  border-bottom: 1px solid rgba(233, 69, 96, 0.1);
 }
 
 .mini-stat {
@@ -153,23 +239,29 @@
 
 .mini-value {
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 800;
   color: #4ade80;
   margin-bottom: 0.25rem;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
 }
 
 .mini-label {
   font-size: 0.75rem;
   color: #7a7a8a;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  font-family: 'Courier New', monospace;
 }
 
 .player-abilities h4 {
-  color: #f0f0f0;
+  color: #e94560;
   font-size: 1rem;
   margin-bottom: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .player-abilities ul {
@@ -185,6 +277,15 @@
   font-size: 0.9rem;
   padding: 0.5rem 0.75rem;
   background: #0a0a0a;
-  border-radius: 6px;
   border-left: 3px solid #e94560;
+  font-family: 'Courier New', monospace;
+  position: relative;
+}
+
+.player-abilities li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: #e94560;
+  font-weight: 700;
 }
