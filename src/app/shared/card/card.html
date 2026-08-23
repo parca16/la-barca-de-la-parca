@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-avatar">
+    <img [src]="player.photoUrl" [alt]="player.alias" loading="lazy" />
+  </div>
+  <div class="card-info">
+    <h3>{{ player.alias }}</h3>
+    <span class="role-badge">{{ player.role }}</span>
+    <p class="player-name">{{ player.name }}</p>
+    <p class="player-bio">{{ player.bio }}</p>
+    <div class="player-meta">
+      <span class="meta-item">
+        {{ player.nationality }} {{ player.age }} anys
+      </span>
+    </div>
+  </div>
+</div>

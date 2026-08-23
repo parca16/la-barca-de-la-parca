@@ -1,2 +1,10 @@
-<h1>Equipo</h1>
-<p>Plantilla del equipo NTR para Counter-Strike 2.</p>
+<article class="team-section">
+  <h1>Plantilla</h1>
+  <p class="section-subtitle">Jugadores activos para Counter-Strike 2</p>
+
+  <div class="players-grid">
+    @for (player of players; track player.alias) {
+      <app-card [player]="player" />
+    }
+  </div>
+</article>
