@@ -1,0 +1,33 @@
+.page-content {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.page-content h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #f0f0f0;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #e94560, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-content p {
+  color: #7a7a8a;
+  font-size: 1.1rem;
+}
+
+.tag {
+  display: inline-block;
+  background-color: rgba(233, 69, 96, 0.1);
+  border: 1px solid rgba(233, 69, 96, 0.3);
+  color: #e94560;
+  padding: 0.5rem 1.5rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  letter-spacing: 1px;
+}

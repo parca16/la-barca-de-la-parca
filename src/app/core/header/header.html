@@ -1,0 +1,27 @@
+<header class="header">
+  <div class="header-container">
+    <a routerLink="" class="logo">
+      <span class="logo-accent">N</span>TR
+    </a>
+
+    <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
+      <span class="hamburger" [class.open]="isMenuOpen"></span>
+    </button>
+
+    @if (isMenuOpen) {
+      <nav class="nav">
+        @for (item of navItems; track item.route) {
+          <a
+            [routerLink]="item.route"
+            routerLinkActive
+            #active="routerLinkActive"
+            [class.active]="active.isActive"
+            (click)="closeMenu()"
+          >
+            {{ item.label }}
+          </a>
+        }
+      </nav>
+    }
+  </div>
+</header>

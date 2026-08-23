@@ -1,0 +1,67 @@
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  min-height: 60vh;
+  align-items: center;
+  padding: 3rem 0;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.5rem 5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #f0f0f0 0%, #a0a0b0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: #7a7a8a;
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.counter {
+  background: linear-gradient(135deg, rgba(233, 69, 96, 0.1), rgba(255, 107, 107, 0.05));
+  border: 1px solid rgba(233, 69, 96, 0.2);
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.counter h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #e94560;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.counter p {
+  font-size: 0.95rem;
+  color: #7a7a8a;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    min-height: 40vh;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+}
