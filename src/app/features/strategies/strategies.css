@@ -1,33 +1,223 @@
-.page-content {
-  text-align: center;
-  padding: 3rem 0;
+.strategies-section {
+  padding: 2rem 0;
 }
 
-.page-content h1 {
+.strategies-section h1 {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #f0f0f0;
-  margin-bottom: 1rem;
   background: linear-gradient(135deg, #e94560, #ff6b6b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  margin-bottom: 0.5rem;
 }
 
-.page-content p {
+.section-subtitle {
   color: #7a7a8a;
   font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.map-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+  justify-content: center;
+}
+
+.filter-btn {
+  background: #1a1a2e;
+  border: 1px solid #2a2a3e;
+  color: #a0a0b0;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  border-color: #e94560;
+  color: #e94560;
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #e94560, #ff6b6b);
+  color: white;
+  border-color: transparent;
+}
+
+.side-header {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #f0f0f0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.side-label {
+  font-size: 0.9rem;
+  color: #7a7a8a;
+  font-weight: 400;
+}
+
+.strategies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.strategy-card {
+  background: #1a1a2e;
+  border: 1px solid #2a2a3e;
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.strategy-card:hover {
+  border-color: #e94560;
+  box-shadow: 0 4px 20px rgba(233, 69, 96, 0.1);
+}
+
+.strategy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.strategy-header h3 {
+  font-size: 1.4rem;
+  color: #f0f0f0;
+  margin: 0;
+  font-weight: 700;
+}
+
+.strategy-tags {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .tag {
-  display: inline-block;
-  background-color: rgba(233, 69, 96, 0.1);
-  border: 1px solid rgba(233, 69, 96, 0.3);
-  color: #e94560;
-  padding: 0.5rem 1.5rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  margin-top: 1.5rem;
-  letter-spacing: 1px;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.side-CT {
+  background: rgba(96, 165, 250, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+.side-T {
+  background: rgba(248, 113, 113, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.map-tag {
+  background: #0a0a0a;
+  color: #7a7a8a;
+  border: 1px solid #2a2a3e;
+}
+
+.strategy-desc {
+  color: #a0a0b0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.timing-section,
+.roles-section {
+  margin-bottom: 1.5rem;
+}
+
+.timing-section h4,
+.roles-section h4 {
+  font-size: 1rem;
+  color: #f0f0f0;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e94560;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(233, 69, 96, 0.4);
+}
+
+.timeline-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex: 1;
+  background: #0a0a0a;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #2a2a3e;
+}
+
+.timeline-time {
+  font-size: 0.85rem;
+  color: #e94560;
+  font-weight: 700;
+  min-width: 40px;
+}
+
+.timeline-action {
+  font-size: 0.9rem;
+  color: #a0a0b0;
+}
+
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.75rem;
+}
+
+.role-item {
+  background: #0a0a0a;
+  border: 1px solid #2a2a3e;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.role-player {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e94560;
+}
+
+.role-task {
+  font-size: 0.8rem;
+  color: #7a7a8a;
 }

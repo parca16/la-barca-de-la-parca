@@ -7,4 +7,8 @@ export interface Player {
   photoUrl: string;
   joined: string;
   bio: string;
+  rating?: number;
+  kdr?: number;
+  headshotPct?: number;
+  hsColor?: string;
 }

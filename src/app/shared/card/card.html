@@ -5,12 +5,12 @@
   <div class="card-info">
     <h3>{{ player.alias }}</h3>
     <span class="role-badge">{{ player.role }}</span>
-    <p class="player-name">{{ player.name }}</p>
+    @if (player.rating) {
+      <div class="player-rating">
+        <span class="rating-label">Rating</span>
+        <span class="rating-value"> {{ player.rating }}</span>
+      </div>
+    }
     <p class="player-bio">{{ player.bio }}</p>
-    <div class="player-meta">
-      <span class="meta-item">
-        {{ player.nationality }} {{ player.age }} anys
-      </span>
-    </div>
   </div>
 </div>
