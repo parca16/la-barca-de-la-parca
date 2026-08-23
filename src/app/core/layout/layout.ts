@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from '../header/header';
 
@@ -8,6 +8,4 @@ import { Header } from '../header/header';
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
-export class Layout {
-  protected readonly title = signal('NTR');
-}
+export class Layout {}
