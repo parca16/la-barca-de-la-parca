@@ -50,7 +50,40 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
+}
+
+.roster-section {
+  margin-bottom: 3rem;
+}
+
+.roster-title {
+  font-size: 1.5rem;
+  color: #f0f0f0;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #e94560;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.roster-title::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 24px;
+  background: linear-gradient(180deg, #e94560, #ff6b6b);
+  border-radius: 2px;
+}
+
+.reserves-grid {
+  opacity: 0.85;
+}
+
+.reserves-grid .card {
+  border-style: dashed;
 }
 
 .stats-table-section {

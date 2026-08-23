@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Card } from '../../shared/card/card';
-import { players } from '../../data/models/players.mock';
+import { starters, reserves } from '../../data/models/players.mock';
 
 @Component({
   imports: [Card],
@@ -9,5 +9,6 @@ import { players } from '../../data/models/players.mock';
   styleUrl: './team.css',
 })
 export class Team {
-  protected readonly players = players;
+  protected readonly starters = starters;
+  protected readonly reserves = reserves;
 }

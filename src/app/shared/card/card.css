@@ -22,7 +22,7 @@
   height: 120px;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid #2a2a3e;
+  border: 3px solid;
   background: #0a0a0a;
 }
 

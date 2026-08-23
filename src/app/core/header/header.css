@@ -99,18 +99,6 @@
   transition: all 0.3s ease;
 }
 
-.hamburger.open:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.hamburger.open:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.open:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-
 @media (max-width: 768px) {
   .menu-toggle {
     display: flex;
@@ -127,6 +115,10 @@
     padding: 1.5rem 2rem;
     gap: 1rem;
     border-bottom: 1px solid #2a2a3e;
+  }
+
+  .nav.mobile-open {
+    display: flex;
   }
 
   .nav a {

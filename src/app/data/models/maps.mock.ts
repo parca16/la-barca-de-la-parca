@@ -82,6 +82,16 @@ export const cs2Maps: Map[] = [
     winsT: 50.2,
   },
   {
+    name: 'Cache',
+    type: 'competitive',
+    image: 'cache',
+    description: 'Mapa de doble sitio con control de A Bombs y B Alley.',
+    attackSites: ['A', 'B'],
+    averageRounds: 41,
+    winsCT: 56.1,
+    winsT: 43.9,
+  },
+  {
     name: 'Forest',
     type: 'deathmatch',
     image: 'forest',

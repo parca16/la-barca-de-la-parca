@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { players } from '../../data/models/players.mock';
+import { starters } from '../../data/models/players.mock';
 
 @Component({
   imports: [],
@@ -8,7 +8,7 @@ import { players } from '../../data/models/players.mock';
   styleUrl: './roles.css',
 })
 export class Roles {
-  protected readonly players = players;
+  protected readonly players = starters;
 
   readonly roles: { name: string; color: string; icon: string; players: string[] }[] = [
     {

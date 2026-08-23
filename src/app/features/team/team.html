@@ -4,28 +4,40 @@
 
   <div class="stats-bar">
     <div class="stat-item">
-      <span class="stat-value">5</span>
-      <span class="stat-label">Jugadores</span>
+      <span class="stat-value">6</span>
+      <span class="stat-label">Titulares</span>
     </div>
     <div class="stat-item">
-      <span class="stat-value">22.4</span>
+      <span class="stat-value">2</span>
+      <span class="stat-label">Suplentes</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">30.3</span>
       <span class="stat-label">Edad media</span>
     </div>
     <div class="stat-item">
-      <span class="stat-value">3</span>
+      <span class="stat-value">5</span>
       <span class="stat-label">Países</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-value">Jan 2024</span>
-      <span class="stat-label">Formación</span>
     </div>
   </div>
 
-  <div class="players-grid">
-    @for (player of players; track player.alias) {
-      <app-card [player]="player" />
-    }
-  </div>
+  <section class="roster-section">
+    <h2 class="roster-title">Titulares</h2>
+    <div class="players-grid">
+      @for (player of starters; track player.alias) {
+        <app-card [player]="player" />
+      }
+    </div>
+  </section>
+
+  <section class="roster-section">
+    <h2 class="roster-title">Suplentes</h2>
+    <div class="players-grid reserves-grid">
+      @for (player of reserves; track player.alias) {
+        <app-card [player]="player" />
+      }
+    </div>
+  </section>
 
   <!-- Tabla de estadísticas -->
   <section class="stats-table-section">
@@ -43,7 +55,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (player of players; track player.alias) {
+          @for (player of starters; track player.alias) {
             <tr>
               <td>
                 <div class="player-cell">
@@ -63,7 +75,7 @@
               <td>
                 <div class="rating-bar-wrapper">
                   <div class="rating-bar" [style.width.%]="(player.rating! / 1.3) * 100" [style.backgroundColor]="player.hsColor"></div>
-                  <span class="rating-value">TOP {{ 5 - players.indexOf(player) + 1 }}</span>
+                  <span class="rating-value">TOP {{ 6 - starters.indexOf(player) + 1 }}</span>
                 </div>
               </td>
             </tr>

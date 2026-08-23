@@ -8,20 +8,18 @@
       <span class="hamburger" [class.open]="isMenuOpen"></span>
     </button>
 
-    @if (isMenuOpen) {
-      <nav class="nav">
-        @for (item of navItems; track item.route) {
-          <a
-            [routerLink]="item.route"
-            routerLinkActive
-            #active="routerLinkActive"
-            [class.active]="active.isActive"
-            (click)="closeMenu()"
-          >
-            {{ item.label }}
-          </a>
-        }
-      </nav>
-    }
+    <nav class="nav" [class.mobile-open]="isMenuOpen">
+      @for (item of navItems; track item.route) {
+        <a
+          [routerLink]="item.route"
+          routerLinkActive
+          #active="routerLinkActive"
+          [class.active]="active.isActive"
+          (click)="closeMenu()"
+        >
+          {{ item.label }}
+        </a>
+      }
+    </nav>
   </div>
 </header>

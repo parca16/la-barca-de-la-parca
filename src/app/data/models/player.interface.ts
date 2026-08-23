@@ -11,4 +11,5 @@ export interface Player {
   kdr?: number;
   headshotPct?: number;
   hsColor?: string;
+  borderColor?: string;
 }
