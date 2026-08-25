@@ -1,288 +1,145 @@
-.hero {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 4rem;
-  align-items: center;
-  padding: 4rem 3rem;
-  background:
-    linear-gradient(135deg, rgba(233, 69, 96, 0.15), rgba(233, 69, 96, 0.02)),
-    linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5)),
-    #0f0f1a;
-  border: 1px solid rgba(233, 69, 96, 0.3);
-  border-radius: 0;
+.intro-section {
   position: relative;
-  overflow: hidden;
-  clip-path: polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%);
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #e94560, transparent);
-  box-shadow: 0 0 15px #e94560;
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(233, 69, 96, 0.15), transparent 70%);
-  pointer-events: none;
-}
-
-.hero-content h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  color: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  font-family: 'Courier New', monospace;
-  text-shadow: 0 0 10px rgba(233, 69, 96, 0.5), 0 0 30px rgba(233, 69, 96, 0.3);
-}
-
-.hero-content h1 br {
-  display: block;
-}
-
-.hero-content p {
-  font-size: 1.2rem;
-  color: #a0a0b0;
-  margin-bottom: 2rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-family: 'Courier New', monospace;
-  font-weight: 600;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.85rem 1.75rem;
-  font-size: 0.95rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  border: none;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-family: 'Courier New', monospace;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #e94560, #b83549);
-  color: white;
-  border: 2px solid #e94560;
-  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  box-shadow: 0 0 20px rgba(233, 69, 96, 0.3);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 30px rgba(233, 69, 96, 0.5);
-  background: linear-gradient(135deg, #ff5566, #e94560);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: #a0a0b0;
-  border: 2px solid #2a2a3e;
-  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-}
-
-.btn-secondary:hover {
-  border-color: #e94560;
-  color: #e94560;
-  box-shadow: 0 0 15px rgba(233, 69, 96, 0.2);
-}
-
-.hero-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.stat-box {
-  background: linear-gradient(135deg, rgba(15, 15, 26, 0.9), rgba(26, 26, 46, 0.9));
-  border: 1px solid rgba(233, 69, 96, 0.2);
-  padding: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
-  position: relative;
-}
-
-.stat-box::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: #e94560;
-  box-shadow: 0 0 5px #e94560;
-}
-
-.stat-number {
-  font-size: 2rem;
-  font-weight: 900;
-  color: #e94560;
-  font-family: 'Courier New', monospace;
-  text-shadow: 0 0 10px rgba(233, 69, 96, 0.6);
-}
-
-.stat-desc {
-  color: #7a7a8a;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-family: 'Courier New', monospace;
-}
-
-.highlights {
   margin-bottom: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid #2a2a3e;
 }
 
-.highlights h2 {
-  font-size: 1.75rem;
-  color: #ffffff;
-  font-weight: 800;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-family: 'Courier New', monospace;
+.page-hero {
   position: relative;
-}
-
-.highlights h2::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100px;
-  height: 2px;
-  background: #e94560;
-  box-shadow: 0 0 10px #e94560;
-}
-
-.highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.highlight-card {
-  background: linear-gradient(135deg, rgba(15, 15, 26, 0.95), rgba(26, 26, 46, 0.95));
-  border: 1px solid rgba(233, 69, 96, 0.2);
-  border-radius: 0;
-  padding: 2rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  position: relative;
+  height: 420px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.highlight-card::before {
+.page-hero::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(180deg, #e94560, transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(13, 15, 19, 0.3), rgba(13, 15, 19, 0.85));
 }
 
-.highlight-card:hover {
-  border-color: #e94560;
-  transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(233, 69, 96, 0.15), 0 0 15px rgba(233, 69, 96, 0.1);
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding-top: 100px;
 }
 
-.highlight-card:hover::before {
-  opacity: 1;
-}
-
-.highlight-tag {
-  font-size: 0.75rem;
-  color: #e94560;
+.page-hero h1 {
+  font-size: 3rem;
   font-weight: 700;
-  text-transform: uppercase;
+  color: #fff;
   letter-spacing: 2px;
-  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.5rem;
 }
 
-.highlight-card h3 {
-  color: #ffffff;
-  font-size: 1.25rem;
-  margin: 0;
-  font-weight: 700;
+.page-hero h1 .accent {
+  color: #E9FF1F;
+}
+
+.page-hero .subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
   letter-spacing: 1px;
-  font-family: 'Courier New', monospace;
+  font-weight: 500;
 }
 
-.highlight-card p {
-  color: #7a7a8a;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  margin: 0;
+.intro-text {
+  color: #555;
+  font-size: 0.95rem;
+  max-width: 600px;
+  margin: 2rem auto 3rem;
+  line-height: 1.7;
+  letter-spacing: 0.5px;
 }
 
-.highlight-arrow {
-  font-size: 1.5rem;
-  color: #e94560;
-  margin-top: auto;
-  align-self: flex-end;
-  transition: transform 0.2s ease;
+.section-label {
+  font-size: 0.85rem;
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.highlight-card:hover .highlight-arrow {
-  transform: translateX(4px);
+.map-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
 }
 
-@media (max-width: 768px) {
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 2rem;
-  }
+.map-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  aspect-ratio: 16/9;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-  .hero-actions {
-    flex-direction: column;
-  }
+.map-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 32px rgba(233, 255, 31, 0.15);
+}
 
-  .hero-stats {
-    flex-direction: row;
-    gap: 1rem;
-  }
+.map-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(13, 15, 19, 0.8));
+  transition: background 0.3s ease;
+}
 
-  .stat-box {
-    flex: 1;
-  }
+.map-card:hover::before {
+  background: linear-gradient(to bottom, rgba(233, 255, 31, 0.1) 0%, rgba(13, 15, 19, 0.9));
+}
 
-  .stat-number {
-    font-size: 1.5rem;
+.map-card-name {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 900px) {
+  .page-hero {
+    height: 320px;
+  }
+  .page-hero h1 {
+    font-size: 2.25rem;
+  }
+  .map-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .page-hero {
+    height: 260px;
+  }
+  .page-hero h1 {
+    font-size: 1.75rem;
+  }
+  .page-hero .subtitle {
+    font-size: 0.8rem;
+  }
+  .map-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

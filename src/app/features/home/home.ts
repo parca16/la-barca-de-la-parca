@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
-  imports: [RouterLink],
+  imports: [],
   selector: 'app-home',
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {}
+export class Home {
+  constructor(private router: Router) {}
+
+  navigateToMap(mapKey: string): void {
+    this.router.navigate(['/map', mapKey]);
+  }
+}

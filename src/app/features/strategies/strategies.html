@@ -1,6 +1,27 @@
 <article class="strategies-section">
-  <h1>Estrategias</h1>
-  <p class="section-subtitle">Ejecuciones, timings y roles por lado</p>
+  <!-- Hero -->
+  <div class="page-hero" style="background-image: url('/assets/headers/header-strategies.jpg');">
+    <div class="page-hero-content">
+      <h1>Estrategias <span class="accent">del Equipo</span></h1>
+      <p class="subtitle">Ejecuciones y roles por mapa</p>
+    </div>
+  </div>
+
+  <p class="intro-text">
+    Todas las estrategias que hemos ido ideando y probando a lo largo de los años.
+    Selecciona un mapa para ver las ejecuciones, timings y roles asignados.
+  </p>
+
+  <!-- Grid de mapas como botones -->
+  <h2 class="section-label">Selecciona un mapa</h2>
+  <div class="map-grid">
+    @for (map of strategyMapNames; track map) {
+      <div class="map-card" [style.backgroundImage]="'url(/assets/maps/' + map + '.jpg)'"
+           (click)="selectMap(map)">
+        <span class="map-card-name">{{ map }}</span>
+      </div>
+    }
+  </div>
 
   <!-- Filtro por mapa -->
   <div class="map-filter">
@@ -15,101 +36,120 @@
     }
   </div>
 
-  <!-- Sección CT -->
-  @if (groupedBySide.CT.length > 0) {
-    <h2 class="side-header">Lado CT <span class="side-label">Defensa</span></h2>
-    <div class="strategies-list">
-      @for (strategy of groupedBySide.CT; track strategy.id) {
-        <div class="strategy-card">
-          <div class="strategy-header">
-            <h3>{{ strategy.name }}</h3>
-            <div class="strategy-tags">
-              <span class="tag side-CT">{{ strategy.side }}</span>
-              <span class="tag map-tag">{{ strategy.map }}</span>
-            </div>
-          </div>
+  <!-- Estrategias -->
+  <div class="sides-columns">
+    <!-- CT Defense -->
+    <div class="side-column defense">
+      <h2 class="side-header">
+        <span class="header-icon">🛡️</span>
+        Lado CT <span class="side-label">Defensa</span>
+      </h2>
 
-          <p class="strategy-desc">{{ strategy.description }}</p>
-
-          <!-- Timing -->
-          <div class="timing-section">
-            <h4>⏱️ Timing</h4>
-            <div class="timeline">
-              @for (step of strategy.timing; track step.action) {
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-content">
-                    <span class="timeline-time">{{ step.seconds }}s</span>
-                    <span class="timeline-action">{{ step.action }}</span>
-                  </div>
-                </div>
-              }
-            </div>
-          </div>
-
-          <!-- Roles -->
-          <div class="roles-section">
-            <h4>👥 Roles</h4>
-            <div class="roles-grid">
-              @for (role of strategy.roles; track role.player) {
-                <div class="role-item">
-                  <span class="role-player">{{ role.player }}</span>
-                  <span class="role-task">{{ role.utility }}</span>
-                </div>
-              }
-            </div>
-          </div>
-        </div>
+      @if (groupedBySide.CT.length === 0) {
+        <p class="no-strategies">No hay estrategias para este mapa</p>
       }
-    </div>
-  }
 
-  <!-- Sección T -->
-  @if (groupedBySide.T.length > 0) {
-    <h2 class="side-header">Lado T <span class="side-label">Ataque</span></h2>
-    <div class="strategies-list">
-      @for (strategy of groupedBySide.T; track strategy.id) {
-        <div class="strategy-card">
-          <div class="strategy-header">
-            <h3>{{ strategy.name }}</h3>
-            <div class="strategy-tags">
-              <span class="tag side-T">{{ strategy.side }}</span>
-              <span class="tag map-tag">{{ strategy.map }}</span>
+      <div class="strategies-list">
+        @for (strategy of groupedBySide.CT; track strategy.id) {
+          <div class="strategy-card">
+            <div class="strategy-header">
+              <h3>{{ strategy.name }}</h3>
+              <div class="strategy-tags">
+                <span class="tag side-CT">{{ strategy.side }}</span>
+                <span class="tag map-tag">{{ strategy.map }}</span>
+              </div>
             </div>
-          </div>
 
-          <p class="strategy-desc">{{ strategy.description }}</p>
+            <p class="strategy-desc">{{ strategy.description }}</p>
 
-          <!-- Timing -->
-          <div class="timing-section">
-            <h4>⏱️ Timing</h4>
-            <div class="timeline">
-              @for (step of strategy.timing; track step.action) {
-                <div class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-content">
-                    <span class="timeline-time">{{ step.seconds }}s</span>
-                    <span class="timeline-action">{{ step.action }}</span>
+            <!-- Timing -->
+            <div class="timing-section">
+              <h4>⏱️ Timing</h4>
+              <div class="timeline">
+                @for (step of strategy.timing; track step.action) {
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                      <span class="timeline-time">{{ step.seconds }}s</span>
+                      <span class="timeline-action">{{ step.action }}</span>
+                    </div>
                   </div>
-                </div>
-              }
+                }
+              </div>
             </div>
-          </div>
 
-          <!-- Roles -->
-          <div class="roles-section">
-            <h4>👥 Roles</h4>
-            <div class="roles-grid">
-              @for (role of strategy.roles; track role.player) {
-                <div class="role-item">
-                  <span class="role-player">{{ role.player }}</span>
-                  <span class="role-task">{{ role.utility }}</span>
-                </div>
-              }
+            <!-- Roles -->
+            <div class="roles-section">
+              <h4>👥 Roles</h4>
+              <div class="roles-grid">
+                @for (role of strategy.roles; track role.player) {
+                  <div class="role-item">
+                    <span class="role-player">{{ role.player }}</span>
+                    <span class="role-task">{{ role.utility }}</span>
+                  </div>
+                }
+              </div>
             </div>
           </div>
-        </div>
-      }
+        }
+      </div>
     </div>
-  }
+
+    <!-- T Attack -->
+    <div class="side-column attack">
+      <h2 class="side-header">
+        <span class="header-icon">⚔️</span>
+        Lado T <span class="side-label">Ataque</span>
+      </h2>
+
+      @if (groupedBySide.T.length === 0) {
+        <p class="no-strategies">No hay estrategias para este mapa</p>
+      }
+
+      <div class="strategies-list">
+        @for (strategy of groupedBySide.T; track strategy.id) {
+          <div class="strategy-card">
+            <div class="strategy-header">
+              <h3>{{ strategy.name }}</h3>
+              <div class="strategy-tags">
+                <span class="tag side-T">{{ strategy.side }}</span>
+                <span class="tag map-tag">{{ strategy.map }}</span>
+              </div>
+            </div>
+
+            <p class="strategy-desc">{{ strategy.description }}</p>
+
+            <!-- Timing -->
+            <div class="timing-section">
+              <h4>⏱️ Timing</h4>
+              <div class="timeline">
+                @for (step of strategy.timing; track step.action) {
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                      <span class="timeline-time">{{ step.seconds }}s</span>
+                      <span class="timeline-action">{{ step.action }}</span>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <!-- Roles -->
+            <div class="roles-section">
+              <h4>👥 Roles</h4>
+              <div class="roles-grid">
+                @for (role of strategy.roles; track role.player) {
+                  <div class="role-item">
+                    <span class="role-player">{{ role.player }}</span>
+                    <span class="role-task">{{ role.utility }}</span>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
 </article>

@@ -1,0 +1,133 @@
+.map-page {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.page-hero {
+  position: relative;
+  height: 420px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(13, 15, 19, 0.3), rgba(13, 15, 19, 0.85));
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.page-hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.5rem;
+}
+
+.page-hero .subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.section-label {
+  font-size: 0.85rem;
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.map-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.map-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  aspect-ratio: 16/9;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.map-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 32px rgba(233, 255, 31, 0.15);
+}
+
+.map-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(13, 15, 19, 0.8));
+  transition: background 0.3s ease;
+}
+
+.map-card:hover::before {
+  background: linear-gradient(to bottom, rgba(233, 255, 31, 0.1) 0%, rgba(13, 15, 19, 0.9));
+}
+
+.map-card-name {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 900px) {
+  .map-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .page-hero {
+    height: 320px;
+  }
+  .page-hero h1 {
+    font-size: 2.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .map-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .page-hero {
+    height: 260px;
+  }
+  .page-hero h1 {
+    font-size: 1.75rem;
+  }
+  .page-hero .subtitle {
+    font-size: 0.8rem;
+  }
+}

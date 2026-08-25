@@ -1,0 +1,31 @@
+html {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background-color: #0d0f13;
+  color: #e8e8e8;
+  font-family: 'Courier New', monospace;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  width: 100%;
+}

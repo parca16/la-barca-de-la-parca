@@ -1,48 +1,38 @@
-<section class="hero">
-  <div class="hero-content">
-    <h1>Counter-Strike 2<br/>Pro Gaming Team</h1>
-    <p>Estrategias. Disciplina. Victoria.</p>
-    <div class="hero-actions">
-      <a routerLink="/team" class="btn btn-primary">Ver equipo</a>
-      <a routerLink="/strategies" class="btn btn-secondary">Estrategias</a>
+<section class="intro-section">
+  <!-- Hero -->
+  <div class="page-hero" style="background-image: url('/assets/headers/header-intro.jpg');">
+    <div class="page-hero-content">
+      <h1>NTR <span class="accent">CS2</span></h1>
+      <p class="subtitle">La casa de nuestro equipo</p>
     </div>
   </div>
-  <div class="hero-stats">
-    <div class="stat-box">
-      <span class="stat-number">150+</span>
-      <span class="stat-desc">Rondas jugadas</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-number">64%</span>
-      <span class="stat-desc">Win rate</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-number">8</span>
-      <span class="stat-desc">Mapas competitivos</span>
-    </div>
-  </div>
-</section>
 
-<section class="highlights">
-  <h2>Últimas estrategias añadidas</h2>
-  <div class="highlights-grid">
-    <a routerLink="/strategies" class="highlight-card">
-      <div class="highlight-tag">Estrategias</div>
-      <h3>Ejecuciones a sitios</h3>
-      <p>3-1-1, 2-2-1 y smokes coordinados para executes exitosos.</p>
-      <span class="highlight-arrow">→</span>
-    </a>
-    <a routerLink="/maps" class="highlight-card">
-      <div class="highlight-tag">Mapas</div>
-      <h3>Mapas competitivos</h3>
-      <p>8 mapas del panorama competitivo con estadísticas y datos.</p>
-      <span class="highlight-arrow">→</span>
-    </a>
-    <a routerLink="/team" class="highlight-card">
-      <div class="highlight-tag">Equipo</div>
-      <h3>Plantilla NTR</h3>
-      <p>5 jugadores, 3 países, 1 objetivo: ser los mejores.</p>
-      <span class="highlight-arrow">→</span>
-    </a>
+  <!-- Texto explicativo -->
+  <p class="intro-text">
+    Esta web pertenece al equipo NTR. Aquí trackeamos las estadísticas de cada uno de los jugadores y
+    guardamos todas las estrategias que hemos ido desarrollando a lo largo de los años.
+  </p>
+
+  <!-- Grid de mapas -->
+  <h2 class="section-label">Selecciona un mapa</h2>
+  <div class="map-grid">
+    <div class="map-card" style="background-image: url('/assets/maps/Dust 2.jpg');" (click)="navigateToMap('dust-2')">
+      <span class="map-card-name">Dust 2</span>
+    </div>
+    <div class="map-card" style="background-image: url('/assets/maps/Mirage.jpg');" (click)="navigateToMap('mirage')">
+      <span class="map-card-name">Mirage</span>
+    </div>
+    <div class="map-card" style="background-image: url('/assets/maps/Inferno.jpg');" (click)="navigateToMap('inferno')">
+      <span class="map-card-name">Inferno</span>
+    </div>
+    <div class="map-card" style="background-image: url('/assets/maps/Nuke.jpg');" (click)="navigateToMap('nuke')">
+      <span class="map-card-name">Nuke</span>
+    </div>
+    <div class="map-card" style="background-image: url('/assets/maps/Ancient.jpg');" (click)="navigateToMap('ancient')">
+      <span class="map-card-name">Ancient</span>
+    </div>
+    <div class="map-card" style="background-image: url('/assets/maps/Anubis.jpg');" (click)="navigateToMap('anubis')">
+      <span class="map-card-name">Anubis</span>
+    </div>
   </div>
 </section>
