@@ -1,0 +1,93 @@
+<!-- Descripción + Callouts -->
+<div class="map-content">
+  <div class="content-text">
+    <h2>{{ mapData.title }}</h2>
+    @for (idea of mapData.ideas; track idea.heading) {
+      <h3>{{ idea.heading }}</h3>
+      <p>{{ idea.text }}</p>
+    }
+  </div>
+
+  <div class="content-image">
+    <img [src]="mapData.calloutsImage" [alt]="'Callouts de ' + mapData.title" />
+  </div>
+</div>
+
+<!-- Separador -->
+<div class="section-divider"></div>
+
+<!-- Estrategias -->
+<div class="strategies-section">
+  <div class="side-toggle">
+    <button
+      class="toggle-btn"
+      [class.active]="selectedSide === 'T'"
+      (click)="selectSide('T')"
+    >
+      Terrorista
+    </button>
+    <button
+      class="toggle-btn"
+      [class.active]="selectedSide === 'CT'"
+      (click)="selectSide('CT')"
+    >
+      CT
+    </button>
+  </div>
+
+  @if (filteredStrategies.length === 0) {
+    <p class="no-strategies">No hay estrategias para este bando</p>
+  }
+
+  <div class="strategies-list">
+    @for (strategy of filteredStrategies; track strategy.name; let i = $index) {
+
+      <!-- Separador entre jugadas -->
+      @if (i > 0) {
+        <div class="play-separator"></div>
+      }
+
+      <div class="strategy-card" [class.play-alt-1]="i % 2 === 0" [class.play-alt-2]="i % 2 === 1">
+
+        <!-- Header: nombre + tag de bando -->
+        <div class="strategy-header">
+          <h3>{{ strategy.name }}</h3>
+          <span class="tag" [class.side-T]="strategy.side === 'T'" [class.side-CT]="strategy.side === 'CT'">{{ strategy.side }}</span>
+        </div>
+
+        <!-- Descripción -->
+        <p class="strategy-desc">{{ strategy.description }}</p>
+
+        <!-- Fotos de minimap -->
+        @if (strategy.minimaps.length > 0) {
+          <div class="minimaps-container">
+            @for (minimap of strategy.minimaps; track minimap) {
+              <div class="minimap-wrapper">
+                <img [src]="minimap" [alt]="'Minimap de ' + strategy.name" />
+              </div>
+            }
+          </div>
+        }
+
+        <!-- Tabla de jugadores -->
+        <table class="players-table">
+          <thead>
+            <tr>
+              <th>Jugador</th>
+              <th>Función en la ronda</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (role of strategy.roles; track role.player) {
+              <tr>
+                <td class="player-name">{{ role.player }}</td>
+                <td class="player-task">{{ role.utility }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+      </div>
+    }
+  </div>
+</div>
