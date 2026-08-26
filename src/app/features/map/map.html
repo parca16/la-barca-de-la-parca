@@ -7,8 +7,8 @@
     </div>
   </div>
 
-  <!-- Contenido del mapa -->
-  @if (mapKey === 'inferno') {
-    <app-inferno-content />
+  <!-- Contenido del mapa (genérico) -->
+  @if (mapData) {
+    <app-map-content [mapData]="mapData" />
   }
 </div>

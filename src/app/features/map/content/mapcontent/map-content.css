@@ -1,0 +1,293 @@
+/* Mapa: Descripción + Callouts */
+.map-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+.content-text h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f0f0f0;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.content-text h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #E9FF1F;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.content-text p {
+  color: #999;
+  font-size: 1rem;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+  margin-bottom: 1.25rem;
+}
+
+.content-image img {
+  width: 100%;
+  border-radius: 14px;
+  border: 2px solid #1c1c25;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Separador principal */
+.section-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #E9FF1F 50%, transparent);
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+}
+
+/* Toggle de bando */
+.side-toggle {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  justify-content: center;
+}
+
+.toggle-btn {
+  background: transparent;
+  border: 2px solid #333;
+  color: #666;
+  padding: 1rem 3rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  border-radius: 8px;
+}
+
+.toggle-btn:hover {
+  border-color: #E9FF1F;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.toggle-btn.active {
+  background: #E9FF1F;
+  color: #0d0f13;
+  border-color: #E9FF1F;
+  box-shadow: 0 0 30px rgba(233, 255, 31, 0.3);
+}
+
+/* Sin estrategias */
+.no-strategies {
+  color: #555;
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 3rem 0;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+/* Lista de estrategias */
+.strategies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Separador entre jugadas */
+.play-separator {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(233, 255, 31, 0.25), transparent);
+  margin: 2rem 0;
+}
+
+/* Card de estrategia */
+.strategy-card {
+  border: none;
+  border-radius: 0;
+  padding: 3rem;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.strategy-card + .strategy-card {
+  border-top: 3px solid rgba(233, 255, 31, 0.15);
+}
+
+/* Alternating backgrounds */
+.play-alt-1 {
+  background: #0d0f13;
+}
+
+.play-alt-2 {
+  background: #111318;
+}
+
+/* Header de estrategia */
+.strategy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.strategy-header h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.tag {
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.6rem 1.5rem;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 6px;
+}
+
+.side-T {
+  background: rgba(233, 255, 31, 0.12);
+  color: #E9FF1F;
+  border: 2px solid rgba(233, 255, 31, 0.3);
+}
+
+.side-CT {
+  background: rgba(233, 255, 31, 0.12);
+  color: #E9FF1F;
+  border: 2px solid rgba(233, 255, 31, 0.3);
+}
+
+/* Descripción */
+.strategy-desc {
+  color: #aaa;
+  font-size: 1.1rem;
+  line-height: 1.9;
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.3px;
+}
+
+/* Minimap photos */
+.minimaps-container {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.minimap-wrapper {
+  flex: 1;
+  min-width: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #222;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.minimap-wrapper img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Tabla de jugadores */
+.players-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0;
+}
+
+.players-table thead th {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #E9FF1F;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  border-bottom: 2px solid rgba(233, 255, 31, 0.3);
+  background: rgba(233, 255, 31, 0.04);
+}
+
+.players-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.2s ease;
+}
+
+/* Filas alternas gris/blanco */
+.players-table tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.players-table tbody tr:nth-child(even) {
+  background: transparent;
+}
+
+.players-table td {
+  padding: 1rem 1.5rem;
+  font-size: 1.05rem;
+  vertical-align: middle;
+}
+
+.players-table .player-name {
+  color: #E9FF1F;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.players-table .player-task {
+  color: #bbb;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .map-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .toggle-btn {
+    font-size: 1.1rem;
+    padding: 0.8rem 2rem;
+    letter-spacing: 2px;
+  }
+  .strategy-card {
+    padding: 2rem 1.5rem;
+  }
+  .strategy-header h3 {
+    font-size: 1.3rem;
+  }
+  .players-table td {
+    padding: 0.9rem 1.2rem;
+    font-size: 1rem;
+  }
+  .players-table .player-name {
+    font-size: 1.1rem;
+  }
+  .players-table .player-task {
+    font-size: 1rem;
+  }
+  .minimaps-container {
+    flex-direction: column;
+  }
+  .play-separator {
+    margin: 1.5rem 0;
+  }
+}
