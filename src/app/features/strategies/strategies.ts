@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { strategies } from '../../data/models/strategies.mock';
 
 @Component({
   imports: [],
@@ -10,48 +9,23 @@ import { strategies } from '../../data/models/strategies.mock';
 })
 export class Strategies {
   private router = inject(Router);
-  protected readonly strategies = strategies;
-  protected selectedMap = 'All';
 
-  protected readonly availableMaps: string[] = [
-    'All',
-    'Dust 2',
-    'Mirage',
-    'Inferno',
-    'Nuke',
-    'Ancient',
-    'Anubis',
+  protected readonly activePool = [
+    { name: 'Dust 2', key: 'dust-2', image: '/assets/maps/Dust2.jpg' },
+    { name: 'Mirage', key: 'mirage', image: '/assets/maps/Mirage.jpg' },
+    { name: 'Inferno', key: 'inferno', image: '/assets/maps/Inferno.jpg' },
+    { name: 'Nuke', key: 'nuke', image: '/assets/maps/Nuke.jpg' },
+    { name: 'Ancient', key: 'ancient', image: '/assets/maps/Ancient.jpg' },
+    { name: 'Anubis', key: 'anubis', image: '/assets/maps/Anubis.jpg' },
+    { name: 'Cache', key: 'cache', image: '/assets/maps/Cache.jpg' },
   ];
 
-  protected readonly strategyMapNames: string[] = [
-    'Dust 2',
-    'Mirage',
-    'Inferno',
-    'Nuke',
-    'Ancient',
-    'Anubis',
-    'Overpass',
-    'Train',
-    'Vertigo',
+  protected readonly inactivePool = [
+    { name: 'Overpass', key: 'overpass', image: '/assets/maps/Overpass.jpg' },
+    { name: 'Vertigo', key: 'vertigo', image: '/assets/maps/Vertigo.jpg' },
   ];
 
-  selectMap(map: string): void {
-    if (map !== 'All') {
-      this.selectedMap = map;
-      this.router.navigate(['/strategies']);
-    }
-  }
-
-  get filteredStrategies() {
-    if (this.selectedMap === 'All') return this.strategies;
-    return this.strategies.filter((s) => s.map === this.selectedMap);
-  }
-
-  get groupedBySide() {
-    const filtered = this.filteredStrategies;
-    return {
-      CT: filtered.filter((s) => s.side === 'CT'),
-      T: filtered.filter((s) => s.side === 'T'),
-    };
+  navigateToMap(key: string): void {
+    this.router.navigate(['/map', key]);
   }
 }

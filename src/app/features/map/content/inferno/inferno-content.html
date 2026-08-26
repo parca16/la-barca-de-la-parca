@@ -1,0 +1,107 @@
+<div class="map-content">
+  <div class="content-text">
+    <h2>IDEAS CLAVE</h2>
+
+    <p>
+      Inferno es el mapa main del equipo, tanto por recorrido como por winrate como por las alternativas que tenemos ante diversas situaciones y playstyles.
+    </p>
+
+    <h3>Control de Banana</h3>
+    <p>
+      Banana es la zona más contestada del mapa. Los CT deben usar utility para retrasar el avance T y tomarla en caso de ser posible, mientras que los T buscan ganar control earlyround con el objetivo de obligar a anclar un mínimo de dos CTs en B site y poder jugar la ronda con presión general de mapa.
+    </p>
+
+    <h3>Mid y Conexiones</h3>
+    <p>
+      Como Ts se busca generar reacciones en los CTs, forzar gasto de utilidades, spotear enemigos a través del sonido, aislar duelos y hacer executes.
+      Como CT se pretende a) buscar un crossfire que impida aislar duelos utilizando smokes para retrasar al máximo el avance T; y b) ganar espacio tanto por medio como por apps para conseguir información del planteamiento de ronda de los Ts.
+    </p>
+
+    <h3>Site A</h3>
+    <p>
+      El site más abierto del mapa, y el más complejo en su defensa. Requiere de players con mucha movilidad, una pool de utilities amplia y capacidad para colocarse de tal forma que se posibilite jugar juntos. Esposible, situacionalmente, buscar duelos tanto en medio como en apps a través de offangles y/o one way smokes.
+    </p>
+
+    <h3>Site B</h3>
+    <p>
+      El B site es más compacto pero vulnerable a ejecuciones rápidas. Los CT suelen jugar, fundamentalmente, de dos formas.
+      La forma más agresiva es tomando banana, anclando a un player en coche/tocones/muro, y liberando al segundo player para reforzar A site, haciendo el mapa muy pequeño para los CTs. La forma más pasiva es jugando con los timings, los sonidos y los smokes, asegurando un máximo de 43 segundos de control CT.
+    </p>
+  </div>
+
+  <div class="content-image">
+    <img src="/assets/callouts/inferno.png" alt="Callouts de Inferno" />
+  </div>
+</div>
+
+<!-- Separador -->
+<div class="section-divider"></div>
+
+<!-- Estrategias -->
+<div class="strategies-section">
+  <div class="side-toggle">
+    <button
+      class="toggle-btn"
+      [class.active]="selectedSide === 'T'"
+      (click)="selectSide('T')"
+    >
+      Terrorista
+    </button>
+    <button
+      class="toggle-btn"
+      [class.active]="selectedSide === 'CT'"
+      (click)="selectSide('CT')"
+    >
+      CT
+    </button>
+  </div>
+
+  @if (filteredStrategies.length === 0) {
+    <p class="no-strategies">No hay estrategias para este bando</p>
+  }
+
+  <div class="strategies-list">
+    @for (strategy of filteredStrategies; track strategy.id) {
+      <div class="strategy-card">
+        <div class="strategy-header">
+          <h3>{{ strategy.name }}</h3>
+          <div class="strategy-tags">
+            <span class="tag" [class.side-T]="strategy.side === 'T'" [class.side-CT]="strategy.side === 'CT'">{{ strategy.side }}</span>
+            <span class="tag round-tag">{{ strategy.round }}</span>
+          </div>
+        </div>
+
+        <p class="strategy-desc">{{ strategy.description }}</p>
+
+        <!-- Timing -->
+        <div class="timing-section">
+          <h4>Timing</h4>
+          <div class="timeline">
+            @for (step of strategy.timing; track step.action) {
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <span class="timeline-time">{{ step.seconds }}s</span>
+                  <span class="timeline-action">{{ step.action }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Roles -->
+        <div class="roles-section">
+          <h4>Roles</h4>
+          <div class="roles-grid">
+            @for (role of strategy.roles; track role.player) {
+              <div class="role-item">
+                <span class="role-player">{{ role.player }}</span>
+                <span class="role-task">{{ role.utility }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 12rem;
+}
+
+.page-hero {
+  margin-left: calc(50% - 50vw - 12rem);
+  margin-right: calc(50% - 50vw - 12rem);
+}
+
+@media (max-width: 900px) {
+  main {
+    padding: 0 2rem;
+  }
+  .page-hero {
+    margin-left: calc(50% - 50vw - 2rem);
+    margin-right: calc(50% - 50vw - 2rem);
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 0 1rem;
+  }
+  .page-hero {
+    margin-left: calc(50% - 50vw - 1rem);
+    margin-right: calc(50% - 50vw - 1rem);
+  }
+}

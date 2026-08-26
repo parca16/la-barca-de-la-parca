@@ -1,22 +1,14 @@
 <div class="map-page">
-  <!-- Hero con imagen de fondo del mapa -->
-  @if (currentMapFile) {
-    <div class="page-hero" [style.backgroundImage]="'url(/assets/maps/' + currentMapFile + ')'">
-      <div class="page-hero-content">
-        <h1>{{ mapName }}</h1>
-        <p class="subtitle">Estrategias y estadísticas</p>
-      </div>
+  <!-- Hero con imagen de cabecera personalizada -->
+  <div class="page-hero" [style.backgroundImage]="'url(' + headerImage + ')'">
+    <div class="page-hero-content">
+      <h1>{{ mapName }}</h1>
+      <p class="subtitle">Estrategias y estadísticas</p>
     </div>
-  }
-
-  <!-- Grid de mapas como botones -->
-  <h2 class="section-label">Selecciona un mapa</h2>
-  <div class="map-grid">
-    @for (map of maps; track map.key) {
-      <div class="map-card" [style.backgroundImage]="'url(/assets/maps/' + map.file + ')'"
-           (click)="navigateToMap(map.key)">
-        <span class="map-card-name">{{ map.name }}</span>
-      </div>
-    }
   </div>
+
+  <!-- Contenido del mapa -->
+  @if (mapKey === 'inferno') {
+    <app-inferno-content />
+  }
 </div>
