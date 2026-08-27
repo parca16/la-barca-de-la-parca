@@ -60,9 +60,27 @@ export class MapPage {
       this.mapKey = params.get('map') || 'dust-2';
       const map = this.maps.find(m => m.key === this.mapKey);
       this.mapName = map?.name || this.mapKey;
-      this.headerImage = '/assets/map-headers/' + this.mapKey + '.jpg';
+      this.headerImage = this.getHeaderImage(this.mapKey);
       this.mapData = this.dataMap[this.mapKey] || null;
     });
+  }
+
+  private getHeaderImage(key: string): string {
+    const mapNames: Record<string, string> = {
+      'dust-2': 'Dust2',
+      mirage: 'Mirage',
+      inferno: 'inferno',
+      nuke: 'Nuke',
+      ancient: 'Ancient',
+      anubis: 'Anubis',
+      overpass: 'Overpass',
+      vertigo: 'Vertigo',
+      cache: 'Cache',
+      train: 'Train',
+    };
+    const name = mapNames[key] || key;
+    const ext = name === 'Overpass' ? 'png' : 'jpg';
+    return `/assets/map-headers/${name}.${ext}`;
   }
 
   navigateToMap(mapKey: string): void {

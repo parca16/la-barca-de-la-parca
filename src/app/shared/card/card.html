@@ -1,16 +1,84 @@
 <div class="card">
-  <div class="card-avatar" [style.borderColor]="player.borderColor">
-    <img [src]="player.photoUrl" [alt]="player.alias" loading="lazy" />
+  <div class="card-left">
+    <div class="card-avatar" [style.borderColor]="player.borderColor">
+      <img [src]="player.photoUrl" [alt]="player.alias" loading="lazy" [style.object-position]="getObjectPosition(player.alias)" />
+    </div>
+    <span class="role-badge" [style.backgroundColor]="player.borderColor">{{ player.role }}</span>
+    <div class="card-bottom-row">
+      <span class="card-abbrev">{{ getAbbrev(player.alias) }}</span>
+      @if (getPlayerSteamId(player.alias)) {
+        <a href="https://steamcommunity.com/profiles/{{ getPlayerSteamId(player.alias) }}" target="_blank" class="profile-link profile-link-steam">
+          <img src="/assets/icons/steam.svg" alt="Steam" />
+        </a>
+      }
+    </div>
   </div>
-  <div class="card-info">
-    <h3>{{ player.alias }}</h3>
-    <span class="role-badge">{{ player.role }}</span>
-    @if (player.rating) {
-      <div class="player-rating">
-        <span class="rating-label">Rating</span>
-        <span class="rating-value"> {{ player.rating }}</span>
-      </div>
-    }
-    <p class="player-bio">{{ player.bio }}</p>
+  <div class="card-right">
+    <div class="card-toggle">
+      <button class="toggle-btn" [class.active]="activeTab === 'perfil'" (click)="selectTab('perfil')">Perfil</button>
+      <button class="toggle-btn" [class.active]="activeTab === 'posicion'" (click)="selectTab('posicion')">Posición</button>
+      <button class="toggle-btn" [class.active]="activeTab === 'virtudes'" (click)="selectTab('virtudes')">Virtudes</button>
+      <button class="toggle-btn" [class.active]="activeTab === 'psico'" (click)="selectTab('psico')">Psicología</button>
+      <button class="toggle-btn" [class.active]="activeTab === 'stats'" (click)="selectTab('stats')">Estadísticas</button>
+    </div>
+    <div class="card-content">
+      @switch (activeTab) {
+        @case ('perfil') {
+          <div class="tab-perfil">
+            <div class="perfil-row">
+              <span class="label">Nombre</span>
+              <span class="value">{{ player.name }}</span>
+            </div>
+            <div class="perfil-row">
+              <span class="label">Posición</span>
+              <span class="value">{{ player.role }}</span>
+            </div>
+            <div class="perfil-row">
+              <span class="label">Edad</span>
+              <span class="value">{{ player.age }} años</span>
+            </div>
+            <div class="perfil-row">
+              <span class="label">País</span>
+              <span class="value">{{ player.nationality }}</span>
+            </div>
+          </div>
+        }
+        @case ('posicion') {
+          <div class="tab-posicion">
+            <p>{{ player.posicionDesc }}</p>
+          </div>
+        }
+        @case ('virtudes') {
+          <div class="tab-virtudes">
+            <div class="virtues-section">
+              <h4>Virtudes</h4>
+              <ul>
+                @for (v of player.virtudes; track v) {
+                  <li>{{ v }}</li>
+                }
+              </ul>
+            </div>
+            <div class="defects-section">
+              <h4>Defectos</h4>
+              <ul>
+                @for (d of player.defectos; track d) {
+                  <li>{{ d }}</li>
+                }
+              </ul>
+            </div>
+          </div>
+        }
+        @case ('psico') {
+          <div class="tab-psico">
+            <p>{{ player.perfilPsicologico }}</p>
+          </div>
+        }
+        @case ('stats') {
+          <div class="tab-stats-empty">
+            <p>Estadísticas no disponibles</p>
+          </div>
+        }
+      }
+    </div>
   </div>
 </div>

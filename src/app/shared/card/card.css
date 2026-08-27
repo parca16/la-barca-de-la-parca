@@ -1,28 +1,37 @@
 .card {
-  background: #15171b;
-  border: 1px solid #1c1c25;
-  border-radius: 12px;
-  padding: 1.75rem 1.5rem;
+  background: #1a1d23;
+  border: 1px solid #252830;
+  border-radius: 16px;
+  padding: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+  align-items: stretch;
   transition: all 0.2s ease;
-  text-align: center;
+  overflow: hidden;
 }
 
 .card:hover {
-  border-color: #2a2a35;
-  transform: translateY(-2px);
+  border-color: #353840;
+}
+
+.card-left {
+  width: 450px;
+  min-width: 450px;
+  background: #141619;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  border-right: 1px solid #252830;
 }
 
 .card-avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 12px;
+  width: 320px;
+  height: 320px;
+  border-radius: 16px;
   overflow: hidden;
-  border: 2px solid #222;
-  background: #0d0f13;
+  border: 3px solid #252830;
+  background: #1a1d23;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,56 +44,280 @@
   display: block;
 }
 
-.card-info h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
+.card-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-name-text {
+  font-size: 1.6rem;
+  font-weight: 700;
   color: #fff;
   margin: 0;
   letter-spacing: 1px;
+  text-align: center;
+}
+
+.card-bottom-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-abbrev {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ddd;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #252830;
+  background: #1a1d23;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.profile-link:hover {
+  border-color: #353840;
+  background: #252830;
+  transform: translateY(-2px);
+}
+
+.profile-link img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.card-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 1.5px;
+  text-align: center;
 }
 
 .role-badge {
   display: inline-block;
-  background: rgba(233, 255, 31, 0.08);
-  color: #E9FF1F;
-  font-size: 0.65rem;
+  color: #fff;
+  font-size: 0.9rem;
   font-weight: 600;
-  padding: 0.25rem 0.6rem;
+  padding: 0.45rem 0.9rem;
   font-family: 'Courier New', monospace;
   letter-spacing: 1px;
-  margin-top: 0.25rem;
   text-transform: uppercase;
-  border-radius: 4px;
+  border-radius: 6px;
+  opacity: 0.9;
 }
 
-.player-rating {
+.card-right {
+  flex: 1;
+  padding: 2.5rem 3rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background: #0d0f13;
-  border: 1px solid #1c1c25;
-  padding: 0.4rem 0.8rem;
-  margin-top: 0.5rem;
-  border-radius: 6px;
 }
 
-.rating-label {
-  font-size: 0.6rem;
-  color: #444;
+.card-toggle {
+  display: flex;
+  gap: 3px;
+  background: #141619;
+  border-radius: 8px;
+  padding: 3px;
+  margin-bottom: 1.5rem;
+}
+
+.toggle-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 0.7rem 0.4rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.toggle-btn:hover {
+  color: #aaa;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.toggle-btn.active {
+  background: #252830;
+  color: #E9FF1F;
+}
+
+.card-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Tab: Perfil */
+.tab-perfil {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.perfil-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  background: #141619;
+  border-radius: 6px;
+  border: 1px solid #252830;
+}
+
+.perfil-row .label {
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-family: 'Courier New', monospace;
+}
+
+.perfil-row .value {
+  font-size: 1.1rem;
+  color: #ddd;
+  font-weight: 600;
+}
+
+/* Tab: Posición */
+.tab-posicion p {
+  font-size: 1.05rem;
+  color: #aaa;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0.85rem 1.1rem;
+  background: #141619;
+  border-radius: 8px;
+  border: 1px solid #252830;
+}
+
+/* Tab: Virtudes / Defectos */
+.tab-virtudes {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.virtues-section,
+.defects-section {
+  flex: 1;
+}
+
+.virtues-section h4,
+.defects-section h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: 500;
+  margin-bottom: 0.6rem;
+  font-family: 'Courier New', monospace;
 }
 
-.rating-value {
-  font-size: 1.1rem;
-  font-weight: 700;
+.virtues-section h4 {
   color: #22c55e;
 }
 
-.player-bio {
-  color: #444;
-  font-size: 0.8rem;
-  line-height: 1.5;
-  margin-top: 0.25rem;
+.defects-section h4 {
+  color: #ef4444;
+}
+
+.virtues-section ul,
+.defects-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.virtues-section li {
+  font-size: 0.95rem;
+  color: #aaa;
+  padding: 0.5rem 0.7rem;
+  background: rgba(34, 197, 94, 0.06);
+  border-radius: 6px;
+  border-left: 2px solid #22c55e;
+}
+
+.defects-section li {
+  font-size: 0.95rem;
+  color: #aaa;
+  padding: 0.5rem 0.7rem;
+  background: rgba(239, 68, 68, 0.06);
+  border-radius: 6px;
+  border-left: 2px solid #ef4444;
+}
+
+/* Tab: Psico */
+.tab-psico p {
+  font-size: 1.05rem;
+  color: #aaa;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0.85rem 1.1rem;
+  background: #141619;
+  border-radius: 8px;
+  border: 1px solid #252830;
+}
+
+.tab-stats-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.tab-stats-empty p {
+  color: #555;
+  font-size: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-left {
+    width: 100%;
+    min-width: auto;
+    border-right: none;
+    border-bottom: 1px solid #252830;
+    padding: 2rem;
+  }
+
+  .card-right {
+    padding: 1.5rem 2rem;
+  }
+
+  .tab-virtudes {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 }
