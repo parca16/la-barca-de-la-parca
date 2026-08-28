@@ -18,6 +18,7 @@ export class Header implements OnInit, OnDestroy {
     { label: 'Inicio', route: '' },
     { label: 'Equipo', route: 'team' },
     { label: 'Estrategias', route: 'strategies' },
+    { label: 'Utilidades', route: 'utilities' },
   ];
 
   constructor(private scrollService: ScrollService) {}

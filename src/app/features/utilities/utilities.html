@@ -1,0 +1,34 @@
+<article class="utilities-section">
+  <!-- Hero -->
+  <div class="page-hero" style="background-image: url('/assets/headers/header-strategies.jpg');">
+    <div class="page-hero-content">
+      <h1>Utilidades <span class="accent">del Equipo</span></h1>
+      <p class="subtitle">Molotovs, flashes, smokes y HE por mapa</p>
+    </div>
+  </div>
+
+  <!-- Mapas -->
+  <div class="pool-section">
+    <h2 class="pool-label">Map Pool Activo</h2>
+    <div class="maps-grid">
+      @for (map of activePool; track map.name) {
+        <div class="map-card" [style.backgroundImage]="'url(' + map.image + ')'" (click)="navigateToMap(map.key)">
+          <div class="map-card-overlay"></div>
+          <span class="map-card-name">{{ map.name }}</span>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="pool-section">
+    <h2 class="pool-label">Map Pool Inactivo</h2>
+    <div class="maps-grid">
+      @for (map of inactivePool; track map.name) {
+        <div class="map-card" [style.backgroundImage]="'url(' + map.image + ')'" (click)="navigateToMap(map.key)">
+          <div class="map-card-overlay"></div>
+          <span class="map-card-name">{{ map.name }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</article>

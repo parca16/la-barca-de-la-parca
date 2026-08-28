@@ -1,0 +1,54 @@
+<div class="utility-detail-page">
+  <!-- Hero con imagen de cabecera personalizada -->
+  <div class="page-hero" [style.backgroundImage]="'url(' + headerImage + ')'">
+    <div class="page-hero-content">
+      <a class="back-button" (click)="navigateBack()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Volver
+      </a>
+      <h1>{{ mapName }}</h1>
+      <p class="subtitle">Utilidades y granadas</p>
+    </div>
+  </div>
+
+  <!-- Toggles de granadas -->
+  <div class="grenade-toggles">
+    @for (grenade of grenadeTypes; track grenade.key) {
+      <button
+        class="grenade-toggle"
+        [class.active]="selectedType === grenade.key"
+        (click)="selectType(grenade.key)"
+      >
+        <div class="grenade-icon" [innerHTML]="grenade.svg"></div>
+        <span class="grenade-label">{{ grenade.label }}</span>
+      </button>
+    }
+  </div>
+
+  <!-- Lista de utilidades -->
+  <div class="utilities-grid">
+    @for (utility of utilities; track utility.filename) {
+      <div class="utility-card">
+        <div class="utility-image-wrapper">
+          @if (getUtilityImagePath(utility)) {
+            <img [src]="getUtilityImagePath(utility)" [alt]="utility.title" loading="lazy" />
+          } @else {
+            <div class="utility-placeholder">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="32" r="14" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                <circle cx="32" cy="32" r="6" stroke="currentColor" stroke-width="2.5" fill="none"/>
+              </svg>
+            </div>
+          }
+        </div>
+        <div class="utility-info">
+          <h3 class="utility-title">{{ utility.title }}</h3>
+          <p class="utility-desc">Utilidad en desarrollo</p>
+        </div>
+      </div>
+    }
+  </div>
+</div>
