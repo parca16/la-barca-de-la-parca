@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -61,6 +61,7 @@ export class UtilityDetail implements OnInit, OnDestroy {
   headerImage: string = '';
   selectedType: GrenadeType | null = null;
   utilities: UtilityData[] = [];
+  selectedImage: string | null = null;
   private subscriptions = new Subscription();
 
   private readonly maps = [
@@ -152,6 +153,13 @@ export class UtilityDetail implements OnInit, OnDestroy {
     );
   }
 
+  @HostListener('document:keydown', ['$event'])
+  onKeydownHandler(event: Event): void {
+    if (this.selectedImage && (event as KeyboardEvent).key === 'Escape') {
+      this.closeLightbox();
+    }
+  }
+
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
@@ -215,5 +223,15 @@ export class UtilityDetail implements OnInit, OnDestroy {
 
   navigateBack(): void {
     this.router.navigate(['/utilities']);
+  }
+
+  selectImage(utility: UtilityData): void {
+    if (utility.filename !== 'placeholder') {
+      this.selectedImage = this.getUtilityImagePath(utility);
+    }
+  }
+
+  closeLightbox(): void {
+    this.selectedImage = null;
   }
 }
