@@ -96,6 +96,14 @@
   transform: translateY(-2px);
 }
 
+.profile-link.profile-link-steam {
+  border-color: #1b2838;
+}
+
+.profile-link.profile-link-faceit {
+  border-color: #ff5400;
+}
+
 .profile-link img {
   width: 20px;
   height: 20px;
@@ -122,6 +130,10 @@
   text-transform: uppercase;
   border-radius: 6px;
   opacity: 0.9;
+}
+
+.role-badge.role-light-bg {
+  color: #000;
 }
 
 .card-right {
@@ -214,6 +226,7 @@
   background: #141619;
   border-radius: 8px;
   border: 1px solid #252830;
+  text-align: justify;
 }
 
 /* Tab: Virtudes / Defectos */
@@ -262,6 +275,7 @@
   background: rgba(34, 197, 94, 0.06);
   border-radius: 6px;
   border-left: 2px solid #22c55e;
+  text-align: center;
 }
 
 .defects-section li {
@@ -271,6 +285,7 @@
   background: rgba(239, 68, 68, 0.06);
   border-radius: 6px;
   border-left: 2px solid #ef4444;
+  text-align: center;
 }
 
 /* Tab: Psico */
@@ -283,6 +298,7 @@
   background: #141619;
   border-radius: 8px;
   border: 1px solid #252830;
+  text-align: justify;
 }
 
 .tab-stats-empty {

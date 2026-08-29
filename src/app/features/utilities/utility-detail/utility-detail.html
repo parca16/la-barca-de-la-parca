@@ -22,8 +22,7 @@
         [class.active]="selectedType === grenade.key"
         (click)="selectType(grenade.key)"
       >
-        <div class="grenade-icon" [innerHTML]="grenade.svg"></div>
-        <span class="grenade-label">{{ grenade.label }}</span>
+        <div class="grenade-icon"><img [src]="grenade.iconPath" [alt]="grenade.label" /></div>
       </button>
     }
   </div>

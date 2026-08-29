@@ -65,11 +65,11 @@ export class MapPage {
     });
   }
 
-  private getHeaderImage(key: string): string {
+private getHeaderImage(key: string): string {
     const mapNames: Record<string, string> = {
       'dust-2': 'Dust2',
       mirage: 'Mirage',
-      inferno: 'inferno',
+      inferno: 'Inferno',
       nuke: 'Nuke',
       ancient: 'Ancient',
       anubis: 'Anubis',
@@ -79,8 +79,7 @@ export class MapPage {
       train: 'Train',
     };
     const name = mapNames[key] || key;
-    const ext = name === 'Overpass' ? 'png' : 'jpg';
-    return `/assets/map-headers/${name}.${ext}`;
+    return `/assets/map-headers/${name}_header.webp`;
   }
 
   navigateToMap(mapKey: string): void {

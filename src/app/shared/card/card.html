@@ -3,12 +3,15 @@
     <div class="card-avatar" [style.borderColor]="player.borderColor">
       <img [src]="player.photoUrl" [alt]="player.alias" loading="lazy" [style.object-position]="getObjectPosition(player.alias)" />
     </div>
-    <span class="role-badge" [style.backgroundColor]="player.borderColor">{{ player.role }}</span>
+    <span class="role-badge" [style.backgroundColor]="player.borderColor" [class.role-light-bg]="isLightColor(player.borderColor)">{{ player.role }}</span>
     <div class="card-bottom-row">
       <span class="card-abbrev">{{ getAbbrev(player.alias) }}</span>
       @if (getPlayerSteamId(player.alias)) {
         <a href="https://steamcommunity.com/profiles/{{ getPlayerSteamId(player.alias) }}" target="_blank" class="profile-link profile-link-steam">
-          <img src="/assets/icons/steam.svg" alt="Steam" />
+          <img src="/assets/icons/steam_ico.png" alt="Steam" />
+        </a>
+        <a href="https://faceitpub.notion.site/Community-Hub-42458d91d89242739df47565678a3196" target="_blank" class="profile-link profile-link-faceit">
+          <img src="/assets/icons/faceit_ico.png" alt="FACEIT" />
         </a>
       }
     </div>

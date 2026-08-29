@@ -52,12 +52,16 @@
 
 .intro-text {
   color: #555;
-  font-size: 0.95rem;
-  max-width: 600px;
+  font-size: 1.05rem;
+  max-width: 750px;
   margin: 2rem auto 3rem;
   line-height: 1.7;
   letter-spacing: 0.5px;
-  position: center;
+  text-align: center;
+}
+
+.intro-text p {
+  margin-bottom: 1rem;
 }
 
 .section-label {

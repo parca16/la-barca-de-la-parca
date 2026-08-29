@@ -77,63 +77,26 @@ export class UtilityDetail implements OnInit, OnDestroy {
     { name: 'Train', key: 'train' },
   ];
 
-  readonly grenadeTypes: { key: GrenadeType; label: string; svg: string }[] = [
+  readonly grenadeTypes: { key: GrenadeType; label: string; iconPath: string }[] = [
     {
       key: 'smoke',
       label: 'Smoke',
-      svg: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="32" cy="32" r="12" stroke="currentColor" stroke-width="2.5" fill="none"/>
-        <path d="M32 20c-4-8-10-14-10-20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M42 20c4-8 10-14 10-20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M20 28c-8 2-16 4-22 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M44 28c8 2 16 4 22 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M22 36c-6 4-12 10-16 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M42 36c6 4 12 10 16 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      </svg>`
+      iconPath: '/assets/icons/smoke_ico.jpg'
     },
     {
       key: 'molotov',
       label: 'Molotov',
-      svg: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M28 52l4-24h0l4 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M32 28c-6-8-12-14-10-22 2-6 10-8 10-8s8 2 10 8c2 8-4 14-10 22z" stroke="currentColor" stroke-width="2.5" fill="none"/>
-        <path d="M24 40c-4 2-8 6-10 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M40 40c4 2 8 6 10 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M28 44c-2 4-4 8-4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <path d="M36 44c2 4 4 8 4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      </svg>`
+      iconPath: '/assets/icons/molotov_ico.jpg'
     },
     {
       key: 'flash',
       label: 'Flash',
-      svg: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="32" cy="32" r="10" stroke="currentColor" stroke-width="2.5" fill="none"/>
-        <line x1="32" y1="2" x2="32" y2="12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="32" y1="52" x2="32" y2="62" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="2" y1="32" x2="12" y2="32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="52" y1="32" x2="62" y2="32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="11" y1="11" x2="18" y2="18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="46" y1="46" x2="53" y2="53" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="53" y1="11" x2="46" y2="18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="18" y1="46" x2="11" y2="53" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="32" cy="32" r="4" fill="currentColor"/>
-      </svg>`
+      iconPath: '/assets/icons/flashbang_ico.jpg'
     },
     {
       key: 'he',
       label: 'HE',
-      svg: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="32" cy="32" r="14" stroke="currentColor" stroke-width="2.5" fill="none"/>
-        <circle cx="32" cy="32" r="6" stroke="currentColor" stroke-width="2.5" fill="none"/>
-        <line x1="32" y1="2" x2="32" y2="10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="32" y1="54" x2="32" y2="62" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="2" y1="32" x2="10" y2="32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="54" y1="32" x2="62" y2="32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="10" y1="10" x2="16" y2="16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="48" y1="48" x2="54" y2="54" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="54" y1="10" x2="48" y2="16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="16" y1="48" x2="10" y2="54" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-      </svg>`
+      iconPath: '/assets/icons/nade_ico.jpg'
     }
   ];
 
@@ -218,7 +181,7 @@ export class UtilityDetail implements OnInit, OnDestroy {
       train: 'Train',
     };
     const name = mapNames[key] || key;
-    return `/assets/map-headers/${name}.jpg`;
+    return `/assets/map-headers/${name}_header.webp`;
   }
 
   navigateBack(): void {

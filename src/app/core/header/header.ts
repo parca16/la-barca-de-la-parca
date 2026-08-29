@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterEvent, NavigationEnd } from '@angular/router';
 import { ScrollService } from '../../services/scroll.service';
-import { Subscription } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -12,16 +12,20 @@ import { Subscription } from 'rxjs';
 export class Header implements OnInit, OnDestroy {
   protected isMenuOpen = false;
   protected isSolid = false;
+  protected currentRoute = '';
   private subscriptions = new Subscription();
 
-  protected readonly navItems: { label: string; route: string }[] = [
-    { label: 'Inicio', route: '' },
-    { label: 'Equipo', route: 'team' },
-    { label: 'Estrategias', route: 'strategies' },
-    { label: 'Utilidades', route: 'utilities' },
+  protected readonly navItems: { label: string; route: string; activateOn?: string[] }[] = [
+    { label: 'Inicio', route: '', activateOn: [''] },
+    { label: 'Equipo', route: 'team', activateOn: ['team'] },
+    { label: 'Estrategias', route: 'strategies', activateOn: ['strategies', 'map', 'utilities'] },
+    { label: 'Utilidades', route: 'utilities', activateOn: ['utilities'] },
   ];
 
-  constructor(private scrollService: ScrollService) {}
+  constructor(
+    private scrollService: ScrollService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -30,6 +34,17 @@ export class Header implements OnInit, OnDestroy {
       })
     );
     this.scrollService.observeScroll();
+
+    this.subscriptions.add(
+      this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
+        this.currentRoute = event.urlAfterRedirects.split('/')[1] || '';
+      })
+    );
+  }
+
+  protected isActive(route: string, activateOn?: string[]): boolean {
+    if (!activateOn || activateOn.length === 0) return false;
+    return activateOn.includes(this.currentRoute);
   }
 
   ngOnDestroy(): void {

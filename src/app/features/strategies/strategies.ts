@@ -23,6 +23,7 @@ export class Strategies {
   protected readonly inactivePool = [
     { name: 'Overpass', key: 'overpass', image: '/assets/maps/Overpass.jpg' },
     { name: 'Vertigo', key: 'vertigo', image: '/assets/maps/Vertigo.jpg' },
+    { name: 'Train', key: 'train', image: '/assets/maps/Train.jpg' },
   ];
 
   navigateToMap(key: string): void {
