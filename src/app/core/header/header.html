@@ -1,7 +1,7 @@
 <header class="header" [class.solid]="isSolid">
   <div class="header-container">
     <a routerLink="" class="logo">
-      <span class="logo-accent">N</span>TR
+      <img src="/assets/icons/LaBarcaDeLaParca.png" alt="La Barca de la Parca" />
     </a>
 
     <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
@@ -14,7 +14,8 @@
           [routerLink]="item.route"
           routerLinkActive
           #active="routerLinkActive"
-          [class.active]="active.isActive"
+          [routerLinkActiveOptions]="{ exact: item.route === '' }"
+          [class.active]="isActive(item.route, item.activateOn)"
           (click)="closeMenu()"
         >
           {{ item.label }}
@@ -22,4 +23,10 @@
       }
     </nav>
   </div>
+
+  <button class="back-to-top" (click)="scrollToTop()" aria-label="Volver arriba">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
 </header>

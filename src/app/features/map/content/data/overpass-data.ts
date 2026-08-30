@@ -27,7 +27,7 @@ export const mapData: MapConfig = {
       side: 'T',
       name: 'Mid Palace Execute A',
       description: 'Ejecución fuerte por Palace al sitio A. Busca sorprender a los defensores con un flanco y crear confusión en el site.',
-      minimaps: ['/assets/minimaps/overpass-play1.jpg', '/assets/minimaps/overpass-play2.jpg'],
+      minimaps: ['/assets/minimaps/overpass-play1.webp', '/assets/minimaps/overpass-play2.webp'],
       timing: [
         { action: 'Smoke Mid y Palace', seconds: 0 },
         { action: 'Flash Palace stairs', seconds: 5 },

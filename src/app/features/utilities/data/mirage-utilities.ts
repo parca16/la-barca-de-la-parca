@@ -1,0 +1,50 @@
+import { MapUtilities } from '../utility-detail/utility-detail';
+
+export const mirageUtilities: MapUtilities = {
+  smoke: [
+    { filename: 'smoke_appsB.webp', title: 'Smoke Apps B' ,description: "Stuck en la esquina de la izquierda de la ventana. Left clic", },
+    { filename: 'smoke_connector.webp', title: 'Smoke Connector' ,description: "Stuck en el pilar de madera previo a la entrada a TV. Jumpthrow", },
+    { filename: 'smoke_corta.webp', title: 'Smoke Corta (I)' ,description: "Stuck en el hueco derecho de trashcan. Jumpthrow", },
+    { filename: 'smoke_corta1.webp', title: 'Smoke Corta (II)' ,description: "Stuck en la esquina izquierda de carro. Left clic", },
+    { filename: 'smoke_corta2.webp', title: 'Smoke Corta (III)' ,description: "Stuck en la esquina derecha tras el umbral de salida de TV. Left clic", },
+    { filename: 'smoke_CT.webp', title: 'Smoke CT' ,description: "Frente a la esquina que une los pasillos de rampa y T spawn. Jumpthrow", },
+    { filename: 'smoke_escaleras.webp', title: 'Smoke Escaleras' ,description: "Stuck en el último pilar de madera del andamio. Double clic Jumpthrow", },
+    { filename: 'smoke_jungla.webp', title: 'Smoke Jungla (I)' ,description: "Stuck en la esquina previa a la subida al andamio. Jumpthrow", },
+    { filename: 'smoke_junglaclose.webp', title: 'Smoke Jungle (II)' ,description: "Frente a la segunda plancha del andamio. Left clic", },
+    { filename: 'smoke_kitchen.webp', title: 'Smoke Ventana Kitchen' ,description: "Stuck en la esquina derecha tras el umbral de salida de TV. Jumpthrow", },
+    { filename: 'smoke_palacealter.webp', title: 'Smoke Crossmap Palace ' ,description: "Stuck en la esquina izquierda previa a la entrada a kitchen. Jumpthrow", },
+    { filename: 'smoke_puertakitchen.webp', title: 'Smoke Kitchen (I)' ,description: "Stuck en la esquina derecha tras el umbral de salida de TV. Jumpthrow", },
+    { filename: 'smoke_puertakitchen1.webp', title: 'Smoke Puerta Kitchen (II)' ,description: "Stuck en el marco posterior del pasillo de apps. Left clic", },
+    { filename: 'smoke_puertakitchen2.webp', title: 'Smoke Puerta Kitchen (III)' ,description: "Stuck en la esquina de van. Left clic (skilled)", },
+    { filename: 'smoke_topmid.webp', title: 'Smoke Top Mid' ,description: "Stuck en la esquina de encima de trashcan. Left clic", },
+    { filename: 'smoke_ventana.webp', title: 'Smoke Window (I)' ,description: "Stuck en el hueco derecho de trashcan. Crouch walk Jumpthrow", },
+    { filename: 'smoke_window1.webp', title: 'Smoke Window (II)' ,description: "Stuck en el hueco de la derecha de carro. Crouch Stand Left clic", },
+  ],
+  molotov: [
+    { filename: 'molodefaultA2.webp', title: 'Molotov Postplant A Site (I)' ,description: "Stuck en la esquina antes de llegar a tickets. Left clic", },
+    { filename: 'molo_defaultA.webp', title: 'Molotov Postplant A Site (II)' ,description: "Stuck en la esquina de las escaleras. Left clic", },
+    { filename: 'molo_defaultA1.webp', title: 'Molotov Postplant A Site (III)' ,description: "Stuck en la columna separadora de connector y jungle. Left clic", },
+    { filename: 'molo_defaultB.webp', title: 'Molotov Postplant B Site' ,description: "Cerca de la puerta de entrada a cocina. Run left clic (skilled)", },
+    { filename: 'molo_underpalace.webp', title: 'Molotov Under Palace' ,description: "Frente a la segunda columna de palace. Run left clic (skilled)", },
+    { filename: 'molo_window.webp', title: 'Molotov Window' ,description: "Pegado a la pared de carro alineando la antena con la separación del carro y las cajas. Run left clic", },
+  ],
+  flash: [
+    { filename: 'flash_antirushA.webp', title: 'Flash de parca' ,description: "Stuck en la esquina izquierda de underpalace. Left clic", },
+    { filename: 'flash_connector.webp', title: 'Flash Connector' ,description: "Stuck en la esquina derecha de carro y un paso hacia atrás. Left clic", },
+    { filename: 'flash_popmid.webp', title: 'Flash Mid' ,description: "Detrás de firebox y oculto de rampa. Run Jumpthrow", },
+    { filename: 'flash_popunder.webp', title: 'Flash Under (I)' ,description: "En medio del pasillo de under. Run Right clic", },
+    { filename: 'flash_under.webp', title: 'Flash Under (II)' ,description: "Stuck en la mesa de ventana. Left clic", },
+    { filename: 'flash_under1.webp', title: 'Flash Under (III)' ,description: "Stuck en la esquina derecha del hueco ladder room. Right clic", },
+    { filename: 'flash_siteA.webp', title: 'Flash A Site (I)' ,description: "Stuck en la esquina de las escaleras. Jumpthrow", },
+    { filename: 'flash_siteA1.webp', title: 'Flash A Site (II)' ,description: "Frente a la segunda plancha del andamio. Left clic", },
+    { filename: 'flash_siteA2.webp', title: 'Flash A Site (III)' ,description: "Stuck en el último pilar de madera del andamio. Left clic", },
+    { filename: 'flash_siteA3.webp', title: 'Flash A Site (IV)' ,description: "Stuck en la esquina izquierda previa a la entrada a kitchen. Jumpthrow", },
+    { filename: 'flash_siteB.webp', title: 'Flash B Site' ,description: "Entrando en el pasillo de apps. Run left clic (skilled)", },
+    
+  ],
+  he: [
+    { filename: 'nade_antismoke.webp', title: 'HE Anti Smoke' ,description: "Stuck en la mesa de ventana. Right clic", },
+    { filename: 'nade_cave.webp', title: 'HE Cave' ,description: "Stuck en la parte posterior de la columna frente a jungla. Jumpthrow", },
+    { filename: 'nade_tetris.webp', title: 'HE Tetris' ,description: "Stuck en la parte posterior de la columna frente a jungla. Left clic", },
+  ],
+};

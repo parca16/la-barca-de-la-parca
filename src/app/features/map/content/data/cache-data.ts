@@ -27,7 +27,7 @@ export const mapData: MapConfig = {
       side: 'T',
       name: 'Split A B Simultáneo',
       description: 'Split simultáneo a ambos sitios para dividir la defensa CT. Uno de los sitios es una finta mientras el otro juega el execute real.',
-      minimaps: ['/assets/minimaps/cache-play1.jpg'],
+      minimaps: ['/assets/minimaps/cache-play1.webp'],
       timing: [
         { action: 'Fake B con utility', seconds: 0 },
         { action: 'Split A por Bombs', seconds: 5 },

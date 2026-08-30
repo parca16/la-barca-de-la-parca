@@ -27,7 +27,7 @@ export const mapData: MapConfig = {
       side: 'T',
       name: 'Execute Helipuerto',
       description: 'Ejecución fuerte por el helipuerto al sitio A. Requiere utility bien mostrado para asegurar el entry y plantar con cobertura.',
-      minimaps: ['/assets/minimaps/vertigo-play1.jpg'],
+      minimaps: ['/assets/minimaps/vertigo-play1.webp'],
       timing: [
         { action: 'Smoke Mid y condo', seconds: 0 },
         { action: 'Flash helipuerto', seconds: 5 },

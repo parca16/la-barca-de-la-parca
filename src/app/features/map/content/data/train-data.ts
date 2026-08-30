@@ -27,7 +27,7 @@ export const mapData: MapConfig = {
       side: 'T',
       name: 'Tunnel Execute A',
       description: 'Ejecución fuerte desde tunnel al sitio A. Requiere utility bien mostrado para asegurar el entry y plantar con cobertura.',
-      minimaps: ['/assets/minimaps/train-play1.jpg'],
+      minimaps: ['/assets/minimaps/train-play1.webp'],
       timing: [
         { action: 'Smoke apartments y connector', seconds: 0 },
         { action: 'Flash tunnel', seconds: 5 },

@@ -27,7 +27,7 @@ export const mapData: MapConfig = {
       side: 'T',
       name: 'Mid B Main Execute',
       description: 'Ejecución rápida a B Main desde Mid con smokes para Banana y Mid Stairs. Ideal cuando el CT se debilitó en Banana.',
-      minimaps: ['/assets/minimaps/anubis-play1.jpg'],
+      minimaps: ['/assets/minimaps/anubis-play1.webp'],
       timing: [
         { action: 'Smoke Mid y Banana', seconds: 0 },
         { action: 'Flash Mid Stairs', seconds: 5 },

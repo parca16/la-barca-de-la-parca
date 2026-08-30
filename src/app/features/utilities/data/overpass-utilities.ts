@@ -1,0 +1,48 @@
+import { MapUtilities } from '../utility-detail/utility-detail';
+
+export const overpassUtilities: MapUtilities = {
+  smoke: [
+    { filename: 'smoke_banana.webp', title: 'Smoke Banana (I)' ,description: "Stuck en la esquina del escondite de corta. Jumpthrow", },
+    { filename: 'smoke_banana1.webp', title: 'Smoke Banana (II)' ,description: "Extremo izquierdo de la pared de headshot. Jumpthrow", },
+    { filename: 'smoke_banana2.webp', title: 'Smoke Banana (III)' ,description: "Stuck en la parte frontal de los sacos de boosteo. Left clic", },
+    { filename: 'smoke_bañoslarga.webp', title: 'Smoke Baños Larga' ,description: "Stuck en la esquina izquierda tras salir por el umbral de upper connector. Jumpthrow", },
+    { filename: 'smoke_camion.webp', title: 'Smoke Camión (I)' ,description: "Stuck en la columna del segundo banco de banana. Left clic", },
+    { filename: 'smoke_camion1.webp', title: 'Smoke Camión (II)' ,description: "Frente a la columna del muro de piedra cercana a la farola. Jumpthrow", },
+    { filename: 'smoke_CT.webp', title: 'Smoke CT (I)' ,description: "Stuck en la placa de madera de corta. Left clic", },
+    { filename: 'smoke_CT1.webp', title: 'Smoke CT (II)' ,description: "Stuck en las planchas metálicas de la pasarela de connector. Left clic", },
+    { filename: 'smoke_heaven.webp', title: 'Smoke Heaven' ,description: "Stuck en la placa de madera de corta. Left clic", },
+    { filename: 'smoke_heaven1.webp', title: 'Smoke Heaven 1' ,description: "Stuck en las planchas metálicas de la pasarela de connector. Left clic", },
+    { filename: 'smoke_middeep.webp', title: 'Smoke Mid Deep' ,description: "Stuck en la parte anterior de la caja de ventilación. Jumpthrow", },
+    { filename: 'smoke_monster.webp', title: 'Smoke Monster' ,description: "Stuck en la esquina izquierda de basura. Jumpthrow", },
+    { filename: 'smoke_siteA.webp', title: 'Smoke A Site (I)' ,description: "Stuck en la columna del segundo banco de banana. Left clic", },
+    { filename: 'smoke_siteA1.webp', title: 'Smoke A Site (II)' ,description: "Frente a la columna del muro de piedra cercana a la farola. Jumpthrow", },
+  ],
+  molotov: [
+    { filename: 'molo_antipushcorta.webp', title: 'Molotov Anti-Push Corta' ,description: "Frente a la columna blanca previa a la bajada a monster. Run Double clic Jumpthrow (skilled)", },
+    { filename: 'molo_backsite.webp', title: 'Molotov Backsite' ,description: "En la calle de banana llegando a la ventilación. Jumpthrow (referencia laxa)", },
+    { filename: 'molo_connector.webp', title: 'Molotov Connector' ,description: "Frente al primer banco de globos y pegado a la pared. Left clic", },
+    { filename: 'molo_deepconnector.webp', title: 'Molotov Deep Connector' ,description: "Frente a la rejilla de la alcantarilla tras atravesar la tubería. Left clic (skilled)", },
+    { filename: 'molo_defaultA.webp', title: 'Molotov Postplant A Site' ,description: "Stuck en la esquina derecha de la papelera. Left clic", },
+    { filename: 'molo_parque.webp', title: 'Molotov Parque' ,description: "En la calle de banana. Run Jumpthrow (skilled)", },
+    { filename: 'molo_toxico.webp', title: 'Molotov Tóxico' ,description: "Stuck en la placa de madera de corta. Jumpthrow", },
+    { filename: 'molo_toxico1.webp', title: 'Molotov Tóxico 1' ,description: "Stuck en las planchas metálicas de la pasarela de connector. Jumpthrow", },
+  ],
+  flash: [
+    { filename: 'flash_banana.webp', title: 'Flash Banana' ,description: "Stuck en la parte anterior de la basura. Left clic", },
+    { filename: 'flash_connector.webp', title: 'Flash Connector (I)' ,description: "Stuck en la columna de entrada a aguas. Double clic Jumthrow", },
+    { filename: 'flash_connectorpop.webp', title: 'Flash Connector (II)' ,description: "Stuck en la esquina de las primeras escaleras. Right clic", },
+    { filename: 'flash_larga.webp', title: 'Flash Larga (I)' ,description: "Stuck en la parte anterior de la basura. Left clic (referencia laxa)", },
+    { filename: 'flash_larga1.webp', title: 'Flash Larga (II)' ,description: "Frente a la cabina del camión estando expuesto a larga. Left clic (referencia laxa)", },
+    { filename: 'flash_martillo.webp', title: 'Flash Martillo' ,description: "Frente al martillo colocado al lado de los sacos de corta. Jumpthrow (skilled)", },
+    { filename: 'flash_mid.webp', title: 'Flash Mid' ,description: "Frente a la columna de hormigon opuesta a la estrada lateral a baños. Jumpthrow", },
+    { filename: 'flash_monster.webp', title: 'Flash Monster' ,description: "En el extremo izquierdo de la tabla de madera. Jumpthrow", },
+    { filename: 'flash_siteA.webp', title: 'Flash A Site' ,description: "En la entrada lateral de baños. Jumthrow (referencia laxa)", },
+    { filename: 'flash_siteB.webp', title: 'Flash Site B' ,description: "Al finalizar de bajar las escaleras de acceso a monster. Left clic (referencia laxa)", },
+  ],
+  he: [
+    { filename: 'nade_defaultA.webp', title: 'HE Postplant A Site' ,description: "Stuck en la esquina derecha de la papelera", },
+    { filename: 'nade_doorbreak.webp', title: 'HE Doorbreak' ,description: "Stuck en la columna de entrada a aguas. Double clic Jumthrow", },
+    { filename: 'nade_headshot.webp', title: 'HE Headshot (I)' ,description: "Stuck en la placa de madera de corta. Jumpthrow", },
+    { filename: 'nade_headshot1.webp', title: 'HE Headshot (II)' ,description: "Stuck en las planchas metálicas de la pasarela de connector. Jumpthrow", },
+  ],
+};

@@ -27,7 +27,7 @@ export const mapData: MapConfig = {
       side: 'T',
       name: 'Split A B Fake',
       description: 'Finta fuerte en B mientras un split de 2 jugadores entra por A Long. Busca dividir la atención de los CT y crear números ventajas en un sitio.',
-      minimaps: ['/assets/minimaps/dust-2-play1.jpg'],
+      minimaps: ['/assets/minimaps/dust-2-play1.webp'],
       timing: [
         { action: 'Fake bombsite B con utility', seconds: 0 },
         { action: 'Split 2 jugadores por A Bananas', seconds: 5 },
