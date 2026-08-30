@@ -60,6 +60,18 @@
   text-align: center;
 }
 
+.home-logo {
+  text-align: center;
+  margin: 3rem auto 2rem;
+}
+
+.home-logo img {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 .intro-text p {
   margin-bottom: 1rem;
 }

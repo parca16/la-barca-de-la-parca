@@ -27,7 +27,7 @@ export const mapData: MapConfig = {
       side: 'T',
       name: 'Execute Jump C A',
       description: 'Ejecución con salto por C hacia el sitio A. Requiere utility bien mostrado para asegurar el entry y plantar con cobertura.',
-      minimaps: ['/assets/minimaps/nuke-play1.jpg', '/assets/minimaps/nuke-play2.jpg'],
+      minimaps: ['/assets/minimaps/nuke-play1.webp', '/assets/minimaps/nuke-play2.webp'],
       timing: [
         { action: 'Smoke CT y connectors', seconds: 0 },
         { action: 'Flash jump C', seconds: 3 },

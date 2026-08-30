@@ -112,7 +112,7 @@
 }
 
 .grenade-toggle:hover {
-  border-color: rgba(233, 255, 31, 0.4);
+  border-color: rgba(196, 214, 24, 0.4);
 }
 
 .grenade-toggle:hover::before {
@@ -120,8 +120,8 @@
 }
 
 .grenade-toggle.active {
-  border-color: #E9FF1F;
-  box-shadow: 0 0 20px rgba(233, 255, 31, 0.1);
+  border-color: #C4D618;
+  box-shadow: 0 0 20px rgba(196, 214, 24, 0.1);
 }
 
 .grenade-toggle.active::before {

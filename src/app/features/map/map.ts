@@ -27,16 +27,16 @@ export class MapPage {
   mapData: MapConfig | null = null;
 
   readonly maps = [
-    { name: 'Dust 2', key: 'dust-2', file: 'Dust2.jpg' },
-    { name: 'Mirage', key: 'mirage', file: 'Mirage.jpg' },
-    { name: 'Inferno', key: 'inferno', file: 'Inferno.jpg' },
-    { name: 'Nuke', key: 'nuke', file: 'Nuke.jpg' },
-    { name: 'Ancient', key: 'ancient', file: 'Ancient.jpg' },
-    { name: 'Anubis', key: 'anubis', file: 'Anubis.jpg' },
-    { name: 'Overpass', key: 'overpass', file: 'Overpass.jpg' },
-    { name: 'Vertigo', key: 'vertigo', file: 'Vertigo.jpg' },
-    { name: 'Cache', key: 'cache', file: 'Cache.jpg' },
-    { name: 'Train', key: 'train', file: 'Train.jpg' },
+    { name: 'Dust 2', key: 'dust-2', file: 'Dust2.webp' },
+    { name: 'Mirage', key: 'mirage', file: 'Mirage.webp' },
+    { name: 'Inferno', key: 'inferno', file: 'Inferno.webp' },
+    { name: 'Nuke', key: 'nuke', file: 'Nuke.webp' },
+    { name: 'Ancient', key: 'ancient', file: 'Ancient.webp' },
+    { name: 'Anubis', key: 'anubis', file: 'Anubis.webp' },
+    { name: 'Overpass', key: 'overpass', file: 'Overpass.webp' },
+    { name: 'Vertigo', key: 'vertigo', file: 'Vertigo.webp' },
+    { name: 'Cache', key: 'cache', file: 'Cache.webp' },
+    { name: 'Train', key: 'train', file: 'Train.webp' },
   ];
 
   private readonly dataMap: Record<string, MapConfig> = {

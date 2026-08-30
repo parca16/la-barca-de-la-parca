@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterEvent, NavigationEnd } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { ScrollService } from '../../services/scroll.service';
 import { Subscription, filter } from 'rxjs';
 
@@ -18,7 +18,7 @@ export class Header implements OnInit, OnDestroy {
   protected readonly navItems: { label: string; route: string; activateOn?: string[] }[] = [
     { label: 'Inicio', route: '', activateOn: [''] },
     { label: 'Equipo', route: 'team', activateOn: ['team'] },
-    { label: 'Estrategias', route: 'strategies', activateOn: ['strategies', 'map', 'utilities'] },
+    { label: 'Estrategias', route: 'strategies', activateOn: ['strategies', 'map'] },
     { label: 'Utilidades', route: 'utilities', activateOn: ['utilities'] },
   ];
 
@@ -38,8 +38,13 @@ export class Header implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
         this.currentRoute = event.urlAfterRedirects.split('/')[1] || '';
+        window.scrollTo(0, 0);
       })
     );
+  }
+
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   protected isActive(route: string, activateOn?: string[]): boolean {

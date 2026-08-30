@@ -27,7 +27,7 @@ export const mapData: MapConfig = {
       side: 'T',
       name: 'Execute B',
       description: 'Execute clásico desde banana y un lurker jugando desde apps o second mid. En un escenario ideal, se realiza una vez los players de B han gastado sus dos smokes. Usualmente esto ocurre entre el 1:05 y el 0:45. Se precisan de smokes en coffins y en CT (preferiblemente smoke que tape boosteo), molotovs en triples y en segundas, y flashes en site y secundaria. Especial cuidado con a) el CT de fuente, b) con el CT de boost en primeras, y c) la popflash desde CT con push de smoke. En caso de caer molotov por parte del equipo CT para detener temporalmente el avance terro, JAMÁS apagarlo con un smoke',
-      minimaps: ['/assets/minimaps/inferno-play1.jpg'],
+      minimaps: ['/assets/minimaps/inferno-play1.webp'],
       roles: [
         { player: 'Parca', role: 'Support', utility: '1º smoke coffins, 2º molotov triples, 3º molotov segundas. La función principal es la de setuppear el site de tal forma que los entrys tengan la capacidad para limpiar ángulos más facilmente. Si no existen dos molotovs, se sustituirá con flash a segundas. Importante la velocidad de dedos para asegurar que las utilidades caen en los timings correctos' },
         { player: 'Dida', role: 'Support', utility: '1º smoke CT, 2º flash CT, 3º drop molotov into Parca. Una vez lanza sus utilidades, debe ser rápida para llegar al segundo contacto tras los entrys. En caso de existir popflashes desde CT o molos para detener el avance, puede llegar a tradear' },
@@ -40,7 +40,7 @@ export const mapData: MapConfig = {
       side: 'T',
       name: 'Execute A',
       description: 'Este site se ejecuta en caso de haber logrado una kill en el mapa (distribución probable de los CTs 2-2) o en caso de ser incapaces de tomar banana por mérito del equipo enemigo. Se precisa de smokes en larga y en moto, popflash a medio, molo en pit y flashes a site. Requiere de haber logrado control de apps y de jugar muy juntos en la entrada por corta debido a la gran cantidad de ángulos a limpiar. Especial importancia del player de apps, tanto por utilidad como por apertura del site. Las posiciones más problemáticas son backsite, minipit, balcón y camión. Importante que los entrys de corta no duden a la hora de atacar el site al llegar a la zona de azul. Se recomienda pegarse a la pared de la izquierda para tratar de spotear al CT de minipit o al CT de balcón, para después avanzar hacia site',
-      minimaps: ['/assets/minimaps/inferno-split-a.jpg', '/assets/minimaps/inferno-b-fake.jpg'],
+      minimaps: ['/assets/minimaps/inferno-split-a.webp', '/assets/minimaps/inferno-b-fake.webp'],
       roles: [
         { player: 'Parca', role: 'Support + second entry', utility: '1º Smoke moto, 2º flash site. La función es incomodar lo máximo posible al player de minipit para facilitar la entrada de los entrys. La flash debe popear de tal forma que flashee site, deep minipit y que no obligue a los entrys a girarse. Tras ello, debe correr para buscar trades arma en mano.' },
         { player: 'Kike/Doda', role: 'Lurker', utility: '1º molotov coche, 2º nade sandbox, 3º popflash mid (lado izquierdo. Tras ello, la función será la de permanecer en under y anclar el smoke de larga para prevenir el pusheo del smoke del CT, de tal forma que los cuatro players solo tengan que preocuparse de luchar por el site desde el push de larga. Función secundaria, sonidear el posible push de banana por parte de los CTs, pudiendo esconderse en under y sacar kills gratis. En caso de no existir dicho push y de no escuchar ningún push banana, debe avanzar para poder utilizar su smoke ya sea en larga o en moto, y buscando jugar al postplant. Importante ser consciente del timer del smoke para saber cuando resmokear. Importante conocer lineup desde under para smokear larga.' },
@@ -53,7 +53,7 @@ export const mapData: MapConfig = {
       side: 'CT',
       name: 'Aggro Banana + B Anchor',
       description: 'Defensa agresiva con presión en Banana para obligar a los T a gastar utility temprano. Un jugador anclado en B y otro rotando según información.',
-      minimaps: ['/assets/minimaps/inferno-ct-banana.jpg'],
+      minimaps: ['/assets/minimaps/inferno-ct-banana.webp'],
       roles: [
         { player: 'c4rlos', role: 'RIFLER', utility: 'Aggro banana con rifle y smokes' },
         { player: 'd00m', role: 'ANCHOR', utility: 'Anclado en B con posiciones key' },
@@ -79,7 +79,7 @@ export const mapData: MapConfig = {
       side: 'CT',
       name: 'Double A Hold',
       description: 'Defensa estática enfocada en A con 3 jugadores. Se usa cuando se detecta que el enemigo prioriza A site. B se juega con 2 jugadores.',
-      minimaps: ['/assets/minimaps/inferno-double-a.jpg'],
+      minimaps: ['/assets/minimaps/inferno-double-a.webp'],
       roles: [
         { player: 'c4rlos', role: 'RIFLER', utility: 'A Apartments con rifle' },
         { player: 'd00m', role: 'RIFLER', utility: 'A Long con cobertura' },

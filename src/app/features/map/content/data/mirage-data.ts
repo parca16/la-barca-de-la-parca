@@ -27,7 +27,7 @@ export const mapData: MapConfig = {
       side: 'T',
       name: 'Mid Execute B',
       description: 'Ejecución fuerte desde Mid al sitio B con smokes para apartments y connectors. Busca crear confusión y aprovechar números a favor en el site.',
-      minimaps: ['/assets/minimaps/mirage-play1.jpg'],
+      minimaps: ['/assets/minimaps/mirage-play1.webp'],
       timing: [
         { action: 'Smoke apartments y connectors', seconds: 0 },
         { action: 'Flash Mid Stairs', seconds: 5 },

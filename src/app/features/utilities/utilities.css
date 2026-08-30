@@ -83,7 +83,7 @@
 
 .map-card:hover {
   transform: scale(1.03);
-  box-shadow: 0 8px 32px rgba(233, 255, 31, 0.15);
+  box-shadow: 0 8px 32px rgba(196, 214, 24, 0.15);
 }
 
 .map-card-overlay {
@@ -94,7 +94,7 @@
 }
 
 .map-card:hover .map-card-overlay {
-  background: linear-gradient(to bottom, rgba(233, 255, 31, 0.1) 0%, rgba(13, 15, 19, 0.9));
+  background: linear-gradient(to bottom, rgba(196, 214, 24, 0.08) 0%, rgba(13, 15, 19, 0.9));
 }
 
 .map-card::after {
@@ -107,7 +107,7 @@
 }
 
 .map-card:hover::after {
-  border-color: #E9FF1F;
+  border-color: #C4D618;
 }
 
 .map-card-name {

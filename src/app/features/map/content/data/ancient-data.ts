@@ -27,7 +27,7 @@ export const mapData: MapConfig = {
       side: 'T',
       name: '3-2 Execute B',
       description: 'Ejecución a B con 3 fraggers principales y 2 supports. Los smokes para las ventanas y la utility coordinada son clave para abrir el site.',
-      minimaps: ['/assets/minimaps/ancient-play1.jpg'],
+      minimaps: ['/assets/minimaps/ancient-play1.webp'],
       timing: [
         { action: 'Smokes ventana B', seconds: 0 },
         { action: 'Flash entrada B', seconds: 3 },

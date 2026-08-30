@@ -18,6 +18,7 @@ type GrenadeType = 'smoke' | 'molotov' | 'flash' | 'he';
 export interface UtilityData {
   filename: string;
   title: string;
+  description: string;
 }
 
 export interface MapUtilities {
@@ -81,22 +82,22 @@ export class UtilityDetail implements OnInit, OnDestroy {
     {
       key: 'smoke',
       label: 'Smoke',
-      iconPath: '/assets/icons/smoke_ico.jpg'
+      iconPath: '/assets/icons/smoke_ico.png'
     },
     {
       key: 'molotov',
       label: 'Molotov',
-      iconPath: '/assets/icons/molotov_ico.jpg'
+      iconPath: '/assets/icons/molotov_ico.png'
     },
     {
       key: 'flash',
       label: 'Flash',
-      iconPath: '/assets/icons/flashbang_ico.jpg'
+      iconPath: '/assets/icons/flashbang_ico.png'
     },
     {
       key: 'he',
       label: 'HE',
-      iconPath: '/assets/icons/nade_ico.jpg'
+      iconPath: '/assets/icons/nade_ico.png'
     }
   ];
 
@@ -145,7 +146,7 @@ export class UtilityDetail implements OnInit, OnDestroy {
     if (data && data[this.selectedType] && data[this.selectedType].length > 0) {
       this.utilities = data[this.selectedType];
     } else {
-      this.utilities = [{ filename: 'placeholder', title: 'Utilidad en desarrollo' }];
+      this.utilities = [{ filename: 'placeholder', title: 'Utilidad en desarrollo', description: 'En desarrollo...' }];
     }
   }
 
