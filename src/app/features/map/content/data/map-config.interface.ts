@@ -12,6 +12,7 @@ export interface MapConfig {
     description: string;
     minimaps: string[];
     timing?: { action: string; seconds: number }[];
+    variants?: { label: string; text: string }[];
     roles: {
       player: string;
       role: string;

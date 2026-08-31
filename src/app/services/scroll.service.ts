@@ -1,28 +1,28 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { fromEvent, Subscription, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ScrollService {
+export class ScrollService implements OnDestroy {
   private hasScrollSubject = new BehaviorSubject<boolean>(false);
+  private scrollSubscription = Subscription.EMPTY;
 
   readonly hasScroll$ = this.hasScrollSubject.asObservable();
-  private scrollDistanceSubject = new BehaviorSubject<number>(0);
 
-  constructor() {
-    this.scrollDistanceSubject.subscribe(distance => {
-      this.hasScrollSubject.next(distance > 60);
+  constructor() {}
+
+  observeScroll(): void {
+    this.scrollSubscription = fromEvent(window, 'scroll').subscribe(() => {
+      this.hasScrollSubject.next(window.scrollY > 500);
     });
   }
 
-  observeScroll(): void {
-    window.addEventListener('scroll', () => {
-      this.scrollDistanceSubject.next(window.scrollY);
-    }, { passive: true });
+  destroy(): void {
+    this.scrollSubscription.unsubscribe();
   }
 
-  reset(): void {
-    this.scrollDistanceSubject.next(0);
+  ngOnDestroy(): void {
+    this.destroy();
   }
 }

@@ -32,7 +32,7 @@ export const anubisUtilities: MapUtilities = {
     { filename: 'flash_middeep.webp', title: 'Flash Mid Deep' ,description: "Stuck en la esquina derecha de mid frente al tocón. Run Jumpthrow", },
     { filename: 'flash_palo.webp', title: 'Flash de palo' ,description: "Stuck en cajas. Left clic", },
     { filename: 'flash_popwater.webp', title: 'Flash Pop Water' ,description: "Desde corner. Run left clic (referencia laxa)", },
-    { filename: 'flash_puente.png', title: 'Flash Puente' ,description: "Stuck y crouch en la ruina izquierda de deep mid. Left clic (referemcia laxa)", },
+    { filename: 'flash_puente.webp', title: 'Flash Puente' ,description: "Stuck y crouch en la ruina izquierda de deep mid. Left clic (referemcia laxa)", },
     { filename: 'flash_siteA.webp', title: 'Flash Site A (I)' ,description: "Stuck en segundo escalón. Left clic", },
     { filename: 'flash_siteA1.webp', title: 'Flash Site A (II)' ,description: "Stuck frente a las escaleras de boat. Left clic", },
     { filename: 'flash_siteB.webp', title: 'Flash Site B (I)' ,description: "Frente a lado derecho de la primera columna de B main. Left clic", },

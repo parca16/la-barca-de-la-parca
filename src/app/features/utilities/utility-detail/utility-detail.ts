@@ -82,22 +82,22 @@ export class UtilityDetail implements OnInit, OnDestroy {
     {
       key: 'smoke',
       label: 'Smoke',
-      iconPath: '/assets/icons/smoke_ico.png'
+      iconPath: '/assets/icons/smoke_ico.webp'
     },
     {
       key: 'molotov',
       label: 'Molotov',
-      iconPath: '/assets/icons/molotov_ico.png'
+      iconPath: '/assets/icons/molotov_ico.webp'
     },
     {
       key: 'flash',
       label: 'Flash',
-      iconPath: '/assets/icons/flashbang_ico.png'
+      iconPath: '/assets/icons/flashbang_ico.webp'
     },
     {
       key: 'he',
       label: 'HE',
-      iconPath: '/assets/icons/nade_ico.png'
+      iconPath: '/assets/icons/nade_ico.webp'
     }
   ];
 

@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
-import { ScrollService } from '../../services/scroll.service';
-import { Subscription, filter } from 'rxjs';
+import { Subscription, filter, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +13,7 @@ export class Header implements OnInit, OnDestroy {
   protected isSolid = false;
   protected currentRoute = '';
   private subscriptions = new Subscription();
+  private scrollSubscription: Subscription = Subscription.EMPTY;
 
   protected readonly navItems: { label: string; route: string; activateOn?: string[] }[] = [
     { label: 'Inicio', route: '', activateOn: [''] },
@@ -23,17 +23,15 @@ export class Header implements OnInit, OnDestroy {
   ];
 
   constructor(
-    private scrollService: ScrollService,
+    private cdr: ChangeDetectorRef,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.scrollService.hasScroll$.subscribe(solid => {
-        this.isSolid = solid;
-      })
-    );
-    this.scrollService.observeScroll();
+    this.scrollSubscription = fromEvent(window, 'scroll').subscribe(() => {
+      this.isSolid = window.scrollY > 400;
+      this.cdr.markForCheck();
+    });
 
     this.subscriptions.add(
       this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
@@ -54,6 +52,7 @@ export class Header implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    this.scrollSubscription.unsubscribe();
   }
 
   toggleMenu(): void {

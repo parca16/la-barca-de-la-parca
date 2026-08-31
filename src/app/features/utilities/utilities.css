@@ -55,12 +55,15 @@
 }
 
 .pool-label {
-  font-size: 0.85rem;
+  font-size: 1.25rem;
   color: #555;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #252830;
   text-transform: uppercase;
   letter-spacing: 1px;
+  text-align: center;
 }
 
 .maps-grid {

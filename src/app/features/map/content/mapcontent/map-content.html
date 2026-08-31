@@ -2,14 +2,16 @@
 <div class="map-content">
   <div class="content-text">
     <h2>{{ mapData.title }}</h2>
-    @for (idea of mapData.ideas; track idea.heading) {
-      <h3>{{ idea.heading }}</h3>
-      <p>{{ idea.text }}</p>
-    }
+    <div class="ideas-section">
+      @for (idea of mapData.ideas; track idea.heading) {
+        <h3>{{ idea.heading }}</h3>
+        <p>{{ idea.text }}</p>
+      }
+    </div>
   </div>
 
   <div class="content-image">
-    <img [src]="mapData.calloutsImage" [alt]="'Callouts de ' + mapData.title" />
+    <img [src]="mapData.calloutsImage" [alt]="'Callouts de ' + mapData.title" style="margin-top: 8.5rem;" />
   </div>
 </div>
 
@@ -55,19 +57,43 @@
           <span class="tag" [class.side-T]="strategy.side === 'T'" [class.side-CT]="strategy.side === 'CT'">{{ strategy.side }}</span>
         </div>
 
-        <!-- Descripción -->
-        <p class="strategy-desc">{{ strategy.description }}</p>
+        <!-- Descripción + Variantes + Minimaps -->
+        <div class="strategy-body">
+          <div class="strategy-text">
+            <p class="strategy-desc">{{ strategy.description }}</p>
 
-        <!-- Fotos de minimap -->
-        @if (strategy.minimaps.length > 0) {
-          <div class="minimaps-container">
-            @for (minimap of strategy.minimaps; track minimap) {
-              <div class="minimap-wrapper">
-                <img [src]="minimap" [alt]="'Minimap de ' + strategy.name" />
+            <!-- Variantes -->
+            @if (strategy.variants && strategy.variants.length > 0) {
+              <div class="variants-block">
+                <div class="variants-toggle">
+                  @for (variant of strategy.variants; track variant.label; let v = $index) {
+                    <button
+                      class="variant-btn"
+                      [class.active]="variantIndex(strategy.name) === v"
+                      (click)="selectVariant(strategy.name, v)"
+                    >
+                      {{ variant.label }}
+                    </button>
+                  }
+                </div>
+                @if (strategy.variants[variantIndex(strategy.name)]) {
+                  <p class="variant-text">{{ strategy.variants[variantIndex(strategy.name)].text }}</p>
+                }
               </div>
             }
           </div>
-        }
+
+          <!-- Fotos de minimap -->
+          @if (strategy.minimaps.length > 0) {
+            <div class="minimaps-container">
+              @for (minimap of strategy.minimaps; track minimap) {
+                <div class="minimap-wrapper">
+                  <img [src]="minimap" [alt]="'Minimap de ' + strategy.name" />
+                </div>
+              }
+            </div>
+          }
+        </div>
 
         <!-- Tabla de jugadores -->
         <table class="players-table">

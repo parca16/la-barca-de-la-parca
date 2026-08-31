@@ -7,7 +7,7 @@ export const starters: Player[] = [
     role: 'IGL',
     nationality: '🇪🇬 Egipto',
     age: 51,
-    photoUrl: '/assets/players/Parca16.png',
+    photoUrl: '/assets/players/Parca16.webp',
     joined: '2024-01',
     bio: 'In-Game Leader con más de 30 años de experiencia.',
     rating: 1.04,
