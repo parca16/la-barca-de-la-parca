@@ -16,7 +16,7 @@ export const anubisUtilities: MapUtilities = {
     { filename: 'smoke_window.webp', title: 'Smoke Window' ,description: "Stuck en el lado izquierdo de la puerta de Tspawn. Crouch-walk Jumpthrow", },
   ],
   molotov: [
-    { filename: 'molo_backsite.webp', title: 'Molotov Backsite A' ,description: "Desde main sin exponerse a site. Left clic (referencia laxa)", },
+    { filename: 'molo_backsite.webp', title: 'Molotov de faraón' ,description: "Desde main sin exponerse a site. Left clic (referencia laxa)", },
     { filename: 'molo_columna.webp', title: 'Molotov Columna' ,description: "Stuck en el angulo previo a la entrada a B site. Jumpthrow", },
     { filename: 'molo_corner.webp', title: 'Molotov Corner' ,description: "Desde la zona oculta y elevada de B main. Left clic", },
     { filename: 'molo_headshot.webp', title: 'Molotov Headshot' ,description: "Stuck frente a las escaleras de boat. Jumpthrow", },

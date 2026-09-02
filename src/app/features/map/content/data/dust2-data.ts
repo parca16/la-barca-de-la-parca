@@ -61,7 +61,7 @@ export const mapData: MapConfig = {
     {
       side: 'T',
       name: 'Split A',
-      description: '.',
+      description: 'Esta play está basada en la velocidad de ejecución. Consta de dos players que juagrán corta y tres que jugarán larga. Los players que acaben por ir corta serán los encargados de lanzar la utilidad early round, que estará compuesta por un smoke x-box, un molotov corta y dos flashes de palmera. Tras esta utilidad, correrán por corta jugando el dos contra uno contra el CT, que tendrá que decidir si tomar el duelo o si hgastar un smoke defensivo. En caso de recibir smoke defensivo, debe prepararse una nade para disipar el humo, lanzada un poco antes de la llegada al cross de CT por parte de los players de larga. Por su parte, los players de larga tendrán por tarea tomar el duelo de larga, flashear site y smokear el cross de CT (a ser posible, la variante deep de dicho smoke). Con el smoke deep la intención es plantar para larga y jugar el postplant desde la esquina de site, gandalf, backsite, coche o larga, tratando de resmokear, preferiblemente, corta. La lógica y la configuración de players dependerá en gran medida del número de supervivientes tras lograr el plante. Cuantos menos hayan sobrevivido, más recomendable será la migración hacia larga. Un detalle fundamental: la bomba ha de plantarse en la parte superior de la caja orientada a larga. En caso contrario, corremos el riesgo de que el CT pueda defusarla desde detrás de la propia caja, haciendo inútiles los esfuerzos de los players de larga por evitarlo.',
       minimaps: ['/assets/plays/Dust2_T_SplitA.webp'],
       timing: [
         { action: 'Fake bombsite B con utility', seconds: 0 },
@@ -70,11 +70,11 @@ export const mapData: MapConfig = {
         { action: 'Rotación de Mid a A si se rompe', seconds: 15 },
       ],
       roles: [
-        { player: 'Parca', role: 'RIFLER', utility: '-' },
-        { player: 'Dida', role: 'AWPER', utility: '-' },
-        { player: 'Fedello', role: 'ENTRY', utility: '-' },
-        { player: 'Kevs', role: 'IGL', utility: '-' },
-        { player: 'Peter/Kike', role: 'SUPPORT', utility: '-' },
+        { player: 'Parca', role: 'RIFLER', utility: 'Todos los players deben saber jugar en ambas posiciones en esta play, y deben saber lanzar consistentemente el smoke x-box y el molotov corta, además de conocer el lineup del smoke deep cross. Esto se debe a que esta play es dependiente de un spawn favorable, y las posiciones de corta y larga se barajarán en función del RNG de dichos spawns.' },
+        { player: 'Dida', role: 'AWPER', utility: 'Todos los players deben saber jugar en ambas posiciones en esta play, y deben saber lanzar consistentemente el smoke x-box y el molotov corta, además de conocer el lineup del smoke deep cross. Esto se debe a que esta play es dependiente de un spawn favorable, y las posiciones de corta y larga se barajarán en función del RNG de dichos spawns.' },
+        { player: 'Fedello', role: 'ENTRY', utility: 'Todos los players deben saber jugar en ambas posiciones en esta play, y deben saber lanzar consistentemente el smoke x-box y el molotov corta, además de conocer el lineup del smoke deep cross. Esto se debe a que esta play es dependiente de un spawn favorable, y las posiciones de corta y larga se barajarán en función del RNG de dichos spawns.' },
+        { player: 'Kevs', role: 'IGL', utility: 'Todos los players deben saber jugar en ambas posiciones en esta play, y deben saber lanzar consistentemente el smoke x-box y el molotov corta, además de conocer el lineup del smoke deep cross. Esto se debe a que esta play es dependiente de un spawn favorable, y las posiciones de corta y larga se barajarán en función del RNG de dichos spawns.' },
+        { player: 'Peter/Kike', role: 'SUPPORT', utility: 'Todos los players deben saber jugar en ambas posiciones en esta play, y deben saber lanzar consistentemente el smoke x-box y el molotov corta, además de conocer el lineup del smoke deep cross. Esto se debe a que esta play es dependiente de un spawn favorable, y las posiciones de corta y larga se barajarán en función del RNG de dichos spawns.' },
       ],
     },
     {

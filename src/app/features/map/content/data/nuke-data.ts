@@ -5,7 +5,7 @@ export const mapData: MapConfig = {
   title: 'Ideas Clave de Nuke',
   ideas: [
     {
-      heading: '',
+      heading: 'Mapa fuera de la pool de NTR',
       text: 'La concepción y playstyle que NTR tenía sobre Nuke se ha visto desfasada y superada a medida que el elo de los players ha ido subiendo, hasta llegar un punto en el que un re-estudio del mapa se ha vuelto del todo imprescindible.',
     },
     

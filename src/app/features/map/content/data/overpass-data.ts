@@ -5,21 +5,10 @@ export const mapData: MapConfig = {
   title: 'Ideas Clave de Overpass',
   ideas: [
     {
-      heading: 'Mapa Acuático',
-      text: 'Overpass es conocido por su diseño acuático y sus múltiples niveles. Las zonas de canal y las plataformas flotantes crean ángulos únicos que premian el conocimiento del mapa.',
+      heading: 'Mapa inactivo',
+      text: 'NTR ha jugado con solidez este mapa en un pasado reciente, pero su exclusión de la pool competitiva actual provoca que la exposición de utilidades y jugadas quede, temporalmente, en suspensión.',
     },
-    {
-      heading: 'Site A y Palace',
-      text: 'El sitio A cuenta con múltiples rutas de entrada incluyendo Palace y Mid. Los defensores pueden jugar de forma agresiva o pasiva según la situación.',
-    },
-    {
-      heading: 'Site B y Church',
-      text: 'El sitio B se accede por Church y B Main. Es un sitio que permite defendidas compactas y retomas con utility bien coordinado.',
-    },
-    {
-      heading: 'Mid y Conexiones',
-      text: 'El control de Mid es vital en Overpass. Los smokes y flashes definen la capacidad de los T para llegar a los sitios y los CT para mantener el mapa.',
-    },
+    
   ],
   calloutsImage: '/assets/callouts/Overpass.webp',
   strategies: [
