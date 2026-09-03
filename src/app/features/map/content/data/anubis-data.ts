@@ -79,7 +79,7 @@ export const mapData: MapConfig = {
     },
     {
       side: 'CT',
-      name: 'Agresiva Boat',
+      name: 'Plays en contrucción',
       description: '.',
       minimaps: ['/assets/plays/Anubis_CT_AgresivaBoat.webp'],
       timing: [

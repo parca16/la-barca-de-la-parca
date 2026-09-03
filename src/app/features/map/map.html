@@ -3,12 +3,12 @@
   <div class="page-hero" [style.backgroundImage]="'url(' + headerImage + ')'">
     <div class="page-hero-content">
       <h1>{{ mapName }}</h1>
-      <p class="subtitle">Estrategias y estadísticas</p>
+      <p class="subtitle">Estrategias y variantes</p>
     </div>
   </div>
 
   <!-- Contenido del mapa (genérico) -->
   @if (mapData) {
-    <app-map-content [mapData]="mapData" />
+    <app-map-content [mapData]="mapData" [mapName]="mapName" [mapKey]="mapKey" />
   }
 </div>

@@ -1,6 +1,6 @@
 <section class="intro-section">
   <!-- Hero -->
-  <div class="page-hero" style="background-image: url('/assets/headers/Home_header.jpg');">
+  <div class="page-hero" style="background-image: url('/assets/headers/Home_header.webp');">
     <div class="page-hero-content">
       <h1>LA BARCA DE <span class="accent">LA PARCA</span> </h1>
     </div>
@@ -16,5 +16,44 @@
     <p><b>La Barca de la Parca</b> ha sido construida para almacenar todos aquellos conocimientos, ideas, jugadas, utilidades y cuestiones que <b>el equipo NTR (No te rayes)</b> haya desarrollado en sus años de juego en Counter Strike 2.</p>
     <p>En ella, encontraremos <b>nuestras plays</b> explicadas minuciosamente, <b>minimapas de visualización</b> de la posición de cada jugador, <b>un pequeño perfil</b> de cada uno de los miembros del roster y una <b>sección de utilidades</b> para facilitar la búsqueda y aplicación de las mismas ingame.</p>
     <p>El objetivo es que esta web se convierta en una <b>herramienta útil</b> para los players, y que sus <b>aportaciones e ideas</b> la nutran de nuevo contenido con el paso del tiempo</p>
+  </div>
+
+  <!-- Separamiento -->
+  <div class="section-divider"></div>
+
+  <!-- Sección de contribución -->
+  <div class="contribute-section">
+    <h2 class="contribute-title">¿Quieres aportar?</h2>
+    <p class="contribute-subtitle">Elige una de las secciones y envía tu contribución a la Parca en el mismo formato en que está expuesta para facilitar su incorporación. He aquí unas breves instrucciones de formato para cada sección:</p>
+
+    <div class="contribute-grid">
+      @for (card of contributionCards; track card.route) {
+        <div class="contribute-card" (click)="navigateTo(card.route)">
+          <div class="contribute-card-header">
+            <h3 class="contribute-card-title">{{ card.title }}</h3>
+            <svg class="contribute-card-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+          <p class="contribute-card-desc">{{ card.description }}</p>
+          <ul class="contribute-card-list">
+            @for (item of card.items; track item) {
+              <li class="contribute-card-item">
+                <svg class="contribute-item-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>{{ item }}</span>
+              </li>
+            }
+          </ul>
+          @if (card.footer) {
+            <div class="contribute-card-footer">
+              <p class="contribute-card-note">{{ card.footer }}</p>
+            </div>
+          }
+        </div>
+      }
+    </div>
   </div>
 </section>

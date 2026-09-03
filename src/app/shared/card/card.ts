@@ -15,7 +15,7 @@ export class Card {
     this.activeTab = tab;
   }
 
-  getPlayerSteamId(alias: string): string | undefined {
+  getPlayerSteamUrl(alias: string): string | undefined {
     const ids: Record<string, string> = {
       parca: '76561198301504889',
       peter: '76561198041309771',
@@ -23,10 +23,28 @@ export class Card {
       kevin: '76561198143673849',
       kike: '76561198415119986',
       fede: '76561198395532972',
-      porco: '',
-      xuiz: '',
+      porco: '76561199790384537',
+      xuiz: 'blackyolo22',
     };
-    return ids[alias];
+    const id = ids[alias];
+    if (!id) return undefined;
+    return id.startsWith('7656')
+      ? `https://steamcommunity.com/profiles/${id}`
+      : `https://steamcommunity.com/id/${id}`;
+  }
+
+  getPlayerFaceitUrl(alias: string): string {
+    const urls: Record<string, string> = {
+      parca: 'https://www.faceit.com/en/players/parca16',
+      peter: 'https://www.faceit.com/en/players/selav28',
+      doda: 'https://www.faceit.com/en/players/niturbo',
+      kevin: 'https://www.faceit.com/en/players/Kevimuxx69',
+      kike: 'https://www.faceit.com/en/players/Kakii145',
+      fede: 'https://www.faceit.com/en/players/danielo9',
+      porco: 'https://www.faceit.com/en/players/PuercoManco',
+      xuiz: 'https://www.faceit.com/en/players/Blackyolo22',
+    };
+    return urls[alias] || '';
   }
 
   protected getAbbrev(alias: string): string {

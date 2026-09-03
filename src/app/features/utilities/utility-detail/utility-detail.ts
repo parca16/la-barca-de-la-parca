@@ -28,15 +28,6 @@ export interface MapUtilities {
   he: UtilityData[];
 }
 
-type GrenadeKey = 'smoke' | 'molo' | 'flash' | 'nade';
-
-const grenadeMap: Record<GrenadeType, GrenadeKey> = {
-  smoke: 'smoke',
-  molotov: 'molo',
-  flash: 'flash',
-  he: 'nade',
-};
-
 const mapUtilities: Record<string, MapUtilities> = {
   'dust-2': dust2Utilities,
   mirage: mirageUtilities,
@@ -185,8 +176,8 @@ export class UtilityDetail implements OnInit, OnDestroy {
     return `/assets/map-headers/${name}_header.webp`;
   }
 
-  navigateBack(): void {
-    this.router.navigate(['/utilities']);
+  navigateToStrategies(): void {
+    this.router.navigate(['/map', this.mapKey]);
   }
 
   selectImage(utility: UtilityData): void {

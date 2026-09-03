@@ -101,7 +101,7 @@ export const mapData: MapConfig = {
     },
     {
       side: 'CT',
-      name: '',
+      name: 'Plays en contrucción',
       description: '.',
       minimaps: [],
       timing: [

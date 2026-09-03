@@ -59,11 +59,21 @@
   color: #555;
   font-weight: 700;
   margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #252830;
+  padding-bottom: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: center;
+  position: relative;
+}
+
+.pool-label::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #C4D618 50%, transparent);
 }
 
 .maps-grid {

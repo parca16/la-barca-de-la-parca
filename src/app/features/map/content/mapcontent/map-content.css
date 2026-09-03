@@ -16,6 +16,36 @@
   text-transform: uppercase;
 }
 
+.utilities-link {
+  color: #555;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Courier New', monospace;
+  font-style: normal;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.utilities-link:hover {
+  color: #C4D618;
+  transform: translateX(3px);
+}
+
+.utilities-link svg {
+  transition: transform 0.2s ease;
+}
+
+.utilities-link:hover svg {
+  transform: translateX(3px);
+}
+
 .content-text h3 {
   font-size: 1.1rem;
   font-weight: 600;
@@ -173,13 +203,17 @@
   border: 2px solid rgba(233, 255, 31, 0.3);
 }
 
-/* Body de estrategia: texto a la izquierda, minimaps a la derecha */
+/* Body de estrategia: descripcion a la izquierda, minimaps a la derecha */
+.strategy-main {
+  display: flex;
+  flex-direction: column;
+}
+
 .strategy-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   align-items: start;
-  margin-bottom: 2.5rem;
 }
 
 /* Descripción */
@@ -194,7 +228,9 @@
 
 /* Variantes */
 .variants-block {
-  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 3px solid rgba(233, 255, 31, 0.15);
 }
 
 .variants-toggle {
@@ -330,6 +366,9 @@
   }
   .strategy-card {
     padding: 2rem 1.5rem;
+  }
+  .strategy-body {
+    grid-template-columns: 1fr;
   }
   .strategy-header h3 {
     font-size: 1.3rem;

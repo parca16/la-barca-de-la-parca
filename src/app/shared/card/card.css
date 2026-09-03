@@ -44,23 +44,6 @@
   display: block;
 }
 
-.card-name-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  justify-content: center;
-  width: 100%;
-}
-
-.card-name-text {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #fff;
-  margin: 0;
-  letter-spacing: 1px;
-  text-align: center;
-}
-
 .card-bottom-row {
   display: flex;
   align-items: center;
@@ -108,15 +91,6 @@
   width: 20px;
   height: 20px;
   object-fit: contain;
-}
-
-.card-name {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #fff;
-  margin: 0;
-  letter-spacing: 1.5px;
-  text-align: center;
 }
 
 .role-badge {

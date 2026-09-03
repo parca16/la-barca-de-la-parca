@@ -77,7 +77,7 @@ export const mapData: MapConfig = {
     },
     {
       side: 'CT',
-      name: '.',
+      name: 'Plays en contrucción',
       description: '.',
       minimaps: [],
       roles: [
@@ -88,18 +88,6 @@ export const mapData: MapConfig = {
         { player: 'Peter/Kike', role: 'SUPPORT', utility: '-' },
       ],
     },
-    {
-      side: 'CT',
-      name: '',
-      description: '.',
-      minimaps: ['/assets/minimaps/inferno-double-a.webp'],
-      roles: [
-        { player: 'Parca', role: 'RIFLER', utility: '-' },
-        { player: 'Dida', role: 'AWPER', utility: '-' },
-        { player: 'Fedello', role: 'ENTRY', utility: '-' },
-        { player: 'Kevs', role: 'IGL', utility: '-' },
-        { player: 'Peter/Kike', role: 'SUPPORT', utility: '-' },
-      ],
-    },
+    
   ],
 };
