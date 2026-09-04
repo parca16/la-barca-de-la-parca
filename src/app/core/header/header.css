@@ -165,3 +165,29 @@
     text-align: center;
   }
 }
+
+@media (max-width: 600px) {
+  .header-container {
+    height: 60px;
+    padding: 0 1rem;
+  }
+  .nav {
+    top: 60px;
+  }
+  .logo img {
+    height: 40px;
+  }
+  .menu-toggle {
+    padding: 0.35rem;
+  }
+  .hamburger {
+    width: 16px;
+    height: 2px;
+  }
+  .back-to-top {
+    width: 44px;
+    height: 44px;
+    bottom: 0.75rem;
+    right: 0.75rem;
+  }
+}

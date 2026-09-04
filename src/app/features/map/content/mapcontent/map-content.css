@@ -390,3 +390,96 @@
     margin: 1.5rem 0;
   }
 }
+
+@media (max-width: 600px) {
+  .map-content {
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .content-text h2 {
+    font-size: 1.25rem;
+    letter-spacing: 0.5px;
+  }
+  .content-text h3 {
+    font-size: 1rem;
+  }
+  .content-text p {
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+  }
+  .utilities-link {
+    font-size: 0.95rem;
+  }
+  .toggle-btn {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.5rem;
+    letter-spacing: 1.5px;
+  }
+  .strategy-card {
+    padding: 1.5rem 1rem;
+  }
+  .strategy-header h3 {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+  .tag {
+    font-size: 0.75rem;
+    padding: 0.45rem 1rem;
+    letter-spacing: 1px;
+  }
+  .strategy-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: left;
+  }
+  .strategy-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+  }
+  .strategy-body {
+    gap: 1.25rem;
+  }
+  .variants-block {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+  }
+  .variants-toggle {
+    gap: 0.5rem;
+  }
+  .variant-btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    letter-spacing: 1px;
+  }
+  .variant-text {
+    font-size: 0.95rem;
+    padding: 1rem;
+    line-height: 1.5;
+  }
+  .players-table thead th {
+    font-size: 0.7rem;
+    padding: 0.75rem 0.75rem;
+    letter-spacing: 1px;
+  }
+  .players-table td {
+    padding: 0.75rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  .players-table .player-name {
+    font-size: 0.95rem;
+  }
+  .players-table .player-task {
+    font-size: 0.9rem;
+  }
+  .no-strategies {
+    font-size: 0.95rem;
+    padding: 2rem 0;
+  }
+  .play-separator {
+    margin: 1rem 0;
+  }
+  .section-divider {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
+}

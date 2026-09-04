@@ -345,28 +345,41 @@ a.strategies-link:hover svg {
   .page-hero {
     height: 320px;
   }
-
+  .page-hero-content {
+    padding-top: 60px;
+  }
   .page-hero h1 {
     font-size: 2.25rem;
   }
-
   .grenade-toggles {
     gap: 0.75rem;
     padding: 0 1rem;
   }
-
   .grenade-toggle {
     padding: 0.5rem 0.75rem;
     font-size: 0.75rem;
   }
-
   .grenade-icon {
     width: 28px;
     height: 28px;
   }
-
   .utilities-grid {
     grid-template-columns: 1fr;
     padding: 0 1rem;
+  }
+  .utility-info {
+    padding: 0.75rem 1rem;
+  }
+  .utility-title {
+    font-size: 0.85rem;
+  }
+  .utility-desc {
+    font-size: 0.85rem;
+  }
+  .strategies-link-wrapper {
+    margin-bottom: 1rem;
+  }
+  a.strategies-link {
+    font-size: 0.95rem;
   }
 }

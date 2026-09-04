@@ -60,6 +60,9 @@
   .page-hero {
     height: 260px;
   }
+  .page-hero-content {
+    padding-top: 60px;
+  }
   .page-hero h1 {
     font-size: 1.75rem;
   }

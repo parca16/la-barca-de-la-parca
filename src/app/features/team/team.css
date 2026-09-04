@@ -108,10 +108,19 @@
   .page-hero {
     height: 260px;
   }
+  .page-hero-content {
+    padding-top: 60px;
+  }
   .page-hero h1 {
     font-size: 1.75rem;
   }
   .page-hero .subtitle {
     font-size: 0.8rem;
+  }
+  .roster-title {
+    font-size: 1rem;
+  }
+  .team-section {
+    padding: 0 0 1.5rem;
   }
 }

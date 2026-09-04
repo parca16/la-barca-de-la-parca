@@ -311,3 +311,53 @@
     gap: 0.75rem;
   }
 }
+
+@media (max-width: 600px) {
+  .card-left {
+    padding: 1.5rem 1rem;
+  }
+  .card-avatar {
+    width: 200px;
+    height: 200px;
+  }
+  .card-bottom-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .card-abbrev {
+    font-size: 1rem;
+  }
+  .card-right {
+    padding: 1.25rem 1rem;
+  }
+  .toggle-btn {
+    font-size: 0.7rem;
+    padding: 0.6rem 0.3rem;
+  }
+  .perfil-row .label {
+    font-size: 0.75rem;
+  }
+  .perfil-row .value {
+    font-size: 0.95rem;
+  }
+  .perfil-row {
+    padding: 0.5rem 0.75rem;
+  }
+  .tab-posicion p,
+  .tab-psico p {
+    font-size: 0.95rem;
+    padding: 0.65rem 0.85rem;
+  }
+  .virtues-section h4,
+  .defects-section h4 {
+    font-size: 0.8rem;
+  }
+  .virtues-section li,
+  .defects-section li {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.5rem;
+  }
+  .tab-stats-empty p {
+    font-size: 0.9rem;
+  }
+}
