@@ -28,15 +28,6 @@ export interface MapUtilities {
   he: UtilityData[];
 }
 
-type GrenadeKey = 'smoke' | 'molo' | 'flash' | 'nade';
-
-const grenadeMap: Record<GrenadeType, GrenadeKey> = {
-  smoke: 'smoke',
-  molotov: 'molo',
-  flash: 'flash',
-  he: 'nade',
-};
-
 const mapUtilities: Record<string, MapUtilities> = {
   'dust-2': dust2Utilities,
   mirage: mirageUtilities,
@@ -82,22 +73,22 @@ export class UtilityDetail implements OnInit, OnDestroy {
     {
       key: 'smoke',
       label: 'Smoke',
-      iconPath: '/assets/icons/smoke_ico.png'
+      iconPath: '/assets/icons/smoke_ico.webp'
     },
     {
       key: 'molotov',
       label: 'Molotov',
-      iconPath: '/assets/icons/molotov_ico.png'
+      iconPath: '/assets/icons/molotov_ico.webp'
     },
     {
       key: 'flash',
       label: 'Flash',
-      iconPath: '/assets/icons/flashbang_ico.png'
+      iconPath: '/assets/icons/flashbang_ico.webp'
     },
     {
       key: 'he',
       label: 'HE',
-      iconPath: '/assets/icons/nade_ico.png'
+      iconPath: '/assets/icons/nade_ico.webp'
     }
   ];
 
@@ -185,8 +176,8 @@ export class UtilityDetail implements OnInit, OnDestroy {
     return `/assets/map-headers/${name}_header.webp`;
   }
 
-  navigateBack(): void {
-    this.router.navigate(['/utilities']);
+  navigateToStrategies(): void {
+    this.router.navigate(['/map', this.mapKey]);
   }
 
   selectImage(utility: UtilityData): void {

@@ -2,19 +2,23 @@
   <!-- Hero con imagen de cabecera personalizada -->
   <div class="page-hero" [style.backgroundImage]="'url(' + headerImage + ')'">
     <div class="page-hero-content">
-      <a class="back-button" (click)="navigateBack()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="19" y1="12" x2="5" y2="12"></line>
-          <polyline points="12 19 5 12 12 5"></polyline>
-        </svg>
-        Volver
-      </a>
       <h1>{{ mapName }}</h1>
-      <p class="subtitle">Utilidades y granadas</p>
+      <p class="subtitle">Utilidades e instrucciones de uso</p>
     </div>
   </div>
 
-  <!-- Toggles de granadas -->
+  <!-- Enlace a estrategias -->
+  <div class="strategies-link-wrapper">
+    <a class="strategies-link" (click)="navigateToStrategies()">
+      <span>Estrategias de {{ mapName }}</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </a>
+  </div>
+
+<!-- Toggles de granadas -->
   <div class="grenade-toggles">
     @for (grenade of grenadeTypes; track grenade.key) {
       <button

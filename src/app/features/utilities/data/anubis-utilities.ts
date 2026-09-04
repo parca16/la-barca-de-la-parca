@@ -16,7 +16,7 @@ export const anubisUtilities: MapUtilities = {
     { filename: 'smoke_window.webp', title: 'Smoke Window' ,description: "Stuck en el lado izquierdo de la puerta de Tspawn. Crouch-walk Jumpthrow", },
   ],
   molotov: [
-    { filename: 'molo_backsite.webp', title: 'Molotov Backsite A' ,description: "Desde main sin exponerse a site. Left clic (referencia laxa)", },
+    { filename: 'molo_backsite.webp', title: 'Molotov de faraón' ,description: "Desde main sin exponerse a site. Left clic (referencia laxa)", },
     { filename: 'molo_columna.webp', title: 'Molotov Columna' ,description: "Stuck en el angulo previo a la entrada a B site. Jumpthrow", },
     { filename: 'molo_corner.webp', title: 'Molotov Corner' ,description: "Desde la zona oculta y elevada de B main. Left clic", },
     { filename: 'molo_headshot.webp', title: 'Molotov Headshot' ,description: "Stuck frente a las escaleras de boat. Jumpthrow", },
@@ -32,7 +32,7 @@ export const anubisUtilities: MapUtilities = {
     { filename: 'flash_middeep.webp', title: 'Flash Mid Deep' ,description: "Stuck en la esquina derecha de mid frente al tocón. Run Jumpthrow", },
     { filename: 'flash_palo.webp', title: 'Flash de palo' ,description: "Stuck en cajas. Left clic", },
     { filename: 'flash_popwater.webp', title: 'Flash Pop Water' ,description: "Desde corner. Run left clic (referencia laxa)", },
-    { filename: 'flash_puente.png', title: 'Flash Puente' ,description: "Stuck y crouch en la ruina izquierda de deep mid. Left clic (referemcia laxa)", },
+    { filename: 'flash_puente.webp', title: 'Flash Puente' ,description: "Stuck y crouch en la ruina izquierda de deep mid. Left clic (referemcia laxa)", },
     { filename: 'flash_siteA.webp', title: 'Flash Site A (I)' ,description: "Stuck en segundo escalón. Left clic", },
     { filename: 'flash_siteA1.webp', title: 'Flash Site A (II)' ,description: "Stuck frente a las escaleras de boat. Left clic", },
     { filename: 'flash_siteB.webp', title: 'Flash Site B (I)' ,description: "Frente a lado derecho de la primera columna de B main. Left clic", },

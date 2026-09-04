@@ -5,29 +5,18 @@ export const mapData: MapConfig = {
   title: 'Ideas Clave de Vertigo',
   ideas: [
     {
-      heading: 'Mapa Vertical',
-      text: 'Vertigo es el mapa más vertical del competitive con su helipuerto en lo alto. La defensa del sitio A se centra en controlar el heli y las conexiones al mismo.',
+      heading: 'Mapa inactivo',
+      text: 'NTR ha jugado con cierta consistencia este mapa en el pasado, pero requiere de un re-estudio para poder formular recomendaciones, jugadas y tips con un mínimo de conocimiento de causa. Dicha revisión se llevará a cabo, potencialmente, con el regreso de Vertigo al map pool activo.',
     },
-    {
-      heading: 'Helipuerto y Conexiones',
-      text: 'El helipuerto es la zona más estratégica del mapa. Controlarlo permite a los T llegar al sitio A con ventaja. Los CTs deben usar utility para negar el espacio.',
-    },
-    {
-      heading: 'Site A y Condo',
-      text: 'El sitio A se defiende desde el helipuerto, condo y long. La coordinación entre defensores en estas zonas es esencial para cubrir todas las líneas de entrada.',
-    },
-    {
-      heading: 'Site B Compacto',
-      text: 'El sitio B es más compacto que A pero puede ser vulnerable a executes rápidos. Los CTs deben mantener un defensor anclado y otro rotando desde A.',
-    },
+    
   ],
-  calloutsImage: '/assets/callouts/Vertigo.png',
+  calloutsImage: '/assets/callouts/Vertigo.webp',
   strategies: [
     {
       side: 'T',
-      name: 'Execute Helipuerto',
-      description: 'Ejecución fuerte por el helipuerto al sitio A. Requiere utility bien mostrado para asegurar el entry y plantar con cobertura.',
-      minimaps: ['/assets/minimaps/vertigo-play1.webp'],
+      name: 'Elaboración de jugadas en pausa',
+      description: '',
+      minimaps: [],
       timing: [
         { action: 'Smoke Mid y condo', seconds: 0 },
         { action: 'Flash helipuerto', seconds: 5 },
@@ -35,17 +24,17 @@ export const mapData: MapConfig = {
         { action: 'Entry A con cobertura', seconds: 15 },
       ],
       roles: [
-        { player: 'c4rlos', role: 'RIFLER', utility: 'Entry heli. Molotov A.' },
-        { player: 'n1tro', role: 'AWPER', utility: 'Overwatch Mid. Flash heli.' },
-        { player: 'd00m', role: 'ENTRY', utility: 'Saltar heli. Entry.' },
-        { player: 'b1nd', role: 'IGL', utility: 'Llama execute. Smoke Mid.' },
-        { player: 'shad0w', role: 'SUPPORT', utility: 'Smoke condo. Monitor B.' },
+        { player: 'Parca', role: 'RIFLER', utility: '-' },
+        { player: 'Dida', role: 'AWPER', utility: '-' },
+        { player: 'Fedello', role: 'ENTRY', utility: '-' },
+        { player: 'Kevs', role: 'IGL', utility: '-' },
+        { player: 'Peter/Kike', role: 'SUPPORT', utility: '-' },
       ],
     },
     {
       side: 'CT',
-      name: 'Defensa helipuerto',
-      description: 'Defensa del helipuerto con rifler y AWPer. Los defensores rotan entre heli y sitio B basándose en información.',
+      name: 'Elaboración de jugadas en pausa',
+      description: '',
       minimaps: [],
       timing: [
         { action: 'Rifler + AWPer heli', seconds: 0 },
@@ -54,11 +43,11 @@ export const mapData: MapConfig = {
         { action: 'Controlo B si no hay presión', seconds: 20 },
       ],
       roles: [
-        { player: 'c4rlos', role: 'RIFLER', utility: 'Rifler heli con cobertura.' },
-        { player: 'n1tro', role: 'AWPER', utility: 'AWP heli con cobertura.' },
-        { player: 'b1nd', role: 'IGL', utility: 'Llama rotaciones. Muestra utility.' },
-        { player: 'd00m', role: 'ENTRY', utility: 'Defiende B. Retoma.' },
-        { player: 'shad0w', role: 'SUPPORT', utility: 'Monitor condo. Flash B.' },
+        { player: 'Parca', role: 'RIFLER', utility: '-' },
+        { player: 'Dida', role: 'AWPER', utility: '-' },
+        { player: 'Fedello', role: 'ENTRY', utility: '-' },
+        { player: 'Kevs', role: 'IGL', utility: '-' },
+        { player: 'Peter/Kike', role: 'SUPPORT', utility: '-' },
       ],
     },
   ],

@@ -8,7 +8,6 @@ import { UtilityDetail } from './features/utilities/utility-detail/utility-detai
 
 export const routes: Routes = [
   { path: '', component: Home },
-  { path: 'home', component: Home },
   { path: 'team', component: Team },
   { path: 'strategies', component: Strategies },
   { path: 'map/:map', component: MapPage },

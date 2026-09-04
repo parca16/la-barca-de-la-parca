@@ -5,29 +5,18 @@ export const mapData: MapConfig = {
   title: 'Ideas Clave de Overpass',
   ideas: [
     {
-      heading: 'Mapa Acuático',
-      text: 'Overpass es conocido por su diseño acuático y sus múltiples niveles. Las zonas de canal y las plataformas flotantes crean ángulos únicos que premian el conocimiento del mapa.',
+      heading: 'Mapa inactivo',
+      text: 'NTR ha jugado con solidez este mapa en un pasado reciente, pero su exclusión de la pool competitiva actual provoca que la exposición de utilidades y jugadas quede, temporalmente, en suspensión.',
     },
-    {
-      heading: 'Site A y Palace',
-      text: 'El sitio A cuenta con múltiples rutas de entrada incluyendo Palace y Mid. Los defensores pueden jugar de forma agresiva o pasiva según la situación.',
-    },
-    {
-      heading: 'Site B y Church',
-      text: 'El sitio B se accede por Church y B Main. Es un sitio que permite defendidas compactas y retomas con utility bien coordinado.',
-    },
-    {
-      heading: 'Mid y Conexiones',
-      text: 'El control de Mid es vital en Overpass. Los smokes y flashes definen la capacidad de los T para llegar a los sitios y los CT para mantener el mapa.',
-    },
+    
   ],
-  calloutsImage: '/assets/callouts/Overpass.png',
+  calloutsImage: '/assets/callouts/Overpass.webp',
   strategies: [
     {
       side: 'T',
-      name: 'Mid Palace Execute A',
-      description: 'Ejecución fuerte por Palace al sitio A. Busca sorprender a los defensores con un flanco y crear confusión en el site.',
-      minimaps: ['/assets/minimaps/overpass-play1.webp', '/assets/minimaps/overpass-play2.webp'],
+      name: 'Elaboración de jugadas en pausa',
+      description: '',
+      minimaps: [],
       timing: [
         { action: 'Smoke Mid y Palace', seconds: 0 },
         { action: 'Flash Palace stairs', seconds: 5 },
@@ -35,17 +24,17 @@ export const mapData: MapConfig = {
         { action: 'Entry A con cobertura', seconds: 15 },
       ],
       roles: [
-        { player: 'c4rlos', role: 'RIFLER', utility: 'Entry A Long. Molotov.' },
-        { player: 'n1tro', role: 'AWPER', utility: 'Overwatch Mid. Flash Palace.' },
-        { player: 'd00m', role: 'ENTRY', utility: 'Saltar Palace. Entry.' },
-        { player: 'b1nd', role: 'IGL', utility: 'Llama execute. Smoke Mid.' },
-        { player: 'shad0w', role: 'SUPPORT', utility: 'Smoke Palace. Monitor B.' },
+        { player: 'Parca', role: 'RIFLER', utility: '-' },
+        { player: 'Dida', role: 'AWPER', utility: '-' },
+        { player: 'Fedello', role: 'ENTRY', utility: '-' },
+        { player: 'Kevs', role: 'IGL', utility: '-' },
+        { player: 'Peter/Kike', role: 'SUPPORT', utility: '-' },
       ],
     },
     {
       side: 'CT',
-      name: 'Defensa con lurker Mid',
-      description: 'Defensa distribuida con lurker en Mid para monitorar movimientos. Los defensores rotan basándose en información de utility y sonido.',
+      name: 'Elaboración de jugadas en pausa',
+      description: '',
       minimaps: [],
       timing: [
         { action: 'Posiciones iniciales', seconds: 0 },
@@ -54,11 +43,11 @@ export const mapData: MapConfig = {
         { action: 'Controlo sites', seconds: 20 },
       ],
       roles: [
-        { player: 'c4rlos', role: 'RIFLER', utility: 'Rifler A con cobertura.' },
-        { player: 'n1tro', role: 'AWPER', utility: 'AWP connectors.' },
-        { player: 'b1nd', role: 'IGL', utility: 'Llama posiciones. Muestra utility.' },
-        { player: 'd00m', role: 'ENTRY', utility: 'Defiende B. Retoma.' },
-        { player: 'shad0w', role: 'LURKER', utility: 'Monitor Mid y canal.' },
+        { player: 'Parca', role: 'RIFLER', utility: '-' },
+        { player: 'Dida', role: 'AWPER', utility: '-' },
+        { player: 'Fedello', role: 'ENTRY', utility: '-' },
+        { player: 'Kevs', role: 'IGL', utility: '-' },
+        { player: 'Peter/Kike', role: 'SUPPORT', utility: '-' },
       ],
     },
   ],

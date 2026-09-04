@@ -10,16 +10,46 @@
 .content-text h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #f0f0f0;
+  color: #000;
   margin-bottom: 1.5rem;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
+.utilities-link {
+  color: #555;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Courier New', monospace;
+  font-style: normal;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.utilities-link:hover {
+  color: #C4D618;
+  transform: translateX(3px);
+}
+
+.utilities-link svg {
+  transition: transform 0.2s ease;
+}
+
+.utilities-link:hover svg {
+  transform: translateX(3px);
+}
+
 .content-text h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #E9FF1F;
+  color: #C4D618;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
   letter-spacing: 0.5px;
@@ -31,6 +61,7 @@
   line-height: 1.8;
   letter-spacing: 0.3px;
   margin-bottom: 1.25rem;
+  text-align: justify;
 }
 
 .content-image img {
@@ -43,7 +74,7 @@
 /* Separador principal */
 .section-divider {
   height: 2px;
-  background: linear-gradient(90deg, transparent, #E9FF1F 50%, transparent);
+  background: linear-gradient(90deg, transparent, #C4D618 50%, transparent);
   margin-bottom: 3rem;
   margin-top: 2rem;
 }
@@ -172,6 +203,19 @@
   border: 2px solid rgba(233, 255, 31, 0.3);
 }
 
+/* Body de estrategia: descripcion a la izquierda, minimaps a la derecha */
+.strategy-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.strategy-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
 /* Descripción */
 .strategy-desc {
   color: #aaa;
@@ -179,19 +223,71 @@
   line-height: 1.9;
   margin-bottom: 2.5rem;
   letter-spacing: 0.3px;
+  text-align: justify;
+}
+
+/* Variantes */
+.variants-block {
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 3px solid rgba(233, 255, 31, 0.15);
+}
+
+.variants-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.variant-btn {
+  background: transparent;
+  border: 2px solid rgba(196, 214, 24, 0.4);
+  color: #C4D618;
+  padding: 0.65rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.variant-btn:hover {
+  background: rgba(196, 214, 24, 0.15);
+  border-color: #C4D618;
+  transform: translateY(-2px);
+}
+
+.variant-btn.active {
+  background: #C4D618;
+  color: #0d0f13;
+  border-color: #C4D618;
+  box-shadow: 0 0 20px rgba(196, 214, 24, 0.3);
+}
+
+.variant-text {
+  color: #bbb;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid #C4D618;
+  background: rgba(196, 214, 24, 0.05);
+  border-radius: 0 8px 8px 0;
+  text-align: justify;
 }
 
 /* Minimap photos */
 .minimaps-container {
   display: flex;
+  flex-direction: column;
   gap: 1.5rem;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap;
 }
 
 .minimap-wrapper {
-  flex: 1;
-  min-width: 250px;
   border-radius: 12px;
   overflow: hidden;
   border: 2px solid #222;
@@ -270,6 +366,9 @@
   }
   .strategy-card {
     padding: 2rem 1.5rem;
+  }
+  .strategy-body {
+    grid-template-columns: 1fr;
   }
   .strategy-header h3 {
     font-size: 1.3rem;

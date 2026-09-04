@@ -37,6 +37,7 @@
   text-transform: uppercase;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
   margin-bottom: 0.5rem;
+  line-height: 1.15;
 }
 
 .page-hero h1 .accent {
@@ -55,12 +56,25 @@
 }
 
 .pool-label {
-  font-size: 0.85rem;
+  font-size: 1.25rem;
   color: #555;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+  text-align: center;
+  position: relative;
+}
+
+.pool-label::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #C4D618 50%, transparent);
 }
 
 .maps-grid {
