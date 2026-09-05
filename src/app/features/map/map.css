@@ -58,13 +58,14 @@
 
 @media (max-width: 600px) {
   .page-hero {
-    height: 260px;
+    height: 280px;
   }
   .page-hero-content {
-    padding-top: 60px;
+    padding-top: 50px;
   }
   .page-hero h1 {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
   }
   .page-hero .subtitle {
     font-size: 0.8rem;

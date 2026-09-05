@@ -482,4 +482,11 @@
     margin-top: 1.5rem;
     margin-bottom: 2rem;
   }
+  .side-toggle {
+    gap: 0.75rem;
+  }
+  .players-table .player-name {
+    white-space: normal;
+    word-break: break-word;
+  }
 }

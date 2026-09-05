@@ -138,23 +138,34 @@
 }
 
 @media (max-width: 900px) {
+  .strategies-section {
+    padding: 0 2rem 2rem;
+  }
   .maps-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 600px) {
+  .strategies-section {
+    padding: 0 0.5rem 1.5rem;
+  }
   .maps-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .page-hero {
-    height: 320px;
+    height: 280px;
+    overflow-x: clip;
   }
   .page-hero-content {
-    padding-top: 70px;
+    padding-top: 50px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
   .page-hero h1 {
-    font-size: 2.25rem;
+    font-size: 1.15rem;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
   }
   .page-hero .subtitle {
     font-size: 0.8rem;
@@ -162,7 +173,10 @@
   .pool-label {
     font-size: 1rem;
   }
-  .strategies-section {
-    padding: 0 0 1.5rem;
+  .map-card-name {
+    font-size: 0.7rem;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
   }
 }

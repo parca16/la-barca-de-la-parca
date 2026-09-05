@@ -28,10 +28,10 @@ main {
 
 @media (max-width: 600px) {
   main {
-    padding: 0 1rem;
+    padding: 0 0;
   }
   .page-hero {
-    margin-left: calc(50% - 50vw - 1rem);
-    margin-right: calc(50% - 50vw - 1rem);
+    margin-left: 0;
+    margin-right: 0;
   }
 }

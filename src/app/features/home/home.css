@@ -278,31 +278,59 @@
 }
 
 @media (max-width: 600px) {
+  .intro-section {
+    padding: 0 0.5rem;
+  }
   .page-hero {
     height: 260px;
   }
+  .page-hero-content {
+    padding-top: 50px;
+  }
   .page-hero h1 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
   }
   .page-hero .subtitle {
     font-size: 0.8rem;
   }
+  .contribute-section {
+    padding: 0 0.5rem;
+  }
   .contribute-title {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
   }
   .contribute-subtitle {
-    font-size: 1rem;
-  }
-  .contribute-card {
-    padding: 1.5rem;
-  }
-  .contribute-card-title {
-    font-size: 1.35rem;
-  }
-  .contribute-card-desc {
     font-size: 0.95rem;
   }
-  .contribute-card-item {
+  .contribute-card {
+    padding: 1.25rem;
+  }
+  .contribute-card-title {
+    font-size: 1.2rem;
+  }
+  .contribute-card-desc {
     font-size: 0.9rem;
+  }
+  .contribute-card-item {
+    font-size: 0.85rem;
+  }
+  .intro-text {
+    font-size: 0.95rem;
+    max-width: 100%;
+  }
+  .intro-text p {
+    margin-bottom: 0.75rem;
+  }
+  .home-logo img {
+    height: 150px;
+  }
+  .home-logo {
+    margin: 2rem auto 1.5rem;
+  }
+  .section-divider {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
   }
 }
