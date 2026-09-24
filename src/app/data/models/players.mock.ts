@@ -4,6 +4,10 @@ export const starters: Player[] = [
   {
     name: 'Alejo "Parca" Rivas',
     alias: 'parca',
+    abbrev: 'Parca',
+    steamUrl: 'https://steamcommunity.com/profiles/76561198301504889',
+    faceitUrl: 'https://www.faceit.com/en/players/parca16',
+    photoPosition: 'center 60%',
     role: 'IGL',
     nationality: '🇪🇬 Egipto',
     age: 51,
@@ -23,6 +27,9 @@ export const starters: Player[] = [
   {
     name: 'Pedro "Macaco" Vales',
     alias: 'peter',
+    abbrev: 'Peter',
+    steamUrl: 'https://steamcommunity.com/profiles/76561198041309771',
+    faceitUrl: 'https://www.faceit.com/en/players/selav28',
     role: 'Entry Fragger',
     nationality: '🇳🇴 Noruega',
     age: 30,
@@ -42,6 +49,9 @@ export const starters: Player[] = [
   {
     name: 'Nina "Dodo" Urdaneta',
     alias: 'doda',
+    abbrev: 'Dida',
+    steamUrl: 'https://steamcommunity.com/profiles/76561199015608983',
+    faceitUrl: 'https://www.faceit.com/en/players/niturbo',
     role: 'Anchor Rifler',
     nationality: '🇵🇪 Perú',
     age: 29,
@@ -61,6 +71,9 @@ export const starters: Player[] = [
   {
     name: 'Kevin "Muab\'dib" Espiñeira',
     alias: 'kevin',
+    abbrev: 'Kevs',
+    steamUrl: 'https://steamcommunity.com/profiles/76561198143673849',
+    faceitUrl: 'https://www.faceit.com/en/players/Kevimuxx69',
     role: 'Star Rifler',
     nationality: '🇫🇷 Francia',
     age: 30,
@@ -80,6 +93,9 @@ export const starters: Player[] = [
   {
     name: 'Kike "Atún" Vilas',
     alias: 'kike',
+    abbrev: 'Kike',
+    steamUrl: 'https://steamcommunity.com/profiles/76561198415119986',
+    faceitUrl: 'https://www.faceit.com/en/players/Kakii145',
     role: 'Standard Rifler',
     nationality: '🇪🇸 España',
     age: 26,
@@ -99,6 +115,9 @@ export const starters: Player[] = [
   {
     name: 'Daniel "Fedello" Otero',
     alias: 'fede',
+    abbrev: 'Fede',
+    steamUrl: 'https://steamcommunity.com/profiles/76561198395532972',
+    faceitUrl: 'https://www.faceit.com/en/players/danielo9',
     role: 'Lurker',
     nationality: '🇪🇸 España',
     age: 28,
@@ -121,6 +140,9 @@ export const reserves: Player[] = [
   {
     name: 'Carlos "Porco" Mosquera',
     alias: 'porco',
+    abbrev: 'Porco',
+    steamUrl: 'https://steamcommunity.com/profiles/76561199790384537',
+    faceitUrl: 'https://www.faceit.com/en/players/PuercoManco',
     role: 'Drunk Rifler',
     nationality: '🇯🇵 Japón',
     age: 27,
@@ -140,6 +162,9 @@ export const reserves: Player[] = [
   {
     name: 'Antón "El profe" Xuiz',
     alias: 'xuiz',
+    abbrev: 'Xuiz',
+    steamUrl: 'https://steamcommunity.com/id/blackyolo22',
+    faceitUrl: 'https://www.faceit.com/en/players/Blackyolo22',
     role: 'Parkinson Rifler',
     nationality: '🇪🇸 España',
     age: 25,
