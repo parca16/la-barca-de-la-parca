@@ -2,7 +2,7 @@ import { MapUtilities } from '../utility-detail/utility-detail';
 
 export const dust2Utilities: MapUtilities = {
   smoke: [
-    { filename: 'smoke_cross.webp', title: 'Smoke de cross' ,description: "Pegado al extremo de la parte derecha del frontal del container. Jumpthrow ", },
+    { filename: 'smoke_cross.webp', title: 'Smoke de cross' ,description: "Pegado al extremo de la parte derecha del frontal del container. Left clic", },
     { filename: 'smoke_CTspawn.webp', title: 'Smoke CT Spawn' ,description: "Stuck en la esquina de X-box. Crouch Jumpthrow ", },
     { filename: 'smoke_doors.webp', title: 'Smoke Puertas (I)' ,description: "Stuck en la esquina previa al umbral de upper. Jumpthrow", },
     { filename: 'smoke_puertasspawn.webp', title: 'Smoke Puertas (II)' ,description: "Stuck en el primer hueco de la izquierda de T spawn. Run Jumpthrow (skilled) ", },
