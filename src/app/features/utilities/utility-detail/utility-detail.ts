@@ -12,6 +12,7 @@ import { overpassUtilities } from '../data/overpass-utilities';
 import { vertigoUtilities } from '../data/vertigo-utilities';
 import { cacheUtilities } from '../data/cache-utilities';
 import { trainUtilities } from '../data/train-utilities';
+import { getMapHeaderImage, getMapInfo, getMapUtilitiesFolder } from '../../../data/models/maps';
 
 type GrenadeType = 'smoke' | 'molotov' | 'flash' | 'he';
 
@@ -56,19 +57,6 @@ export class UtilityDetail implements OnInit, OnDestroy {
   selectedImage: string | null = null;
   private subscriptions = new Subscription();
 
-  private readonly maps = [
-    { name: 'Dust 2', key: 'dust-2' },
-    { name: 'Mirage', key: 'mirage' },
-    { name: 'Inferno', key: 'inferno' },
-    { name: 'Nuke', key: 'nuke' },
-    { name: 'Ancient', key: 'ancient' },
-    { name: 'Anubis', key: 'anubis' },
-    { name: 'Overpass', key: 'overpass' },
-    { name: 'Vertigo', key: 'vertigo' },
-    { name: 'Cache', key: 'cache' },
-    { name: 'Train', key: 'train' },
-  ];
-
   readonly grenadeTypes: { key: GrenadeType; label: string; iconPath: string }[] = [
     {
       key: 'smoke',
@@ -99,9 +87,8 @@ export class UtilityDetail implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.route.paramMap.subscribe(params => {
         this.mapKey = params.get('map') || 'dust-2';
-        const map = this.maps.find(m => m.key === this.mapKey);
-        this.mapName = map?.name || this.mapKey;
-        this.headerImage = this.getHeaderImage(this.mapKey);
+        this.mapName = getMapInfo(this.mapKey)?.name || this.mapKey;
+        this.headerImage = getMapHeaderImage(this.mapKey);
         this.selectedType = null;
         this.utilities = [];
       })
@@ -143,37 +130,8 @@ export class UtilityDetail implements OnInit, OnDestroy {
 
   getUtilityImagePath(utility: UtilityData): string {
     if (utility.filename === 'placeholder') return '';
-    const mapNames: Record<string, string> = {
-      'dust-2': 'dust2',
-      mirage: 'mirage',
-      inferno: 'inferno',
-      nuke: 'nuke',
-      ancient: 'ancient',
-      anubis: 'anubis',
-      overpass: 'overpass',
-      vertigo: 'vertigo',
-      cache: 'cache',
-      train: 'train',
-    };
-    const folder = mapNames[this.mapKey] || this.mapKey;
+    const folder = getMapUtilitiesFolder(this.mapKey);
     return `/assets/utilidades/${folder}/${utility.filename}`;
-  }
-
-  private getHeaderImage(key: string): string {
-    const mapNames: Record<string, string> = {
-      'dust-2': 'Dust2',
-      mirage: 'Mirage',
-      inferno: 'Inferno',
-      nuke: 'Nuke',
-      ancient: 'Ancient',
-      anubis: 'Anubis',
-      overpass: 'Overpass',
-      vertigo: 'Vertigo',
-      cache: 'Cache',
-      train: 'Train',
-    };
-    const name = mapNames[key] || key;
-    return `/assets/map-headers/${name}_header.webp`;
   }
 
   navigateToStrategies(): void {
