@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { getHeaderImage, getMap } from '../../data/models/maps';
 import { MapContentComponent } from './content/mapcontent/map-content';
 import { MapConfig } from './content/data/map-config.interface';
 import { mapData as dust2Data } from './content/data/dust2-data';
@@ -26,19 +27,6 @@ export class MapPage {
   headerImage: string = '';
   mapData: MapConfig | null = null;
 
-  readonly maps = [
-    { name: 'Dust 2', key: 'dust-2', file: 'Dust2.webp' },
-    { name: 'Mirage', key: 'mirage', file: 'Mirage.webp' },
-    { name: 'Inferno', key: 'inferno', file: 'Inferno.webp' },
-    { name: 'Nuke', key: 'nuke', file: 'Nuke.webp' },
-    { name: 'Ancient', key: 'ancient', file: 'Ancient.webp' },
-    { name: 'Anubis', key: 'anubis', file: 'Anubis.webp' },
-    { name: 'Overpass', key: 'overpass', file: 'Overpass.webp' },
-    { name: 'Vertigo', key: 'vertigo', file: 'Vertigo.webp' },
-    { name: 'Cache', key: 'cache', file: 'Cache.webp' },
-    { name: 'Train', key: 'train', file: 'Train.webp' },
-  ];
-
   private readonly dataMap: Record<string, MapConfig> = {
     'dust-2': dust2Data,
     mirage: mirageData,
@@ -58,28 +46,11 @@ export class MapPage {
   ) {
     this.route.paramMap.subscribe(params => {
       this.mapKey = params.get('map') || 'dust-2';
-      const map = this.maps.find(m => m.key === this.mapKey);
+      const map = getMap(this.mapKey);
       this.mapName = map?.name || this.mapKey;
-      this.headerImage = this.getHeaderImage(this.mapKey);
+      this.headerImage = getHeaderImage(this.mapKey);
       this.mapData = this.dataMap[this.mapKey] || null;
     });
-  }
-
-private getHeaderImage(key: string): string {
-    const mapNames: Record<string, string> = {
-      'dust-2': 'Dust2',
-      mirage: 'Mirage',
-      inferno: 'Inferno',
-      nuke: 'Nuke',
-      ancient: 'Ancient',
-      anubis: 'Anubis',
-      overpass: 'Overpass',
-      vertigo: 'Vertigo',
-      cache: 'Cache',
-      train: 'Train',
-    };
-    const name = mapNames[key] || key;
-    return `/assets/map-headers/${name}_header.webp`;
   }
 
   navigateToMap(mapKey: string): void {
