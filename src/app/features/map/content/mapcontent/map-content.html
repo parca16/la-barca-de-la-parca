@@ -106,6 +106,21 @@
           }
         </div>
 
+        <!-- Timeline de tiempos -->
+        @if (strategy.timing && strategy.timing.length > 0) {
+          <div class="strategy-timing-block">
+            <h4 class="timing-title">Timeline de la ronda</h4>
+            <ol class="strategy-timing">
+              @for (t of strategy.timing; track t.seconds + t.action) {
+                <li class="timing-item">
+                  <span class="timing-seconds">{{ t.seconds }}s</span>
+                  <span class="timing-action">{{ t.action }}</span>
+                </li>
+              }
+            </ol>
+          </div>
+        }
+
         <!-- Tabla de jugadores -->
         <table class="players-table">
           <thead>
