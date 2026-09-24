@@ -300,6 +300,77 @@
   border-radius: 10px;
 }
 
+/* Timeline de tiempos */
+.strategy-timing-block {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 3px solid rgba(233, 255, 31, 0.15);
+}
+
+.timing-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #E9FF1F;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 1.25rem;
+}
+
+.strategy-timing {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1.5rem;
+  position: relative;
+}
+
+.strategy-timing::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, #E9FF1F, rgba(233, 255, 31, 0.1));
+}
+
+.timing-item {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.timing-item::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 0.55rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #E9FF1F;
+  box-shadow: 0 0 10px rgba(233, 255, 31, 0.6);
+}
+
+.timing-seconds {
+  flex: 0 0 auto;
+  min-width: 3.5rem;
+  color: #E9FF1F;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+}
+
+.timing-action {
+  color: #bbb;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+
 /* Tabla de jugadores */
 .players-table {
   width: 100%;
@@ -455,6 +526,27 @@
     font-size: 0.95rem;
     padding: 1rem;
     line-height: 1.5;
+  }
+  .strategy-timing-block {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
+  }
+  .timing-title {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+  }
+  .timing-item {
+    gap: 0.75rem;
+    padding: 0.4rem 0;
+  }
+  .timing-seconds {
+    min-width: 3rem;
+    font-size: 0.95rem;
+  }
+  .timing-action {
+    font-size: 0.9rem;
   }
   .players-table thead th {
     font-size: 0.7rem;
