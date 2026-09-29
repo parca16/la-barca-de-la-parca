@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { MapContentComponent } from './content/mapcontent/map-content';
 import { MapConfig } from './content/data/map-config.interface';
 import { mapData as dust2Data } from './content/data/dust2-data';
@@ -19,11 +20,13 @@ import { mapData as trainData } from './content/data/train-data';
   templateUrl: './map.html',
   styleUrl: './map.css',
 })
-export class MapPage {
+export class MapPage implements OnDestroy {
   mapName: string = '';
   mapKey: string = '';
   headerImage: string = '';
   mapData: MapConfig | null = null;
+
+  private subscriptions = new Subscription();
 
   readonly maps = [
     { name: 'Dust 2', key: 'dust-2', file: 'Dust2.webp' },
@@ -55,13 +58,19 @@ export class MapPage {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.route.paramMap.subscribe(params => {
-      this.mapKey = params.get('map') || 'dust-2';
-      const map = this.maps.find(m => m.key === this.mapKey);
-      this.mapName = map?.name || this.mapKey;
-      this.headerImage = this.getHeaderImage(this.mapKey);
-      this.mapData = this.dataMap[this.mapKey] || null;
-    });
+    this.subscriptions.add(
+      this.route.paramMap.subscribe(params => {
+        this.mapKey = params.get('map') || 'dust-2';
+        const map = this.maps.find(m => m.key === this.mapKey);
+        this.mapName = map?.name || this.mapKey;
+        this.headerImage = this.getHeaderImage(this.mapKey);
+        this.mapData = this.dataMap[this.mapKey] || null;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
 private getHeaderImage(key: string): string {
