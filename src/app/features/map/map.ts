@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { Component, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { getHeaderImage, getMap } from '../../data/models/maps';
 import { MapContentComponent } from './content/mapcontent/map-content';
 import { MapConfig } from './content/data/map-config.interface';
@@ -16,16 +16,18 @@ import { mapData as cacheData } from './content/data/cache-data';
 import { mapData as trainData } from './content/data/train-data';
 
 @Component({
-  imports: [CommonModule, MapContentComponent],
+  imports: [MapContentComponent],
   selector: 'app-map',
   templateUrl: './map.html',
   styleUrl: './map.css',
 })
-export class MapPage {
+export class MapPage implements OnDestroy {
   mapName: string = '';
   mapKey: string = '';
   headerImage: string = '';
   mapData: MapConfig | null = null;
+
+  private subscriptions = new Subscription();
 
   private readonly dataMap: Record<string, MapConfig> = {
     'dust-2': dust2Data,
@@ -40,20 +42,19 @@ export class MapPage {
     train: trainData,
   };
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-    this.route.paramMap.subscribe(params => {
-      this.mapKey = params.get('map') || 'dust-2';
-      const map = getMap(this.mapKey);
-      this.mapName = map?.name || this.mapKey;
-      this.headerImage = getHeaderImage(this.mapKey);
-      this.mapData = this.dataMap[this.mapKey] || null;
-    });
+  constructor(private route: ActivatedRoute) {
+    this.subscriptions.add(
+      this.route.paramMap.subscribe(params => {
+        this.mapKey = params.get('map') || 'dust-2';
+        const map = getMap(this.mapKey);
+        this.mapName = map?.name || this.mapKey;
+        this.headerImage = getHeaderImage(this.mapKey);
+        this.mapData = this.dataMap[this.mapKey] || null;
+      })
+    );
   }
 
-  navigateToMap(mapKey: string): void {
-    this.router.navigate(['/map', mapKey]);
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

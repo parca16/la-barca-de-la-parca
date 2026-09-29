@@ -65,10 +65,6 @@ export class Home {
 
   constructor(private router: Router) {}
 
-  navigateToMap(mapKey: string): void {
-    this.router.navigate(['/map', mapKey]);
-  }
-
   navigateTo(route: string): void {
     this.router.navigate(['/' + route]);
   }

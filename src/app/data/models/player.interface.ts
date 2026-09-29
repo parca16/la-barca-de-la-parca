@@ -60,6 +60,10 @@ export interface Player {
   headshotPct?: number;
   hsColor?: string;
   borderColor?: string;
+  steamUrl?: string;
+  faceitUrl?: string;
+  abbrev?: string;
+  photoPosition?: string;
   posicionDesc: string;
   virtudes: string[];
   defectos: string[];

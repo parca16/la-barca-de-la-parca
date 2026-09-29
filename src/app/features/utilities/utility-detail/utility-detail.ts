@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
+import { Component, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { getHeaderImage, getMap } from '../../../data/models/maps';
 import { dust2Utilities } from '../data/dust2-utilities';
@@ -20,6 +19,11 @@ export interface UtilityData {
   filename: string;
   title: string;
   description: string;
+}
+
+/** Utilidad con su ruta de imagen ya resuelta, lista para pintar. */
+export interface UtilityView extends UtilityData {
+  imagePath: string;
 }
 
 export interface MapUtilities {
@@ -43,17 +47,16 @@ const mapUtilities: Record<string, MapUtilities> = {
 };
 
 @Component({
-  imports: [CommonModule],
   selector: 'app-utility-detail',
   templateUrl: './utility-detail.html',
   styleUrl: './utility-detail.css',
 })
-export class UtilityDetail implements OnInit, OnDestroy {
+export class UtilityDetail implements OnDestroy {
   mapName: string = '';
   mapKey: string = '';
   headerImage: string = '';
   selectedType: GrenadeType | null = null;
-  utilities: UtilityData[] = [];
+  utilities: UtilityView[] = [];
   selectedImage: string | null = null;
   private subscriptions = new Subscription();
 
@@ -103,8 +106,6 @@ export class UtilityDetail implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void {}
-
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
@@ -121,27 +122,26 @@ export class UtilityDetail implements OnInit, OnDestroy {
     }
 
     const data = mapUtilities[this.mapKey];
+    const selected = data?.[this.selectedType];
 
-    if (data && data[this.selectedType] && data[this.selectedType].length > 0) {
-      this.utilities = data[this.selectedType];
+    if (selected && selected.length > 0) {
+      const folder = getMap(this.mapKey)?.utilitiesFolder || this.mapKey;
+      this.utilities = selected.map(utility => ({
+        ...utility,
+        imagePath: `/assets/utilidades/${folder}/${utility.filename}`,
+      }));
     } else {
-      this.utilities = [{ filename: 'placeholder', title: 'Utilidad en desarrollo', description: 'En desarrollo...' }];
+      this.utilities = [{ filename: 'placeholder', title: 'Utilidad en desarrollo', description: 'En desarrollo...', imagePath: '' }];
     }
-  }
-
-  getUtilityImagePath(utility: UtilityData): string {
-    if (utility.filename === 'placeholder') return '';
-    const folder = getMap(this.mapKey)?.utilitiesFolder || this.mapKey;
-    return `/assets/utilidades/${folder}/${utility.filename}`;
   }
 
   navigateToStrategies(): void {
     this.router.navigate(['/map', this.mapKey]);
   }
 
-  selectImage(utility: UtilityData): void {
-    if (utility.filename !== 'placeholder') {
-      this.selectedImage = this.getUtilityImagePath(utility);
+  selectImage(utility: UtilityView): void {
+    if (utility.imagePath) {
+      this.selectedImage = utility.imagePath;
     }
   }
 
