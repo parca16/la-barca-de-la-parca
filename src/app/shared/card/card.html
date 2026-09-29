@@ -1,17 +1,17 @@
 <div class="card">
   <div class="card-left">
-    <div class="card-avatar" [style.borderColor]="player.borderColor">
-      <img [src]="player.photoUrl" [alt]="player.alias" loading="lazy" [style.object-position]="getObjectPosition(player.alias)" />
+    <div class="card-avatar" [style.borderColor]="player().borderColor">
+      <img [src]="player().photoUrl" [alt]="player().alias" loading="lazy" [style.object-position]="player().photoPosition ?? 'center center'" />
     </div>
-    <span class="role-badge" [style.backgroundColor]="player.borderColor" [class.role-light-bg]="isLightColor(player.borderColor)">{{ player.role }}</span>
+    <span class="role-badge" [style.backgroundColor]="player().borderColor" [class.role-light-bg]="lightBorderColor()">{{ player().role }}</span>
     <div class="card-bottom-row">
-      <span class="card-abbrev">{{ getAbbrev(player.alias) }}</span>
-      @if (getPlayerSteamUrl(player.alias)) {
-        <a [href]="getPlayerSteamUrl(player.alias)" target="_blank" class="profile-link profile-link-steam">
+      <span class="card-abbrev">{{ player().abbrev ?? player().alias }}</span>
+      @if (player().steamUrl) {
+        <a [href]="player().steamUrl" target="_blank" class="profile-link profile-link-steam">
           <img src="/assets/icons/steam_ico.webp" alt="Steam" />
         </a>
-        @if (getPlayerFaceitUrl(player.alias)) {
-          <a [href]="getPlayerFaceitUrl(player.alias)" target="_blank" class="profile-link profile-link-faceit">
+        @if (player().faceitUrl) {
+          <a [href]="player().faceitUrl" target="_blank" class="profile-link profile-link-faceit">
             <img src="/assets/icons/faceit_ico.webp" alt="FACEIT" />
           </a>
         }
@@ -32,25 +32,25 @@
           <div class="tab-perfil">
             <div class="perfil-row">
               <span class="label">Nombre</span>
-              <span class="value">{{ player.name }}</span>
+              <span class="value">{{ player().name }}</span>
             </div>
             <div class="perfil-row">
               <span class="label">Posición</span>
-              <span class="value">{{ player.role }}</span>
+              <span class="value">{{ player().role }}</span>
             </div>
             <div class="perfil-row">
               <span class="label">Edad</span>
-              <span class="value">{{ player.age }} años</span>
+              <span class="value">{{ player().age }} años</span>
             </div>
             <div class="perfil-row">
               <span class="label">País</span>
-              <span class="value">{{ player.nationality }}</span>
+              <span class="value">{{ player().nationality }}</span>
             </div>
           </div>
         }
         @case ('posicion') {
           <div class="tab-posicion">
-            <p>{{ player.posicionDesc }}</p>
+            <p>{{ player().posicionDesc }}</p>
           </div>
         }
         @case ('virtudes') {
@@ -58,7 +58,7 @@
             <div class="virtues-section">
               <h4>Virtudes</h4>
               <ul>
-                @for (v of player.virtudes; track v) {
+                @for (v of player().virtudes; track v) {
                   <li>{{ v }}</li>
                 }
               </ul>
@@ -66,7 +66,7 @@
             <div class="defects-section">
               <h4>Defectos</h4>
               <ul>
-                @for (d of player.defectos; track d) {
+                @for (d of player().defectos; track d) {
                   <li>{{ d }}</li>
                 }
               </ul>
@@ -75,7 +75,7 @@
         }
         @case ('psico') {
           <div class="tab-psico">
-            <p>{{ player.perfilPsicologico }}</p>
+            <p>{{ player().perfilPsicologico }}</p>
           </div>
         }
         @case ('stats') {

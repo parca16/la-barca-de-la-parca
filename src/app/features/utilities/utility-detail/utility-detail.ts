@@ -1,6 +1,5 @@
 import { Component, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { dust2Utilities } from '../data/dust2-utilities';
 import { mirageUtilities } from '../data/mirage-utilities';
@@ -19,6 +18,11 @@ export interface UtilityData {
   filename: string;
   title: string;
   description: string;
+}
+
+/** Utilidad con su ruta de imagen ya resuelta, lista para pintar. */
+export interface UtilityView extends UtilityData {
+  imagePath: string;
 }
 
 export interface MapUtilities {
@@ -41,8 +45,33 @@ const mapUtilities: Record<string, MapUtilities> = {
   train: trainUtilities,
 };
 
+const MAP_FOLDER_NAMES: Record<string, string> = {
+  'dust-2': 'dust2',
+  mirage: 'mirage',
+  inferno: 'inferno',
+  nuke: 'nuke',
+  ancient: 'ancient',
+  anubis: 'anubis',
+  overpass: 'overpass',
+  vertigo: 'vertigo',
+  cache: 'cache',
+  train: 'train',
+};
+
+const HEADER_IMAGE_NAMES: Record<string, string> = {
+  'dust-2': 'Dust2',
+  mirage: 'Mirage',
+  inferno: 'Inferno',
+  nuke: 'Nuke',
+  ancient: 'Ancient',
+  anubis: 'Anubis',
+  overpass: 'Overpass',
+  vertigo: 'Vertigo',
+  cache: 'Cache',
+  train: 'Train',
+};
+
 @Component({
-  imports: [CommonModule],
   selector: 'app-utility-detail',
   templateUrl: './utility-detail.html',
   styleUrl: './utility-detail.css',
@@ -52,7 +81,7 @@ export class UtilityDetail implements OnDestroy {
   mapKey: string = '';
   headerImage: string = '';
   selectedType: GrenadeType | null = null;
-  utilities: UtilityData[] = [];
+  utilities: UtilityView[] = [];
   selectedImage: string | null = null;
   private subscriptions = new Subscription();
 
@@ -131,46 +160,21 @@ export class UtilityDetail implements OnDestroy {
     }
 
     const data = mapUtilities[this.mapKey];
+    const selected = data?.[this.selectedType];
 
-    if (data && data[this.selectedType] && data[this.selectedType].length > 0) {
-      this.utilities = data[this.selectedType];
+    if (selected && selected.length > 0) {
+      const folder = MAP_FOLDER_NAMES[this.mapKey] || this.mapKey;
+      this.utilities = selected.map(utility => ({
+        ...utility,
+        imagePath: `/assets/utilidades/${folder}/${utility.filename}`,
+      }));
     } else {
-      this.utilities = [{ filename: 'placeholder', title: 'Utilidad en desarrollo', description: 'En desarrollo...' }];
+      this.utilities = [{ filename: 'placeholder', title: 'Utilidad en desarrollo', description: 'En desarrollo...', imagePath: '' }];
     }
   }
 
-  getUtilityImagePath(utility: UtilityData): string {
-    if (utility.filename === 'placeholder') return '';
-    const mapNames: Record<string, string> = {
-      'dust-2': 'dust2',
-      mirage: 'mirage',
-      inferno: 'inferno',
-      nuke: 'nuke',
-      ancient: 'ancient',
-      anubis: 'anubis',
-      overpass: 'overpass',
-      vertigo: 'vertigo',
-      cache: 'cache',
-      train: 'train',
-    };
-    const folder = mapNames[this.mapKey] || this.mapKey;
-    return `/assets/utilidades/${folder}/${utility.filename}`;
-  }
-
   private getHeaderImage(key: string): string {
-    const mapNames: Record<string, string> = {
-      'dust-2': 'Dust2',
-      mirage: 'Mirage',
-      inferno: 'Inferno',
-      nuke: 'Nuke',
-      ancient: 'Ancient',
-      anubis: 'Anubis',
-      overpass: 'Overpass',
-      vertigo: 'Vertigo',
-      cache: 'Cache',
-      train: 'Train',
-    };
-    const name = mapNames[key] || key;
+    const name = HEADER_IMAGE_NAMES[key] || key;
     return `/assets/map-headers/${name}_header.webp`;
   }
 
@@ -178,9 +182,9 @@ export class UtilityDetail implements OnDestroy {
     this.router.navigate(['/map', this.mapKey]);
   }
 
-  selectImage(utility: UtilityData): void {
-    if (utility.filename !== 'placeholder') {
-      this.selectedImage = this.getUtilityImagePath(utility);
+  selectImage(utility: UtilityView): void {
+    if (utility.imagePath) {
+      this.selectedImage = utility.imagePath;
     }
   }
 
