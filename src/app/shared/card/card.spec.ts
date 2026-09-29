@@ -12,6 +12,10 @@ const mockPlayer: Player = {
   joined: '2024-01',
   bio: 'In-Game Leader.',
   borderColor: '#E9FF1F',
+  abbrev: 'Parca',
+  steamUrl: 'https://steamcommunity.com/profiles/76561198301504889',
+  faceitUrl: 'https://www.faceit.com/en/players/parca16',
+  photoPosition: 'center 60%',
   posicionDesc: 'El cerebro del equipo.',
   virtudes: ['Liderazgo'],
   defectos: ['Headshots'],
@@ -55,18 +59,17 @@ describe('Card', () => {
     expect(compiled.querySelector('.tab-posicion')?.textContent).toContain(mockPlayer.posicionDesc);
   });
 
-  it('should build the correct Steam URL from the alias', () => {
-    const fixture = createCard();
-    expect(fixture.componentInstance.getPlayerSteamUrl('parca')).toBe(
-      'https://steamcommunity.com/profiles/76561198301504889',
-    );
-    expect(fixture.componentInstance.getPlayerSteamUrl('desconocido')).toBeUndefined();
+  it('should render the Steam and FACEIT links from the player data', () => {
+    const compiled = createCard().nativeElement as HTMLElement;
+    expect(compiled.querySelector('.profile-link-steam')?.getAttribute('href')).toBe(mockPlayer.steamUrl);
+    expect(compiled.querySelector('.profile-link-faceit')?.getAttribute('href')).toBe(mockPlayer.faceitUrl);
   });
 
-  it('should detect light border colors', () => {
-    const fixture = createCard();
-    expect(fixture.componentInstance.isLightColor('#ffffff')).toBe(true);
-    expect(fixture.componentInstance.isLightColor('#000000')).toBe(false);
-    expect(fixture.componentInstance.isLightColor(undefined)).toBe(false);
+  it('should mark light border colors with the role-light-bg class', () => {
+    const light = createCard({ ...mockPlayer, borderColor: '#ffffff' }).nativeElement as HTMLElement;
+    expect(light.querySelector('.role-badge')?.classList.contains('role-light-bg')).toBe(true);
+
+    const dark = createCard({ ...mockPlayer, borderColor: '#000000' }).nativeElement as HTMLElement;
+    expect(dark.querySelector('.role-badge')?.classList.contains('role-light-bg')).toBe(false);
   });
 });

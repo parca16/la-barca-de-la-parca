@@ -47,13 +47,20 @@ describe('UtilityDetail', () => {
     expect(page.utilities).toEqual([]);
   });
 
-  it('should build the asset path for a utility image', () => {
+  it('should precompute the asset path when a type is selected', () => {
     const page = createComponent('dust-2').componentInstance;
     page.selectType('smoke');
     const utility = page.utilities[0];
 
-    expect(page.getUtilityImagePath(utility)).toBe(`/assets/utilidades/dust2/${utility.filename}`);
-    expect(page.getUtilityImagePath({ filename: 'placeholder', title: '', description: '' })).toBe('');
+    expect(utility.imagePath).toBe(`/assets/utilidades/dust2/${utility.filename}`);
+  });
+
+  it('should leave the placeholder utility without an image path', () => {
+    const page = createComponent('mapa-inventado').componentInstance;
+    page.selectType('smoke');
+
+    expect(page.utilities[0].filename).toBe('placeholder');
+    expect(page.utilities[0].imagePath).toBe('');
   });
 
   it('should open and close the lightbox', () => {
