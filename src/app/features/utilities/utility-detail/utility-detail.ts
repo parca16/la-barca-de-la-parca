@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { dust2Utilities } from '../data/dust2-utilities';
 import { mirageUtilities } from '../data/mirage-utilities';
@@ -42,7 +41,6 @@ const mapUtilities: Record<string, MapUtilities> = {
 };
 
 @Component({
-  imports: [CommonModule],
   selector: 'app-utility-detail',
   templateUrl: './utility-detail.html',
   styleUrl: './utility-detail.css',
