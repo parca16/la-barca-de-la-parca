@@ -36,8 +36,8 @@
     @for (utility of utilities; track utility.filename) {
       <div class="utility-card">
         <div class="utility-image-wrapper" (click)="selectImage(utility)">
-          @if (getUtilityImagePath(utility)) {
-            <img [src]="getUtilityImagePath(utility)" [alt]="utility.title" loading="lazy" />
+          @if (utility.imagePath) {
+            <img [src]="utility.imagePath" [alt]="utility.title" loading="lazy" />
           } @else {
             <div class="utility-placeholder">
               <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
