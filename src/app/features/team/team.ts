@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Card } from '../../shared/card/card';
 import { starters, reserves } from '../../data/models/players.mock';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [Card, CommonModule],
+  imports: [Card],
   selector: 'app-team',
   templateUrl: './team.html',
   styleUrl: './team.css',

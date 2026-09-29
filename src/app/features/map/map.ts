@@ -1,6 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { MapContentComponent } from './content/mapcontent/map-content';
 import { MapConfig } from './content/data/map-config.interface';
@@ -16,7 +15,7 @@ import { mapData as cacheData } from './content/data/cache-data';
 import { mapData as trainData } from './content/data/train-data';
 
 @Component({
-  imports: [CommonModule, MapContentComponent],
+  imports: [MapContentComponent],
   selector: 'app-map',
   templateUrl: './map.html',
   styleUrl: './map.css',
