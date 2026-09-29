@@ -60,7 +60,7 @@ export class Header implements OnInit, OnDestroy {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  protected isActive(route: string, activateOn?: string[]): boolean {
+  protected isActive(activateOn?: string[]): boolean {
     if (!activateOn || activateOn.length === 0) return false;
     return activateOn.includes(this.currentRoute);
   }

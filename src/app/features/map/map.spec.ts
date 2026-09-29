@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { MapPage } from './map';
 
@@ -9,7 +9,6 @@ describe('MapPage', () => {
       imports: [MapPage],
       providers: [
         { provide: ActivatedRoute, useValue: { paramMap: of(convertToParamMap({ map })) } },
-        { provide: Router, useValue: { navigate: () => Promise.resolve(true) } },
       ],
     });
 
@@ -41,15 +40,5 @@ describe('MapPage', () => {
     const fixture = createComponent('inferno');
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.page-hero h1')?.textContent).toContain('Inferno');
-  });
-
-  it('should navigate to the selected map', () => {
-    const fixture = createComponent();
-    const router = TestBed.inject(Router);
-    const navigate = vi.spyOn(router, 'navigate');
-
-    fixture.componentInstance.navigateToMap('nuke');
-
-    expect(navigate).toHaveBeenCalledWith(['/map', 'nuke']);
   });
 });

@@ -7,7 +7,6 @@ import { MapConfig } from '../data/map-config.interface';
   selector: 'app-map-content',
   templateUrl: './map-content.html',
   styleUrl: './map-content.css',
-  standalone: true,
 })
 export class MapContentComponent {
   @Input() mapData!: MapConfig;

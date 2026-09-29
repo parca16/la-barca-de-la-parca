@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
+import { Component, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { dust2Utilities } from '../data/dust2-utilities';
@@ -76,7 +76,7 @@ const HEADER_IMAGE_NAMES: Record<string, string> = {
   templateUrl: './utility-detail.html',
   styleUrl: './utility-detail.css',
 })
-export class UtilityDetail implements OnInit, OnDestroy {
+export class UtilityDetail implements OnDestroy {
   mapName: string = '';
   mapKey: string = '';
   headerImage: string = '';
@@ -143,8 +143,6 @@ export class UtilityDetail implements OnInit, OnDestroy {
       this.closeLightbox();
     }
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();

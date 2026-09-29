@@ -13,9 +13,8 @@
         <a
           [routerLink]="item.route"
           routerLinkActive
-          #active="routerLinkActive"
           [routerLinkActiveOptions]="{ exact: item.route === '' }"
-          [class.active]="isActive(item.route, item.activateOn)"
+          [class.active]="isActive(item.activateOn)"
           (click)="closeMenu()"
         >
           {{ item.label }}
