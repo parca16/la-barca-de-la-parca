@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
+import { Component, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -47,7 +47,7 @@ const mapUtilities: Record<string, MapUtilities> = {
   templateUrl: './utility-detail.html',
   styleUrl: './utility-detail.css',
 })
-export class UtilityDetail implements OnInit, OnDestroy {
+export class UtilityDetail implements OnDestroy {
   mapName: string = '';
   mapKey: string = '';
   headerImage: string = '';
@@ -114,8 +114,6 @@ export class UtilityDetail implements OnInit, OnDestroy {
       this.closeLightbox();
     }
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();

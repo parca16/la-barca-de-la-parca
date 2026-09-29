@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MapContentComponent } from './content/mapcontent/map-content';
 import { MapConfig } from './content/data/map-config.interface';
@@ -26,17 +26,17 @@ export class MapPage {
   headerImage: string = '';
   mapData: MapConfig | null = null;
 
-  readonly maps = [
-    { name: 'Dust 2', key: 'dust-2', file: 'Dust2.webp' },
-    { name: 'Mirage', key: 'mirage', file: 'Mirage.webp' },
-    { name: 'Inferno', key: 'inferno', file: 'Inferno.webp' },
-    { name: 'Nuke', key: 'nuke', file: 'Nuke.webp' },
-    { name: 'Ancient', key: 'ancient', file: 'Ancient.webp' },
-    { name: 'Anubis', key: 'anubis', file: 'Anubis.webp' },
-    { name: 'Overpass', key: 'overpass', file: 'Overpass.webp' },
-    { name: 'Vertigo', key: 'vertigo', file: 'Vertigo.webp' },
-    { name: 'Cache', key: 'cache', file: 'Cache.webp' },
-    { name: 'Train', key: 'train', file: 'Train.webp' },
+  private readonly maps = [
+    { name: 'Dust 2', key: 'dust-2' },
+    { name: 'Mirage', key: 'mirage' },
+    { name: 'Inferno', key: 'inferno' },
+    { name: 'Nuke', key: 'nuke' },
+    { name: 'Ancient', key: 'ancient' },
+    { name: 'Anubis', key: 'anubis' },
+    { name: 'Overpass', key: 'overpass' },
+    { name: 'Vertigo', key: 'vertigo' },
+    { name: 'Cache', key: 'cache' },
+    { name: 'Train', key: 'train' },
   ];
 
   private readonly dataMap: Record<string, MapConfig> = {
@@ -52,10 +52,7 @@ export class MapPage {
     train: trainData,
   };
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
+  constructor(private route: ActivatedRoute) {
     this.route.paramMap.subscribe(params => {
       this.mapKey = params.get('map') || 'dust-2';
       const map = this.maps.find(m => m.key === this.mapKey);
@@ -80,9 +77,5 @@ private getHeaderImage(key: string): string {
     };
     const name = mapNames[key] || key;
     return `/assets/map-headers/${name}_header.webp`;
-  }
-
-  navigateToMap(mapKey: string): void {
-    this.router.navigate(['/map', mapKey]);
   }
 }
