@@ -13,11 +13,11 @@
 
 /* Alternating backgrounds */
 .play-alt-1 {
-  background: #0d0f13;
+  background: var(--bg-0);
 }
 
 .play-alt-2 {
-  background: #111318;
+  background: var(--bg-alt);
 }
 
 /* Header de estrategia */
@@ -44,7 +44,7 @@
   font-size: 0.9rem;
   font-weight: 700;
   padding: 0.6rem 1.5rem;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 2px;
   border-radius: 6px;
@@ -52,9 +52,9 @@
 
 .side-T,
 .side-CT {
-  background: rgba(233, 255, 31, 0.12);
-  color: #E9FF1F;
-  border: 2px solid rgba(233, 255, 31, 0.3);
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent);
+  border: 2px solid rgba(var(--accent-rgb), 0.3);
 }
 
 /* Body de estrategia: descripcion a la izquierda, minimaps a la derecha */
@@ -79,7 +79,7 @@
 .variants-block {
   margin-top: 2.5rem;
   padding-top: 2.5rem;
-  border-top: 3px solid rgba(233, 255, 31, 0.15);
+  border-top: 3px solid rgba(var(--accent-rgb), 0.15);
 }
 
 .variants-toggle {
@@ -91,12 +91,12 @@
 
 .variant-btn {
   background: transparent;
-  border: 2px solid rgba(196, 214, 24, 0.4);
-  color: #C4D618;
+  border: 2px solid rgba(var(--accent-strong-rgb), 0.4);
+  color: var(--accent-strong);
   padding: 0.65rem 1.5rem;
   font-size: 1rem;
   font-weight: 700;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 2px;
   border-radius: 8px;
@@ -105,16 +105,16 @@
 }
 
 .variant-btn:hover {
-  background: rgba(196, 214, 24, 0.15);
-  border-color: #C4D618;
+  background: rgba(var(--accent-strong-rgb), 0.15);
+  border-color: var(--accent-strong);
   transform: translateY(-2px);
 }
 
 .variant-btn.active {
-  background: #C4D618;
-  color: #0d0f13;
-  border-color: #C4D618;
-  box-shadow: 0 0 20px rgba(196, 214, 24, 0.3);
+  background: var(--accent-strong);
+  color: var(--bg-0);
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 20px rgba(var(--accent-strong-rgb), 0.3);
 }
 
 .variant-text {
@@ -123,8 +123,8 @@
   line-height: 1.8;
   letter-spacing: 0.3px;
   padding: 1.25rem 1.5rem;
-  border-left: 3px solid #C4D618;
-  background: rgba(196, 214, 24, 0.05);
+  border-left: 3px solid var(--accent-strong);
+  background: rgba(var(--accent-strong-rgb), 0.05);
   border-radius: 0 8px 8px 0;
   text-align: justify;
 }
@@ -159,13 +159,13 @@
 .players-table thead th {
   font-size: 0.85rem;
   font-weight: 700;
-  color: #E9FF1F;
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 2px;
   padding: 1rem 1.5rem;
   text-align: left;
-  border-bottom: 2px solid rgba(233, 255, 31, 0.3);
-  background: rgba(233, 255, 31, 0.04);
+  border-bottom: 2px solid rgba(var(--accent-rgb), 0.3);
+  background: rgba(var(--accent-rgb), 0.04);
 }
 
 .players-table tbody tr {
@@ -185,9 +185,9 @@
 }
 
 .players-table .player-name {
-  color: #E9FF1F;
+  color: var(--accent);
   font-weight: 700;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   font-size: 1.1rem;
   white-space: nowrap;
 }

@@ -36,39 +36,39 @@
   position: relative;
   width: 120px;
   height: 120px;
-  border: 2px solid #1c1c25;
+  border: 2px solid var(--border);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   padding: 0;
   overflow: hidden;
-  background: rgba(28, 28, 37, 0.3);
+  background: rgba(var(--border-rgb), 0.3);
 }
 
 .grenade-toggle::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(13, 15, 19, 0.3);
+  background: rgba(var(--bg-0-rgb), 0.3);
   z-index: 1;
   transition: background 0.3s ease;
 }
 
 .grenade-toggle:hover {
-  border-color: rgba(196, 214, 24, 0.4);
+  border-color: rgba(var(--accent-strong-rgb), 0.4);
 }
 
 .grenade-toggle:hover::before {
-  background: rgba(13, 15, 19, 0.1);
+  background: rgba(var(--bg-0-rgb), 0.1);
 }
 
 .grenade-toggle.active {
-  border-color: #C4D618;
-  box-shadow: 0 0 20px rgba(196, 214, 24, 0.1);
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 20px rgba(var(--accent-strong-rgb), 0.1);
 }
 
 .grenade-toggle.active::before {
-  background: rgba(13, 15, 19, 0.05);
+  background: rgba(var(--bg-0-rgb), 0.05);
 }
 
 .grenade-icon {
@@ -95,22 +95,22 @@
 }
 
 .utility-card {
-  background: #13151a;
-  border: 1px solid #1c1c25;
+  background: var(--bg-1);
+  border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .utility-card:hover {
-  border-color: rgba(233, 255, 31, 0.3);
+  border-color: rgba(var(--accent-rgb), 0.3);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
 .utility-image-wrapper {
   width: 100%;
   aspect-ratio: 16/9;
-  background: #0d0f13;
+  background: var(--bg-0);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -157,7 +157,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 0.35rem;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   cursor: text;
   outline: none;
   border-bottom: 1px solid transparent;
@@ -165,14 +165,14 @@
 }
 
 .utility-title:focus {
-  border-bottom-color: #E9FF1F;
+  border-bottom-color: var(--accent);
 }
 
 .utility-desc {
   font-size: 0.9rem;
   color: #555;
   font-style: italic;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
 }
 
 @media (max-width: 900px) {

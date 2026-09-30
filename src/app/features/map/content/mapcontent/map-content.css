@@ -24,7 +24,7 @@
 .content-text h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #C4D618;
+  color: var(--accent-strong);
   margin-top: 2rem;
   margin-bottom: 0.75rem;
   letter-spacing: 0.5px;
@@ -42,7 +42,7 @@
 .content-image img {
   width: 100%;
   border-radius: 14px;
-  border: 2px solid #1c1c25;
+  border: 2px solid var(--border);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
@@ -65,16 +65,16 @@
 }
 
 .toggle-btn:hover {
-  border-color: #C4D618;
-  color: #C4D618;
+  border-color: var(--accent-strong);
+  color: var(--accent-strong);
   transform: translateY(-2px);
 }
 
 .toggle-btn.active {
-  background: #E9FF1F;
-  color: #0d0f13;
-  border-color: #E9FF1F;
-  box-shadow: 0 0 30px rgba(233, 255, 31, 0.3);
+  background: var(--accent);
+  color: var(--bg-0);
+  border-color: var(--accent);
+  box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.3);
 }
 
 /* Sin estrategias */
@@ -97,7 +97,7 @@
 /* Separador entre jugadas */
 .play-separator {
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(233, 255, 31, 0.25), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.25), transparent);
   margin: 2rem 0;
 }
 
