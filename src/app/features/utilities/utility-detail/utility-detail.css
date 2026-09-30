@@ -2,53 +2,18 @@
   padding: 0 0 2rem;
 }
 
-.page-hero {
-  position: relative;
-  height: 420px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  margin-bottom: 2rem;
-}
-
-.page-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(13, 15, 19, 0.3), rgba(13, 15, 19, 0.85));
-}
-
-.page-hero-content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding-top: 80px;
-}
-
-.page-hero h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
-  margin-bottom: 0.5rem;
-  margin-top: 1rem;
-}
-
-.page-hero h1 .accent {
-  color: #E9FF1F;
-}
-
-.page-hero .subtitle {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.95rem;
-  letter-spacing: 1px;
-  font-weight: 500;
+/* El hero compartido (.page-hero en styles.css) define la versión móvil/tablet.
+   En escritorio se conservan los valores propios de esta página. */
+@media (min-width: 901px) {
+  .utility-detail-page .page-hero {
+    margin-bottom: 2rem;
+  }
+  .utility-detail-page .page-hero-content {
+    padding-top: 80px;
+  }
+  .utility-detail-page .page-hero h1 {
+    margin-top: 1rem;
+  }
 }
 
 /* Enlace a estrategias */
@@ -342,16 +307,6 @@ a.strategies-link:hover svg {
 }
 
 @media (max-width: 600px) {
-  .page-hero {
-    height: 280px;
-  }
-  .page-hero-content {
-    padding-top: 50px;
-  }
-  .page-hero h1 {
-    font-size: 1.6rem;
-    letter-spacing: 1px;
-  }
   .grenade-toggles {
     gap: 0.5rem;
     padding: 0 0.5rem;

@@ -31,9 +31,63 @@ main {
   cursor: pointer;
 }
 
+/* Hero de página compartido por home, team, strategies, map, utilities y utility-detail.
+   Los márgenes laterales hacen "bleed" a todo el ancho del viewport para compensar
+   el padding de `main`. */
 .page-hero {
+  position: relative;
+  height: 420px;
+  margin-bottom: 2.5rem;
   margin-left: calc(50% - 50vw - 12rem);
   margin-right: calc(50% - 50vw - 12rem);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(13, 15, 19, 0.3), rgba(13, 15, 19, 0.85));
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.page-hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.5rem;
+}
+
+.page-hero h1 .accent {
+  color: #E9FF1F;
+}
+
+.page-hero .subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+/* Títulos largos (p. ej. la cabecera de strategies) que necesitan
+   interlineado ajustado y un tamaño menor en móvil. */
+.page-hero--long-title h1 {
+  line-height: 1.15;
 }
 
 @media (max-width: 900px) {
@@ -41,8 +95,12 @@ main {
     padding: 0 2rem;
   }
   .page-hero {
+    height: 320px;
     margin-left: calc(50% - 50vw - 2rem);
     margin-right: calc(50% - 50vw - 2rem);
+  }
+  .page-hero h1 {
+    font-size: 2.25rem;
   }
 }
 
@@ -51,8 +109,28 @@ main {
     padding: 0 0;
   }
   .page-hero {
+    height: 280px;
     margin-left: 0;
     margin-right: 0;
+  }
+  .page-hero-content {
+    padding-top: 50px;
+  }
+  .page-hero h1 {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+  }
+  .page-hero .subtitle {
+    font-size: 0.8rem;
+  }
+  .page-hero--long-title .page-hero-content {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .page-hero--long-title h1 {
+    font-size: 1.15rem;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
   }
   .section-divider {
     margin-top: 1.5rem;
