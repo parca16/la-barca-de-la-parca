@@ -41,4 +41,11 @@ describe('MapPage', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.page-hero h1')?.textContent).toContain('Inferno');
   });
+
+  it('should build a responsive srcset for the hero', () => {
+    const page = createComponent('mirage').componentInstance;
+
+    expect(page.headerSrcset).toContain('Mirage_header-960.webp 960w');
+    expect(page.headerSrcset).toContain('Mirage_header.webp 1920w');
+  });
 });

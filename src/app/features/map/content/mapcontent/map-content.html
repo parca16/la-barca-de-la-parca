@@ -20,7 +20,7 @@
   </div>
 
   <div class="content-image">
-    <img [src]="mapData.calloutsImage" [alt]="'Callouts de ' + mapData.title" style="margin-top: 8.5rem;" loading="lazy" />
+    <img [src]="mapData.calloutsImage" [alt]="'Callouts de ' + mapData.title" style="margin-top: 8.5rem;" width="846" height="798" loading="lazy" decoding="async" />
   </div>
 </div>
 
@@ -78,7 +78,16 @@
               <div class="minimaps-container">
                 @for (minimap of strategy.minimaps; track minimap) {
                   <div class="minimap-wrapper">
-                    <img [src]="minimap" [alt]="'Minimap de ' + strategy.name" loading="lazy" />
+                    <img
+                      [src]="minimap"
+                      [srcset]="minimapSrcset(minimap)"
+                      sizes="(max-width: 600px) 100vw, 50vw"
+                      [alt]="'Minimap de ' + strategy.name"
+                      width="710"
+                      height="710"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
                 }
               </div>

@@ -90,7 +90,7 @@ la-barca-de-la-parca/
 │   ├── index.html
 │   └── styles.css
 ├── server/                  # Servidor Express de estadísticas
-├── optimize-headers.js      # Script de optimización de imágenes con sharp
+├── optimize-headers.js      # Optimización sharp: heroes, utilidades y variantes responsivas
 └── angular.json
 ```
 

@@ -1,6 +1,17 @@
 <div class="utility-detail-page">
   <!-- Hero con imagen de cabecera personalizada -->
-  <div class="page-hero" [style.backgroundImage]="'url(' + headerImage + ')'">
+  <div class="page-hero">
+    <img
+      class="page-hero-bg"
+      [src]="headerImage"
+      [srcset]="headerSrcset"
+      sizes="100vw"
+      [alt]="'Cabecera de ' + mapName"
+      width="1920"
+      height="1080"
+      fetchpriority="high"
+      decoding="async"
+    />
     <div class="page-hero-content">
       <h1>{{ mapName }}</h1>
       <p class="subtitle">Utilidades e instrucciones de uso</p>
@@ -26,7 +37,7 @@
         [class.active]="selectedType === grenade.key"
         (click)="selectType(grenade.key)"
       >
-        <div class="grenade-icon"><img [src]="grenade.iconPath" [alt]="grenade.label" /></div>
+        <div class="grenade-icon"><img [src]="grenade.iconPath" [alt]="grenade.label" width="120" height="120" decoding="async" /></div>
       </button>
     }
   </div>
@@ -37,7 +48,16 @@
       <div class="utility-card">
         <div class="utility-image-wrapper" (click)="selectImage(utility)">
           @if (utility.imagePath) {
-            <img [src]="utility.imagePath" [alt]="utility.title" loading="lazy" />
+            <img
+              [src]="utility.imagePath"
+              [srcset]="utility.imageSrcset"
+              sizes="(max-width: 600px) 100vw, (max-width: 1400px) 25vw, 320px"
+              [alt]="utility.title"
+              width="1280"
+              height="720"
+              loading="lazy"
+              decoding="async"
+            />
           } @else {
             <div class="utility-placeholder">
               <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +85,7 @@
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
-      <img [src]="selectedImage" alt="" class="lightbox-image" />
+      <img [src]="selectedImage" alt="" class="lightbox-image" decoding="async" />
     </div>
   }
 </div>

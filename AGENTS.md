@@ -30,7 +30,7 @@ Sitio interno del equipo NTR de Counter-Strike 2: SPA **Angular 22** (standalone
 - **Assets**: `public/assets/...` se sirven como `/assets/...`. El README menciona `src/public/assets`; está desactualizado.
 - **Rutas**: todas eager en `app.routes.ts` (la issue #21 propone lazy loading).
 - **Servidor**: `server/` es un proyecto npm aparte (ESM) que el frontend **no consume todavía** (#34). Los Steam IDs están duplicados en `server/server.js` y `players.mock.ts`; mantenlos en sincronía (#14).
-- `optimize-headers.js` (raíz) procesa `public/assets/map-headers` con sharp; no está enlazado a ningún script npm (#36).
+- `optimize-headers.js` (raíz) optimiza los assets con sharp: reescribe los heroes (`map-headers/`, `headers/`) y las utilidades, y genera las variantes `-960`/`-640`/`-480` que usan los `srcset`. Se lanza con `npm run optimize:images` (añade `--force` para regenerar todo).
 
 ## Flujo Git
 

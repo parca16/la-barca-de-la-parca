@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { getHeaderImage, getMap } from '../../data/models/maps';
+import { imageVariant } from '../../shared/image-utils';
 import { MapContentComponent } from './content/mapcontent/map-content';
 import { MapConfig } from './content/data/map-config.interface';
 import { mapData as dust2Data } from './content/data/dust2-data';
@@ -56,5 +57,11 @@ export class MapPage implements OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  /** `srcset` del hero: variante 960w + original 1920w. */
+  get headerSrcset(): string {
+    if (!this.headerImage) return '';
+    return `${imageVariant(this.headerImage, 960)} 960w, ${this.headerImage} 1920w`;
   }
 }

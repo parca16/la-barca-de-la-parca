@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { UtilityDetail } from './utility-detail';
+import { imageVariant } from '../../../shared/image-utils';
 
 describe('UtilityDetail', () => {
   function createComponent(map = 'dust-2') {
@@ -53,6 +54,23 @@ describe('UtilityDetail', () => {
     const utility = page.utilities[0];
 
     expect(utility.imagePath).toBe(`/assets/utilidades/dust2/${utility.filename}`);
+  });
+
+  it('should precompute a responsive srcset for each utility', () => {
+    const page = createComponent('dust-2').componentInstance;
+    page.selectType('smoke');
+    const utility = page.utilities[0];
+
+    expect(utility.imageSrcset).toBe(
+      `${imageVariant(utility.imagePath, 640)} 640w, ${utility.imagePath} 1280w`
+    );
+  });
+
+  it('should build a responsive srcset for the hero', () => {
+    const page = createComponent('mirage').componentInstance;
+
+    expect(page.headerSrcset).toContain('Mirage_header-960.webp 960w');
+    expect(page.headerSrcset).toContain('Mirage_header.webp 1920w');
   });
 
   it('should leave the placeholder utility without an image path', () => {
