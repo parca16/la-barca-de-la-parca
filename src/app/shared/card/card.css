@@ -1,6 +1,6 @@
 .card {
-  background: #1a1d23;
-  border: 1px solid #252830;
+  background: var(--bg-3);
+  border: 1px solid var(--border-soft);
   border-radius: 16px;
   padding: 0;
   display: flex;
@@ -10,19 +10,19 @@
 }
 
 .card:hover {
-  border-color: #353840;
+  border-color: var(--border-hover);
 }
 
 .card-left {
   width: 450px;
   min-width: 450px;
-  background: #141619;
+  background: var(--bg-2);
   padding: 3rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  border-right: 1px solid #252830;
+  border-right: 1px solid var(--border-soft);
 }
 
 .card-avatar {
@@ -30,8 +30,8 @@
   height: 320px;
   border-radius: 16px;
   overflow: hidden;
-  border: 3px solid #252830;
-  background: #1a1d23;
+  border: 3px solid var(--border-soft);
+  background: var(--bg-3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,7 +54,7 @@
   font-size: 1.2rem;
   font-weight: 700;
   color: #ddd;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -66,16 +66,16 @@
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  border: 1px solid #252830;
-  background: #1a1d23;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-3);
   transition: all 0.15s ease;
   cursor: pointer;
   text-decoration: none;
 }
 
 .profile-link:hover {
-  border-color: #353840;
-  background: #252830;
+  border-color: var(--border-hover);
+  background: var(--border-soft);
   transform: translateY(-2px);
 }
 
@@ -99,7 +99,7 @@
   font-size: 0.9rem;
   font-weight: 600;
   padding: 0.45rem 0.9rem;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
   letter-spacing: 1px;
   text-transform: uppercase;
   border-radius: 6px;
@@ -120,7 +120,7 @@
 .card-toggle {
   display: flex;
   gap: 3px;
-  background: #141619;
+  background: var(--bg-2);
   border-radius: 8px;
   padding: 3px;
   margin-bottom: 1.5rem;
@@ -144,8 +144,8 @@
 }
 
 .toggle-btn.active {
-  background: #252830;
-  color: #E9FF1F;
+  background: var(--border-soft);
+  color: var(--accent);
 }
 
 .card-content {
@@ -165,9 +165,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.7rem 1rem;
-  background: #141619;
+  background: var(--bg-2);
   border-radius: 6px;
-  border: 1px solid #252830;
+  border: 1px solid var(--border-soft);
 }
 
 .perfil-row .label {
@@ -176,7 +176,7 @@
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.5px;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
 }
 
 .perfil-row .value {
@@ -192,9 +192,9 @@
   line-height: 1.8;
   margin: 0;
   padding: 0.85rem 1.1rem;
-  background: #141619;
+  background: var(--bg-2);
   border-radius: 8px;
-  border: 1px solid #252830;
+  border: 1px solid var(--border-soft);
   text-align: justify;
 }
 
@@ -216,7 +216,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 0.6rem;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
 }
 
 .virtues-section h4 {
@@ -264,9 +264,9 @@
   line-height: 1.8;
   margin: 0;
   padding: 0.85rem 1.1rem;
-  background: #141619;
+  background: var(--bg-2);
   border-radius: 8px;
-  border: 1px solid #252830;
+  border: 1px solid var(--border-soft);
   text-align: justify;
 }
 
@@ -293,7 +293,7 @@
     width: 100%;
     min-width: auto;
     border-right: none;
-    border-bottom: 1px solid #252830;
+    border-bottom: 1px solid var(--border-soft);
     padding: 2rem;
   }
 
