@@ -2,7 +2,6 @@
   background: var(--bg-3);
   border: 1px solid var(--border-soft);
   border-radius: 16px;
-  padding: 0;
   display: flex;
   align-items: stretch;
   transition: all 0.2s ease;
@@ -32,9 +31,6 @@
   overflow: hidden;
   border: 3px solid var(--border-soft);
   background: var(--bg-3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .card-avatar img {
@@ -69,7 +65,6 @@
   border: 1px solid var(--border-soft);
   background: var(--bg-3);
   transition: all 0.15s ease;
-  cursor: pointer;
   text-decoration: none;
 }
 
@@ -117,35 +112,9 @@
   flex-direction: column;
 }
 
+/* Control segmentado compartido (styles.css); aquí solo el espaciado. */
 .card-toggle {
-  display: flex;
-  gap: 3px;
-  background: var(--bg-2);
-  border-radius: 8px;
-  padding: 3px;
   margin-bottom: 1.5rem;
-}
-
-.toggle-btn {
-  flex: 1;
-  border: none;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  padding: 0.7rem 0.4rem;
-  border-radius: 6px;
-  transition: all 0.15s ease;
-  white-space: nowrap;
-}
-
-.toggle-btn:hover {
-  color: #aaa;
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.toggle-btn.active {
-  background: var(--border-soft);
-  color: var(--accent);
 }
 
 .card-content {
@@ -185,8 +154,9 @@
   font-weight: 600;
 }
 
-/* Tab: Posición */
-.tab-posicion p {
+/* Tabs de texto: Posición y Psico */
+.tab-posicion p,
+.tab-psico p {
   font-size: 1.05rem;
   color: #aaa;
   line-height: 1.8;
@@ -209,6 +179,16 @@
   flex: 1;
 }
 
+.virtues-section {
+  --section-accent: #22c55e;
+  --section-bg: rgba(34, 197, 94, 0.06);
+}
+
+.defects-section {
+  --section-accent: #ef4444;
+  --section-bg: rgba(239, 68, 68, 0.06);
+}
+
 .virtues-section h4,
 .defects-section h4 {
   font-size: 0.9rem;
@@ -217,14 +197,7 @@
   letter-spacing: 1px;
   margin-bottom: 0.6rem;
   font-family: var(--font-mono);
-}
-
-.virtues-section h4 {
-  color: #22c55e;
-}
-
-.defects-section h4 {
-  color: #ef4444;
+  color: var(--section-accent);
 }
 
 .virtues-section ul,
@@ -237,37 +210,15 @@
   gap: 0.4rem;
 }
 
-.virtues-section li {
-  font-size: 0.95rem;
-  color: #aaa;
-  padding: 0.5rem 0.7rem;
-  background: rgba(34, 197, 94, 0.06);
-  border-radius: 6px;
-  border-left: 2px solid #22c55e;
-  text-align: center;
-}
-
+.virtues-section li,
 .defects-section li {
   font-size: 0.95rem;
   color: #aaa;
   padding: 0.5rem 0.7rem;
-  background: rgba(239, 68, 68, 0.06);
+  background: var(--section-bg);
   border-radius: 6px;
-  border-left: 2px solid #ef4444;
+  border-left: 2px solid var(--section-accent);
   text-align: center;
-}
-
-/* Tab: Psico */
-.tab-psico p {
-  font-size: 1.05rem;
-  color: #aaa;
-  line-height: 1.8;
-  margin: 0;
-  padding: 0.85rem 1.1rem;
-  background: var(--bg-2);
-  border-radius: 8px;
-  border: 1px solid var(--border-soft);
-  text-align: justify;
 }
 
 .tab-stats-empty {
@@ -324,15 +275,6 @@
   }
   .card-right {
     padding: 1.25rem 1rem;
-  }
-  .card-toggle {
-    flex-wrap: wrap;
-    gap: 2px;
-  }
-  .toggle-btn {
-    font-size: 0.65rem;
-    padding: 0.5rem 0.2rem;
-    flex: 0 0 calc(50% - 1px);
   }
   .perfil-row .label {
     font-size: 0.75rem;

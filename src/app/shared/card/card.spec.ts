@@ -50,7 +50,7 @@ describe('Card', () => {
   it('should switch the active tab when a toggle is clicked', () => {
     const fixture = createCard();
     const compiled = fixture.nativeElement as HTMLElement;
-    const buttons = compiled.querySelectorAll<HTMLButtonElement>('.toggle-btn');
+    const buttons = compiled.querySelectorAll<HTMLButtonElement>('.segmented-btn');
 
     buttons[1].click();
     fixture.detectChanges();

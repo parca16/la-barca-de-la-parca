@@ -60,6 +60,144 @@ main {
   cursor: pointer;
 }
 
+/**
+ * Control segmentado (grupo de pestañas/botones), usado por Card.
+ * El contenedor agrupa los botones y cada botón mantiene sus estados.
+ */
+.segmented-control {
+  display: flex;
+  gap: 3px;
+  background: var(--bg-2);
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.segmented-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #666;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 0.7rem 0.4rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.segmented-btn:hover {
+  color: #aaa;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.segmented-btn.active {
+  background: var(--border-soft);
+  color: var(--accent);
+}
+
+/**
+ * Enlace de texto con flecha, compartido por map-content ("Utilidades de X")
+ * y utility-detail ("Estrategias de X").
+ */
+.text-link {
+  color: #555;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-style: normal;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.text-link:hover {
+  color: var(--accent-strong);
+  transform: translateX(3px);
+}
+
+.text-link svg {
+  transition: transform 0.2s ease;
+}
+
+.text-link:hover svg {
+  transform: translateX(3px);
+}
+
+/* Lightbox de imagen genérico (utility-detail). */
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 200;
+  cursor: zoom-out;
+  animation: fadeIn 0.2s ease;
+}
+
+.lightbox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 201;
+  max-width: 95vw;
+  max-height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: zoomIn 0.2s ease;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 202;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(var(--accent-rgb), 0.1);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.lightbox-image {
+  max-width: 95vw;
+  max-height: 95vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 8px 64px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
 /* Hero de página compartido por home, team, strategies, map, utilities y utility-detail.
    Los márgenes laterales hacen "bleed" a todo el ancho del viewport para compensar
    el padding de `main`. */
@@ -176,5 +314,17 @@ main {
   .section-divider {
     margin-top: 1.5rem;
     margin-bottom: 2rem;
+  }
+  .text-link {
+    font-size: 0.95rem;
+  }
+  .segmented-control {
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+  .segmented-btn {
+    font-size: 0.65rem;
+    padding: 0.5rem 0.2rem;
+    flex: 0 0 calc(50% - 1px);
   }
 }

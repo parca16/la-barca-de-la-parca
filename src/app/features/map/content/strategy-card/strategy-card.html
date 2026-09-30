@@ -1,0 +1,72 @@
+<div class="strategy-card" [class.play-alt-1]="index % 2 === 0" [class.play-alt-2]="index % 2 === 1">
+  <!-- Header: nombre + tag de bando -->
+  <div class="strategy-header">
+    <h3>{{ strategy.name }}</h3>
+    <span class="tag" [class.side-T]="strategy.side === 'T'" [class.side-CT]="strategy.side === 'CT'">{{ strategy.side }}</span>
+  </div>
+
+  <!-- Cuerpo principal: descripcion + minimaps -->
+  <div class="strategy-body">
+    <div class="strategy-text">
+      <p class="strategy-desc">{{ strategy.description }}</p>
+    </div>
+
+    <!-- Fotos de minimap -->
+    @if (strategy.minimaps.length > 0) {
+      <div class="minimaps-container">
+        @for (minimap of strategy.minimaps; track minimap) {
+          <div class="minimap-wrapper">
+            <img
+              [src]="minimap"
+              [srcset]="minimapSrcset(minimap)"
+              sizes="(max-width: 600px) 100vw, 50vw"
+              [alt]="'Minimap de ' + strategy.name"
+              width="710"
+              height="710"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Variantes -->
+  @if (strategy.variants && strategy.variants.length > 0) {
+    <div class="variants-block">
+      <div class="variants-toggle">
+        @for (variant of strategy.variants; track variant.label; let v = $index) {
+          <button
+            class="variant-btn"
+            [class.active]="activeVariant === v"
+            (click)="selectVariant(v)"
+          >
+            {{ variant.label }}
+          </button>
+        }
+      </div>
+      @if (strategy.variants[activeVariant]) {
+        <p class="variant-text">{{ strategy.variants[activeVariant].text }}</p>
+      }
+    </div>
+  }
+
+  <!-- Tabla de jugadores -->
+  <table class="players-table">
+    <thead>
+      <tr>
+        <th>Jugador</th>
+        <th>Función en la ronda</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (role of strategy.roles; track role.player) {
+        <tr>
+          <td class="player-name">{{ role.player }}</td>
+          <td class="player-task">{{ role.utility }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
