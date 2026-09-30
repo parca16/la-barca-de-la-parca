@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MapConfig } from '../data/map-config.interface';
+import { imageVariant } from '../../../../shared/image-utils';
 
 @Component({
   imports: [],
@@ -31,6 +32,12 @@ export class MapContentComponent {
 
   selectVariant(name: string, index: number): void {
     this.activeVariant = { ...this.activeVariant, [name]: index };
+  }
+
+  /** `srcset` de un minimapa: variante 480w + original. */
+  protected minimapSrcset(path: string): string {
+    if (!path) return '';
+    return `${imageVariant(path, 480)} 480w, ${path} 710w`;
   }
 
   navigateToUtilities(): void {

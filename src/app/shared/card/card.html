@@ -1,18 +1,18 @@
 <div class="card">
   <div class="card-left">
     <div class="card-avatar" [style.borderColor]="player().borderColor">
-      <img [src]="player().photoUrl" [alt]="player().alias" loading="lazy" [style.object-position]="player().photoPosition ?? 'center center'" />
+      <img [src]="player().photoUrl" [alt]="player().alias" width="640" height="640" loading="lazy" decoding="async" [style.object-position]="player().photoPosition ?? 'center center'" />
     </div>
     <span class="role-badge" [style.backgroundColor]="player().borderColor" [class.role-light-bg]="lightBorderColor()">{{ player().role }}</span>
     <div class="card-bottom-row">
       <span class="card-abbrev">{{ player().abbrev ?? player().alias }}</span>
       @if (player().steamUrl) {
         <a [href]="player().steamUrl" target="_blank" class="profile-link profile-link-steam">
-          <img src="/assets/icons/steam_ico.webp" alt="Steam" />
+          <img src="/assets/icons/steam_ico.webp" alt="Steam" width="20" height="20" decoding="async" />
         </a>
         @if (player().faceitUrl) {
           <a [href]="player().faceitUrl" target="_blank" class="profile-link profile-link-faceit">
-            <img src="/assets/icons/faceit_ico.webp" alt="FACEIT" />
+            <img src="/assets/icons/faceit_ico.webp" alt="FACEIT" width="20" height="20" decoding="async" />
           </a>
         }
       }

@@ -1,6 +1,17 @@
 <section class="intro-section">
   <!-- Hero -->
-  <div class="page-hero" style="background-image: url('/assets/headers/Home_header.webp');">
+  <div class="page-hero">
+    <img
+      class="page-hero-bg"
+      src="/assets/headers/Home_header.webp"
+      srcset="/assets/headers/Home_header-960.webp 960w, /assets/headers/Home_header.webp 1280w"
+      sizes="100vw"
+      alt="La Barca de la Parca"
+      width="1280"
+      height="460"
+      fetchpriority="high"
+      decoding="async"
+    />
     <div class="page-hero-content">
       <h1>LA BARCA DE <span class="accent">LA PARCA</span> </h1>
     </div>
@@ -8,7 +19,7 @@
 
   <!-- Logo -->
   <div class="home-logo" style="display: flex; justify-content: center;">
-    <img src="/assets/icons/LaBarcaDeLaParca.webp" alt="La Barca de la Parca" style="height: 200px;" />
+    <img src="/assets/icons/LaBarcaDeLaParca.webp" alt="La Barca de la Parca" width="500" height="500" decoding="async" style="height: 200px;" />
   </div>
 
   <!-- Texto explicativo -->
