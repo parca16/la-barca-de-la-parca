@@ -1,0 +1,11 @@
+<div class="pool-section">
+  <h2 class="pool-label">{{ title() }}</h2>
+  <div class="maps-grid">
+    @for (map of maps(); track map.name) {
+      <div class="map-card" [style.backgroundImage]="'url(' + map.cardImage + ')'" (click)="navigateToMap(map.key)">
+        <div class="map-card-overlay"></div>
+        <span class="map-card-name">{{ map.name }}</span>
+      </div>
+    }
+  </div>
+</div>

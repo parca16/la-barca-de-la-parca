@@ -1,20 +1,14 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { getMapsByPool } from '../../data/models/maps';
+import { MapPoolGrid } from '../../shared/map-pool-grid/map-pool-grid';
 
 @Component({
-  imports: [],
+  imports: [MapPoolGrid],
   selector: 'app-strategies',
   templateUrl: './strategies.html',
   styleUrl: './strategies.css',
 })
 export class Strategies {
-  private router = inject(Router);
-
   protected readonly activePool = getMapsByPool('active');
   protected readonly inactivePool = getMapsByPool('inactive');
-
-  navigateToMap(key: string): void {
-    this.router.navigate(['/map', key]);
-  }
 }
