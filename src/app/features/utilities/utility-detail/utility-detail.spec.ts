@@ -65,7 +65,7 @@ describe('UtilityDetail', () => {
     const utility = page.utilities[0];
 
     expect(utility.imageSrcset).toBe(
-      `${imageVariant(utility.imagePath, 640)} 640w, ${utility.imagePath} 1280w`
+      `${imageVariant(utility.imagePath, 640)} 640w, ${imageVariant(utility.imagePath, 1280)} 1280w, ${utility.imagePath} 1920w`
     );
   });
 
