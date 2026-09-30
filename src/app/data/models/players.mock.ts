@@ -163,7 +163,7 @@ export const reserves: Player[] = [
     name: 'Antón "El profe" Xuiz',
     alias: 'xuiz',
     abbrev: 'Xuiz',
-    steamUrl: 'https://steamcommunity.com/id/blackyolo22',
+    steamUrl: 'https://steamcommunity.com/profiles/76561198186565967',
     faceitUrl: 'https://www.faceit.com/en/players/Blackyolo22',
     role: 'Parkinson Rifler',
     nationality: '🇪🇸 España',
