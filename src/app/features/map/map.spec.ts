@@ -22,12 +22,12 @@ describe('MapPage', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should resolve the map from the route parameter', () => {
+  it('should resolve the map from the route parameter', async () => {
     const page = createComponent('mirage').componentInstance;
     expect(page.mapKey).toBe('mirage');
     expect(page.mapName).toBe('Mirage');
     expect(page.headerImage).toContain('Mirage_header.webp');
-    expect(page.mapData).not.toBeNull();
+    await vi.waitFor(() => expect(page.mapData).not.toBeNull());
   });
 
   it('should fall back to dust-2 when there is no parameter', () => {

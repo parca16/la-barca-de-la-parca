@@ -2,16 +2,6 @@ import { Component, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { getHeaderImage, getMap } from '../../../data/models/maps';
-import { dust2Utilities } from '../data/dust2-utilities';
-import { mirageUtilities } from '../data/mirage-utilities';
-import { infernoUtilities } from '../data/inferno-utilities';
-import { nukeUtilities } from '../data/nuke-utilities';
-import { ancientUtilities } from '../data/ancient-utilities';
-import { anubisUtilities } from '../data/anubis-utilities';
-import { overpassUtilities } from '../data/overpass-utilities';
-import { vertigoUtilities } from '../data/vertigo-utilities';
-import { cacheUtilities } from '../data/cache-utilities';
-import { trainUtilities } from '../data/train-utilities';
 
 type GrenadeType = 'smoke' | 'molotov' | 'flash' | 'he';
 
@@ -33,17 +23,22 @@ export interface MapUtilities {
   he: UtilityData[];
 }
 
-const mapUtilities: Record<string, MapUtilities> = {
-  'dust-2': dust2Utilities,
-  mirage: mirageUtilities,
-  inferno: infernoUtilities,
-  nuke: nukeUtilities,
-  ancient: ancientUtilities,
-  anubis: anubisUtilities,
-  overpass: overpassUtilities,
-  vertigo: vertigoUtilities,
-  cache: cacheUtilities,
-  train: trainUtilities,
+/**
+ * Cargadores diferidos de las utilidades de cada mapa. Con `import()` dinámico
+ * y rutas literales, el bundler genera un chunk por mapa y solo se descarga el
+ * del mapa visitado.
+ */
+const mapUtilitiesLoaders: Record<string, () => Promise<MapUtilities>> = {
+  'dust-2': () => import('../data/dust2-utilities').then(m => m.dust2Utilities),
+  mirage: () => import('../data/mirage-utilities').then(m => m.mirageUtilities),
+  inferno: () => import('../data/inferno-utilities').then(m => m.infernoUtilities),
+  nuke: () => import('../data/nuke-utilities').then(m => m.nukeUtilities),
+  ancient: () => import('../data/ancient-utilities').then(m => m.ancientUtilities),
+  anubis: () => import('../data/anubis-utilities').then(m => m.anubisUtilities),
+  overpass: () => import('../data/overpass-utilities').then(m => m.overpassUtilities),
+  vertigo: () => import('../data/vertigo-utilities').then(m => m.vertigoUtilities),
+  cache: () => import('../data/cache-utilities').then(m => m.cacheUtilities),
+  train: () => import('../data/train-utilities').then(m => m.trainUtilities),
 };
 
 @Component({
@@ -59,6 +54,7 @@ export class UtilityDetail implements OnDestroy {
   utilities: UtilityView[] = [];
   selectedImage: string | null = null;
   private subscriptions = new Subscription();
+  private loadToken = 0;
 
   readonly grenadeTypes: { key: GrenadeType; label: string; iconPath: string }[] = [
     {
@@ -112,17 +108,27 @@ export class UtilityDetail implements OnDestroy {
 
   selectType(type: GrenadeType): void {
     this.selectedType = this.selectedType === type ? null : type;
-    this.loadUtilities();
+    void this.loadUtilities();
   }
 
-  private loadUtilities(): void {
-    if (!this.selectedType) {
+  private async loadUtilities(): Promise<void> {
+    const type = this.selectedType;
+    const token = ++this.loadToken;
+
+    if (!type) {
       this.utilities = [];
       return;
     }
 
-    const data = mapUtilities[this.mapKey];
-    const selected = data?.[this.selectedType];
+    const loader = mapUtilitiesLoaders[this.mapKey];
+    const data = loader ? await loader() : undefined;
+
+    // Si el usuario cambió de tipo o de mapa durante la carga, descartamos.
+    if (token !== this.loadToken || this.selectedType !== type) {
+      return;
+    }
+
+    const selected = data?.[type];
 
     if (selected && selected.length > 0) {
       const folder = getMap(this.mapKey)?.utilitiesFolder || this.mapKey;

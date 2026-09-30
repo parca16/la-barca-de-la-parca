@@ -4,16 +4,24 @@ import { Subscription } from 'rxjs';
 import { getHeaderImage, getMap } from '../../data/models/maps';
 import { MapContentComponent } from './content/mapcontent/map-content';
 import { MapConfig } from './content/data/map-config.interface';
-import { mapData as dust2Data } from './content/data/dust2-data';
-import { mapData as mirageData } from './content/data/mirage-data';
-import { mapData as infernoData } from './content/data/inferno-data';
-import { mapData as nukeData } from './content/data/nuke-data';
-import { mapData as ancientData } from './content/data/ancient-data';
-import { mapData as anubisData } from './content/data/anubis-data';
-import { mapData as overpassData } from './content/data/overpass-data';
-import { mapData as vertigoData } from './content/data/vertigo-data';
-import { mapData as cacheData } from './content/data/cache-data';
-import { mapData as trainData } from './content/data/train-data';
+
+/**
+ * Cargadores diferidos de los datos de cada mapa. Al usar `import()` dinámico
+ * con rutas literales, el bundler genera un chunk por mapa y la página solo
+ * descarga el del mapa visitado.
+ */
+const mapDataLoaders: Record<string, () => Promise<MapConfig>> = {
+  'dust-2': () => import('./content/data/dust2-data').then(m => m.mapData),
+  mirage: () => import('./content/data/mirage-data').then(m => m.mapData),
+  inferno: () => import('./content/data/inferno-data').then(m => m.mapData),
+  nuke: () => import('./content/data/nuke-data').then(m => m.mapData),
+  ancient: () => import('./content/data/ancient-data').then(m => m.mapData),
+  anubis: () => import('./content/data/anubis-data').then(m => m.mapData),
+  overpass: () => import('./content/data/overpass-data').then(m => m.mapData),
+  vertigo: () => import('./content/data/vertigo-data').then(m => m.mapData),
+  cache: () => import('./content/data/cache-data').then(m => m.mapData),
+  train: () => import('./content/data/train-data').then(m => m.mapData),
+};
 
 @Component({
   imports: [MapContentComponent],
@@ -28,19 +36,7 @@ export class MapPage implements OnDestroy {
   mapData: MapConfig | null = null;
 
   private subscriptions = new Subscription();
-
-  private readonly dataMap: Record<string, MapConfig> = {
-    'dust-2': dust2Data,
-    mirage: mirageData,
-    inferno: infernoData,
-    nuke: nukeData,
-    ancient: ancientData,
-    anubis: anubisData,
-    overpass: overpassData,
-    vertigo: vertigoData,
-    cache: cacheData,
-    train: trainData,
-  };
+  private loadToken = 0;
 
   constructor(private route: ActivatedRoute) {
     this.subscriptions.add(
@@ -49,9 +45,19 @@ export class MapPage implements OnDestroy {
         const map = getMap(this.mapKey);
         this.mapName = map?.name || this.mapKey;
         this.headerImage = getHeaderImage(this.mapKey);
-        this.mapData = this.dataMap[this.mapKey] || null;
+        void this.loadMapData(this.mapKey);
       })
     );
+  }
+
+  private async loadMapData(mapKey: string): Promise<void> {
+    const loader = mapDataLoaders[mapKey];
+    const token = ++this.loadToken;
+    const data = loader ? await loader() : null;
+    // Si el parámetro de ruta cambió durante la carga, descartamos el resultado.
+    if (token === this.loadToken) {
+      this.mapData = data;
+    }
   }
 
   ngOnDestroy(): void {

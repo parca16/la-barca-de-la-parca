@@ -28,13 +28,13 @@ describe('UtilityDetail', () => {
     expect(page.grenadeTypes.map(t => t.key)).toEqual(['smoke', 'molotov', 'flash', 'he']);
   });
 
-  it('should load utilities when a type is selected', () => {
+  it('should load utilities when a type is selected', async () => {
     const page = createComponent('dust-2').componentInstance;
 
     page.selectType('smoke');
 
     expect(page.selectedType).toBe('smoke');
-    expect(page.utilities.length).toBeGreaterThan(0);
+    await vi.waitFor(() => expect(page.utilities.length).toBeGreaterThan(0));
   });
 
   it('should toggle the selected type off when clicked twice', () => {
@@ -47,25 +47,28 @@ describe('UtilityDetail', () => {
     expect(page.utilities).toEqual([]);
   });
 
-  it('should precompute the asset path when a type is selected', () => {
+  it('should precompute the asset path when a type is selected', async () => {
     const page = createComponent('dust-2').componentInstance;
     page.selectType('smoke');
+    await vi.waitFor(() => expect(page.utilities.length).toBeGreaterThan(0));
+
     const utility = page.utilities[0];
 
     expect(utility.imagePath).toBe(`/assets/utilidades/dust2/${utility.filename}`);
   });
 
-  it('should leave the placeholder utility without an image path', () => {
+  it('should leave the placeholder utility without an image path', async () => {
     const page = createComponent('mapa-inventado').componentInstance;
     page.selectType('smoke');
 
-    expect(page.utilities[0].filename).toBe('placeholder');
+    await vi.waitFor(() => expect(page.utilities[0]?.filename).toBe('placeholder'));
     expect(page.utilities[0].imagePath).toBe('');
   });
 
-  it('should open and close the lightbox', () => {
+  it('should open and close the lightbox', async () => {
     const page = createComponent().componentInstance;
     page.selectType('smoke');
+    await vi.waitFor(() => expect(page.utilities.length).toBeGreaterThan(0));
 
     page.selectImage(page.utilities[0]);
     expect(page.selectedImage).not.toBeNull();

@@ -19,12 +19,12 @@
     </div>
   </div>
   <div class="card-right">
-    <div class="card-toggle">
-      <button class="toggle-btn" [class.active]="activeTab === 'perfil'" (click)="selectTab('perfil')">Perfil</button>
-      <button class="toggle-btn" [class.active]="activeTab === 'posicion'" (click)="selectTab('posicion')">Rol</button>
-      <button class="toggle-btn" [class.active]="activeTab === 'virtudes'" (click)="selectTab('virtudes')">Características</button>
-      <button class="toggle-btn" [class.active]="activeTab === 'psico'" (click)="selectTab('psico')">Psicología</button>
-      <button class="toggle-btn" [class.active]="activeTab === 'stats'" (click)="selectTab('stats')">Estadísticas</button>
+    <div class="card-toggle segmented-control">
+      <button class="segmented-btn" [class.active]="activeTab === 'perfil'" (click)="selectTab('perfil')">Perfil</button>
+      <button class="segmented-btn" [class.active]="activeTab === 'posicion'" (click)="selectTab('posicion')">Rol</button>
+      <button class="segmented-btn" [class.active]="activeTab === 'virtudes'" (click)="selectTab('virtudes')">Características</button>
+      <button class="segmented-btn" [class.active]="activeTab === 'psico'" (click)="selectTab('psico')">Psicología</button>
+      <button class="segmented-btn" [class.active]="activeTab === 'stats'" (click)="selectTab('stats')">Estadísticas</button>
     </div>
     <div class="card-content">
       @switch (activeTab) {

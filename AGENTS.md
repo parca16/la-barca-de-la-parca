@@ -17,7 +17,7 @@ Sitio interno del equipo NTR de Counter-Strike 2: SPA **Angular 22** (standalone
 
 - **Zoneless**: no hay Zone.js. Trabaja con signals y evita llamar funciones desde plantillas que se recalculen en cada change detection (usa `computed` o datos precalculados; ver issue #13).
 - Componentes standalone y control de flujo nativo `@if` / `@for` / `@switch`. Sin NgModules.
-- Presupuesto de estilos por componente: warning 4 kB, error 10 kB. Varios componentes ya avisan en el build (~4,7–6,6 kB); es deuda conocida (#21), no la "arregles" salvo que se pida.
+- Presupuesto de estilos por componente: warning 4 kB, error 10 kB. Tras #21 todos quedan por debajo; mantén el límite (no lo subas para silenciar avisos). Los patrones reutilizables (`.text-link`, lightbox, `.segmented-*`, `.toggle-btn`, `.section-divider`, `.page-hero`) viven en `src/styles.css`.
 - Tests con **Vitest** vía `@angular/build:unit-test` (jsdom). Los globals `describe/it/expect` están habilitados por `tsconfig.spec.json` (`vitest/globals`); los specs `*.spec.ts` viven junto al código.
 - Componentes que usan `RouterLink` (`App`, `Header`) necesitan `provideRouter([])` en el `TestBed`, o el test falla con `NG0201: No provider found for ActivatedRoute`.
 - Inputs de tipo signal: en tests usa `fixture.componentRef.setInput('player', obj)`.
@@ -26,9 +26,9 @@ Sitio interno del equipo NTR de Counter-Strike 2: SPA **Angular 22** (standalone
 
 - **Mapas**: `src/app/data/models/maps.ts` es la fuente única (`MapInfo`, `MAPS`, `MAPS_BY_KEY`, `getMap`, `getMapsByPool`, `getHeaderImage`). Añadir un mapa empieza aquí; lo consumen `map.ts`, `strategies.ts`, `utilities.ts` y `utility-detail.ts`.
 - **Jugadores**: modelo en `src/app/data/models/player.interface.ts`, datos en `players.mock.ts`. `Card` lee `steamUrl`, `faceitUrl`, `abbrev` y `photoPosition` del modelo; no los recalcules en la plantilla.
-- **Utilidades**: contenido en `src/app/features/utilities/data/<mapa>-utilities.ts` (tipo `MapUtilities`, exportado desde `utility-detail.ts`). El registro `mapUtilities` en `utility-detail.ts` mapea `mapKey` → datos; las imágenes están en `public/assets/utilidades/<carpeta>/`. Añadir un mapa requiere catálogo + fichero de datos + assets.
+- **Utilidades**: contenido en `src/app/features/utilities/data/<mapa>-utilities.ts` (tipo `MapUtilities`, exportado desde `utility-detail.ts`). El registro `mapUtilitiesLoaders` en `utility-detail.ts` mapea `mapKey` → cargador dinámico; las imágenes están en `public/assets/utilidades/<carpeta>/`. Añadir un mapa requiere catálogo + fichero de datos + assets.
 - **Assets**: `public/assets/...` se sirven como `/assets/...`. El README menciona `src/public/assets`; está desactualizado.
-- **Rutas**: todas eager en `app.routes.ts` (la issue #21 propone lazy loading).
+- **Rutas**: todas lazy en `app.routes.ts` (`loadComponent`). Los datos por mapa (`*-data.ts` y `*-utilities.ts`) se cargan con `import()` dinámico desde `map.ts` y `utility-detail.ts`, generando un chunk por mapa.
 - **Servidor**: `server/` es un proyecto npm aparte (ESM) que el frontend **no consume todavía** (#34). Los Steam IDs están duplicados en `server/server.js` y `players.mock.ts`; mantenlos en sincronía (#14).
 - `optimize-headers.js` (raíz) procesa `public/assets/map-headers` con sharp; no está enlazado a ningún script npm (#36).
 
