@@ -71,14 +71,6 @@
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
-/* Separador principal */
-.section-divider {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #C4D618 50%, transparent);
-  margin-bottom: 3rem;
-  margin-top: 2rem;
-}
-
 /* Toggle de bando */
 .side-toggle {
   display: flex;
@@ -88,16 +80,11 @@
 }
 
 .toggle-btn {
-  background: transparent;
   border: 2px solid #333;
-  color: #666;
   padding: 1rem 3rem;
   font-size: 1.3rem;
   font-weight: 700;
-  cursor: pointer;
   transition: all 0.25s ease;
-  font-family: 'Courier New', monospace;
-  text-transform: uppercase;
   letter-spacing: 3px;
   border-radius: 8px;
 }
@@ -477,10 +464,6 @@
   }
   .play-separator {
     margin: 1rem 0;
-  }
-  .section-divider {
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
   }
   .side-toggle {
     gap: 0.75rem;
