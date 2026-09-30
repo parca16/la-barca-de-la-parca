@@ -2,6 +2,20 @@
   padding: 0 0 2rem;
 }
 
+/* El hero compartido (.page-hero en styles.css) define la versión móvil/tablet.
+   En escritorio se conservan los valores propios de esta página. */
+@media (min-width: 901px) {
+  .utility-detail-page .page-hero {
+    margin-bottom: 2rem;
+  }
+  .utility-detail-page .page-hero-content {
+    padding-top: 80px;
+  }
+  .utility-detail-page .page-hero h1 {
+    margin-top: 1rem;
+  }
+}
+
 /* Enlace a estrategias */
 .strategies-link-wrapper {
   text-align: center;

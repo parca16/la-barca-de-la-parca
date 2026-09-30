@@ -2,3 +2,11 @@
   position: relative;
   margin-bottom: 3rem;
 }
+
+/* El hero compartido (.page-hero en styles.css) define la versión móvil/tablet.
+   En escritorio esta página mantiene su separación propia. */
+@media (min-width: 901px) {
+  .map-page .page-hero {
+    margin-bottom: 3rem;
+  }
+}
