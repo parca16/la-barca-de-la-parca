@@ -25,7 +25,7 @@ export interface UtilityData {
 /** Utilidad con su ruta de imagen ya resuelta, lista para pintar. */
 export interface UtilityView extends UtilityData {
   imagePath: string;
-  /** `srcset` responsivo ya resuelto (variante 640w + original 1280w). */
+  /** `srcset` responsivo ya resuelto (variantes 640w/1280w + original 1920w). */
   imageSrcset: string;
 }
 
@@ -140,7 +140,7 @@ export class UtilityDetail implements OnDestroy {
         return {
           ...utility,
           imagePath,
-          imageSrcset: `${imageVariant(imagePath, 640)} 640w, ${imagePath} 1280w`,
+          imageSrcset: `${imageVariant(imagePath, 640)} 640w, ${imageVariant(imagePath, 1280)} 1280w, ${imagePath} 1920w`,
         };
       });
     } else {

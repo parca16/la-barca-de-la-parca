@@ -4,8 +4,9 @@
  * Recorre `public/assets` y:
  *   - Heroes (`map-headers/`, `headers/`): reescribe el original a un ancho
  *     máximo de 1920 px y genera una variante `-960.webp` para móvil/tablet.
- *   - Utilidades (`utilidades/*`): reescribe el original a 1280 px y genera
- *     una variante `-640.webp` para las tarjetas de la rejilla.
+ *   - Utilidades (`utilidades/*`): genera variantes `-640.webp` (tarjetas) y
+ *     `-1280.webp` (retina/móvil de alta densidad); el original se conserva
+ *     intacto y solo se sirve en el lightbox, así que no se degrada.
  *   - Plays (`plays/`): genera una variante `-480.webp` para los minimapas.
  *
  * Las variantes siguen el patrón `<nombre>-<ancho>.webp` y son las que
@@ -41,9 +42,13 @@ const GROUPS = [
   {
     dir: 'utilidades',
     label: 'Utilidades',
-    maxWidth: 1280,
-    quality: 76,
-    variants: [{ width: 640, quality: 72 }],
+    // El original se conserva: solo se usa en el lightbox. Las tarjetas cargan
+    // la variante -640 y las pantallas retina/móvil la -1280.
+    maxWidth: null,
+    variants: [
+      { width: 640, quality: 72 },
+      { width: 1280, quality: 76 },
+    ],
   },
   {
     dir: 'plays',
