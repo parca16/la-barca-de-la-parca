@@ -35,7 +35,17 @@ describe('UtilityDetail', () => {
     page.selectType('smoke');
 
     expect(page.selectedType).toBe('smoke');
-    await vi.waitFor(() => expect(page.utilities.length).toBeGreaterThan(0));
+    await vi.waitFor(() => expect(page.utilities().length).toBeGreaterThan(0));
+  });
+
+  it('should render the utility cards once the async data loads', async () => {
+    const fixture = createComponent('dust-2');
+    fixture.autoDetectChanges();
+    fixture.componentInstance.selectType('smoke');
+
+    await vi.waitFor(() => {
+      expect(fixture.nativeElement.querySelector('.utility-card')).toBeTruthy();
+    });
   });
 
   it('should toggle the selected type off when clicked twice', () => {
@@ -45,15 +55,15 @@ describe('UtilityDetail', () => {
     page.selectType('smoke');
 
     expect(page.selectedType).toBeNull();
-    expect(page.utilities).toEqual([]);
+    expect(page.utilities()).toEqual([]);
   });
 
   it('should precompute the asset path when a type is selected', async () => {
     const page = createComponent('dust-2').componentInstance;
     page.selectType('smoke');
-    await vi.waitFor(() => expect(page.utilities.length).toBeGreaterThan(0));
+    await vi.waitFor(() => expect(page.utilities().length).toBeGreaterThan(0));
 
-    const utility = page.utilities[0];
+    const utility = page.utilities()[0];
 
     expect(utility.imagePath).toBe(`/assets/utilidades/dust2/${utility.filename}`);
   });
@@ -61,8 +71,8 @@ describe('UtilityDetail', () => {
   it('should precompute a responsive srcset for each utility', async () => {
     const page = createComponent('dust-2').componentInstance;
     page.selectType('smoke');
-    await vi.waitFor(() => expect(page.utilities.length).toBeGreaterThan(0));
-    const utility = page.utilities[0];
+    await vi.waitFor(() => expect(page.utilities().length).toBeGreaterThan(0));
+    const utility = page.utilities()[0];
 
     expect(utility.imageSrcset).toBe(
       `${imageVariant(utility.imagePath, 640)} 640w, ${imageVariant(utility.imagePath, 1280)} 1280w, ${utility.imagePath} 1920w`
@@ -80,16 +90,16 @@ describe('UtilityDetail', () => {
     const page = createComponent('mapa-inventado').componentInstance;
     page.selectType('smoke');
 
-    await vi.waitFor(() => expect(page.utilities[0]?.filename).toBe('placeholder'));
-    expect(page.utilities[0].imagePath).toBe('');
+    await vi.waitFor(() => expect(page.utilities()[0]?.filename).toBe('placeholder'));
+    expect(page.utilities()[0].imagePath).toBe('');
   });
 
   it('should open and close the lightbox', async () => {
     const page = createComponent().componentInstance;
     page.selectType('smoke');
-    await vi.waitFor(() => expect(page.utilities.length).toBeGreaterThan(0));
+    await vi.waitFor(() => expect(page.utilities().length).toBeGreaterThan(0));
 
-    page.selectImage(page.utilities[0]);
+    page.selectImage(page.utilities()[0]);
     expect(page.selectedImage).not.toBeNull();
 
     page.closeLightbox();

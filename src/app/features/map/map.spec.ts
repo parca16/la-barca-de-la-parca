@@ -24,16 +24,25 @@ describe('MapPage', () => {
 
   it('should resolve the map from the route parameter', async () => {
     const page = createComponent('mirage').componentInstance;
-    expect(page.mapKey).toBe('mirage');
-    expect(page.mapName).toBe('Mirage');
-    expect(page.headerImage).toContain('Mirage_header.webp');
-    await vi.waitFor(() => expect(page.mapData).not.toBeNull());
+    expect(page.mapKey()).toBe('mirage');
+    expect(page.mapName()).toBe('Mirage');
+    expect(page.headerImage()).toContain('Mirage_header.webp');
+    await vi.waitFor(() => expect(page.mapData()).not.toBeNull());
   });
 
   it('should fall back to dust-2 when there is no parameter', () => {
     const page = createComponent('').componentInstance;
-    expect(page.mapKey).toBe('dust-2');
-    expect(page.mapName).toBe('Dust 2');
+    expect(page.mapKey()).toBe('dust-2');
+    expect(page.mapName()).toBe('Dust 2');
+  });
+
+  it('should render the map content once the async data loads', async () => {
+    const fixture = createComponent('mirage');
+    fixture.autoDetectChanges();
+
+    await vi.waitFor(() => {
+      expect(fixture.nativeElement.querySelector('.map-content')).toBeTruthy();
+    });
   });
 
   it('should render the map name in the hero', () => {
@@ -45,7 +54,7 @@ describe('MapPage', () => {
   it('should build a responsive srcset for the hero', () => {
     const page = createComponent('mirage').componentInstance;
 
-    expect(page.headerSrcset).toContain('Mirage_header-960.webp 960w');
-    expect(page.headerSrcset).toContain('Mirage_header.webp 1920w');
+    expect(page.headerSrcset()).toContain('Mirage_header-960.webp 960w');
+    expect(page.headerSrcset()).toContain('Mirage_header.webp 1920w');
   });
 });

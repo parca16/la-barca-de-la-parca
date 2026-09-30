@@ -44,7 +44,7 @@
 
   <!-- Lista de utilidades -->
   <div class="utilities-grid">
-    @for (utility of utilities; track utility.filename) {
+    @for (utility of utilities(); track utility.filename) {
       <div class="utility-card">
         <div class="utility-image-wrapper" (click)="selectImage(utility)">
           @if (utility.imagePath) {

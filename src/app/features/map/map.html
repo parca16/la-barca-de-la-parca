@@ -3,23 +3,23 @@
   <div class="page-hero">
     <img
       class="page-hero-bg"
-      [src]="headerImage"
-      [srcset]="headerSrcset"
+      [src]="headerImage()"
+      [srcset]="headerSrcset()"
       sizes="100vw"
-      [alt]="'Cabecera de ' + mapName"
+      [alt]="'Cabecera de ' + mapName()"
       width="1920"
       height="1080"
       fetchpriority="high"
       decoding="async"
     />
     <div class="page-hero-content">
-      <h1>{{ mapName }}</h1>
+      <h1>{{ mapName() }}</h1>
       <p class="subtitle">Estrategias y variantes</p>
     </div>
   </div>
 
   <!-- Contenido del mapa (genérico) -->
-  @if (mapData) {
-    <app-map-content [mapData]="mapData" [mapName]="mapName" [mapKey]="mapKey" />
+  @if (mapData(); as data) {
+    <app-map-content [mapData]="data" [mapName]="mapName()" [mapKey]="mapKey()" />
   }
 </div>

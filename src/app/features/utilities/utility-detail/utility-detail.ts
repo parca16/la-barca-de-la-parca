@@ -1,4 +1,4 @@
-import { Component, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnDestroy, HostListener, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { getHeaderImage, getMap } from '../../../data/models/maps';
@@ -54,7 +54,8 @@ export class UtilityDetail implements OnDestroy {
   mapKey: string = '';
   headerImage: string = '';
   selectedType: GrenadeType | null = null;
-  utilities: UtilityView[] = [];
+  // Signal: las utilidades llegan de un import() diferido y la app es zoneless.
+  readonly utilities = signal<UtilityView[]>([]);
   selectedImage: string | null = null;
   private subscriptions = new Subscription();
   private loadToken = 0;
@@ -93,7 +94,7 @@ export class UtilityDetail implements OnDestroy {
         this.mapName = map?.name || this.mapKey;
         this.headerImage = getHeaderImage(this.mapKey);
         this.selectedType = null;
-        this.utilities = [];
+        this.utilities.set([]);
       })
     );
   }
@@ -125,7 +126,7 @@ export class UtilityDetail implements OnDestroy {
     const token = ++this.loadToken;
 
     if (!type) {
-      this.utilities = [];
+      this.utilities.set([]);
       return;
     }
 
@@ -141,16 +142,18 @@ export class UtilityDetail implements OnDestroy {
 
     if (selected && selected.length > 0) {
       const folder = getMap(this.mapKey)?.utilitiesFolder || this.mapKey;
-      this.utilities = selected.map(utility => {
-        const imagePath = `/assets/utilidades/${folder}/${utility.filename}`;
-        return {
-          ...utility,
-          imagePath,
-          imageSrcset: `${imageVariant(imagePath, 640)} 640w, ${imageVariant(imagePath, 1280)} 1280w, ${imagePath} 1920w`,
-        };
-      });
+      this.utilities.set(
+        selected.map(utility => {
+          const imagePath = `/assets/utilidades/${folder}/${utility.filename}`;
+          return {
+            ...utility,
+            imagePath,
+            imageSrcset: `${imageVariant(imagePath, 640)} 640w, ${imageVariant(imagePath, 1280)} 1280w, ${imagePath} 1920w`,
+          };
+        })
+      );
     } else {
-      this.utilities = [{ filename: 'placeholder', title: 'Utilidad en desarrollo', description: 'En desarrollo...', imagePath: '', imageSrcset: '' }];
+      this.utilities.set([{ filename: 'placeholder', title: 'Utilidad en desarrollo', description: 'En desarrollo...', imagePath: '', imageSrcset: '' }]);
     }
   }
 

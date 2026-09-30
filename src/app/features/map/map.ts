@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, computed, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { getHeaderImage, getMap } from '../../data/models/maps';
@@ -31,10 +31,12 @@ const mapDataLoaders: Record<string, () => Promise<MapConfig>> = {
   styleUrl: './map.css',
 })
 export class MapPage implements OnDestroy {
-  mapName: string = '';
-  mapKey: string = '';
-  headerImage: string = '';
-  mapData: MapConfig | null = null;
+  // Signals: la app es zoneless, así que los datos que llegan de forma
+  // asíncrona (import() diferido) deben notificar a la detección de cambios.
+  readonly mapName = signal('');
+  readonly mapKey = signal('');
+  readonly headerImage = signal('');
+  readonly mapData = signal<MapConfig | null>(null);
 
   private subscriptions = new Subscription();
   private loadToken = 0;
@@ -42,11 +44,11 @@ export class MapPage implements OnDestroy {
   constructor(private route: ActivatedRoute) {
     this.subscriptions.add(
       this.route.paramMap.subscribe(params => {
-        this.mapKey = params.get('map') || 'dust-2';
-        const map = getMap(this.mapKey);
-        this.mapName = map?.name || this.mapKey;
-        this.headerImage = getHeaderImage(this.mapKey);
-        void this.loadMapData(this.mapKey);
+        const key = params.get('map') || 'dust-2';
+        this.mapKey.set(key);
+        this.mapName.set(getMap(key)?.name || key);
+        this.headerImage.set(getHeaderImage(key));
+        void this.loadMapData(key);
       })
     );
   }
@@ -57,7 +59,7 @@ export class MapPage implements OnDestroy {
     const data = loader ? await loader() : null;
     // Si el parámetro de ruta cambió durante la carga, descartamos el resultado.
     if (token === this.loadToken) {
-      this.mapData = data;
+      this.mapData.set(data);
     }
   }
 
@@ -66,8 +68,8 @@ export class MapPage implements OnDestroy {
   }
 
   /** `srcset` del hero: variante 960w + original 1920w. */
-  get headerSrcset(): string {
-    if (!this.headerImage) return '';
-    return `${imageVariant(this.headerImage, 960)} 960w, ${this.headerImage} 1920w`;
-  }
+  readonly headerSrcset = computed(() => {
+    const image = this.headerImage();
+    return image ? `${imageVariant(image, 960)} 960w, ${image} 1920w` : '';
+  });
 }
