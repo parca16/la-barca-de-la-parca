@@ -4,10 +4,7 @@
 
 /* Card de estrategia */
 .strategy-card {
-  border: none;
-  border-radius: 0;
   padding: 3rem;
-  position: relative;
   transition: background-color 0.3s ease;
 }
 
@@ -153,7 +150,6 @@
 .players-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 0;
 }
 
 .players-table thead th {

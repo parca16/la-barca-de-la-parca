@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MapConfig } from '../data/map-config.interface';
+import { imageVariant } from '../../../../shared/image-utils';
 
 type Strategy = MapConfig['strategies'][number];
 
@@ -21,5 +22,11 @@ export class StrategyCard {
 
   protected selectVariant(variant: number): void {
     this.activeVariant = variant;
+  }
+
+  /** `srcset` de un minimapa: variante 480w + original. */
+  protected minimapSrcset(path: string): string {
+    if (!path) return '';
+    return `${imageVariant(path, 480)} 480w, ${path} 710w`;
   }
 }

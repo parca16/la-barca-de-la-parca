@@ -2,6 +2,7 @@ import { Component, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { getHeaderImage, getMap } from '../../../data/models/maps';
+import { imageVariant } from '../../../shared/image-utils';
 
 type GrenadeType = 'smoke' | 'molotov' | 'flash' | 'he';
 
@@ -14,6 +15,8 @@ export interface UtilityData {
 /** Utilidad con su ruta de imagen ya resuelta, lista para pintar. */
 export interface UtilityView extends UtilityData {
   imagePath: string;
+  /** `srcset` responsivo ya resuelto (variante 640w + original 1280w). */
+  imageSrcset: string;
 }
 
 export interface MapUtilities {
@@ -95,6 +98,12 @@ export class UtilityDetail implements OnDestroy {
     );
   }
 
+  /** `srcset` del hero: variante 960w + original 1920w. */
+  get headerSrcset(): string {
+    if (!this.headerImage) return '';
+    return `${imageVariant(this.headerImage, 960)} 960w, ${this.headerImage} 1920w`;
+  }
+
   @HostListener('document:keydown', ['$event'])
   onKeydownHandler(event: Event): void {
     if (this.selectedImage && (event as KeyboardEvent).key === 'Escape') {
@@ -132,12 +141,16 @@ export class UtilityDetail implements OnDestroy {
 
     if (selected && selected.length > 0) {
       const folder = getMap(this.mapKey)?.utilitiesFolder || this.mapKey;
-      this.utilities = selected.map(utility => ({
-        ...utility,
-        imagePath: `/assets/utilidades/${folder}/${utility.filename}`,
-      }));
+      this.utilities = selected.map(utility => {
+        const imagePath = `/assets/utilidades/${folder}/${utility.filename}`;
+        return {
+          ...utility,
+          imagePath,
+          imageSrcset: `${imageVariant(imagePath, 640)} 640w, ${imagePath} 1280w`,
+        };
+      });
     } else {
-      this.utilities = [{ filename: 'placeholder', title: 'Utilidad en desarrollo', description: 'En desarrollo...', imagePath: '' }];
+      this.utilities = [{ filename: 'placeholder', title: 'Utilidad en desarrollo', description: 'En desarrollo...', imagePath: '', imageSrcset: '' }];
     }
   }
 

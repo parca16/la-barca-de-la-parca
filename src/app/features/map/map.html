@@ -1,6 +1,17 @@
 <div class="map-page">
   <!-- Hero con imagen de cabecera personalizada -->
-  <div class="page-hero" [style.backgroundImage]="'url(' + headerImage + ')'">
+  <div class="page-hero">
+    <img
+      class="page-hero-bg"
+      [src]="headerImage"
+      [srcset]="headerSrcset"
+      sizes="100vw"
+      [alt]="'Cabecera de ' + mapName"
+      width="1920"
+      height="1080"
+      fetchpriority="high"
+      decoding="async"
+    />
     <div class="page-hero-content">
       <h1>{{ mapName }}</h1>
       <p class="subtitle">Estrategias y variantes</p>
