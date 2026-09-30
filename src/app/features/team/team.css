@@ -25,7 +25,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #C4D618 50%, transparent);
+  background: linear-gradient(90deg, transparent, var(--accent-strong) 50%, transparent);
 }
 
 .players-grid {
@@ -41,7 +41,7 @@
 
 .reserves-grid app-card::ng-deep .card {
   border-style: dashed;
-  border-color: #252830;
+  border-color: var(--border-soft);
 }
 
 @media (max-width: 768px) {
