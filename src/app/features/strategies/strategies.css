@@ -2,115 +2,14 @@
   padding: 0 0 2rem;
 }
 
-.pool-section {
-  margin-bottom: 2rem;
-}
-
-.pool-label {
-  font-size: 1.25rem;
-  color: #555;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-align: center;
-  position: relative;
-}
-
-.pool-label::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #C4D618 50%, transparent);
-}
-
-.maps-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
-
-.map-card {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  aspect-ratio: 16/9;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.map-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 8px 32px rgba(196, 214, 24, 0.15);
-}
-
-.map-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, transparent 40%, rgba(13, 15, 19, 0.8));
-  transition: background 0.3s ease;
-}
-
-.map-card:hover .map-card-overlay {
-  background: linear-gradient(to bottom, rgba(196, 214, 24, 0.08) 0%, rgba(13, 15, 19, 0.9));
-}
-
-.map-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  transition: border-color 0.3s ease;
-}
-
-.map-card:hover::after {
-  border-color: #C4D618;
-}
-
-.map-card-name {
-  position: absolute;
-  bottom: 0.75rem;
-  left: 0.75rem;
-  right: 0.75rem;
-  z-index: 1;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
 @media (max-width: 900px) {
   .strategies-section {
     padding: 0 2rem 2rem;
-  }
-  .maps-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 600px) {
   .strategies-section {
     padding: 0 0.5rem 1.5rem;
-  }
-  .maps-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .pool-label {
-    font-size: 1rem;
-  }
-  .map-card-name {
-    font-size: 0.7rem;
-    bottom: 0.5rem;
-    left: 0.5rem;
-    right: 0.5rem;
   }
 }

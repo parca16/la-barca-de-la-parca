@@ -7,27 +7,6 @@
   </div>
 
   <!-- Mapas -->
-  <div class="pool-section">
-    <h2 class="pool-label">Map Pool Activo</h2>
-    <div class="maps-grid">
-      @for (map of activePool; track map.name) {
-        <div class="map-card" [style.backgroundImage]="'url(' + map.cardImage + ')'" (click)="navigateToMap(map.key)">
-          <div class="map-card-overlay"></div>
-          <span class="map-card-name">{{ map.name }}</span>
-        </div>
-      }
-    </div>
-  </div>
-
-  <div class="pool-section">
-    <h2 class="pool-label">Map Pool Inactivo</h2>
-    <div class="maps-grid">
-      @for (map of inactivePool; track map.name) {
-        <div class="map-card" [style.backgroundImage]="'url(' + map.cardImage + ')'" (click)="navigateToMap(map.key)">
-          <div class="map-card-overlay"></div>
-          <span class="map-card-name">{{ map.name }}</span>
-        </div>
-      }
-    </div>
-  </div>
+  <app-map-pool-grid title="Map Pool Activo" [maps]="activePool" baseRoute="/map" />
+  <app-map-pool-grid title="Map Pool Inactivo" [maps]="inactivePool" baseRoute="/map" />
 </article>

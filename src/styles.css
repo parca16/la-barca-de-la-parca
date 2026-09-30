@@ -11,6 +11,26 @@ main {
   padding: 0 12rem;
 }
 
+/* Separador de sección compartido (home, map-content) */
+.section-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #C4D618 50%, transparent);
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+/**
+ * Base compartida de botones toggle (card, map-content).
+ * Cada componente define tamaño, bordes y estados en su propio CSS.
+ */
+.toggle-btn {
+  background: transparent;
+  color: #666;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
 /* Hero de página compartido por home, team, strategies, map, utilities y utility-detail.
    Los márgenes laterales hacen "bleed" a todo el ancho del viewport para compensar
    el padding de `main`. */
@@ -111,5 +131,9 @@ main {
     font-size: 1.15rem;
     letter-spacing: 0.5px;
     line-height: 1.2;
+  }
+  .section-divider {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
   }
 }
