@@ -1,0 +1,65 @@
+name: CI
+
+# issue #27: validar build y tests en cada push a main y en cada PR.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+# Menor privilegio: solo necesitamos leer el repositorio.
+permissions:
+  contents: read
+
+# Si se vuelve a empujar a la misma rama/PR, cancela la ejecución anterior.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Frontend (build y tests)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Configurar Node
+        uses: actions/setup-node@v5
+        with:
+          # Angular 22 exige ^22.22.3 || ^24.15.0 || >=26.0.0. Usamos la LTS activa.
+          node-version: 24
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Build de producción
+        run: npm run build
+
+      - name: Tests unitarios
+        # --watch=false fuerza una única pasada también si el runner tiene TTY.
+        run: npx ng test --watch=false
+
+  server:
+    name: Servidor (tests)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Configurar Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Tests
+        run: npm test
