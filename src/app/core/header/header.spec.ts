@@ -1,5 +1,6 @@
 import { ChangeDetectorRef } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { TestBed } from '@angular/core/testing';
+import { NavigationEnd, provideRouter, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Header } from './header';
 
@@ -89,5 +90,45 @@ describe('Header', () => {
     header?.scrollToTop();
 
     expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
+  });
+
+  describe('visibilidad del botón "volver arriba"', () => {
+    beforeEach(async () => {
+      await TestBed.configureTestingModule({
+        imports: [Header],
+        providers: [provideRouter([])],
+      }).compileComponents();
+    });
+
+    const getButton = (fixture: { nativeElement: HTMLElement }): HTMLButtonElement =>
+      fixture.nativeElement.querySelector('.back-to-top') as HTMLButtonElement;
+
+    it('permanece oculto al principio de la página', () => {
+      const fixture = TestBed.createComponent(Header);
+      fixture.detectChanges();
+
+      const button = getButton(fixture);
+      expect(button.classList.contains('visible')).toBe(false);
+      expect(button.getAttribute('aria-hidden')).toBe('true');
+      expect(button.getAttribute('tabindex')).toBe('-1');
+    });
+
+    it('se muestra y es accesible tras superar el umbral de scroll', () => {
+      vi.useFakeTimers();
+      const fixture = TestBed.createComponent(Header);
+      fixture.detectChanges();
+
+      setScrollY(500);
+      window.dispatchEvent(new Event('scroll'));
+      vi.advanceTimersByTime(100);
+      fixture.detectChanges();
+
+      const button = getButton(fixture);
+      expect(button.classList.contains('visible')).toBe(true);
+      expect(button.getAttribute('aria-hidden')).toBeNull();
+      expect(button.getAttribute('tabindex')).toBeNull();
+
+      fixture.destroy();
+    });
   });
 });
