@@ -106,6 +106,79 @@ describe('UtilityDetail', () => {
     expect(page.selectedImage).toBeNull();
   });
 
+  it('renders the lightbox as an accessible dialog with a descriptive alt', async () => {
+    const fixture = createComponent('dust-2');
+    fixture.autoDetectChanges();
+    fixture.componentInstance.selectType('smoke');
+
+    await vi.waitFor(() => {
+      expect(fixture.nativeElement.querySelector('.utility-image-wrapper')).toBeTruthy();
+    });
+
+    const trigger = fixture.nativeElement.querySelector('.utility-image-wrapper') as HTMLButtonElement;
+    expect(trigger.tagName).toBe('BUTTON');
+    expect(trigger.getAttribute('aria-label')).toBe('Ampliar imagen: Smoke de cross');
+
+    trigger.click();
+
+    await vi.waitFor(() => {
+      expect(fixture.nativeElement.querySelector('.lightbox')).toBeTruthy();
+    });
+
+    const dialog = fixture.nativeElement.querySelector('.lightbox') as HTMLElement;
+    expect(dialog.getAttribute('role')).toBe('dialog');
+    expect(dialog.getAttribute('aria-modal')).toBe('true');
+    expect(dialog.getAttribute('aria-label')).toBe('Imagen ampliada: Smoke de cross');
+
+    const lightboxImage = dialog.querySelector('img') as HTMLImageElement;
+    expect(lightboxImage.getAttribute('alt')).toBe('Smoke de cross');
+  });
+
+  it('moves focus into the dialog and returns it to the trigger on close', async () => {
+    const fixture = createComponent('dust-2');
+    fixture.autoDetectChanges();
+    fixture.componentInstance.selectType('smoke');
+
+    await vi.waitFor(() => {
+      expect(fixture.nativeElement.querySelector('.utility-image-wrapper')).toBeTruthy();
+    });
+
+    const trigger = fixture.nativeElement.querySelector('.utility-image-wrapper') as HTMLButtonElement;
+    trigger.focus();
+    trigger.click();
+
+    await vi.waitFor(() => {
+      expect(document.activeElement).toBe(fixture.nativeElement.querySelector('.lightbox'));
+    });
+
+    fixture.componentInstance.closeLightbox();
+
+    await vi.waitFor(() => {
+      expect(document.activeElement).toBe(trigger);
+    });
+  });
+
+  it('closes the lightbox with Escape', async () => {
+    const fixture = createComponent('dust-2');
+    fixture.autoDetectChanges();
+    fixture.componentInstance.selectType('smoke');
+
+    await vi.waitFor(() => {
+      expect(fixture.nativeElement.querySelector('.utility-image-wrapper')).toBeTruthy();
+    });
+
+    (fixture.nativeElement.querySelector('.utility-image-wrapper') as HTMLButtonElement).click();
+    await vi.waitFor(() => {
+      expect(fixture.nativeElement.querySelector('.lightbox')).toBeTruthy();
+    });
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+
+    await vi.waitFor(() => {
+      expect(fixture.nativeElement.querySelector('.lightbox')).toBeNull();
+    });
+  });
+
   it('should navigate back to the map strategies', () => {
     const fixture = createComponent('mirage');
     const router = TestBed.inject(Router);
