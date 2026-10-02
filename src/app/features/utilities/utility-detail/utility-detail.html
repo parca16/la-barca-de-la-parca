@@ -52,29 +52,38 @@
           (click)="selectImage(utility, $event)"
           [attr.aria-label]="'Ampliar imagen: ' + utility.title"
         >
-          @if (utility.imagePath) {
-            <img
-              [src]="utility.imagePath"
-              [srcset]="utility.imageSrcset"
-              sizes="(max-width: 600px) 100vw, (max-width: 1400px) 25vw, 320px"
-              alt=""
-              width="1280"
-              height="720"
-              loading="lazy"
-              decoding="async"
-            />
-          } @else {
-            <div class="utility-placeholder">
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="32" cy="32" r="14" stroke="currentColor" stroke-width="2.5" fill="none"/>
-                <circle cx="32" cy="32" r="6" stroke="currentColor" stroke-width="2.5" fill="none"/>
-              </svg>
-            </div>
-          }
+          <img
+            [src]="utility.imagePath"
+            [srcset]="utility.imageSrcset"
+            sizes="(max-width: 600px) 100vw, (max-width: 1400px) 25vw, 320px"
+            alt=""
+            width="1280"
+            height="720"
+            loading="lazy"
+            decoding="async"
+          />
         </button>
         <div class="utility-info">
           <h3 class="utility-title">{{ utility.title }}</h3>
           <p class="utility-desc">{{ utility.description }}</p>
+        </div>
+      </div>
+    }
+
+    <!-- Estado vacío: el tipo seleccionado aún no tiene utilidades -->
+    @if (isDeveloping()) {
+      <div class="utility-card">
+        <div class="utility-image-wrapper">
+          <div class="utility-placeholder">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="14" stroke="currentColor" stroke-width="2.5" fill="none"/>
+              <circle cx="32" cy="32" r="6" stroke="currentColor" stroke-width="2.5" fill="none"/>
+            </svg>
+          </div>
+        </div>
+        <div class="utility-info">
+          <h3 class="utility-title">Utilidad en desarrollo</h3>
+          <p class="utility-desc">En desarrollo...</p>
         </div>
       </div>
     }

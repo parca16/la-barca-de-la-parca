@@ -56,6 +56,8 @@ export class UtilityDetail implements OnDestroy {
   selectedType: GrenadeType | null = null;
   // Signal: las utilidades llegan de un import() diferido y la app es zoneless.
   readonly utilities = signal<UtilityView[]>([]);
+  // Estado de UI: el tipo seleccionado no tiene utilidades todavía ("en desarrollo").
+  readonly isDeveloping = signal(false);
   /** Utilidad cuya imagen está ampliada en el lightbox (null = cerrado). */
   selectedImage: UtilityView | null = null;
   private subscriptions = new Subscription();
@@ -100,6 +102,7 @@ export class UtilityDetail implements OnDestroy {
         this.headerImage = getHeaderImage(this.mapKey);
         this.selectedType = null;
         this.utilities.set([]);
+        this.isDeveloping.set(false);
       })
     );
 
@@ -180,6 +183,7 @@ export class UtilityDetail implements OnDestroy {
 
     if (!type) {
       this.utilities.set([]);
+      this.isDeveloping.set(false);
       return;
     }
 
@@ -205,8 +209,10 @@ export class UtilityDetail implements OnDestroy {
           };
         })
       );
+      this.isDeveloping.set(false);
     } else {
-      this.utilities.set([{ filename: 'placeholder', title: 'Utilidad en desarrollo', description: 'En desarrollo...', imagePath: '', imageSrcset: '' }]);
+      this.utilities.set([]);
+      this.isDeveloping.set(true);
     }
   }
 

@@ -86,12 +86,31 @@ describe('UtilityDetail', () => {
     expect(page.headerSrcset).toContain('Mirage_header.webp 1920w');
   });
 
-  it('should leave the placeholder utility without an image path', async () => {
+  it('should flag the "en desarrollo" state instead of injecting a placeholder utility', async () => {
     const page = createComponent('mapa-inventado').componentInstance;
     page.selectType('smoke');
 
-    await vi.waitFor(() => expect(page.utilities()[0]?.filename).toBe('placeholder'));
-    expect(page.utilities()[0].imagePath).toBe('');
+    await vi.waitFor(() => expect(page.isDeveloping()).toBe(true));
+    expect(page.utilities()).toEqual([]);
+  });
+
+  it('should not flag the "en desarrollo" state when the type has utilities', async () => {
+    const page = createComponent('dust-2').componentInstance;
+    page.selectType('smoke');
+
+    await vi.waitFor(() => expect(page.utilities().length).toBeGreaterThan(0));
+    expect(page.isDeveloping()).toBe(false);
+  });
+
+  it('should render the "en desarrollo" card when there are no utilities', async () => {
+    const fixture = createComponent('mapa-inventado');
+    fixture.autoDetectChanges();
+    fixture.componentInstance.selectType('smoke');
+
+    await vi.waitFor(() => {
+      expect(fixture.nativeElement.querySelector('.utility-placeholder')).toBeTruthy();
+    });
+    expect(fixture.nativeElement.querySelector('.utility-image-wrapper img')).toBeFalsy();
   });
 
   it('should open and close the lightbox', async () => {
