@@ -19,7 +19,6 @@
     "@angular/platform-browser": "^22.1.0",
     "@angular/router": "^22.1.0",
     "rxjs": "~7.8.0",
-    "sharp": "^0.35.4",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
@@ -29,6 +28,7 @@
     "@types/node": "^26.6.3",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
+    "sharp": "^0.35.4",
     "typescript": "~6.0.2",
     "vitest": "^4.0.8"
   }
