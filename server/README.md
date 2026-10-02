@@ -17,6 +17,15 @@ npm run dev
 
 El servidor escuchará en `http://localhost:3000`
 
+## Tests
+
+La lógica de scraping vive en `csstats.js` (separada de la descarga HTTP) y está cubierta con fixtures en `test/fixtures/`:
+
+```bash
+cd server
+npm test
+```
+
 ## Funcionamiento
 
 La web Angular se conecta automáticamente a `localhost:3000/api/players` cuando se ejecuta en `localhost`.
