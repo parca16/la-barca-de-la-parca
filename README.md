@@ -62,7 +62,7 @@ Proyecto **independiente** dentro de `server/` (proyecto npm aparte) que recopil
 | Estilos | **CSS** propio (sin frameworks) con diseño responsive |
 | Plantillas | **HTML** (templates de componentes Angular) |
 | Estado / reactividad | **Signals** de Angular y control de flujo nativo; **RxJS** solo para eventos del router y del scroll |
-| Backend / proxy | **Node.js** + **Express** (JavaScript ESM) |
+| Backend (API auxiliar independiente) | **Node.js** + **Express** (JavaScript ESM) |
 | Scraping y API | **axios** + **cheerio** (csstats.gg) y Steam Web API |
 | Tratamiento de imágenes | **sharp** (conversión y optimización a `.webp`) |
 | Tests | **Vitest** (unitarios) + jsdom |
@@ -169,6 +169,8 @@ npm run dev
 ```
 
 El servidor consulta csstats.gg, combina los datos con la API de Steam, cachea el resultado y lo refresca cada 5 minutos. Para las partidas competitivas se puede configurar `STEAM_API_KEY`; sin ella funciona solo con los datos de csstats.gg. Consulta `server/README.md` para más detalle.
+
+> **El frontend todavía no consume esta API** (#34): no hay ninguna llamada HTTP, `HttpClient` ni proxy configurado. Sus datos solo están disponibles consultando el servidor directamente.
 
 ---
 
