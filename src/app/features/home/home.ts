@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 interface ContributionCard {
@@ -63,7 +63,7 @@ export class Home {
     }
   ];
 
-  constructor(private router: Router) {}
+  private readonly router = inject(Router);
 
   navigateTo(route: string): void {
     this.router.navigate(['/' + route]);

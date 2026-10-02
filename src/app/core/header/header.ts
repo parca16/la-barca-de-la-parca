@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, inject, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { Subscription, filter, fromEvent, map, throttleTime } from 'rxjs';
 
@@ -15,6 +15,8 @@ export class Header implements OnInit, OnDestroy {
   protected isMenuOpen = false;
   protected isSolid = false;
   protected currentRoute = '';
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly router = inject(Router);
   private subscriptions = new Subscription();
   private scrollSubscription: Subscription = Subscription.EMPTY;
 
@@ -24,11 +26,6 @@ export class Header implements OnInit, OnDestroy {
     { label: 'Estrategias', route: 'strategies', activateOn: ['strategies', 'map'] },
     { label: 'Utilidades', route: 'utilities', activateOn: ['utilities'] },
   ];
-
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     this.isSolid = window.scrollY > SOLID_SCROLL_THRESHOLD;

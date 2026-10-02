@@ -20,7 +20,13 @@
 
   <!-- Enlace a estrategias -->
   <div class="strategies-link-wrapper">
-    <a class="strategies-link text-link" (click)="navigateToStrategies()">
+    <a
+      class="strategies-link text-link"
+      role="link"
+      tabindex="0"
+      (click)="navigateToStrategies()"
+      (keydown.enter)="navigateToStrategies()"
+    >
       <span>Estrategias de {{ mapName }}</span>
       <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -91,7 +97,14 @@
 
   <!-- Lightbox -->
   @if (selectedImage) {
-    <div class="lightbox-backdrop" (click)="closeLightbox()"></div>
+    <div
+      class="lightbox-backdrop"
+      role="button"
+      tabindex="0"
+      aria-label="Cerrar imagen ampliada"
+      (click)="closeLightbox()"
+      (keydown.enter)="closeLightbox()"
+    ></div>
     <div
       #lightboxDialog
       class="lightbox"

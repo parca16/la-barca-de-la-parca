@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, HostListener, effect, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, OnDestroy, effect, signal, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { getHeaderImage, getMap } from '../../../data/models/maps';
@@ -50,9 +50,9 @@ const mapUtilitiesLoaders: Record<string, () => Promise<MapUtilities>> = {
   styleUrl: './utility-detail.css',
 })
 export class UtilityDetail implements OnDestroy {
-  mapName: string = '';
-  mapKey: string = '';
-  headerImage: string = '';
+  mapName = '';
+  mapKey = '';
+  headerImage = '';
   selectedType: GrenadeType | null = null;
   // Signal: las utilidades llegan de un import() diferido y la app es zoneless.
   readonly utilities = signal<UtilityView[]>([]);
@@ -60,6 +60,8 @@ export class UtilityDetail implements OnDestroy {
   readonly isDeveloping = signal(false);
   /** Utilidad cuya imagen está ampliada en el lightbox (null = cerrado). */
   selectedImage: UtilityView | null = null;
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private subscriptions = new Subscription();
   private loadToken = 0;
   /** Referencia al diálogo para gestionar el foco al abrir/cerrar. */
@@ -90,10 +92,7 @@ export class UtilityDetail implements OnDestroy {
     }
   ];
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
+  constructor() {
     this.subscriptions.add(
       this.route.paramMap.subscribe(params => {
         this.mapKey = params.get('map') || 'dust-2';

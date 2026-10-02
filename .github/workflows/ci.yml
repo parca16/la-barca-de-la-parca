@@ -34,12 +34,26 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
+      - name: Comprobar formato (Prettier)
+        run: npm run format:check
+
+      - name: Lint (ESLint)
+        run: npm run lint
+
       - name: Build de producción
         run: npm run build
 
-      - name: Tests unitarios
-        # --watch=false fuerza una única pasada también si el runner tiene TTY.
-        run: npx ng test --watch=false
+      - name: Tests unitarios con cobertura
+        run: npm run test:coverage
+
+      - name: Subir informe de cobertura
+        # Se ejecuta también si los tests fallan, para poder inspeccionar el informe.
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-frontend
+          path: coverage/
+          if-no-files-found: ignore
 
   server:
     name: Servidor (tests)

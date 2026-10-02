@@ -39,7 +39,13 @@
 
     <div class="contribute-grid">
       @for (card of contributionCards; track card.route) {
-        <div class="contribute-card" (click)="navigateTo(card.route)">
+        <div
+          class="contribute-card"
+          role="link"
+          tabindex="0"
+          (click)="navigateTo(card.route)"
+          (keydown.enter)="navigateTo(card.route)"
+        >
           <div class="contribute-card-header">
             <h3 class="contribute-card-title">{{ card.title }}</h3>
             <svg class="contribute-card-arrow" aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

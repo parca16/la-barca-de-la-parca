@@ -66,7 +66,7 @@ API auxiliar que recopila estadísticas reales de los jugadores desde **csstats.
 | Scraping y API | **axios** + **cheerio** (csstats.gg) y Steam Web API |
 | Tratamiento de imágenes | **sharp** (conversión y optimización a `.webp`) |
 | Tests | **Vitest** (unitarios) + jsdom |
-| Tooling | Angular CLI, npm, Prettier, TypeScript 6 |
+| Tooling | Angular CLI, npm, ESLint + angular-eslint, Prettier, TypeScript 6 |
 | Despliegue | **Vercel** |
 
 ---
@@ -131,6 +131,16 @@ npm run build
 
 # Tests unitarios (Vitest)
 npm test
+
+# Tests con informe de cobertura -> coverage/
+npm run test:coverage
+
+# Lint (ESLint + angular-eslint)
+npm run lint
+
+# Comprobar / aplicar formato (Prettier)
+npm run format:check
+npm run format
 ```
 
 ### Servidor de estadísticas (opcional)

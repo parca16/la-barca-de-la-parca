@@ -1,4 +1,4 @@
-import { Component, OnDestroy, computed, signal } from '@angular/core';
+import { Component, inject, OnDestroy, computed, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { getHeaderImage, getMap } from '../../data/models/maps';
@@ -38,10 +38,11 @@ export class MapPage implements OnDestroy {
   readonly headerImage = signal('');
   readonly mapData = signal<MapConfig | null>(null);
 
+  private readonly route = inject(ActivatedRoute);
   private subscriptions = new Subscription();
   private loadToken = 0;
 
-  constructor(private route: ActivatedRoute) {
+  constructor() {
     this.subscriptions.add(
       this.route.paramMap.subscribe(params => {
         const key = params.get('map') || 'dust-2';

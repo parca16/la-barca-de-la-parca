@@ -1,0 +1,10 @@
+# Dependencias y artefactos generados
+node_modules
+dist
+coverage
+.angular
+server/node_modules
+
+# Ficheros de bloqueo generados por npm
+package-lock.json
+server/package-lock.json

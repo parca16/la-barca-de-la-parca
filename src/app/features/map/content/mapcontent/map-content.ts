@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { MapConfig } from '../data/map-config.interface';
 import { StrategyCard } from '../strategy-card/strategy-card';
@@ -11,11 +11,11 @@ import { StrategyCard } from '../strategy-card/strategy-card';
 })
 export class MapContentComponent {
   @Input() mapData!: MapConfig;
-  @Input() mapName: string = '';
-  @Input() mapKey: string = '';
+  @Input() mapName = '';
+  @Input() mapKey = '';
   protected selectedSide: 'T' | 'CT' = 'T';
 
-  constructor(private router: Router) {}
+  private readonly router = inject(Router);
 
   get filteredStrategies(): MapConfig['strategies'] {
     return this.mapData.strategies.filter((s: { side: string }) => s.side === this.selectedSide);
