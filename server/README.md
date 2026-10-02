@@ -39,6 +39,7 @@ npm test
 La web Angular se conecta automáticamente a `localhost:3000/api/players` cuando se ejecuta en `localhost`.
 
 El servidor:
+
 1. Rastrea csstats.gg para obtener perfil y stats
 2. Consulta Steam API para datos de partidas competitivas
 3. Combina ambas fuentes

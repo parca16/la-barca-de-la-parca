@@ -8,7 +8,6 @@ export const mapData: MapConfig = {
       heading: 'Mapa inactivo',
       text: 'NTR ha jugado con cierta consistencia este mapa en el pasado, pero requiere de un re-estudio para poder formular recomendaciones, jugadas y tips con un mínimo de conocimiento de causa. Dicha revisión se llevará a cabo, potencialmente, con el regreso de Vertigo al map pool activo.',
     },
-    
   ],
   calloutsImage: '/assets/callouts/Vertigo.webp',
   strategies: [

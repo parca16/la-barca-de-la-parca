@@ -8,3 +8,6 @@ server/node_modules
 # Ficheros de bloqueo generados por npm
 package-lock.json
 server/package-lock.json
+
+# Fixtures HTML de tests: contienen JSON literal que Prettier reformatearía.
+server/test/fixtures/

@@ -43,7 +43,10 @@ describe('players.mock (Steam IDs)', () => {
 
   it('debería usar la SteamID64 del servidor para cada alias', () => {
     for (const player of frontendPlayers) {
-      expect(steamIdDesdeUrl(player), `steamUrl de ${player.alias} en formato /profiles/<steamID64>`).not.toBeNull();
+      expect(
+        steamIdDesdeUrl(player),
+        `steamUrl de ${player.alias} en formato /profiles/<steamID64>`,
+      ).not.toBeNull();
       expect(steamIdDesdeUrl(player), `SteamID de ${player.alias}`).toBe(serverIds[player.alias]);
     }
   });

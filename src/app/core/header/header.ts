@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, HostListener, inject, OnInit, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  inject,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { Subscription, filter, fromEvent, map, throttleTime } from 'rxjs';
 
@@ -33,9 +40,11 @@ export class Header implements OnInit, OnDestroy {
     // La restauración de scroll la gestiona exclusivamente el router
     // (withInMemoryScrolling en app.config.ts). No forzamos scroll aquí.
     this.subscriptions.add(
-      this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
-        this.currentRoute = event.urlAfterRedirects.split('/')[1] || '';
-      })
+      this.router.events
+        .pipe(filter((event) => event instanceof NavigationEnd))
+        .subscribe((event: NavigationEnd) => {
+          this.currentRoute = event.urlAfterRedirects.split('/')[1] || '';
+        }),
     );
 
     // La app es zoneless, así que el listener corre siempre y notificamos a
@@ -44,9 +53,9 @@ export class Header implements OnInit, OnDestroy {
     this.scrollSubscription = fromEvent(window, 'scroll')
       .pipe(
         throttleTime(SCROLL_THROTTLE_MS, undefined, { leading: true, trailing: true }),
-        map(() => window.scrollY > SOLID_SCROLL_THRESHOLD)
+        map(() => window.scrollY > SOLID_SCROLL_THRESHOLD),
       )
-      .subscribe(isSolid => {
+      .subscribe((isSolid) => {
         if (isSolid === this.isSolid) return;
         this.isSolid = isSolid;
         this.cdr.markForCheck();

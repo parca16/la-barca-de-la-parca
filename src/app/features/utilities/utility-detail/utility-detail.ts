@@ -1,4 +1,13 @@
-import { Component, ElementRef, HostListener, inject, OnDestroy, effect, signal, viewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  OnDestroy,
+  effect,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { getHeaderImage, getMap } from '../../../data/models/maps';
@@ -32,16 +41,16 @@ export interface MapUtilities {
  * del mapa visitado.
  */
 const mapUtilitiesLoaders: Record<string, () => Promise<MapUtilities>> = {
-  'dust-2': () => import('../data/dust2-utilities').then(m => m.dust2Utilities),
-  mirage: () => import('../data/mirage-utilities').then(m => m.mirageUtilities),
-  inferno: () => import('../data/inferno-utilities').then(m => m.infernoUtilities),
-  nuke: () => import('../data/nuke-utilities').then(m => m.nukeUtilities),
-  ancient: () => import('../data/ancient-utilities').then(m => m.ancientUtilities),
-  anubis: () => import('../data/anubis-utilities').then(m => m.anubisUtilities),
-  overpass: () => import('../data/overpass-utilities').then(m => m.overpassUtilities),
-  vertigo: () => import('../data/vertigo-utilities').then(m => m.vertigoUtilities),
-  cache: () => import('../data/cache-utilities').then(m => m.cacheUtilities),
-  train: () => import('../data/train-utilities').then(m => m.trainUtilities),
+  'dust-2': () => import('../data/dust2-utilities').then((m) => m.dust2Utilities),
+  mirage: () => import('../data/mirage-utilities').then((m) => m.mirageUtilities),
+  inferno: () => import('../data/inferno-utilities').then((m) => m.infernoUtilities),
+  nuke: () => import('../data/nuke-utilities').then((m) => m.nukeUtilities),
+  ancient: () => import('../data/ancient-utilities').then((m) => m.ancientUtilities),
+  anubis: () => import('../data/anubis-utilities').then((m) => m.anubisUtilities),
+  overpass: () => import('../data/overpass-utilities').then((m) => m.overpassUtilities),
+  vertigo: () => import('../data/vertigo-utilities').then((m) => m.vertigoUtilities),
+  cache: () => import('../data/cache-utilities').then((m) => m.cacheUtilities),
+  train: () => import('../data/train-utilities').then((m) => m.trainUtilities),
 };
 
 @Component({
@@ -73,28 +82,28 @@ export class UtilityDetail implements OnDestroy {
     {
       key: 'smoke',
       label: 'Smoke',
-      iconPath: '/assets/icons/smoke_ico.webp'
+      iconPath: '/assets/icons/smoke_ico.webp',
     },
     {
       key: 'molotov',
       label: 'Molotov',
-      iconPath: '/assets/icons/molotov_ico.webp'
+      iconPath: '/assets/icons/molotov_ico.webp',
     },
     {
       key: 'flash',
       label: 'Flash',
-      iconPath: '/assets/icons/flashbang_ico.webp'
+      iconPath: '/assets/icons/flashbang_ico.webp',
     },
     {
       key: 'he',
       label: 'HE',
-      iconPath: '/assets/icons/nade_ico.webp'
-    }
+      iconPath: '/assets/icons/nade_ico.webp',
+    },
   ];
 
   constructor() {
     this.subscriptions.add(
-      this.route.paramMap.subscribe(params => {
+      this.route.paramMap.subscribe((params) => {
         this.mapKey = params.get('map') || 'dust-2';
         const map = getMap(this.mapKey);
         this.mapName = map?.name || this.mapKey;
@@ -102,7 +111,7 @@ export class UtilityDetail implements OnDestroy {
         this.selectedType = null;
         this.utilities.set([]);
         this.isDeveloping.set(false);
-      })
+      }),
     );
 
     // Al renderizarse el diálogo del lightbox, movemos el foco dentro.
@@ -142,8 +151,8 @@ export class UtilityDetail implements OnDestroy {
 
     const focusables = Array.from(
       dialog.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-      )
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      ),
     );
 
     if (focusables.length === 0) {
@@ -199,14 +208,14 @@ export class UtilityDetail implements OnDestroy {
     if (selected && selected.length > 0) {
       const folder = getMap(this.mapKey)?.utilitiesFolder || this.mapKey;
       this.utilities.set(
-        selected.map(utility => {
+        selected.map((utility) => {
           const imagePath = `/assets/utilidades/${folder}/${utility.filename}`;
           return {
             ...utility,
             imagePath,
             imageSrcset: `${imageVariant(imagePath, 640)} 640w, ${imageVariant(imagePath, 1280)} 1280w, ${imagePath} 1920w`,
           };
-        })
+        }),
       );
       this.isDeveloping.set(false);
     } else {

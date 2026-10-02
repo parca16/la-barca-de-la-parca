@@ -98,16 +98,14 @@ export const MAPS: MapInfo[] = [
   },
 ];
 
-export const MAPS_BY_KEY: ReadonlyMap<string, MapInfo> = new Map(
-  MAPS.map(map => [map.key, map])
-);
+export const MAPS_BY_KEY: ReadonlyMap<string, MapInfo> = new Map(MAPS.map((map) => [map.key, map]));
 
 export function getMap(key: string): MapInfo | undefined {
   return MAPS_BY_KEY.get(key);
 }
 
 export function getMapsByPool(pool: MapPool): MapInfo[] {
-  return MAPS.filter(map => map.pool === pool);
+  return MAPS.filter((map) => map.pool === pool);
 }
 
 export function getHeaderImage(key: string): string {

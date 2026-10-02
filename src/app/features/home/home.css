@@ -95,11 +95,11 @@
 }
 
 .contribute-card:nth-child(2)::before {
-  background: linear-gradient(to right, #FF6B35, var(--border-soft));
+  background: linear-gradient(to right, #ff6b35, var(--border-soft));
 }
 
 .contribute-card:nth-child(3)::before {
-  background: linear-gradient(to right, #4ECDC4, var(--border-soft));
+  background: linear-gradient(to right, #4ecdc4, var(--border-soft));
 }
 
 .contribute-card:hover {
@@ -132,11 +132,11 @@
 }
 
 .contribute-card:nth-child(2) .contribute-card-title {
-  color: #FF6B35;
+  color: #ff6b35;
 }
 
 .contribute-card:nth-child(3) .contribute-card-title {
-  color: #4ECDC4;
+  color: #4ecdc4;
 }
 
 .contribute-card-arrow {
@@ -151,12 +151,12 @@
 }
 
 .contribute-card:nth-child(2):hover .contribute-card-arrow {
-  color: #FF6B35;
+  color: #ff6b35;
   transform: translateX(4px);
 }
 
 .contribute-card:nth-child(3):hover .contribute-card-arrow {
-  color: #4ECDC4;
+  color: #4ecdc4;
   transform: translateX(4px);
 }
 
@@ -193,11 +193,11 @@
 }
 
 .contribute-card:nth-child(2) .contribute-item-check {
-  color: #FF6B35;
+  color: #ff6b35;
 }
 
 .contribute-card:nth-child(3) .contribute-item-check {
-  color: #4ECDC4;
+  color: #4ecdc4;
 }
 
 .contribute-card-footer {

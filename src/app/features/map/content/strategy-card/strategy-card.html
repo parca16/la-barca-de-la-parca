@@ -1,8 +1,17 @@
-<div class="strategy-card" [class.play-alt-1]="index % 2 === 0" [class.play-alt-2]="index % 2 === 1">
+<div
+  class="strategy-card"
+  [class.play-alt-1]="index % 2 === 0"
+  [class.play-alt-2]="index % 2 === 1"
+>
   <!-- Header: nombre + tag de bando -->
   <div class="strategy-header">
     <h3>{{ strategy.name }}</h3>
-    <span class="tag" [class.side-T]="strategy.side === 'T'" [class.side-CT]="strategy.side === 'CT'">{{ strategy.side }}</span>
+    <span
+      class="tag"
+      [class.side-T]="strategy.side === 'T'"
+      [class.side-CT]="strategy.side === 'CT'"
+      >{{ strategy.side }}</span
+    >
   </div>
 
   <!-- Cuerpo principal: descripcion + minimaps -->

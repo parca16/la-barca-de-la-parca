@@ -12,16 +12,16 @@ import { MapConfig } from './content/data/map-config.interface';
  * descarga el del mapa visitado.
  */
 const mapDataLoaders: Record<string, () => Promise<MapConfig>> = {
-  'dust-2': () => import('./content/data/dust2-data').then(m => m.mapData),
-  mirage: () => import('./content/data/mirage-data').then(m => m.mapData),
-  inferno: () => import('./content/data/inferno-data').then(m => m.mapData),
-  nuke: () => import('./content/data/nuke-data').then(m => m.mapData),
-  ancient: () => import('./content/data/ancient-data').then(m => m.mapData),
-  anubis: () => import('./content/data/anubis-data').then(m => m.mapData),
-  overpass: () => import('./content/data/overpass-data').then(m => m.mapData),
-  vertigo: () => import('./content/data/vertigo-data').then(m => m.mapData),
-  cache: () => import('./content/data/cache-data').then(m => m.mapData),
-  train: () => import('./content/data/train-data').then(m => m.mapData),
+  'dust-2': () => import('./content/data/dust2-data').then((m) => m.mapData),
+  mirage: () => import('./content/data/mirage-data').then((m) => m.mapData),
+  inferno: () => import('./content/data/inferno-data').then((m) => m.mapData),
+  nuke: () => import('./content/data/nuke-data').then((m) => m.mapData),
+  ancient: () => import('./content/data/ancient-data').then((m) => m.mapData),
+  anubis: () => import('./content/data/anubis-data').then((m) => m.mapData),
+  overpass: () => import('./content/data/overpass-data').then((m) => m.mapData),
+  vertigo: () => import('./content/data/vertigo-data').then((m) => m.mapData),
+  cache: () => import('./content/data/cache-data').then((m) => m.mapData),
+  train: () => import('./content/data/train-data').then((m) => m.mapData),
 };
 
 @Component({
@@ -44,13 +44,13 @@ export class MapPage implements OnDestroy {
 
   constructor() {
     this.subscriptions.add(
-      this.route.paramMap.subscribe(params => {
+      this.route.paramMap.subscribe((params) => {
         const key = params.get('map') || 'dust-2';
         this.mapKey.set(key);
         this.mapName.set(getMap(key)?.name || key);
         this.headerImage.set(getHeaderImage(key));
         void this.loadMapData(key);
-      })
+      }),
     );
   }
 

@@ -24,9 +24,11 @@ El objetivo es doble:
 La web se organiza en secciones accesibles desde el menú de navegación:
 
 ### 🏠 Inicio
+
 Página de presentación del proyecto y guía de aportación. Explica a los miembros del equipo **qué datos y en qué formato** debe enviar su contenido para incorporarlo a cada sección.
 
 ### 👥 El roster
+
 Perfil de cada jugador (titulares y suplentes) con:
 
 - Foto, alias, nacionalidad y edad.
@@ -36,6 +38,7 @@ Perfil de cada jugador (titulares y suplentes) con:
 - Enlaces a Steam y FACEIT.
 
 ### 🗺️ Estrategias
+
 Contenido organizado **por mapa**, con separación entre map pool activo e inactivo. Cada mapa incluye:
 
 - Callouts e ideas generales del mapa.
@@ -45,29 +48,31 @@ Contenido organizado **por mapa**, con separación entre map pool activo e inact
 - Tabla de **roles por jugador** en cada ronda.
 
 ### 💥 Utilidades
+
 Guía de lineups por mapa, filtrable por **tipo de granada** (smoke, molotov, flash, HE…). Cada utilidad se muestra con su imagen de lanzamiento en primera persona, título y explicación de uso, con visor ampliado (lightbox) al hacer clic.
 
 Mapas cubiertos actualmente: Ancient, Anubis, Cache, Dust 2, Inferno, Mirage y Overpass.
 
-### 📊 Servidor de estadísticas *(en desarrollo)*
+### 📊 Servidor de estadísticas _(en desarrollo)_
+
 API auxiliar que recopila estadísticas reales de los jugadores desde **csstats.gg** y la **API de Steam**, las cachea y las expone a la web. Se incluye como base para mostrar datos en las fichas de jugador.
 
 ---
 
 ## Lenguajes y tecnologías
 
-| Área | Tecnología |
-| --- | --- |
-| Frontend | **TypeScript** + **Angular 22** (componentes standalone, signals y control de flujo `@if`/`@for`/`@switch`) |
-| Estilos | **CSS** propio (sin frameworks) con diseño responsive |
-| Plantillas | **HTML** (templates de componentes Angular) |
-| Reactividad | **RxJS** |
-| Backend / proxy | **Node.js** + **Express** (JavaScript ESM) |
-| Scraping y API | **axios** + **cheerio** (csstats.gg) y Steam Web API |
-| Tratamiento de imágenes | **sharp** (conversión y optimización a `.webp`) |
-| Tests | **Vitest** (unitarios) + jsdom |
-| Tooling | Angular CLI, npm, ESLint + angular-eslint, Prettier, TypeScript 6 |
-| Despliegue | **Vercel** |
+| Área                    | Tecnología                                                                                                  |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Frontend                | **TypeScript** + **Angular 22** (componentes standalone, signals y control de flujo `@if`/`@for`/`@switch`) |
+| Estilos                 | **CSS** propio (sin frameworks) con diseño responsive                                                       |
+| Plantillas              | **HTML** (templates de componentes Angular)                                                                 |
+| Reactividad             | **RxJS**                                                                                                    |
+| Backend / proxy         | **Node.js** + **Express** (JavaScript ESM)                                                                  |
+| Scraping y API          | **axios** + **cheerio** (csstats.gg) y Steam Web API                                                        |
+| Tratamiento de imágenes | **sharp** (conversión y optimización a `.webp`)                                                             |
+| Tests                   | **Vitest** (unitarios) + jsdom                                                                              |
+| Tooling                 | Angular CLI, npm, ESLint + angular-eslint, Prettier, TypeScript 6                                           |
+| Despliegue              | **Vercel**                                                                                                  |
 
 ---
 
@@ -99,18 +104,23 @@ la-barca-de-la-parca/
 ## Proceso de creación
 
 ### Motivación
+
 El proyecto arrancó como **proyecto personal de aprendizaje**. La idea era doble: dar forma a una herramienta real y útil para el equipo NTR y, al mismo tiempo, aprender desarrollo web moderno construyendo algo propio en lugar de seguir tutoriales genéricos.
 
 ### Contenido e imágenes
+
 Las estrategias, roles y descripciones se redactaron a partir del conocimiento del equipo. Los recursos gráficos (minimapas, callouts, imágenes de utilidades y cabeceras) se obtuvieron mediante **capturas ingame** y un posterior **trabajo de edición**, hasta reunir más de 300 imágenes en formato `.webp`.
 
 ### Flujo de trabajo
+
 El desarrollo se llevó a cabo con **Git** sobre ramas de características (principalmente `REDO_MAPS`) que se integraban a `main` mediante **Pull Requests**. Cada iteración —roster, estrategias, utilidades, versión móvil, optimización— se fue añadiendo de forma incremental hasta completar la web actual.
 
 ### Herramientas
+
 Para el código, el diseño de la interfaz y la resolución de dudas técnicas se contó con **asistencia de IA** como herramienta de apoyo al desarrollo. Las imágenes se optimizaron a `.webp` con un script propio basado en **sharp** para reducir el peso de la página.
 
 ### Despliegue
+
 El sitio se publica de forma automática en **Vercel** a partir del repositorio de GitHub.
 
 ---

@@ -47,4 +47,3 @@ describe('.env.example documenta las variables', () => {
     expect(example).toMatch(/^PORT=/m);
   });
 });
-

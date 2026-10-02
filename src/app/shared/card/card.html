@@ -1,18 +1,43 @@
 <div class="card">
   <div class="card-left">
     <div class="card-avatar" [style.borderColor]="player().borderColor">
-      <img [src]="player().photoUrl" [alt]="player().alias" width="640" height="640" loading="lazy" decoding="async" [style.object-position]="player().photoPosition ?? 'center center'" />
+      <img
+        [src]="player().photoUrl"
+        [alt]="player().alias"
+        width="640"
+        height="640"
+        loading="lazy"
+        decoding="async"
+        [style.object-position]="player().photoPosition ?? 'center center'"
+      />
     </div>
-    <span class="role-badge" [style.backgroundColor]="player().borderColor" [class.role-light-bg]="lightBorderColor()">{{ player().role }}</span>
+    <span
+      class="role-badge"
+      [style.backgroundColor]="player().borderColor"
+      [class.role-light-bg]="lightBorderColor()"
+      >{{ player().role }}</span
+    >
     <div class="card-bottom-row">
       <span class="card-abbrev">{{ player().abbrev ?? player().alias }}</span>
       @if (player().steamUrl) {
         <a [href]="player().steamUrl" target="_blank" class="profile-link profile-link-steam">
-          <img src="/assets/icons/steam_ico.webp" alt="Steam" width="20" height="20" decoding="async" />
+          <img
+            src="/assets/icons/steam_ico.webp"
+            alt="Steam"
+            width="20"
+            height="20"
+            decoding="async"
+          />
         </a>
         @if (player().faceitUrl) {
           <a [href]="player().faceitUrl" target="_blank" class="profile-link profile-link-faceit">
-            <img src="/assets/icons/faceit_ico.webp" alt="FACEIT" width="20" height="20" decoding="async" />
+            <img
+              src="/assets/icons/faceit_ico.webp"
+              alt="FACEIT"
+              width="20"
+              height="20"
+              decoding="async"
+            />
           </a>
         }
       }
@@ -20,11 +45,41 @@
   </div>
   <div class="card-right">
     <div class="card-toggle segmented-control">
-      <button class="segmented-btn" [class.active]="activeTab === 'perfil'" (click)="selectTab('perfil')">Perfil</button>
-      <button class="segmented-btn" [class.active]="activeTab === 'posicion'" (click)="selectTab('posicion')">Rol</button>
-      <button class="segmented-btn" [class.active]="activeTab === 'virtudes'" (click)="selectTab('virtudes')">Características</button>
-      <button class="segmented-btn" [class.active]="activeTab === 'psico'" (click)="selectTab('psico')">Psicología</button>
-      <button class="segmented-btn" [class.active]="activeTab === 'stats'" (click)="selectTab('stats')">Estadísticas</button>
+      <button
+        class="segmented-btn"
+        [class.active]="activeTab === 'perfil'"
+        (click)="selectTab('perfil')"
+      >
+        Perfil
+      </button>
+      <button
+        class="segmented-btn"
+        [class.active]="activeTab === 'posicion'"
+        (click)="selectTab('posicion')"
+      >
+        Rol
+      </button>
+      <button
+        class="segmented-btn"
+        [class.active]="activeTab === 'virtudes'"
+        (click)="selectTab('virtudes')"
+      >
+        Características
+      </button>
+      <button
+        class="segmented-btn"
+        [class.active]="activeTab === 'psico'"
+        (click)="selectTab('psico')"
+      >
+        Psicología
+      </button>
+      <button
+        class="segmented-btn"
+        [class.active]="activeTab === 'stats'"
+        (click)="selectTab('stats')"
+      >
+        Estadísticas
+      </button>
     </div>
     <div class="card-content">
       @switch (activeTab) {

@@ -26,7 +26,7 @@ describe('UtilityDetail', () => {
 
   it('should expose the four grenade types', () => {
     const page = createComponent().componentInstance;
-    expect(page.grenadeTypes.map(t => t.key)).toEqual(['smoke', 'molotov', 'flash', 'he']);
+    expect(page.grenadeTypes.map((t) => t.key)).toEqual(['smoke', 'molotov', 'flash', 'he']);
   });
 
   it('should load utilities when a type is selected', async () => {
@@ -75,7 +75,7 @@ describe('UtilityDetail', () => {
     const utility = page.utilities()[0];
 
     expect(utility.imageSrcset).toBe(
-      `${imageVariant(utility.imagePath, 640)} 640w, ${imageVariant(utility.imagePath, 1280)} 1280w, ${utility.imagePath} 1920w`
+      `${imageVariant(utility.imagePath, 640)} 640w, ${imageVariant(utility.imagePath, 1280)} 1280w, ${utility.imagePath} 1920w`,
     );
   });
 
@@ -134,7 +134,9 @@ describe('UtilityDetail', () => {
       expect(fixture.nativeElement.querySelector('.utility-image-wrapper')).toBeTruthy();
     });
 
-    const trigger = fixture.nativeElement.querySelector('.utility-image-wrapper') as HTMLButtonElement;
+    const trigger = fixture.nativeElement.querySelector(
+      '.utility-image-wrapper',
+    ) as HTMLButtonElement;
     expect(trigger.tagName).toBe('BUTTON');
     expect(trigger.getAttribute('aria-label')).toBe('Ampliar imagen: Smoke de cross');
 
@@ -162,7 +164,9 @@ describe('UtilityDetail', () => {
       expect(fixture.nativeElement.querySelector('.utility-image-wrapper')).toBeTruthy();
     });
 
-    const trigger = fixture.nativeElement.querySelector('.utility-image-wrapper') as HTMLButtonElement;
+    const trigger = fixture.nativeElement.querySelector(
+      '.utility-image-wrapper',
+    ) as HTMLButtonElement;
     trigger.focus();
     trigger.click();
 
