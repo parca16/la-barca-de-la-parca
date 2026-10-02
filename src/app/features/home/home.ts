@@ -63,6 +63,21 @@ export class Home {
         'Imagen de la vista en primera persona del lanzamiento en formato webp y con la utilidad correspondiente en la mano',
       ],
     },
+    {
+      title: 'Contenidos',
+      route: 'contents',
+      description:
+        'Comparte clases grabadas (análisis de mapas, utilidades, comunicación, demo reviews…) para centralizarlas en la web.',
+      items: [
+        'Título de la clase',
+        'Enlace de YouTube del vídeo (mejor subido como oculto)',
+        'Fecha de la clase',
+        'Quién la imparte',
+        'Mapa, si la clase trata de uno concreto',
+        'Etiquetas o temática (utilidades, comunicación, demo review…)',
+        'Descripción de lo que se explica',
+      ],
+    },
   ];
 
   private readonly router = inject(Router);

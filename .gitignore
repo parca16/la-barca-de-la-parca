@@ -39,6 +39,14 @@ testem.log
 /typings
 __screenshots__/
 
+# Variables de entorno locales (no se commitean; existe .env.example)
+.env
+.env.local
+.env*.local
+
+# Vercel
+.vercel
+
 # System files
 .DS_Store
 Thumbs.db
