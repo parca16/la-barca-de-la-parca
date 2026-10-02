@@ -2,6 +2,8 @@ import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { rateLimit } from 'express-rate-limit';
+import { createHash, timingSafeEqual } from 'node:crypto';
 import { EMPTY_STATS, parseCsstatsHtml } from './csstats.js';
 import { fileURLToPath } from 'url';
 import { dirname, join, resolve } from 'path';
@@ -18,6 +20,17 @@ const STEAM_API_KEY = process.env.STEAM_API_KEY?.trim() || null;
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
 // Jugadores descargados en paralelo. Un valor bajo evita saturar csstats.gg/Steam.
 const REFRESH_CONCURRENCY = Number(process.env.REFRESH_CONCURRENCY) || 3;
+
+// Secreto compartido para forzar un refresco manual vía `POST /api/refresh`.
+// Si no está configurado, el endpoint queda deshabilitado (404): el refresco
+// automático interno sigue funcionando y nadie de fuera puede disparar el
+// scraping.
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN?.trim() || null;
+
+// Límite de peticiones manuales de refresco. Aunque el token se filtre, no se
+// puede martillear el scraping. Configurable para poder probarlo.
+const REFRESH_RATE_WINDOW_MS = 15 * 60 * 1000; // 15 minutos
+const REFRESH_RATE_MAX = Number(process.env.REFRESH_RATE_MAX) || 5;
 
 // Orígenes permitidos para CORS. Por defecto solo producción y el dev server
 // de Angular. `CORS_ORIGINS` (lista separada por comas) los sustituye, por
@@ -252,6 +265,50 @@ export function refreshCache() {
 export const asyncHandler = (handler) => (req, res, next) =>
   Promise.resolve(handler(req, res, next)).catch(next);
 
+// Rate limiting del refresco manual, aplicado antes de la autenticación para
+// que ni siquiera un token válido permita disparar scraping sin freno.
+const refreshLimiter = rateLimit({
+  windowMs: REFRESH_RATE_WINDOW_MS,
+  limit: REFRESH_RATE_MAX,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many refresh requests. Try again later.' },
+});
+
+const BEARER_PATTERN = /^Bearer\s+(.+)$/i;
+
+/**
+ * Compara dos cadenas en tiempo constante. Se hashean ambas para igualar sus
+ * longitudes, porque `timingSafeEqual` exige buffers del mismo tamaño y lanzar
+ * según la longitud ya filtraría información.
+ */
+function safeEqual(a, b) {
+  const hashA = createHash('sha256').update(a).digest();
+  const hashB = createHash('sha256').update(b).digest();
+  return timingSafeEqual(hashA, hashB);
+}
+
+/**
+ * Exige `Authorization: Bearer <REFRESH_TOKEN>` para forzar un refresco. Sin
+ * secreto configurado el endpoint se comporta como inexistente.
+ */
+export function requireRefreshToken(req, res, next) {
+  if (!REFRESH_TOKEN) {
+    return res.status(404).json({ error: 'Not found' });
+  }
+
+  const header = req.headers?.authorization || '';
+  const match = BEARER_PATTERN.exec(header);
+  const provided = match ? match[1].trim() : '';
+
+  if (!provided || !safeEqual(provided, REFRESH_TOKEN)) {
+    res.set('WWW-Authenticate', 'Bearer');
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  next();
+}
+
 // Routes
 app.get('/api/players', (req, res) => {
   if (cache.status === 'loading') {
@@ -292,8 +349,12 @@ app.get('/api/player/:alias', (req, res) => {
   res.json({ player });
 });
 
-app.get(
+// Solo POST y autenticado: un GET público era cacheable/prefetchable y
+// cualquiera podía disparar el scraping de 8 jugadores.
+app.post(
   '/api/refresh',
+  refreshLimiter,
+  requireRefreshToken,
   asyncHandler(async (req, res) => {
     await refreshCache();
     res.json({

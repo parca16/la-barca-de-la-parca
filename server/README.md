@@ -50,8 +50,15 @@ Se actualiza cada 5 minutos automáticamente. Un refresco en curso se reutiliza:
 
 - `GET /api/players` - Lista completa de jugadores con stats
 - `GET /api/player/:alias` - Stats de un jugador específico
-- `GET /api/refresh` - Fuerza un refresco de la caché
+- `POST /api/refresh` - Fuerza un refresco de la caché. Requiere `Authorization: Bearer <REFRESH_TOKEN>`
 - `GET /api/health` - Estado del servidor
+
+`POST /api/refresh` nunca es público: sin `REFRESH_TOKEN` configurado responde `404` (el endpoint no existe), y con token responde `401` si la cabecera falta o no coincide. La comparación del token se hace en tiempo constante y hay un límite de peticiones (5 cada 15 minutos por defecto). Los datos que sirve la web siguen actualizándose solos cada 5 minutos; este endpoint solo fuerza el refresco a mano.
+
+```bash
+curl -X POST http://localhost:3000/api/refresh \
+  -H "Authorization: Bearer $REFRESH_TOKEN"
+```
 
 ## Variables de entorno
 
@@ -61,12 +68,15 @@ Copia `.env.example` a `.env` y ajusta los valores:
 STEAM_API_KEY=
 PORT=3000
 CORS_ORIGINS=
+REFRESH_TOKEN=
 ```
 
 - `STEAM_API_KEY` - (Opcional) Tu API key de Steam para el perfil y las partidas competitivas.
 - `PORT` - (Opcional) Puerto del servidor. Por defecto `3000`.
 - `CORS_ORIGINS` - (Opcional) Lista de orígenes permitidos para CORS, separados por comas. Admite `*` como comodín. Por defecto solo se permiten `https://labarcadelaparca.vercel.app` y `http://localhost:4200`.
 - `REFRESH_CONCURRENCY` - (Opcional) Número de jugadores que se descargan a la vez. Por defecto `3`.
+- `REFRESH_TOKEN` - (Opcional) Secreto para `POST /api/refresh`. Si no se define, el endpoint queda deshabilitado.
+- `REFRESH_RATE_MAX` - (Opcional) Máximo de peticiones a `POST /api/refresh` cada 15 minutos. Por defecto `5`.
 
 Si no tienes API key, el servidor funcionará con los datos de csstats.gg solo y **no** llamará a la API de Steam. En ese caso el endpoint `/api/health` indica `"steamApiKey": "not configured"`.
 
@@ -78,6 +88,8 @@ STEAM_API_KEY=tu_api_key
 CORS_ORIGINS=https://labarcadelaparca.vercel.app,https://*.vercel.app,http://localhost:4200
 # Descargas simultáneas al refrescar la caché:
 REFRESH_CONCURRENCY=3
+# Secreto para forzar un refresco manual (POST /api/refresh):
+REFRESH_TOKEN=un_secreto_largo_y_aleatorio
 ```
 
 ## Producción
