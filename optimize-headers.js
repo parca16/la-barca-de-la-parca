@@ -133,6 +133,8 @@ async function processGroup({ dir, label, maxWidth, quality, variants }) {
       `${String(skipped).padStart(3)} saltadas | ` +
       `${kb(bytesBefore)} -> ${kb(bytesAfter)} (${saved >= 0 ? '-' : '+'}${kb(Math.abs(saved))})`,
   );
+
+  return { processed, skipped, bytesBefore, bytesAfter };
 }
 
 function kb(bytes) {
@@ -140,10 +142,33 @@ function kb(bytes) {
 }
 
 async function optimize() {
-  console.log(`Optimizando imágenes${FORCE ? ' (--force)' : ''}...\n`);
-  for (const group of GROUPS) {
-    await processGroup(group);
+  if (!fs.existsSync(ASSETS_DIR)) {
+    console.error(
+      `No se encontró el directorio de assets: ${ASSETS_DIR}\n` +
+        'Ejecuta el script desde la raíz del proyecto.',
+    );
+    process.exitCode = 1;
+    return;
   }
+
+  console.log(`Optimizando imágenes${FORCE ? ' (--force)' : ''}...\n`);
+
+  const totals = { processed: 0, skipped: 0, bytesBefore: 0, bytesAfter: 0 };
+  for (const group of GROUPS) {
+    const result = await processGroup(group);
+    totals.processed += result.processed;
+    totals.skipped += result.skipped;
+    totals.bytesBefore += result.bytesBefore;
+    totals.bytesAfter += result.bytesAfter;
+  }
+
+  const saved = totals.bytesBefore - totals.bytesAfter;
+  console.log(
+    `\nTotal                ${String(totals.processed).padStart(3)} procesadas, ` +
+      `${String(totals.skipped).padStart(3)} saltadas | ` +
+      `${kb(totals.bytesBefore)} -> ${kb(totals.bytesAfter)} ` +
+      `(${saved >= 0 ? '-' : '+'}${kb(Math.abs(saved))})`,
+  );
   console.log('\nListo.');
 }
 

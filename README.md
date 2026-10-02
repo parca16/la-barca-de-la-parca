@@ -53,9 +53,9 @@ Guía de lineups por mapa, filtrable por **tipo de granada** (smoke, molotov, fl
 
 Mapas cubiertos actualmente: Ancient, Anubis, Cache, Dust 2, Inferno, Mirage y Overpass.
 
-### 📊 Servidor de estadísticas _(en desarrollo)_
+### 📊 Servidor de estadísticas _(en desarrollo, sin integrar)_
 
-API auxiliar que recopila estadísticas reales de los jugadores desde **csstats.gg** y la **API de Steam**, las cachea y las expone a la web. Se incluye como base para mostrar datos en las fichas de jugador.
+Proyecto **independiente** dentro de `server/` (proyecto npm aparte) que recopila estadísticas reales de los jugadores desde **csstats.gg** y la **API de Steam**, las cachea y las expone vía API REST. **La web todavía no lo consume**: las fichas de jugador usan datos estáticos de `players.mock.ts` y la integración está pendiente (issue #34).
 
 ---
 
@@ -66,7 +66,7 @@ API auxiliar que recopila estadísticas reales de los jugadores desde **csstats.
 | Frontend                | **TypeScript** + **Angular 22** (componentes standalone, signals y control de flujo `@if`/`@for`/`@switch`) |
 | Estilos                 | **CSS** propio (sin frameworks) con diseño responsive                                                       |
 | Plantillas              | **HTML** (templates de componentes Angular)                                                                 |
-| Reactividad             | **RxJS**                                                                                                    |
+| Estado / reactividad    | **Signals** de Angular y control de flujo nativo; **RxJS** solo para eventos del router y del scroll        |
 | Backend / proxy         | **Node.js** + **Express** (JavaScript ESM)                                                                  |
 | Scraping y API          | **axios** + **cheerio** (csstats.gg) y Steam Web API                                                        |
 | Tratamiento de imágenes | **sharp** (conversión y optimización a `.webp`)                                                             |
@@ -80,23 +80,30 @@ API auxiliar que recopila estadísticas reales de los jugadores desde **csstats.
 
 ```
 la-barca-de-la-parca/
+├── .github/workflows/       # CI: formato, lint, build y tests (con cobertura) del frontend; tests del servidor
+├── public/
+│   └── assets/              # Imágenes .webp (maps, callouts, plays, utilidades…)
 ├── src/
 │   ├── app/
-│   │   ├── core/            # Header, navegación y layout
-│   │   ├── shared/          # Componentes reutilizables (card de jugador)
-│   │   ├── data/            # Modelos e interfaces (Player, stats…)
+│   │   ├── app.ts           # Componente raíz (shell con el header)
+│   │   ├── app.config.ts    # Configuración de la app (zoneless, router…)
+│   │   ├── app.routes.ts    # Rutas lazy (una por sección)
+│   │   ├── core/header/     # Header, navegación y menú móvil
+│   │   ├── data/models/     # Modelos y datos: maps.ts, player.interface.ts, players.mock.ts
+│   │   ├── shared/          # Card, map-pool-grid e image-utils
 │   │   └── features/
 │   │       ├── home/        # Página de inicio
 │   │       ├── team/        # Roster
-│   │       ├── strategies/  # Selección de mapas
-│   │       ├── map/         # Detalle de mapa: estrategias y roles
-│   │       └── utilities/   # Utilidades por mapa
-│   ├── public/assets/       # Imágenes .webp (maps, callouts, plays, utilidades…)
+│   │       ├── strategies/  # Selección de mapas (pool activo/inactivo)
+│   │       ├── map/         # Detalle de mapa: content/data/<mapa>-data.ts, map-content y strategy-card
+│   │       └── utilities/   # Utilidades + utility-detail y data/<mapa>-utilities.ts
 │   ├── index.html
-│   └── styles.css
-├── server/                  # Servidor Express de estadísticas
+│   ├── main.ts
+│   └── styles.css           # Estilos globales y patrones reutilizables
+├── server/                  # Servidor Express de estadísticas (proyecto npm aparte, sin integrar)
 ├── optimize-headers.js      # Optimización sharp: heroes, utilidades y variantes responsivas
-└── angular.json
+├── angular.json
+└── package.json
 ```
 
 ---
@@ -139,7 +146,7 @@ npm start
 # Build de producción -> dist/
 npm run build
 
-# Tests unitarios (Vitest)
+# Tests unitarios (Vitest). En terminal interactiva entra en watch mode.
 npm test
 
 # Tests con informe de cobertura -> coverage/
@@ -153,7 +160,25 @@ npm run format:check
 npm run format
 ```
 
+### Scripts disponibles
+
+| Script                      | Descripción                                                                                               |
+| --------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `npm start`                 | Servidor de desarrollo en http://localhost:4200/                                                          |
+| `npm run build`             | Build de producción en `dist/` (config `production` por defecto)                                          |
+| `npm test`                  | Tests unitarios con Vitest. En terminal interactiva entra en **watch mode**                               |
+| `npx ng test --watch=false` | Tests en una sola pasada (lo que usa CI)                                                                  |
+| `npm run optimize:images`   | Optimiza los assets con **sharp**: heroes y variantes responsivas. Añade `-- --force` para regenerar todo |
+
+No hay scripts de **lint**, **format** ni **typecheck**. Prettier está configurado (`.prettierrc`) pero sin script asociado.
+
+### CI
+
+`.github/workflows/ci.yml` se ejecuta en cada push a `main` y en cada Pull Request. Valida el **build** y los **tests** del frontend y, en paralelo, los **tests** del servidor.
+
 ### Servidor de estadísticas (opcional)
+
+Proyecto npm aparte. **El frontend no lo consume** actualmente (issue #34).
 
 ```bash
 cd server
