@@ -13,7 +13,8 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const STEAM_API_KEY = process.env.STEAM_API_KEY || 'YOUR_STEAM_API_KEY_HERE';
+// Sin clave no se llama a Steam: nunca se envía un placeholder a la API.
+const STEAM_API_KEY = process.env.STEAM_API_KEY?.trim() || null;
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
 // Jugadores descargados en paralelo. Un valor bajo evita saturar csstats.gg/Steam.
 const REFRESH_CONCURRENCY = Number(process.env.REFRESH_CONCURRENCY) || 3;
@@ -120,6 +121,11 @@ async function fetchCsstatsStats(steamId) {
 
 // Fetch player profile from Steam
 async function fetchSteamProfile(steamId64) {
+  // Si no hay clave configurada, no se consulta Steam (evita peticiones inválidas).
+  if (!STEAM_API_KEY) {
+    return null;
+  }
+
   try {
     const { data } = await axios.get(
       `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/`,
@@ -303,7 +309,7 @@ app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     timestamp: Date.now(),
-    steamApiKey: STEAM_API_KEY !== 'YOUR_STEAM_API_KEY_HERE' ? 'configured' : 'not configured',
+    steamApiKey: STEAM_API_KEY ? 'configured' : 'not configured',
     cache: {
       status: cache.status,
       players: cache.players.length,
@@ -346,7 +352,7 @@ function startServer() {
 
   app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
-    console.log(`Steam API key: ${STEAM_API_KEY !== 'YOUR_STEAM_API_KEY_HERE' ? '✓ configured' : '✗ not configured'}`);
+    console.log(`Steam API key: ${STEAM_API_KEY ? '✓ configured' : '✗ not configured'}`);
     console.log(`Cache refresh interval: ${CACHE_DURATION / 1000 / 60} minutes`);
     console.log(`Players to track: ${Object.keys(PLAYERS).length}`);
   });

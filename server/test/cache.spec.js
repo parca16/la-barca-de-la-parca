@@ -34,6 +34,10 @@ function stubAxios(html, delayMs = 0) {
 }
 
 beforeEach(() => {
+  // Fijamos las variables antes de importar server.js para que el test no
+  // dependa de un .env local: con clave, Steam también se consulta.
+  process.env.STEAM_API_KEY = 'test-key';
+  process.env.REFRESH_CONCURRENCY = '3';
   mockGet.mockReset();
   // El servidor escribe logs de progreso; no ensuciamos la salida de los tests.
   vi.spyOn(console, 'log').mockImplementation(() => {});

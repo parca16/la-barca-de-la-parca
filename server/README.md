@@ -7,6 +7,14 @@ cd server
 npm install
 ```
 
+Copia la plantilla de variables de entorno y rellena tus valores:
+
+```bash
+cp .env.example .env
+```
+
+`.env` está ignorado por git; usa siempre `.env.example` como plantilla para no subir claves reales.
+
 ## Iniciar el servidor
 
 ```bash
@@ -47,11 +55,20 @@ Se actualiza cada 5 minutos automáticamente. Un refresco en curso se reutiliza:
 
 ## Variables de entorno
 
-- `STEAM_API_KEY` - (Opcional) Tu API key de Steam para competitive matches
+Copia `.env.example` a `.env` y ajusta los valores:
+
+```env
+STEAM_API_KEY=
+PORT=3000
+CORS_ORIGINS=
+```
+
+- `STEAM_API_KEY` - (Opcional) Tu API key de Steam para el perfil y las partidas competitivas.
+- `PORT` - (Opcional) Puerto del servidor. Por defecto `3000`.
 - `CORS_ORIGINS` - (Opcional) Lista de orígenes permitidos para CORS, separados por comas. Admite `*` como comodín. Por defecto solo se permiten `https://labarcadelaparca.vercel.app` y `http://localhost:4200`.
 - `REFRESH_CONCURRENCY` - (Opcional) Número de jugadores que se descargan a la vez. Por defecto `3`.
 
-Si no tienes API key, el servidor funcionará con los datos de csstats.gg solo.
+Si no tienes API key, el servidor funcionará con los datos de csstats.gg solo y **no** llamará a la API de Steam. En ese caso el endpoint `/api/health` indica `"steamApiKey": "not configured"`.
 
 ### Ejemplo de `.env`
 

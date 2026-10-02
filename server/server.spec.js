@@ -23,3 +23,28 @@ describe.each(sources)('$file: no ejecuta código de terceros', ({ source }) => 
     expect(source).not.toMatch(/(?<![\w.])Function\s*\(/);
   });
 });
+
+// issue #26: sin STEAM_API_KEY el servidor no debe enviar un placeholder a
+// Steam. La clave vale null/undefined cuando no está configurada y
+// fetchSteamProfile corta antes de llamar a la API.
+describe('server.js: la clave de Steam no usa placeholders', () => {
+  const source = readFileSync(join(dir, 'server.js'), 'utf8');
+
+  it('no define un placeholder como valor por defecto', () => {
+    expect(source).not.toMatch(/YOUR_STEAM_API_KEY_HERE/);
+  });
+
+  it('solo consulta Steam si hay clave', () => {
+    expect(source).toMatch(/if \(!STEAM_API_KEY\)/);
+  });
+});
+
+describe('.env.example documenta las variables', () => {
+  const example = readFileSync(join(dir, '.env.example'), 'utf8');
+
+  it('incluye STEAM_API_KEY y PORT', () => {
+    expect(example).toMatch(/^STEAM_API_KEY=/m);
+    expect(example).toMatch(/^PORT=/m);
+  });
+});
+
