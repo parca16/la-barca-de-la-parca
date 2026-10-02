@@ -98,30 +98,10 @@ async function fetchCsstatsStats(steamId) {
         }
       }
       
-      // Look for window.__INITIAL_STATE__ or similar
-      if (text.includes('premierRating') || text.includes('competitiveRating')) {
-        try {
-          const stateMatch = text.match(/(?:window\s*\.\s*)?__INITIAL_STATE__\s*=\s*(\{[\s\S]*?\});/);
-          if (stateMatch) {
-            // eslint-disable-next-line no-eval
-            const stateData = eval(`(${stateMatch[1]})`);
-            if (stateData?.profile?.stats) {
-              stats.premierRating = stateData.profile.stats.premierRating || null;
-              stats.competitiveRating = stateData.profile.stats.competitiveRating || null;
-              stats.wins = stateData.profile.stats.wins || 0;
-              stats.kd = stateData.profile.stats.kd || 0;
-              stats.headshotPct = stateData.profile.stats.headshotPct || 0;
-              stats.adr = stateData.profile.stats.adr || 0;
-              stats.kast = stateData.profile.stats.kast || 0;
-              stats.rating = stateData.profile.stats.rating || 0;
-              stats.matches = stateData.profile.stats.matches || 0;
-              stats.wins_p1 = stateData.profile.stats.wins_p1 || 0;
-            }
-          }
-        } catch (e) {
-          // ignore
-        }
-      }
+      // Nota (issue #22): aquí se parseaba window.__INITIAL_STATE__ con
+      // evaluación dinámica sobre HTML de un tercero. Se eliminó por
+      // seguridad; el scraping de stats se replanteará más adelante.
+      // Ver server.spec.js.
     }
 
     // Also try direct regex matching
