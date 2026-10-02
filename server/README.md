@@ -59,12 +59,22 @@ Copia `.env.example` a `.env` y ajusta los valores:
 ```env
 STEAM_API_KEY=
 PORT=3000
+CORS_ORIGINS=
 ```
 
 - `STEAM_API_KEY` - (Opcional) Tu API key de Steam para el perfil y las partidas competitivas.
 - `PORT` - (Opcional) Puerto del servidor. Por defecto `3000`.
+- `CORS_ORIGINS` - (Opcional) Lista de orígenes permitidos para CORS, separados por comas. Admite `*` como comodín. Por defecto solo se permiten `https://labarcadelaparca.vercel.app` y `http://localhost:4200`.
 
 Si no tienes API key, el servidor funcionará con los datos de csstats.gg solo y **no** llamará a la API de Steam. En ese caso el endpoint `/api/health` indica `"steamApiKey": "not configured"`.
+
+### Ejemplo de `.env`
+
+```bash
+STEAM_API_KEY=tu_api_key
+# Añade las previsualizaciones de Vercel a los orígenes permitidos:
+CORS_ORIGINS=https://labarcadelaparca.vercel.app,https://*.vercel.app,http://localhost:4200
+```
 
 ## Producción
 
