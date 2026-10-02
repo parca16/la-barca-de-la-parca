@@ -9,8 +9,6 @@ const mockPlayer: Player = {
   nationality: 'Egipto',
   age: 51,
   photoUrl: '/assets/players/Parca16.webp',
-  joined: '2024-01',
-  bio: 'In-Game Leader.',
   borderColor: '#E9FF1F',
   abbrev: 'Parca',
   steamUrl: 'https://steamcommunity.com/profiles/76561198301504889',
