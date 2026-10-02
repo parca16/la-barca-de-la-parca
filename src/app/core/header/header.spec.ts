@@ -92,6 +92,68 @@ describe('Header', () => {
     expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
   });
 
+  it('toggles the mobile menu open and closed', () => {
+    const instance = createHeader();
+    const isOpen = () => (instance as unknown as { isMenuOpen: boolean }).isMenuOpen;
+
+    instance.toggleMenu();
+    expect(isOpen()).toBe(true);
+
+    instance.toggleMenu();
+    expect(isOpen()).toBe(false);
+  });
+
+  it('closes the mobile menu on Escape', () => {
+    const instance = createHeader();
+    instance.toggleMenu();
+
+    instance.onDocumentKeydown(new KeyboardEvent('keydown', { key: 'Escape' }));
+
+    expect((instance as unknown as { isMenuOpen: boolean }).isMenuOpen).toBe(false);
+  });
+
+  it('closes the mobile menu when clicking outside the header', () => {
+    const instance = createHeader();
+    instance.toggleMenu();
+
+    instance.onDocumentClick({ target: document.createElement('div') } as unknown as MouseEvent);
+
+    expect((instance as unknown as { isMenuOpen: boolean }).isMenuOpen).toBe(false);
+  });
+
+  it('keeps the mobile menu open when clicking inside the header', () => {
+    const instance = createHeader();
+    instance.toggleMenu();
+
+    const headerElement = document.createElement('div');
+    headerElement.classList.add('header');
+    const child = document.createElement('button');
+    headerElement.appendChild(child);
+
+    instance.onDocumentClick({ target: child } as unknown as MouseEvent);
+
+    expect((instance as unknown as { isMenuOpen: boolean }).isMenuOpen).toBe(true);
+  });
+
+  it('exposes aria-expanded and aria-controls on the menu toggle', async () => {
+    await TestBed.configureTestingModule({
+      imports: [Header],
+      providers: [provideRouter([])],
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(Header);
+    fixture.detectChanges();
+
+    const toggle = fixture.nativeElement.querySelector('.menu-toggle') as HTMLButtonElement;
+    expect(toggle.getAttribute('aria-controls')).toBe('primary-navigation');
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+
+    toggle.click();
+    fixture.detectChanges();
+
+    expect(toggle.getAttribute('aria-expanded')).toBe('true');
+  });
+
   describe('visibilidad del botón "volver arriba"', () => {
     beforeEach(async () => {
       await TestBed.configureTestingModule({

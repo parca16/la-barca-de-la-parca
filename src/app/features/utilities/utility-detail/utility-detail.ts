@@ -1,4 +1,4 @@
-import { Component, OnDestroy, HostListener, signal } from '@angular/core';
+import { Component, ElementRef, OnDestroy, HostListener, effect, signal, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { getHeaderImage, getMap } from '../../../data/models/maps';
@@ -58,9 +58,14 @@ export class UtilityDetail implements OnDestroy {
   readonly utilities = signal<UtilityView[]>([]);
   // Estado de UI: el tipo seleccionado no tiene utilidades todavía ("en desarrollo").
   readonly isDeveloping = signal(false);
-  selectedImage: string | null = null;
+  /** Utilidad cuya imagen está ampliada en el lightbox (null = cerrado). */
+  selectedImage: UtilityView | null = null;
   private subscriptions = new Subscription();
   private loadToken = 0;
+  /** Referencia al diálogo para gestionar el foco al abrir/cerrar. */
+  private readonly lightboxDialog = viewChild<ElementRef<HTMLElement>>('lightboxDialog');
+  /** Elemento que abrió el lightbox, para devolverle el foco al cerrar. */
+  private lastFocusedElement: HTMLElement | null = null;
 
   readonly grenadeTypes: { key: GrenadeType; label: string; iconPath: string }[] = [
     {
@@ -100,6 +105,14 @@ export class UtilityDetail implements OnDestroy {
         this.isDeveloping.set(false);
       })
     );
+
+    // Al renderizarse el diálogo del lightbox, movemos el foco dentro.
+    effect(() => {
+      const dialog = this.lightboxDialog();
+      if (dialog && this.selectedImage) {
+        dialog.nativeElement.focus();
+      }
+    });
   }
 
   /** `srcset` del hero: variante 960w + original 1920w. */
@@ -109,9 +122,49 @@ export class UtilityDetail implements OnDestroy {
   }
 
   @HostListener('document:keydown', ['$event'])
-  onKeydownHandler(event: Event): void {
-    if (this.selectedImage && (event as KeyboardEvent).key === 'Escape') {
+  onKeydownHandler(event: KeyboardEvent): void {
+    if (!this.selectedImage) return;
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
       this.closeLightbox();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      this.trapFocus(event);
+    }
+  }
+
+  /** Mantiene el foco dentro del diálogo mientras el lightbox está abierto. */
+  private trapFocus(event: KeyboardEvent): void {
+    const dialog = this.lightboxDialog()?.nativeElement;
+    if (!dialog) return;
+
+    const focusables = Array.from(
+      dialog.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+    );
+
+    if (focusables.length === 0) {
+      event.preventDefault();
+      dialog.focus();
+      return;
+    }
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    const active = document.activeElement;
+
+    if (event.shiftKey) {
+      if (active === first || active === dialog) {
+        event.preventDefault();
+        last.focus();
+      }
+    } else if (active === last) {
+      event.preventDefault();
+      first.focus();
     }
   }
 
@@ -167,13 +220,21 @@ export class UtilityDetail implements OnDestroy {
     this.router.navigate(['/map', this.mapKey]);
   }
 
-  selectImage(utility: UtilityView): void {
-    if (utility.imagePath) {
-      this.selectedImage = utility.imagePath;
-    }
+  selectImage(utility: UtilityView, event?: Event): void {
+    if (!utility.imagePath) return;
+
+    const trigger = event?.currentTarget as HTMLElement | null;
+    this.lastFocusedElement = trigger ?? (document.activeElement as HTMLElement | null);
+    this.selectedImage = utility;
   }
 
   closeLightbox(): void {
     this.selectedImage = null;
+
+    const trigger = this.lastFocusedElement;
+    this.lastFocusedElement = null;
+    if (trigger && trigger.isConnected) {
+      trigger.focus();
+    }
   }
 }

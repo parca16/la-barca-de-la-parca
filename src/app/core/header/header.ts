@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectorRef, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { Subscription, filter, fromEvent, map, throttleTime } from 'rxjs';
 
@@ -76,5 +76,24 @@ export class Header implements OnInit, OnDestroy {
 
   closeMenu(): void {
     this.isMenuOpen = false;
+  }
+
+  /** Cierra el menú móvil con Escape. */
+  @HostListener('document:keydown', ['$event'])
+  onDocumentKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape' && this.isMenuOpen) {
+      this.closeMenu();
+    }
+  }
+
+  /** Cierra el menú móvil al hacer clic fuera de la cabecera. */
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.isMenuOpen) return;
+
+    const target = event.target as HTMLElement | null;
+    if (target?.closest('.header')) return;
+
+    this.closeMenu();
   }
 }
