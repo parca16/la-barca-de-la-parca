@@ -25,11 +25,15 @@ function stubAxios(html, delayMs = 0) {
             resolve({ data: html });
           } else {
             resolve({
-              data: { response: { players: [{ personaname: 'Test', avatarfull: 'a', avatarmedium: 'b' }] } },
+              data: {
+                response: {
+                  players: [{ personaname: 'Test', avatarfull: 'a', avatarmedium: 'b' }],
+                },
+              },
             });
           }
-        }, delayMs)
-      )
+        }, delayMs),
+      ),
   );
 }
 

@@ -7,6 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:coverage": "ng test --watch=false --coverage",
+    "lint": "ng lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "optimize:images": "node optimize-headers.js"
   },
   "private": true,
@@ -25,11 +29,16 @@
     "@angular/build": "^22.1.5",
     "@angular/cli": "^22.1.5",
     "@angular/compiler-cli": "^22.1.0",
+    "@eslint/js": "^10.0.1",
     "@types/node": "^26.6.3",
+    "@vitest/coverage-v8": "^4.1.11",
+    "angular-eslint": "22.5.0",
+    "eslint": "^10.9.1",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
     "sharp": "^0.35.4",
     "typescript": "~6.0.2",
+    "typescript-eslint": "8.69.0",
     "vitest": "^4.0.8"
   }
 }

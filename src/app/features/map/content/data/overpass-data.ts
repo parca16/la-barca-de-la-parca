@@ -8,7 +8,6 @@ export const mapData: MapConfig = {
       heading: 'Mapa inactivo',
       text: 'NTR ha jugado con solidez este mapa en un pasado reciente, pero su exclusión de la pool competitiva actual provoca que la exposición de utilidades y jugadas quede, temporalmente, en suspensión.',
     },
-    
   ],
   calloutsImage: '/assets/callouts/Overpass.webp',
   strategies: [

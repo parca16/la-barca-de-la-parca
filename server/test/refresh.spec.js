@@ -22,8 +22,7 @@ async function startTestServer() {
   return `http://127.0.0.1:${port}`;
 }
 
-const postRefresh = (base, headers) =>
-  fetch(`${base}/api/refresh`, { method: 'POST', headers });
+const postRefresh = (base, headers) => fetch(`${base}/api/refresh`, { method: 'POST', headers });
 
 beforeEach(() => {
   // Sin STEAM_API_KEY el servidor no consulta Steam y el mock solo sirve HTML.

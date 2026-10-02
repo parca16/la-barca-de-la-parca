@@ -59,7 +59,11 @@
 }
 
 .map-card:hover .map-card-overlay {
-  background: linear-gradient(to bottom, rgba(var(--accent-strong-rgb), 0.08) 0%, rgba(var(--bg-0-rgb), 0.9));
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--accent-strong-rgb), 0.08) 0%,
+    rgba(var(--bg-0-rgb), 0.9)
+  );
 }
 
 .map-card::after {

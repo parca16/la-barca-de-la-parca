@@ -10,8 +10,11 @@ Sitio interno del equipo NTR de Counter-Strike 2: SPA **Angular 22** (standalone
 - Tests en una pasada: `npx ng test --watch=false`
   - Filtrar por suite/test: `npx ng test --watch=false --filter Card`
   - `npm test` / `ng test` entran en **watch mode** en terminal interactiva; en entornos no-TTY no.
+- Cobertura de tests: `npm run test:coverage` → informe en `coverage/` (texto, HTML y lcov).
+- Lint: `npm run lint` (ESLint + angular-eslint).
+- Formato: `npm run format` aplica Prettier; `npm run format:check` solo comprueba (lo que corre el CI).
 - Servidor de stats (proyecto npm aparte): `cd server; npm install; npm run dev` → http://localhost:3000
-- **No hay** scripts de lint, format ni typecheck. Prettier está instalado pero sin config ni script (issue #37). No inventes `npm run lint`/`npm run format`.
+- El CI (`.github/workflows/ci.yml`) exige formato, lint, build y tests con cobertura en cada PR.
 
 ## Toolchain / gotchas
 

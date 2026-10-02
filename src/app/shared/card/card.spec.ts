@@ -59,12 +59,17 @@ describe('Card', () => {
 
   it('should render the Steam and FACEIT links from the player data', () => {
     const compiled = createCard().nativeElement as HTMLElement;
-    expect(compiled.querySelector('.profile-link-steam')?.getAttribute('href')).toBe(mockPlayer.steamUrl);
-    expect(compiled.querySelector('.profile-link-faceit')?.getAttribute('href')).toBe(mockPlayer.faceitUrl);
+    expect(compiled.querySelector('.profile-link-steam')?.getAttribute('href')).toBe(
+      mockPlayer.steamUrl,
+    );
+    expect(compiled.querySelector('.profile-link-faceit')?.getAttribute('href')).toBe(
+      mockPlayer.faceitUrl,
+    );
   });
 
   it('should mark light border colors with the role-light-bg class', () => {
-    const light = createCard({ ...mockPlayer, borderColor: '#ffffff' }).nativeElement as HTMLElement;
+    const light = createCard({ ...mockPlayer, borderColor: '#ffffff' })
+      .nativeElement as HTMLElement;
     expect(light.querySelector('.role-badge')?.classList.contains('role-light-bg')).toBe(true);
 
     const dark = createCard({ ...mockPlayer, borderColor: '#000000' }).nativeElement as HTMLElement;

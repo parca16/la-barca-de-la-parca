@@ -8,7 +8,6 @@ export const mapData: MapConfig = {
       heading: 'Mapa fuera de la pool de NTR',
       text: 'Por falta de afinidad con la lógica, el ritmo y el layout del mapa por parte del roster de NTR, Train está, de forma indefinida, fuera de la planificación de las próximas temporadas.',
     },
-    
   ],
   calloutsImage: '/assets/callouts/Train.webp',
   strategies: [

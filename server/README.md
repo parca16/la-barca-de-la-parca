@@ -39,6 +39,7 @@ npm test
 ## Funcionamiento
 
 El servidor:
+
 1. Rastrea csstats.gg para obtener perfil y stats
 2. Consulta Steam API para datos de partidas competitivas
 3. Combina ambas fuentes

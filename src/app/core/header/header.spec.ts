@@ -17,7 +17,14 @@ describe('Header', () => {
     routerEvents = new Subject<NavigationEnd>();
     const router = { events: routerEvents.asObservable() } as unknown as Router;
     cdr = { markForCheck: vi.fn() };
-    header = new Header(cdr as unknown as ChangeDetectorRef, router);
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: Router, useValue: router },
+        { provide: ChangeDetectorRef, useValue: cdr },
+      ],
+    });
+    // `Header` usa `inject()`, así que necesita un contexto de inyección.
+    header = TestBed.runInInjectionContext(() => new Header());
     header.ngOnInit();
     return header;
   };

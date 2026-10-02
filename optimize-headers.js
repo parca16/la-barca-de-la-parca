@@ -79,10 +79,7 @@ function variantPath(file, width) {
 }
 
 function isFresh(source, variant) {
-  return (
-    fs.existsSync(variant) &&
-    fs.statSync(variant).mtimeMs >= fs.statSync(source).mtimeMs
-  );
+  return fs.existsSync(variant) && fs.statSync(variant).mtimeMs >= fs.statSync(source).mtimeMs;
 }
 
 async function optimizeOriginal(file, maxWidth, quality) {
@@ -111,7 +108,7 @@ async function processGroup({ dir, label, maxWidth, quality, variants }) {
   let bytesAfter = 0;
 
   for (const file of walkImages(baseDir)) {
-    const fresh = variants.every(v => isFresh(file, variantPath(file, v.width)));
+    const fresh = variants.every((v) => isFresh(file, variantPath(file, v.width)));
     if (fresh && !FORCE) {
       skipped++;
       continue;
@@ -134,7 +131,7 @@ async function processGroup({ dir, label, maxWidth, quality, variants }) {
   console.log(
     `${label.padEnd(20)} ${String(processed).padStart(3)} procesadas, ` +
       `${String(skipped).padStart(3)} saltadas | ` +
-      `${kb(bytesBefore)} -> ${kb(bytesAfter)} (${saved >= 0 ? '-' : '+'}${kb(Math.abs(saved))})`
+      `${kb(bytesBefore)} -> ${kb(bytesAfter)} (${saved >= 0 ? '-' : '+'}${kb(Math.abs(saved))})`,
   );
 
   return { processed, skipped, bytesBefore, bytesAfter };
@@ -148,7 +145,7 @@ async function optimize() {
   if (!fs.existsSync(ASSETS_DIR)) {
     console.error(
       `No se encontró el directorio de assets: ${ASSETS_DIR}\n` +
-        'Ejecuta el script desde la raíz del proyecto.'
+        'Ejecuta el script desde la raíz del proyecto.',
     );
     process.exitCode = 1;
     return;
@@ -170,12 +167,12 @@ async function optimize() {
     `\nTotal                ${String(totals.processed).padStart(3)} procesadas, ` +
       `${String(totals.skipped).padStart(3)} saltadas | ` +
       `${kb(totals.bytesBefore)} -> ${kb(totals.bytesAfter)} ` +
-      `(${saved >= 0 ? '-' : '+'}${kb(Math.abs(saved))})`
+      `(${saved >= 0 ? '-' : '+'}${kb(Math.abs(saved))})`,
   );
   console.log('\nListo.');
 }
 
-optimize().catch(err => {
+optimize().catch((err) => {
   console.error(err);
   process.exitCode = 1;
 });

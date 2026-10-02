@@ -37,15 +37,10 @@ const REFRESH_RATE_MAX = Number(process.env.REFRESH_RATE_MAX) || 5;
 // ejemplo para cubrir las previsualizaciones de Vercel:
 //   CORS_ORIGINS=https://labarcadelaparca.vercel.app,https://*.vercel.app,http://localhost:4200
 // Cada entrada admite `*` como comodín.
-const DEFAULT_CORS_ORIGINS = [
-  'https://labarcadelaparca.vercel.app',
-  'http://localhost:4200',
-];
+const DEFAULT_CORS_ORIGINS = ['https://labarcadelaparca.vercel.app', 'http://localhost:4200'];
 
 const CORS_ORIGIN_MATCHERS = (
-  process.env.CORS_ORIGINS
-    ? process.env.CORS_ORIGINS.split(',')
-    : DEFAULT_CORS_ORIGINS
+  process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : DEFAULT_CORS_ORIGINS
 )
   .map((origin) => origin.trim().replace(/\/$/, '').toLowerCase())
   .filter(Boolean)
@@ -69,7 +64,7 @@ function isOriginAllowed(origin) {
 app.use(
   cors({
     origin: (origin, callback) => callback(null, isOriginAllowed(origin)),
-  })
+  }),
 );
 app.use(express.json());
 
@@ -105,7 +100,7 @@ async function fetchCsstatsStats(steamId) {
     const { data } = await axios.get(`https://csstats.gg/player/${steamId}`, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Accept': 'text/html,application/xhtml+xml',
+        Accept: 'text/html,application/xhtml+xml',
         'Accept-Language': 'en-US,en;q=0.9',
       },
       timeout: 15000,
@@ -116,12 +111,12 @@ async function fetchCsstatsStats(steamId) {
     if (sources.length === 0) {
       console.warn(
         `[csstats] No se pudo extraer ninguna estadística para ${steamId}: ` +
-          'sin JSON-LD, sin __INITIAL_STATE__ y sin coincidencias por regex.'
+          'sin JSON-LD, sin __INITIAL_STATE__ y sin coincidencias por regex.',
       );
     } else if (sources.length === 1 && sources[0] === 'regex') {
       console.warn(
         `[csstats] ${steamId}: solo se pudo extraer mediante regex. ` +
-          'Es probable que el HTML de csstats.gg haya cambiado.'
+          'Es probable que el HTML de csstats.gg haya cambiado.',
       );
     }
 
@@ -148,7 +143,7 @@ async function fetchSteamProfile(steamId64) {
           key: STEAM_API_KEY,
         },
         timeout: 15000,
-      }
+      },
     );
 
     if (data.response?.players?.[0]) {
@@ -176,10 +171,15 @@ async function fetchPlayerData(steamId64, alias) {
 
   return {
     alias,
-    playerName: profile.status === 'fulfilled' && profile.value?.playerName ? profile.value.playerName : alias,
+    playerName:
+      profile.status === 'fulfilled' && profile.value?.playerName
+        ? profile.value.playerName
+        : alias,
     avatar: profile.status === 'fulfilled' && profile.value?.avatar ? profile.value.avatar : null,
-    profileUrl: profile.status === 'fulfilled' && profile.value?.profileUrl ? profile.value.profileUrl : null,
-    realName: profile.status === 'fulfilled' && profile.value?.realName ? profile.value.realName : null,
+    profileUrl:
+      profile.status === 'fulfilled' && profile.value?.profileUrl ? profile.value.profileUrl : null,
+    realName:
+      profile.status === 'fulfilled' && profile.value?.realName ? profile.value.realName : null,
     stats: csstats.status === 'fulfilled' && csstats.value ? csstats.value : { ...EMPTY_STATS },
     source: csstats.status === 'fulfilled' && csstats.value ? 'csstats' : 'steam',
   };
@@ -214,18 +214,22 @@ async function runRefresh() {
   console.log(`[Cache] Refreshing stats for ${entries.length} players...`);
 
   try {
-    const results = await mapWithConcurrency(entries, REFRESH_CONCURRENCY, async ([alias, steamId]) => {
-      try {
-        const player = await fetchPlayerData(steamId, alias);
-        console.log(
-          `[Cache] ${alias}: premier=${player.stats.premierRating}, rating=${player.stats.competitiveRating}, kd=${player.stats.kd}`
-        );
-        return player;
-      } catch (error) {
-        console.error(`[Cache] Error fetching ${alias}:`, error.message);
-        return null;
-      }
-    });
+    const results = await mapWithConcurrency(
+      entries,
+      REFRESH_CONCURRENCY,
+      async ([alias, steamId]) => {
+        try {
+          const player = await fetchPlayerData(steamId, alias);
+          console.log(
+            `[Cache] ${alias}: premier=${player.stats.premierRating}, rating=${player.stats.competitiveRating}, kd=${player.stats.kd}`,
+          );
+          return player;
+        } catch (error) {
+          console.error(`[Cache] Error fetching ${alias}:`, error.message);
+          return null;
+        }
+      },
+    );
 
     cache.players = results.filter(Boolean);
     // El timestamp refleja cuándo están listos los datos, no cuándo empezó el
@@ -363,7 +367,7 @@ app.post(
       timestamp: cache.timestamp,
       lastFetch: cache.lastFetch,
     });
-  })
+  }),
 );
 
 app.get('/api/health', (req, res) => {
