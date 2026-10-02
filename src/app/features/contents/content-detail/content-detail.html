@@ -1,0 +1,110 @@
+<article class="content-detail-page">
+  <a class="back-link text-link" routerLink="/contents">
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    <span>Volver a contenidos</span>
+  </a>
+
+  @if (loading()) {
+    <p class="detail-status">Cargando clase…</p>
+  } @else if (video(); as video) {
+    <div class="detail-player">
+      @if (embedUrl(); as url) {
+        <iframe
+          class="detail-iframe"
+          [src]="url"
+          [title]="video.title"
+          allow="
+            accelerometer;
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            gyroscope;
+            picture-in-picture;
+            web-share;
+          "
+          allowfullscreen
+        ></iframe>
+      } @else {
+        <button
+          class="detail-facade"
+          type="button"
+          (click)="play()"
+          [attr.aria-label]="'Reproducir ' + video.title"
+        >
+          <img [src]="thumbnail()" [alt]="video.title" width="1280" height="720" decoding="async" />
+          <span class="detail-play-icon" aria-hidden="true">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor" focusable="false">
+              <path d="M8 5v14l11-7z"></path>
+            </svg>
+          </span>
+        </button>
+      }
+    </div>
+
+    <header class="detail-header">
+      <h1>{{ video.title }}</h1>
+      <p class="detail-meta">
+        <span>{{ dateLabel() }}</span>
+        @if (video.speaker) {
+          <span>· {{ video.speaker }}</span>
+        }
+        @if (video.durationMin) {
+          <span>· {{ video.durationMin }} min</span>
+        }
+      </p>
+      @if (mapLabel() || tagList().length > 0) {
+        <div class="detail-tags">
+          @if (mapLabel(); as map) {
+            <span class="content-tag map">{{ map }}</span>
+          }
+          @for (tag of tagList(); track tag) {
+            <span class="content-tag">{{ tag }}</span>
+          }
+        </div>
+      }
+    </header>
+
+    @if (video.description) {
+      <p class="detail-description">{{ video.description }}</p>
+    }
+
+    <a
+      class="detail-youtube text-link"
+      [href]="youtubeWatchUrl()"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span>Ver en YouTube</span>
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" y1="14" x2="21" y2="3"></line>
+      </svg>
+    </a>
+  }
+</article>

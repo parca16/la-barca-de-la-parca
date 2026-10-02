@@ -53,6 +53,16 @@ Guía de lineups por mapa, filtrable por **tipo de granada** (smoke, molotov, fl
 
 Mapas cubiertos actualmente: Ancient, Anubis, Cache, Dust 2, Inferno, Mirage y Overpass.
 
+### 🎬 Contenidos
+
+Sección **privada** (solo para miembros autorizados) que centraliza las clases grabadas del equipo: análisis de mapas, utilidades, comunicación, demo reviews, etc. Cada clase tiene su vídeo de YouTube embebido, además de fecha, ponente, mapa y etiquetas. El listado permite filtrar por mapa y por temática.
+
+El contenido se sirve desde `GET /api/content/classes`, que exige sesión, así que los vídeos no se pueden enumerar sin autenticarse. Para que el vídeo no sea público, se recomienda subirlo a YouTube como **oculto (unlisted)**: proteger la web no protege el vídeo si alguien tiene el enlace.
+
+### 🔐 Autenticación
+
+Solo la sección Contenidos requiere iniciar sesión. Se usa **Google OAuth 2.0 / OIDC** y una lista de emails autorizados. El resto de la web (Inicio, Equipo, Estrategias y Utilidades) sigue siendo pública.
+
 ### 📊 Servidor de estadísticas _(en desarrollo, sin integrar)_
 
 Proyecto **independiente** dentro de `server/` (proyecto npm aparte) que recopila estadísticas reales de los jugadores desde **csstats.gg** y la **API de Steam**, las cachea y las expone vía API REST. **La web todavía no lo consume**: las fichas de jugador usan datos estáticos de `players.mock.ts` y la integración está pendiente (issue #34).
@@ -68,6 +78,7 @@ Proyecto **independiente** dentro de `server/` (proyecto npm aparte) que recopil
 | Plantillas                           | **HTML** (templates de componentes Angular)                                                                 |
 | Estado / reactividad                 | **Signals** de Angular y control de flujo nativo; **RxJS** solo para eventos del router y del scroll        |
 | Backend (API auxiliar independiente) | **Node.js** + **Express** (JavaScript ESM)                                                                  |
+| Backend de la web (auth y contenido) | **Vercel Functions** (TypeScript) + **jose** para firmar la sesión                                          |
 | Scraping y API                       | **axios** + **cheerio** (csstats.gg) y Steam Web API                                                        |
 | Tratamiento de imágenes              | **sharp** (conversión y optimización a `.webp`)                                                             |
 | Tests                                | **Vitest** (unitarios) + jsdom                                                                              |
@@ -81,22 +92,33 @@ Proyecto **independiente** dentro de `server/` (proyecto npm aparte) que recopil
 ```
 la-barca-de-la-parca/
 ├── .github/workflows/       # CI: formato, lint, build y tests (con cobertura) del frontend; tests del servidor
+├── api/                     # Vercel Functions: auth (Google OAuth) y contenido privado
+│   ├── _lib/                # Utilidades del backend (sesión, allowlist, cookies…)
+│   ├── _private/            # Datos privados: classes.ts (no se publica en el bundle)
+│   ├── auth/                # login, callback, logout y me
+│   └── content/             # endpoints protegidos (classes)
 ├── public/
 │   └── assets/              # Imágenes .webp (maps, callouts, plays, utilidades…)
+├── scripts/
+│   └── dev-api.ts           # Servidor local que ejecuta las Functions en desarrollo
 ├── src/
 │   ├── app/
 │   │   ├── app.ts           # Componente raíz (shell con el header)
-│   │   ├── app.config.ts    # Configuración de la app (zoneless, router…)
-│   │   ├── app.routes.ts    # Rutas lazy (una por sección)
-│   │   ├── core/header/     # Header, navegación y menú móvil
-│   │   ├── data/models/     # Modelos y datos: maps.ts, player.interface.ts, players.mock.ts
-│   │   ├── shared/          # Card, map-pool-grid e image-utils
+│   │   ├── app.config.ts    # Configuración de la app (zoneless, router, HTTP…)
+│   │   ├── app.routes.ts    # Rutas lazy (una por sección) + guard de auth
+│   │   ├── core/
+│   │   │   ├── auth/        # AuthService, authGuard y utilidades de sesión
+│   │   │   └── header/      # Header, navegación, menú móvil y sesión
+│   │   ├── data/models/     # Modelos y datos: maps.ts, player.interface.ts, content.interface.ts…
+│   │   ├── shared/          # Card, map-pool-grid, image-utils y youtube
 │   │   └── features/
 │   │       ├── home/        # Página de inicio
 │   │       ├── team/        # Roster
 │   │       ├── strategies/  # Selección de mapas (pool activo/inactivo)
 │   │       ├── map/         # Detalle de mapa: content/data/<mapa>-data.ts, map-content y strategy-card
-│   │       └── utilities/   # Utilidades + utility-detail y data/<mapa>-utilities.ts
+│   │       ├── utilities/   # Utilidades + utility-detail y data/<mapa>-utilities.ts
+│   │       ├── contents/    # Contenidos (privado): listado, filtros y detalle con facade
+│   │       └── login/       # Página de acceso con Google
 │   ├── index.html
 │   ├── main.ts
 │   └── styles.css           # Estilos globales y patrones reutilizables
@@ -140,19 +162,32 @@ Requisitos: **Node.js** y **npm**.
 # Instalar dependencias
 npm install
 
-# Servidor de desarrollo -> http://localhost:4200/
+# Variables de entorno locales de la API (no se commitea)
+cp .env.example .env.local
+# Rellena GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, AUTH_ALLOWED_EMAILS y AUTH_SESSION_SECRET
+
+# API local (ejecuta las Vercel Functions) -> http://localhost:3000
+npm run dev:api
+
+# Servidor de desarrollo -> http://localhost:4200 (hace proxy de /api a :3000)
 npm start
 
 # Build de producción -> dist/
 npm run build
 
-# Tests unitarios (Vitest). En terminal interactiva entra en watch mode.
+# Tests unitarios del frontend (Vitest). En terminal interactiva entra en watch mode.
 npm test
+
+# Tests de la API (backend de auth y contenido)
+npm run test:api
+
+# Comprobar tipos de la API
+npm run typecheck:api
 
 # Tests con informe de cobertura -> coverage/
 npm run test:coverage
 
-# Lint (ESLint + angular-eslint)
+# Lint (ESLint + angular-eslint; incluye api/)
 npm run lint
 
 # Comprobar / aplicar formato (Prettier)
@@ -164,17 +199,46 @@ npm run format
 
 | Script                      | Descripción                                                                                               |
 | --------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `npm start`                 | Servidor de desarrollo en http://localhost:4200/                                                          |
+| `npm start`                 | Servidor de desarrollo en http://localhost:4200/ (proxy de `/api` a :3000)                                |
+| `npm run dev:api`           | Ejecuta las Vercel Functions en http://localhost:3000/ (lee `.env.local`)                                 |
 | `npm run build`             | Build de producción en `dist/` (config `production` por defecto)                                          |
-| `npm test`                  | Tests unitarios con Vitest. En terminal interactiva entra en **watch mode**                               |
-| `npx ng test --watch=false` | Tests en una sola pasada (lo que usa CI)                                                                  |
+| `npm test`                  | Tests unitarios del frontend con Vitest. En terminal interactiva entra en **watch mode**                  |
+| `npm run test:api`          | Tests del backend (`api/`) con Vitest en entorno Node                                                     |
+| `npm run typecheck:api`     | Comprueba los tipos de `api/` con TypeScript                                                              |
+| `npx ng test --watch=false` | Tests del frontend en una sola pasada (lo que usa CI)                                                     |
+| `npm run lint`              | ESLint + angular-eslint sobre `src/` y `api/`                                                             |
+| `npm run format`            | Aplica Prettier a todo el repo                                                                            |
 | `npm run optimize:images`   | Optimiza los assets con **sharp**: heroes y variantes responsivas. Añade `-- --force` para regenerar todo |
 
-No hay scripts de **lint**, **format** ni **typecheck**. Prettier está configurado (`.prettierrc`) pero sin script asociado.
+### Autenticación (Google OAuth)
+
+La sección **Contenidos** se protege con Google OAuth 2.0 / OIDC. Para configurarlo:
+
+1. En [Google Cloud Console](https://console.cloud.google.com/apis/credentials) crea un **OAuth client ID** de tipo _Web application_.
+2. Añade los **Authorized redirect URIs**:
+   - Local: `http://localhost:4200/api/auth/callback` (con `AUTH_BASE_URL=http://localhost:4200` y el proxy de `npm start`).
+   - Producción: `https://labarcadelaparca.vercel.app/api/auth/callback`.
+   - Previews: añade la URL fija de preview que uses, o apóyate en Vercel Deployment Protection.
+3. Configura la pantalla de consentimiento (tipo _External_ o _Internal_ según el caso).
+4. Define las variables de entorno en Vercel (Project → Settings → Environment Variables) o en `.env.local` para desarrollo:
+
+| Variable               | Descripción                                                                      |
+| ---------------------- | -------------------------------------------------------------------------------- |
+| `GOOGLE_CLIENT_ID`     | Client ID del OAuth client.                                                      |
+| `GOOGLE_CLIENT_SECRET` | Client secret del OAuth client.                                                  |
+| `AUTH_ALLOWED_EMAILS`  | Emails autorizados separados por comas. Vacía = no entra nadie (fail closed).    |
+| `AUTH_SESSION_SECRET`  | Secreto de 32+ bytes para firmar la cookie de sesión.                            |
+| `AUTH_BASE_URL`        | URL base pública (local: `http://localhost:4200`; producción: la URL de Vercel). |
+
+La comparación de emails ignora mayúsculas y espacios. Para añadir o quitar un usuario basta con editar `AUTH_ALLOWED_EMAILS` y volver a desplegar.
+
+### Añadir una clase
+
+Edita `api/_private/classes.ts` y añade una entrada al array `CLASSES`. Ese fichero no forma parte del bundle: se sirve solo desde `GET /api/content/classes`, protegido por sesión. Sube el vídeo a YouTube como **oculto (unlisted)** y copia solo el ID (11 caracteres) en `youtubeId`.
 
 ### CI
 
-`.github/workflows/ci.yml` se ejecuta en cada push a `main` y en cada Pull Request. Valida el **build** y los **tests** del frontend y, en paralelo, los **tests** del servidor.
+`.github/workflows/ci.yml` se ejecuta en cada push a `main` y en cada Pull Request. Valida formato, lint, build y tests del frontend; tipos y tests de la API; y tests del servidor.
 
 ### Servidor de estadísticas (opcional)
 

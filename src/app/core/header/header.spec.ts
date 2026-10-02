@@ -1,4 +1,6 @@
 import { ChangeDetectorRef } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { NavigationEnd, provideRouter, Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -21,6 +23,8 @@ describe('Header', () => {
       providers: [
         { provide: Router, useValue: router },
         { provide: ChangeDetectorRef, useValue: cdr },
+        provideHttpClient(),
+        provideHttpClientTesting(),
       ],
     });
     // `Header` usa `inject()`, así que necesita un contexto de inyección.
@@ -145,7 +149,7 @@ describe('Header', () => {
   it('exposes aria-expanded and aria-controls on the menu toggle', async () => {
     await TestBed.configureTestingModule({
       imports: [Header],
-      providers: [provideRouter([])],
+      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
     }).compileComponents();
 
     const fixture = TestBed.createComponent(Header);
@@ -165,7 +169,7 @@ describe('Header', () => {
     beforeEach(async () => {
       await TestBed.configureTestingModule({
         imports: [Header],
-        providers: [provideRouter([])],
+        providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
       }).compileComponents();
     });
 

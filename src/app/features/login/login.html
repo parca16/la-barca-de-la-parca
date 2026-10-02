@@ -1,0 +1,39 @@
+<section class="login-page">
+  <div class="login-card">
+    <h1>ACCESO <span class="accent">PRIVADO</span></h1>
+    <p class="login-subtitle">
+      La sección <b>Contenidos</b> es solo para miembros autorizados del equipo NTR.
+    </p>
+
+    @if (errorMessage(); as message) {
+      <p class="login-error" [class.unauthorized]="isUnauthorized()" role="alert">{{ message }}</p>
+    }
+
+    @if (auth.user(); as user) {
+      <p class="login-session">
+        Sesión iniciada como <b>{{ user.email }}</b>
+      </p>
+      <button class="login-button" type="button" (click)="continueTo()">Ir a Contenidos</button>
+    } @else {
+      <button class="login-button" type="button" (click)="login()">
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+          <polyline points="10 17 15 12 10 7"></polyline>
+          <line x1="15" y1="12" x2="3" y2="12"></line>
+        </svg>
+        Entrar con Google
+      </button>
+    }
+  </div>
+</section>

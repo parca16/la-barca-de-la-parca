@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/auth/auth.guard';
 
 // Todas las features se cargan de forma diferida para que el bundle inicial
 // solo contenga el shell de la app (App + Header). Cada ruta descarga su chunk
@@ -19,6 +20,19 @@ export const routes: Routes = [
     path: 'utilities/:map',
     loadComponent: () =>
       import('./features/utilities/utility-detail/utility-detail').then((m) => m.UtilityDetail),
+  },
+  { path: 'login', loadComponent: () => import('./features/login/login').then((m) => m.Login) },
+  // Única sección privada: el contenido se sirve desde la API protegida.
+  {
+    path: 'contents',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/contents/contents').then((m) => m.Contents),
+  },
+  {
+    path: 'contents/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/contents/content-detail/content-detail').then((m) => m.ContentDetail),
   },
   { path: '**', redirectTo: '' },
 ];

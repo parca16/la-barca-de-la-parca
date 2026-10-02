@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { Subscription, filter, fromEvent, map, throttleTime } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 const SOLID_SCROLL_THRESHOLD = 400;
 const SCROLL_THROTTLE_MS = 100;
@@ -27,11 +28,14 @@ export class Header implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
   private scrollSubscription: Subscription = Subscription.EMPTY;
 
+  protected readonly auth = inject(AuthService);
+
   protected readonly navItems: { label: string; route: string; activateOn?: string[] }[] = [
     { label: 'Inicio', route: '', activateOn: [''] },
     { label: 'Equipo', route: 'team', activateOn: ['team'] },
     { label: 'Estrategias', route: 'strategies', activateOn: ['strategies', 'map'] },
     { label: 'Utilidades', route: 'utilities', activateOn: ['utilities'] },
+    { label: 'Contenidos', route: 'contents', activateOn: ['contents'] },
   ];
 
   ngOnInit(): void {
@@ -82,6 +86,11 @@ export class Header implements OnInit, OnDestroy {
 
   closeMenu(): void {
     this.isMenuOpen = false;
+  }
+
+  protected logout(): void {
+    this.closeMenu();
+    void this.auth.logout().then(() => this.router.navigate(['/']));
   }
 
   /** Cierra el menú móvil con Escape. */
