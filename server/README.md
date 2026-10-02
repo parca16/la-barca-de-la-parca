@@ -36,18 +36,20 @@ El servidor:
 3. Combina ambas fuentes
 4. Devuelve JSON a la web
 
-Se actualiza cada 5 minutos automáticamente.
+Se actualiza cada 5 minutos automáticamente. Un refresco en curso se reutiliza: llamar a `/api/refresh` mientras ya hay uno en marcha no lanza otro ciclo en paralelo. Los jugadores se descargan en paralelo con un límite de concurrencia (3 por defecto) y `timestamp` solo se actualiza cuando todos los datos están listos.
 
 ## Endpoints
 
 - `GET /api/players` - Lista completa de jugadores con stats
 - `GET /api/player/:alias` - Stats de un jugador específico
+- `GET /api/refresh` - Fuerza un refresco de la caché
 - `GET /api/health` - Estado del servidor
 
 ## Variables de entorno
 
 - `STEAM_API_KEY` - (Opcional) Tu API key de Steam para competitive matches
 - `CORS_ORIGINS` - (Opcional) Lista de orígenes permitidos para CORS, separados por comas. Admite `*` como comodín. Por defecto solo se permiten `https://labarcadelaparca.vercel.app` y `http://localhost:4200`.
+- `REFRESH_CONCURRENCY` - (Opcional) Número de jugadores que se descargan a la vez. Por defecto `3`.
 
 Si no tienes API key, el servidor funcionará con los datos de csstats.gg solo.
 
@@ -57,6 +59,8 @@ Si no tienes API key, el servidor funcionará con los datos de csstats.gg solo.
 STEAM_API_KEY=tu_api_key
 # Añade las previsualizaciones de Vercel a los orígenes permitidos:
 CORS_ORIGINS=https://labarcadelaparca.vercel.app,https://*.vercel.app,http://localhost:4200
+# Descargas simultáneas al refrescar la caché:
+REFRESH_CONCURRENCY=3
 ```
 
 ## Producción
