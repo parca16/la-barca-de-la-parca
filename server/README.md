@@ -47,8 +47,17 @@ Se actualiza cada 5 minutos automáticamente.
 ## Variables de entorno
 
 - `STEAM_API_KEY` - (Opcional) Tu API key de Steam para competitive matches
+- `CORS_ORIGINS` - (Opcional) Lista de orígenes permitidos para CORS, separados por comas. Admite `*` como comodín. Por defecto solo se permiten `https://labarcadelaparca.vercel.app` y `http://localhost:4200`.
 
 Si no tienes API key, el servidor funcionará con los datos de csstats.gg solo.
+
+### Ejemplo de `.env`
+
+```bash
+STEAM_API_KEY=tu_api_key
+# Añade las previsualizaciones de Vercel a los orígenes permitidos:
+CORS_ORIGINS=https://labarcadelaparca.vercel.app,https://*.vercel.app,http://localhost:4200
+```
 
 ## Producción
 

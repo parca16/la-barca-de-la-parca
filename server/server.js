@@ -16,7 +16,45 @@ const PORT = process.env.PORT || 3000;
 const STEAM_API_KEY = process.env.STEAM_API_KEY || 'YOUR_STEAM_API_KEY_HERE';
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
 
-app.use(cors());
+// Orígenes permitidos para CORS. Por defecto solo producción y el dev server
+// de Angular. `CORS_ORIGINS` (lista separada por comas) los sustituye, por
+// ejemplo para cubrir las previsualizaciones de Vercel:
+//   CORS_ORIGINS=https://labarcadelaparca.vercel.app,https://*.vercel.app,http://localhost:4200
+// Cada entrada admite `*` como comodín.
+const DEFAULT_CORS_ORIGINS = [
+  'https://labarcadelaparca.vercel.app',
+  'http://localhost:4200',
+];
+
+const CORS_ORIGIN_MATCHERS = (
+  process.env.CORS_ORIGINS
+    ? process.env.CORS_ORIGINS.split(',')
+    : DEFAULT_CORS_ORIGINS
+)
+  .map((origin) => origin.trim().replace(/\/$/, '').toLowerCase())
+  .filter(Boolean)
+  .map((pattern) => {
+    if (!pattern.includes('*')) {
+      return (origin) => origin === pattern;
+    }
+    const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`^${pattern.split('*').map(escapeRegExp).join('.*')}$`);
+    return (origin) => regex.test(origin);
+  });
+
+// Las peticiones sin cabecera `Origin` (curl, health checks, mismo origen) no
+// pasan por CORS, así que no hay nada que restringir.
+function isOriginAllowed(origin) {
+  if (!origin) return true;
+  const normalized = origin.replace(/\/$/, '').toLowerCase();
+  return CORS_ORIGIN_MATCHERS.some((matches) => matches(normalized));
+}
+
+app.use(
+  cors({
+    origin: (origin, callback) => callback(null, isOriginAllowed(origin)),
+  })
+);
 app.use(express.json());
 
 // Players to track
