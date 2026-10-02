@@ -1,8 +1,8 @@
 import express from 'express';
 import axios from 'axios';
-import { load } from 'cheerio';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { EMPTY_STATS, parseCsstatsHtml } from './csstats.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -51,92 +51,18 @@ async function fetchCsstatsStats(steamId) {
       timeout: 15000,
     });
 
-    const stats = {
-      premierRating: null,
-      competitiveRating: null,
-      wins: 0,
-      kd: 0,
-      headshotPct: 0,
-      adr: 0,
-      kast: 0,
-      rating: 0,
-      matches: 0,
-      wins_p1: 0,
-    };
+    const { stats, sources } = parseCsstatsHtml(data);
 
-    // Load HTML with cheerio
-    const $ = load(data);
-
-    // Try to find stats from inline script data
-    const scripts = $('script').toArray();
-    
-    for (const script of scripts) {
-      const text = $(script).text();
-      
-      // Look for JSON-LD data
-      if (text.includes('application/ld+json')) {
-        try {
-          // Find JSON-LD in the page
-          const jsonLdScripts = $('script[type="application/ld+json"]').toArray();
-          for (const jsonScript of jsonLdScripts) {
-            const jsonText = $(jsonScript).text();
-            try {
-              const json = JSON.parse(jsonText);
-              if (json?.stats) {
-                if (json.stats.premierRating) stats.premierRating = json.stats.premierRating;
-                if (json.stats.competitiveRating) stats.competitiveRating = json.stats.competitiveRating;
-                if (json.stats.wins) stats.wins = json.stats.wins;
-                if (json.stats.kd) stats.kd = json.stats.kd;
-                if (json.stats.headshotPct) stats.headshotPct = json.stats.headshotPct;
-              }
-            } catch (e) {
-              // ignore
-            }
-          }
-        } catch (e) {
-          // ignore
-        }
-      }
-      
-      // Nota (issue #22): aquí se parseaba window.__INITIAL_STATE__ con
-      // evaluación dinámica sobre HTML de un tercero. Se eliminó por
-      // seguridad; el scraping de stats se replanteará más adelante.
-      // Ver server.spec.js.
-    }
-
-    // Also try direct regex matching
-    try {
-      const premierMatch = data.match(/"premierRating"\s*:\s*(\d+)/);
-      if (premierMatch) stats.premierRating = parseInt(premierMatch[1]);
-      
-      const compMatch = data.match(/"competitiveRating"\s*:\s*(\d+)/);
-      if (compMatch) stats.competitiveRating = parseInt(compMatch[1]);
-      
-      const kdMatch = data.match(/"kd"\s*:\s*([\d.]+)/);
-      if (kdMatch) stats.kd = parseFloat(kdMatch[1]);
-      
-      const hsMatch = data.match(/"headshotPct"\s*:\s*([\d.]+)/);
-      if (hsMatch) stats.headshotPct = parseFloat(hsMatch[1]);
-      
-      const adrMatch = data.match(/"adr"\s*:\s*([\d.]+)/);
-      if (adrMatch) stats.adr = parseFloat(adrMatch[1]);
-      
-      const kastMatch = data.match(/"kast"\s*:\s*([\d.]+)/);
-      if (kastMatch) stats.kast = parseFloat(kastMatch[1]);
-      
-      const ratingMatch = data.match(/"rating"\s*:\s*([\d.]+)/);
-      if (ratingMatch) stats.rating = parseFloat(ratingMatch[1]);
-      
-      const winsMatch = data.match(/"wins"\s*:\s*(\d+)/);
-      if (winsMatch) stats.wins = parseInt(winsMatch[1]);
-      
-      const matchesMatch = data.match(/"matches"\s*:\s*(\d+)/);
-      if (matchesMatch) stats.matches = parseInt(matchesMatch[1]);
-      
-      const wins_p1Match = data.match(/"wins_p1"\s*:\s*(\d+)/);
-      if (wins_p1Match) stats.wins_p1 = parseInt(wins_p1Match[1]);
-    } catch (e) {
-      // ignore regex errors
+    if (sources.length === 0) {
+      console.warn(
+        `[csstats] No se pudo extraer ninguna estadística para ${steamId}: ` +
+          'sin JSON-LD, sin __INITIAL_STATE__ y sin coincidencias por regex.'
+      );
+    } else if (sources.length === 1 && sources[0] === 'regex') {
+      console.warn(
+        `[csstats] ${steamId}: solo se pudo extraer mediante regex. ` +
+          'Es probable que el HTML de csstats.gg haya cambiado.'
+      );
     }
 
     return stats;
@@ -189,18 +115,7 @@ async function fetchPlayerData(steamId64, alias) {
     avatar: profile.status === 'fulfilled' && profile.value?.avatar ? profile.value.avatar : null,
     profileUrl: profile.status === 'fulfilled' && profile.value?.profileUrl ? profile.value.profileUrl : null,
     realName: profile.status === 'fulfilled' && profile.value?.realName ? profile.value.realName : null,
-    stats: csstats.status === 'fulfilled' && csstats.value ? csstats.value : {
-      premierRating: null,
-      competitiveRating: null,
-      wins: 0,
-      kd: 0,
-      headshotPct: 0,
-      adr: 0,
-      kast: 0,
-      rating: 0,
-      matches: 0,
-      wins_p1: 0,
-    },
+    stats: csstats.status === 'fulfilled' && csstats.value ? csstats.value : { ...EMPTY_STATS },
     source: csstats.status === 'fulfilled' && csstats.value ? 'csstats' : 'steam',
   };
 }
