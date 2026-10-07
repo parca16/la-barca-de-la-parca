@@ -11,7 +11,7 @@
     "test": "ng test",
     "test:coverage": "ng test --watch=false --coverage",
     "test:api": "vitest run --config vitest.api.config.ts",
-    "typecheck:api": "tsc -p api/tsconfig.json",
+    "typecheck:api": "tsc -p tsconfig.api.json",
     "lint": "ng lint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
