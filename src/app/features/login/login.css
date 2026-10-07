@@ -9,7 +9,7 @@
   background: var(--bg-page);
 }
 
-/* Rejilla táctica de fondo, difuminada en los bordes. */
+/* Rejilla táctica de fondo, a toda la vista. */
 .login-page::before {
   content: '';
   position: absolute;
@@ -18,21 +18,6 @@
     linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 48px 48px;
-  -webkit-mask-image: radial-gradient(circle at 50% 42%, #000 0%, #000 35%, transparent 72%);
-  mask-image: radial-gradient(circle at 50% 42%, #000 0%, #000 35%, transparent 72%);
-  pointer-events: none;
-}
-
-/* Emblema del equipo como marca de agua. */
-.login-page::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('/assets/icons/LaBarcaDeLaParca.webp');
-  background-repeat: no-repeat;
-  background-position: 50% 44%;
-  background-size: min(64vw, 520px);
-  opacity: 0.05;
   pointer-events: none;
 }
 
