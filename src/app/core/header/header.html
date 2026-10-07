@@ -39,8 +39,8 @@
         </a>
       }
 
-      <div class="nav-auth">
-        @if (auth.user(); as user) {
+      @if (auth.user(); as user) {
+        <div class="nav-auth">
           <span class="auth-user" [title]="user.email">
             @if (user.picture) {
               <img
@@ -56,10 +56,8 @@
             <span class="auth-name">{{ user.name || user.email }}</span>
           </span>
           <button class="auth-action" type="button" (click)="logout()">Salir</button>
-        } @else {
-          <a class="auth-action" routerLink="/login" (click)="closeMenu()">Entrar</a>
-        }
-      </div>
+        </div>
+      }
     </nav>
   </div>
 

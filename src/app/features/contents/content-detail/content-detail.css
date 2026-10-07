@@ -79,29 +79,6 @@
   margin-bottom: 0.75rem;
 }
 
-.detail-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-bottom: 1.5rem;
-}
-
-.content-tag {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #888;
-  background: var(--bg-3);
-  border-radius: 4px;
-  padding: 0.2rem 0.55rem;
-}
-
-.content-tag.map {
-  color: var(--accent);
-  background: rgba(var(--accent-rgb), 0.1);
-}
-
 .detail-description {
   color: #bbb;
   font-size: 1.05rem;

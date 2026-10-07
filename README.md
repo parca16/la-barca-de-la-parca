@@ -55,7 +55,7 @@ Mapas cubiertos actualmente: Ancient, Anubis, Cache, Dust 2, Inferno, Mirage y O
 
 ### 🎬 Contenidos
 
-Sección **privada** (solo para miembros autorizados) que centraliza las clases grabadas del equipo: análisis de mapas, utilidades, comunicación, demo reviews, etc. Cada clase tiene su vídeo de YouTube embebido, además de fecha, ponente, mapa y etiquetas. El listado permite filtrar por mapa y por temática.
+Sección **privada** (solo para miembros autorizados) que centraliza las clases grabadas del equipo: análisis de mapas, utilidades, comunicación, demo reviews, etc. Cada clase tiene su vídeo de YouTube embebido, además de fecha, ponente y descripción, y el listado se ordena por fecha.
 
 El contenido se sirve desde `GET /api/content/classes`, que exige sesión, así que los vídeos no se pueden enumerar sin autenticarse. Para que el vídeo no sea público, se recomienda subirlo a YouTube como **oculto (unlisted)**: proteger la web no protege el vídeo si alguien tiene el enlace.
 

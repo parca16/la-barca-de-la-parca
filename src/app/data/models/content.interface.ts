@@ -1,9 +1,9 @@
 /**
  * Una clase grabada del equipo.
  *
- * Los datos reales viven en `api/_private/classes.ts` (solo servidor) y se
- * sirven a través de `GET /api/content/classes`, que exige sesión. Este modelo
- * es el contrato compartido entre backend y frontend.
+ * Los datos reales viven cifrados en `api/_private/classes.enc.js` y se sirven
+ * a través de `GET /api/content/classes`, que exige sesión. Este modelo es el
+ * contrato compartido entre backend y frontend.
  */
 export interface ClassVideo {
   /** Slug único, usado en la URL `/contents/:id`. */
@@ -20,9 +20,5 @@ export interface ClassVideo {
   date: string;
   /** Quién imparte la clase. */
   speaker?: string;
-  /** Clave de mapa si aplica ('mirage', 'inferno'...). */
-  map?: string;
-  /** Etiquetas: 'utilidades', 'comunicación', 'demo review'... */
-  tags?: string[];
   durationMin?: number;
 }

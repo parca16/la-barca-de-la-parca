@@ -66,16 +66,6 @@
           <span>· {{ video.durationMin }} min</span>
         }
       </p>
-      @if (mapLabel() || tagList().length > 0) {
-        <div class="detail-tags">
-          @if (mapLabel(); as map) {
-            <span class="content-tag map">{{ map }}</span>
-          }
-          @for (tag of tagList(); track tag) {
-            <span class="content-tag">{{ tag }}</span>
-          }
-        </div>
-      }
     </header>
 
     @if (video.description) {

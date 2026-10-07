@@ -73,8 +73,6 @@ export class Home {
         'Enlace de YouTube del vídeo (mejor subido como oculto)',
         'Fecha de la clase',
         'Quién la imparte',
-        'Mapa, si la clase trata de uno concreto',
-        'Etiquetas o temática (utilidades, comunicación, demo review…)',
         'Descripción de lo que se explica',
       ],
     },

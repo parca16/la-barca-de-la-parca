@@ -2,7 +2,6 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DomSanitizer, type SafeResourceUrl } from '@angular/platform-browser';
 import { ClassVideo } from '../../../data/models/content.interface';
-import { getMap } from '../../../data/models/maps';
 import { youtubeEmbedUrl, youtubeThumbnail, youtubeWatchUrl } from '../../../shared/youtube';
 import { ContentsService } from '../contents.service';
 
@@ -35,12 +34,6 @@ export class ContentDetail {
     const video = this.video();
     return video ? this.dateFormatter.format(new Date(`${video.date}T00:00:00`)) : '';
   });
-  protected readonly mapLabel = computed(() => {
-    const video = this.video();
-    if (!video?.map) return null;
-    return getMap(video.map)?.name ?? video.map;
-  });
-  protected readonly tagList = computed(() => this.video()?.tags ?? []);
   protected readonly watchUrl = computed(() => {
     const video = this.video();
     return video ? youtubeWatchUrl(video.youtubeId) : '';
