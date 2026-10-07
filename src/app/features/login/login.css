@@ -1,39 +1,82 @@
 .login-page {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 70vh;
-  padding: 2rem 0;
+  min-height: 100vh;
+  padding: 7rem 1.5rem 3rem;
+  overflow: hidden;
+  background: var(--bg-page);
+}
+
+/* Rejilla táctica de fondo, difuminada en los bordes. */
+.login-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(circle at 50% 42%, #000 0%, #000 35%, transparent 72%);
+  mask-image: radial-gradient(circle at 50% 42%, #000 0%, #000 35%, transparent 72%);
+  pointer-events: none;
+}
+
+/* Emblema del equipo como marca de agua. */
+.login-page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/icons/LaBarcaDeLaParca.webp');
+  background-repeat: no-repeat;
+  background-position: 50% 44%;
+  background-size: min(64vw, 520px);
+  opacity: 0.05;
+  pointer-events: none;
 }
 
 .login-card {
+  position: relative;
+  z-index: 1;
   width: 100%;
-  max-width: 460px;
-  background: var(--bg-1);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2.5rem 2rem;
+  max-width: 430px;
+  padding: 2.5rem 2.25rem 2.25rem;
+  background: rgba(19, 21, 26, 0.92);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
   text-align: center;
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.45);
 }
 
-.login-card h1 {
-  font-size: 1.9rem;
+.login-rule {
+  display: block;
+  width: 44px;
+  height: 3px;
+  margin: 0 auto 1.5rem;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.login-title {
+  font-size: 2.1rem;
+  line-height: 1.05;
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: 0.75rem;
   color: #fff;
+  margin-bottom: 0.9rem;
 }
 
-.login-card h1 .accent {
+.login-title .accent {
   color: var(--accent);
 }
 
 .login-subtitle {
+  max-width: 34ch;
+  margin: 0 auto 2rem;
   color: #9a9a9a;
   font-size: 0.95rem;
-  line-height: 1.5;
-  margin-bottom: 1.75rem;
+  line-height: 1.55;
 }
 
 .login-error {
@@ -43,11 +86,12 @@
   border-radius: 8px;
   padding: 0.75rem 1rem;
   font-size: 0.9rem;
+  line-height: 1.4;
   margin-bottom: 1.5rem;
 }
 
 .login-error.unauthorized {
-  background: rgba(233, 255, 31, 0.06);
+  background: rgba(var(--accent-rgb), 0.06);
   border-color: rgba(var(--accent-rgb), 0.35);
   color: var(--accent);
 }
@@ -56,21 +100,22 @@
   color: #ccc;
   font-size: 0.95rem;
   margin-bottom: 1.5rem;
+  word-break: break-word;
 }
 
 .login-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
+  gap: 0.65rem;
   width: 100%;
-  padding: 0.85rem 1.25rem;
+  padding: 0.9rem 1.25rem;
   border-radius: 8px;
   border: 1px solid var(--accent);
   background: var(--accent);
   color: #0a0a0a;
   font-family: var(--font-mono);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -87,12 +132,52 @@
   transform: translateY(-1px);
 }
 
-@media (max-width: 600px) {
+.login-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.login-google {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  flex: 0 0 auto;
+}
+
+.login-footnote {
+  margin-top: 1.25rem;
+  color: #666;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: no-preference) {
   .login-card {
-    padding: 2rem 1.25rem;
+    animation: login-in 0.45s ease both;
   }
 
-  .login-card h1 {
-    font-size: 1.5rem;
+  @keyframes login-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .login-page {
+    padding: 5.5rem 1rem 2rem;
+  }
+
+  .login-card {
+    padding: 2rem 1.35rem 1.75rem;
+  }
+
+  .login-title {
+    font-size: 1.7rem;
   }
 }

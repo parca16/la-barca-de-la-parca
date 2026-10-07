@@ -1,8 +1,10 @@
 <section class="login-page">
   <div class="login-card">
-    <h1>ACCESO <span class="accent">PRIVADO</span></h1>
+    <span class="login-rule" aria-hidden="true"></span>
+
+    <h1 class="login-title">ACCESO <span class="accent">PRIVADO</span></h1>
     <p class="login-subtitle">
-      La sección <b>Contenidos</b> es solo para miembros autorizados del equipo NTR.
+      Contenidos es solo para el equipo NTR. Entra con una cuenta de Google autorizada.
     </p>
 
     @if (errorMessage(); as message) {
@@ -16,24 +18,14 @@
       <button class="login-button" type="button" (click)="continueTo()">Ir a Contenidos</button>
     } @else {
       <button class="login-button" type="button" (click)="login()">
-        <svg
-          aria-hidden="true"
-          focusable="false"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-          <polyline points="10 17 15 12 10 7"></polyline>
-          <line x1="15" y1="12" x2="3" y2="12"></line>
+        <svg class="login-google" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path
+            d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81Z"
+          ></path>
         </svg>
         Entrar con Google
       </button>
+      <p class="login-footnote">Solo las cuentas autorizadas del equipo pueden ver las clases.</p>
     }
   </div>
 </section>
