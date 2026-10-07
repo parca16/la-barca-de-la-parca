@@ -1,6 +1,7 @@
 {
   "name": "la-barca-de-la-parca",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
@@ -15,7 +16,7 @@
     "lint": "ng lint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "optimize:images": "node optimize-headers.js"
+    "optimize:images": "node optimize-headers.cjs"
   },
   "private": true,
   "packageManager": "npm@12.0.2",
