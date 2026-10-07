@@ -1,0 +1,115 @@
+<article class="contents-section">
+  <header class="contents-header">
+    <h1>CONTENIDOS <span class="accent">DEL EQUIPO</span></h1>
+    <p class="contents-subtitle">
+      Clases grabadas: análisis de mapas, utilidades, comunicación y mucho más.
+    </p>
+  </header>
+
+  @if (loading()) {
+    <p class="contents-status">Cargando clases…</p>
+  } @else if (loadError()) {
+    <p class="contents-status error">No se pudieron cargar las clases. Inténtalo de nuevo.</p>
+  } @else {
+    @if (mapOptions().length > 0 || tagOptions().length > 0) {
+      <div class="contents-filters">
+        @if (mapOptions().length > 0) {
+          <div class="filter-group">
+            <span class="filter-label">Mapa</span>
+            <div class="filter-chips">
+              @for (option of mapOptions(); track option.key) {
+                <button
+                  class="filter-chip"
+                  type="button"
+                  [class.active]="selectedMap() === option.key"
+                  (click)="toggleMap(option.key)"
+                >
+                  {{ option.label }}
+                </button>
+              }
+            </div>
+          </div>
+        }
+
+        @if (tagOptions().length > 0) {
+          <div class="filter-group">
+            <span class="filter-label">Tipo</span>
+            <div class="filter-chips">
+              @for (tag of tagOptions(); track tag) {
+                <button
+                  class="filter-chip"
+                  type="button"
+                  [class.active]="selectedTag() === tag"
+                  (click)="toggleTag(tag)"
+                >
+                  {{ tag }}
+                </button>
+              }
+            </div>
+          </div>
+        }
+
+        @if (selectedMap() || selectedTag()) {
+          <button class="filter-clear" type="button" (click)="clearFilters()">
+            Limpiar filtros
+          </button>
+        }
+      </div>
+    }
+
+    @if (filtered().length === 0) {
+      <p class="contents-status">
+        @if (mapOptions().length === 0 && tagOptions().length === 0) {
+          Todavía no hay clases publicadas.
+        } @else {
+          No hay clases con estos filtros.
+        }
+      </p>
+    } @else {
+      <div class="contents-grid">
+        @for (video of filtered(); track video.id) {
+          <a class="content-card" [routerLink]="['/contents', video.id]">
+            <div class="content-thumb">
+              <img
+                [src]="video.thumbnail"
+                [alt]="video.title"
+                width="480"
+                height="360"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="content-play" aria-hidden="true">
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  focusable="false"
+                >
+                  <path d="M8 5v14l11-7z"></path>
+                </svg>
+              </span>
+            </div>
+            <div class="content-info">
+              <h2 class="content-title">{{ video.title }}</h2>
+              <p class="content-meta">
+                <span>{{ video.dateLabel }}</span>
+                @if (video.speaker) {
+                  <span>· {{ video.speaker }}</span>
+                }
+              </p>
+              <div class="content-tags">
+                @if (video.mapLabel) {
+                  <span class="content-tag map">{{ video.mapLabel }}</span>
+                }
+                @for (tag of video.tagList; track tag) {
+                  <span class="content-tag">{{ tag }}</span>
+                }
+              </div>
+            </div>
+          </a>
+        }
+      </div>
+    }
+  }
+</article>

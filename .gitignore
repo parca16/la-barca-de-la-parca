@@ -39,6 +39,17 @@ testem.log
 /typings
 __screenshots__/
 
+# Variables de entorno locales (no se commitean; existe .env.example)
+.env
+.env.local
+.env*.local
+
+# Datos privados en claro de Contenidos (solo se commitea la versión cifrada)
+api/_private/classes.private.json
+
+# Vercel
+.vercel
+
 # System files
 .DS_Store
 Thumbs.db
