@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ClassVideo } from '../../data/models/content.interface';
-import { sortClassesByDateDesc } from './content-filters';
+import { sortClassesByDateDesc } from './contents-sort';
 
 /**
  * Acceso al listado de clases. Los datos son privados: viven detrás de

@@ -10,8 +10,6 @@ const CLASSES = [
     description: '',
     youtubeId: 'https://youtu.be/Fi1wOnVkt3w',
     date: '2026-10-07',
-    map: 'cache',
-    tags: ['mapas'],
   },
 ];
 
