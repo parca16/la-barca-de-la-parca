@@ -1,11 +1,35 @@
-import { createRemoteJWKSet, jwtVerify } from 'jose';
+import { createPublicKey, createVerify } from 'node:crypto';
+
+type CreatePublicKeyInput = Parameters<typeof createPublicKey>[0];
+type JwkInput = Extract<CreatePublicKeyInput, { format: 'jwk' }>;
+
+/** Clave pública de Google en formato JWK. */
+export type GoogleJwk = JwkInput['key'] & { kid?: string };
 
 const GOOGLE_AUTH_ENDPOINT = 'https://accounts.google.com/o/oauth2/v2/auth';
 const GOOGLE_TOKEN_ENDPOINT = 'https://oauth2.googleapis.com/token';
+const GOOGLE_JWKS_URL = 'https://www.googleapis.com/oauth2/v3/certs';
 const GOOGLE_ISSUERS = ['https://accounts.google.com', 'accounts.google.com'];
+const JWKS_TTL_MS = 60 * 60 * 1000;
 
-/** Claves públicas de Google (con caché interna de jose) para verificar el id_token. */
-const GOOGLE_JWKS = createRemoteJWKSet(new URL('https://www.googleapis.com/oauth2/v3/certs'));
+let cachedKeys: GoogleJwk[] = [];
+let cachedAt = 0;
+
+/** Claves públicas de Google (JWKS) con una caché de una hora. */
+async function getGoogleKeys(): Promise<GoogleJwk[]> {
+  const now = Date.now();
+  if (cachedKeys.length > 0 && now - cachedAt < JWKS_TTL_MS) return cachedKeys;
+
+  const response = await fetch(GOOGLE_JWKS_URL);
+  if (!response.ok) {
+    throw new Error(`No se pudieron obtener las claves de Google (${response.status})`);
+  }
+
+  const data = (await response.json()) as { keys?: GoogleJwk[] };
+  cachedKeys = Array.isArray(data.keys) ? data.keys : [];
+  cachedAt = now;
+  return cachedKeys;
+}
 
 export interface GoogleAuthParams {
   clientId: string;
@@ -66,31 +90,68 @@ export interface GoogleIdTokenClaims {
 }
 
 /**
- * Verifica firma (`JWKS`), `aud`, `iss` y devuelve los claims relevantes.
- * Devuelve `null` si el token no es válido o no trae email.
+ * Verifica firma (RS256), `iss`, `aud` y caducidad de un id_token.
+ * Se pasa la lista de claves para poder testearlo sin red.
  */
-export async function verifyGoogleIdToken(
+export function verifyIdToken(
   idToken: string,
   clientId: string,
-): Promise<GoogleIdTokenClaims | null> {
+  keys: GoogleJwk[],
+): GoogleIdTokenClaims | null {
   try {
-    const { payload } = await jwtVerify(idToken, GOOGLE_JWKS, {
-      issuer: GOOGLE_ISSUERS,
-      audience: clientId,
-    });
+    const parts = idToken.split('.');
+    if (parts.length !== 3) return null;
+
+    const [headerB64, payloadB64, signatureB64] = parts;
+
+    const header = JSON.parse(Buffer.from(headerB64, 'base64url').toString('utf8')) as {
+      alg?: string;
+      kid?: string;
+    };
+    if (header.alg !== 'RS256') return null;
+
+    const jwk = keys.find((key) => key.kid === header.kid);
+    if (!jwk) return null;
+
+    const publicKey = createPublicKey({ key: jwk, format: 'jwk' });
+    const verifier = createVerify('RSA-SHA256');
+    verifier.update(`${headerB64}.${payloadB64}`);
+    verifier.end();
+    if (!verifier.verify(publicKey, Buffer.from(signatureB64, 'base64url'))) return null;
+
+    const payload = JSON.parse(Buffer.from(payloadB64, 'base64url').toString('utf8')) as Record<
+      string,
+      unknown
+    >;
+
+    const issuer = payload['iss'];
+    if (typeof issuer !== 'string' || !GOOGLE_ISSUERS.includes(issuer)) return null;
+    if (payload['aud'] !== clientId) return null;
+
+    const exp = payload['exp'];
+    if (typeof exp === 'number' && exp < Math.floor(Date.now() / 1000)) return null;
 
     const email = typeof payload['email'] === 'string' ? payload['email'] : null;
     if (!email) return null;
 
-    const verified = payload['email_verified'];
+    const verified = payload['email_verified'] === true || payload['email_verified'] === 'true';
 
     return {
       email,
-      emailVerified: verified === true || verified === 'true',
+      emailVerified: verified,
       name: typeof payload['name'] === 'string' ? payload['name'] : undefined,
       picture: typeof payload['picture'] === 'string' ? payload['picture'] : undefined,
     };
   } catch {
     return null;
   }
+}
+
+/** Obtiene las claves de Google y verifica el id_token. */
+export async function verifyGoogleIdToken(
+  idToken: string,
+  clientId: string,
+): Promise<GoogleIdTokenClaims | null> {
+  const keys = await getGoogleKeys();
+  return verifyIdToken(idToken, clientId, keys);
 }
