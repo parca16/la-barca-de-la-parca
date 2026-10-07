@@ -1,24 +1,22 @@
 import { randomBytes } from 'node:crypto';
-import { getGoogleClientId } from '../_lib/env';
-import { buildGoogleAuthUrl } from '../_lib/google';
+import { getGoogleClientId } from '../_lib/env.js';
+import { buildGoogleAuthUrl } from '../_lib/google.js';
 import {
   getBaseUrl,
   getRequestUrl,
   isSecureRequest,
   methodNotAllowed,
   redirect,
-  type ApiRequest,
-  type ApiResponse,
-} from '../_lib/http';
-import { serializeCookie } from '../_lib/cookies';
-import { encodeOAuthState, OAUTH_COOKIE, OAUTH_TTL_SECONDS } from '../_lib/oauth-state';
-import { sanitizeReturnTo } from '../_lib/return-to';
+} from '../_lib/http.js';
+import { serializeCookie } from '../_lib/cookies.js';
+import { encodeOAuthState, OAUTH_COOKIE, OAUTH_TTL_SECONDS } from '../_lib/oauth-state.js';
+import { sanitizeReturnTo } from '../_lib/return-to.js';
 
 /**
  * GET /api/auth/login
  * Redirige a Google guardando `state` y `returnTo` en una cookie temporal.
  */
-export default function handler(req: ApiRequest, res: ApiResponse): void {
+export default function handler(req, res) {
   if (req.method !== 'GET') {
     methodNotAllowed(res, 'GET');
     return;

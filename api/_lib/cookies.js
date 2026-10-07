@@ -1,12 +1,5 @@
-export interface CookieOptions {
-  maxAge?: number;
-  secure?: boolean;
-  sameSite?: 'Lax' | 'Strict' | 'None';
-  path?: string;
-}
-
 /** Serializa una cookie `HttpOnly` para la cabecera `Set-Cookie`. */
-export function serializeCookie(name: string, value: string, options: CookieOptions = {}): string {
+export function serializeCookie(name, value, options = {}) {
   const parts = [`${name}=${value}`, `Path=${options.path ?? '/'}`];
 
   if (options.maxAge !== undefined) {
@@ -24,12 +17,12 @@ export function serializeCookie(name: string, value: string, options: CookieOpti
 }
 
 /** Cookie de borrado (valor vacío y caducidad inmediata). */
-export function clearCookie(name: string, secure: boolean): string {
+export function clearCookie(name, secure) {
   return serializeCookie(name, '', { maxAge: 0, secure });
 }
 
 /** Lee el valor de una cookie concreta de la cabecera `Cookie`. */
-export function parseCookie(header: string | undefined, name: string): string | null {
+export function parseCookie(header, name) {
   if (!header) return null;
 
   for (const part of header.split(';')) {

@@ -1,9 +1,9 @@
-import { signSession, verifySession, type SessionUser } from './session';
+import { signSession, verifySession } from './session.js';
 
 const SECRET = new TextEncoder().encode('secreto-de-test-suficientemente-largo');
 const OTHER_SECRET = new TextEncoder().encode('otro-secreto-de-test-suficientemente');
 
-const USER: SessionUser = {
+const USER = {
   email: 'parca@ntr.gg',
   name: 'Parca',
   picture: 'https://example.com/parca.png',

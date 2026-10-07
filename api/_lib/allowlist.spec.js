@@ -1,4 +1,4 @@
-import { isEmailAllowed, normalizeEmail, parseAllowedEmails } from './allowlist';
+import { isEmailAllowed, normalizeEmail, parseAllowedEmails } from './allowlist.js';
 
 describe('allowlist', () => {
   it('normaliza mayúsculas y espacios', () => {

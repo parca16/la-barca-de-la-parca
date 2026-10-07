@@ -3,11 +3,11 @@ import {
   getGoogleClientId,
   getGoogleClientSecret,
   getSessionSecretBytes,
-} from '../_lib/env';
-import { exchangeCodeForIdToken, verifyGoogleIdToken } from '../_lib/google';
-import { normalizeEmail, isEmailAllowed } from '../_lib/allowlist';
-import { parseCookie, clearCookie } from '../_lib/cookies';
-import { buildSessionCookie, signSession } from '../_lib/session';
+} from '../_lib/env.js';
+import { exchangeCodeForIdToken, verifyGoogleIdToken } from '../_lib/google.js';
+import { normalizeEmail, isEmailAllowed } from '../_lib/allowlist.js';
+import { parseCookie, clearCookie } from '../_lib/cookies.js';
+import { buildSessionCookie, signSession } from '../_lib/session.js';
 import {
   getBaseUrl,
   getHeader,
@@ -15,18 +15,16 @@ import {
   isSecureRequest,
   methodNotAllowed,
   redirect,
-  type ApiRequest,
-  type ApiResponse,
-} from '../_lib/http';
-import { decodeOAuthState, OAUTH_COOKIE } from '../_lib/oauth-state';
-import { sanitizeReturnTo } from '../_lib/return-to';
+} from '../_lib/http.js';
+import { decodeOAuthState, OAUTH_COOKIE } from '../_lib/oauth-state.js';
+import { sanitizeReturnTo } from '../_lib/return-to.js';
 
 /**
  * GET /api/auth/callback
  * Intercambia el `code`, valida el `id_token` y crea la cookie de sesión si el
  * email está en la allowlist. Cualquier error redirige a /login con un código.
  */
-export default async function handler(req: ApiRequest, res: ApiResponse): Promise<void> {
+export default async function handler(req, res) {
   if (req.method !== 'GET') {
     methodNotAllowed(res, 'GET');
     return;
@@ -70,7 +68,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse): Promis
     }
 
     const email = normalizeEmail(claims.email);
-    const token = await signSession(
+    const token = signSession(
       { email, name: claims.name ?? email, picture: claims.picture },
       getSessionSecretBytes(),
     );

@@ -4,7 +4,7 @@ import { defineConfig } from 'vitest/config';
 // tests de Angular (que usan el builder de `@angular/build`). Entorno Node.
 export default defineConfig({
   test: {
-    include: ['api/**/*.spec.ts'],
+    include: ['api/**/*.spec.js'],
     environment: 'node',
     globals: true,
   },

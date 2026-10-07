@@ -1,22 +1,13 @@
-import { createSign, generateKeyPairSync, type KeyObject } from 'node:crypto';
-import { verifyIdToken, type GoogleJwk } from './google';
+import { createSign, generateKeyPairSync } from 'node:crypto';
+import { verifyIdToken } from './google.js';
 
 const CLIENT_ID = 'test-client-id.apps.googleusercontent.com';
 const KID = 'test-key-1';
 
 const { publicKey, privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });
-const JWK = { ...(publicKey.export({ format: 'jwk' }) as GoogleJwk), kid: KID };
+const JWK = { ...publicKey.export({ format: 'jwk' }), kid: KID };
 
-interface Claims {
-  iss?: string;
-  aud?: string;
-  exp?: number;
-  email?: string;
-  email_verified?: boolean | string;
-  name?: string;
-}
-
-function makeToken(claims: Claims, key: KeyObject = privateKey, kid = KID): string {
+function makeToken(claims, key = privateKey, kid = KID) {
   const header = Buffer.from(JSON.stringify({ alg: 'RS256', typ: 'JWT', kid })).toString(
     'base64url',
   );

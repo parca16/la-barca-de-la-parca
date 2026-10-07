@@ -1,10 +1,9 @@
-import type { ClassVideo } from '../../src/app/data/models/content.interface';
-import { decodeClasses } from './classes-codec';
-import { encrypt, generateKey, parseKey } from './crypto';
+import { decodeClasses } from './classes-codec.js';
+import { encrypt, generateKey, parseKey } from './crypto.js';
 
-const KEY = parseKey(generateKey()) as Uint8Array;
+const KEY = parseKey(generateKey());
 
-const CLASSES: ClassVideo[] = [
+const CLASSES = [
   {
     id: 'una-clase',
     title: 'Una clase',

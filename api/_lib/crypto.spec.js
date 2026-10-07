@@ -1,7 +1,7 @@
-import { decrypt, encrypt, generateKey, parseKey } from './crypto';
+import { decrypt, encrypt, generateKey, parseKey } from './crypto.js';
 
-const KEY = parseKey(generateKey()) as Uint8Array;
-const OTHER_KEY = parseKey(generateKey()) as Uint8Array;
+const KEY = parseKey(generateKey());
+const OTHER_KEY = parseKey(generateKey());
 
 describe('crypto', () => {
   it('cifra y descifra un texto', () => {

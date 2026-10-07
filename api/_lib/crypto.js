@@ -9,7 +9,7 @@ const TAG_BYTES = 16;
  * Cifra un texto con AES-256-GCM y devuelve `iv || tag || ciphertext` en base64.
  * El IV es aleatorio en cada llamada.
  */
-export function encrypt(plaintext: string, key: Uint8Array): string {
+export function encrypt(plaintext, key) {
   const iv = randomBytes(IV_BYTES);
   const cipher = createCipheriv(ALGORITHM, key, iv);
   const ciphertext = Buffer.concat([cipher.update(plaintext, 'utf8'), cipher.final()]);
@@ -18,7 +18,7 @@ export function encrypt(plaintext: string, key: Uint8Array): string {
 }
 
 /** Descifra un payload generado por `encrypt`. Lanza si la clave o el dato no son válidos. */
-export function decrypt(payload: string, key: Uint8Array): string {
+export function decrypt(payload, key) {
   const raw = Buffer.from(payload, 'base64');
   if (raw.length <= IV_BYTES + TAG_BYTES) {
     throw new Error('Payload cifrado demasiado corto');
@@ -34,7 +34,7 @@ export function decrypt(payload: string, key: Uint8Array): string {
 }
 
 /** Convierte una clave hex de 64 caracteres en bytes. Devuelve `null` si no es válida. */
-export function parseKey(value: string | undefined): Uint8Array | null {
+export function parseKey(value) {
   if (!value) return null;
   const trimmed = value.trim();
   if (!/^[0-9a-fA-F]{64}$/.test(trimmed)) return null;
@@ -44,6 +44,6 @@ export function parseKey(value: string | undefined): Uint8Array | null {
 }
 
 /** Genera una clave nueva en formato hex (64 caracteres). */
-export function generateKey(): string {
+export function generateKey() {
   return randomBytes(KEY_BYTES).toString('hex');
 }

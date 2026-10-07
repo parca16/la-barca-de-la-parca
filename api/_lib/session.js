@@ -1,39 +1,26 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
-import { clearCookie, parseCookie, serializeCookie } from './cookies';
-import { getSessionSecretBytes } from './env';
-import { getHeader, type ApiRequest } from './http';
+import { clearCookie, parseCookie, serializeCookie } from './cookies.js';
+import { getSessionSecretBytes } from './env.js';
+import { getHeader } from './http.js';
 
 export const SESSION_COOKIE = 'ntr_session';
 const SESSION_TTL_SECONDS = 60 * 60 * 24 * 7; // 7 días
 
-export interface SessionUser {
-  email: string;
-  name: string;
-  picture?: string;
-}
-
 /**
  * Firma de sesión con JWT HS256 implementado sobre `node:crypto`.
- *
- * Se evita una dependencia externa (como `jose`) para que la función de Vercel
- * no arrastre nada que pueda fallar al cargarse en el runtime. El formato es un
- * JWT estándar: `base64url(header).base64url(payload).base64url(firma)`.
+ * El formato es el estándar: `base64url(header).base64url(payload).base64url(firma)`.
  */
 
-function base64UrlEncode(value: string): string {
+function base64UrlEncode(value) {
   return Buffer.from(value, 'utf8').toString('base64url');
 }
 
-function signBody(body: string, secret: Uint8Array): string {
+function signBody(body, secret) {
   return createHmac('sha256', secret).update(body).digest('base64url');
 }
 
 /** Firma un JWT de sesión. El secreto se inyecta para poder testear. */
-export function signSession(
-  user: SessionUser,
-  secret: Uint8Array,
-  ttlSeconds = SESSION_TTL_SECONDS,
-): string {
+export function signSession(user, secret, ttlSeconds = SESSION_TTL_SECONDS) {
   const now = Math.floor(Date.now() / 1000);
   const header = base64UrlEncode(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
   const payload = base64UrlEncode(
@@ -52,7 +39,7 @@ export function signSession(
 }
 
 /** Verifica un JWT de sesión. Devuelve `null` si no es válido o ha caducado. */
-export function verifySession(token: string, secret: Uint8Array): SessionUser | null {
+export function verifySession(token, secret) {
   try {
     const parts = token.split('.');
     if (parts.length !== 3) return null;
@@ -65,37 +52,34 @@ export function verifySession(token: string, secret: Uint8Array): SessionUser | 
       return null;
     }
 
-    const claims = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8')) as Record<
-      string,
-      unknown
-    >;
+    const claims = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'));
 
-    const exp = claims['exp'];
+    const exp = claims.exp;
     if (typeof exp === 'number' && exp < Math.floor(Date.now() / 1000)) return null;
 
-    const email = typeof claims['email'] === 'string' ? claims['email'] : claims['sub'];
+    const email = typeof claims.email === 'string' ? claims.email : claims.sub;
     if (typeof email !== 'string' || !email) return null;
 
     return {
       email,
-      name: typeof claims['name'] === 'string' ? claims['name'] : email,
-      picture: typeof claims['picture'] === 'string' ? claims['picture'] : undefined,
+      name: typeof claims.name === 'string' ? claims.name : email,
+      picture: typeof claims.picture === 'string' ? claims.picture : undefined,
     };
   } catch {
     return null;
   }
 }
 
-export function buildSessionCookie(token: string, secure: boolean): string {
+export function buildSessionCookie(token, secure) {
   return serializeCookie(SESSION_COOKIE, token, { maxAge: SESSION_TTL_SECONDS, secure });
 }
 
-export function clearSessionCookie(secure: boolean): string {
+export function clearSessionCookie(secure) {
   return clearCookie(SESSION_COOKIE, secure);
 }
 
 /** Devuelve el usuario de la sesión o `null` si la petición no trae una válida. */
-export function getSessionUser(req: ApiRequest): SessionUser | null {
+export function getSessionUser(req) {
   const token = parseCookie(getHeader(req, 'cookie'), SESSION_COOKIE);
   if (!token) return null;
   return verifySession(token, getSessionSecretBytes());
