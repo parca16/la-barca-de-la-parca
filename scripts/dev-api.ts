@@ -14,11 +14,11 @@ async function main(): Promise<void> {
   }
 
   const [login, callback, logout, me, classes] = await Promise.all([
-    import('../api/auth/login'),
-    import('../api/auth/callback'),
-    import('../api/auth/logout'),
-    import('../api/auth/me'),
-    import('../api/content/classes'),
+    import('../api/auth/login.js'),
+    import('../api/auth/callback.js'),
+    import('../api/auth/logout.js'),
+    import('../api/auth/me.js'),
+    import('../api/content/classes.js'),
   ]);
 
   const routes: Record<string, Handler> = {

@@ -94,7 +94,7 @@ la-barca-de-la-parca/
 ├── .github/workflows/       # CI: formato, lint, build y tests (con cobertura) del frontend; tests del servidor
 ├── api/                     # Vercel Functions: auth (Google OAuth) y contenido privado
 │   ├── _lib/                # Utilidades del backend (sesión, allowlist, cookies…)
-│   ├── _private/            # Datos privados: classes.ts (no se publica en el bundle)
+│   ├── _private/            # Datos privados: classes.enc.js (cifrado, no se publica en el bundle)
 │   ├── auth/                # login, callback, logout y me
 │   └── content/             # endpoints protegidos (classes)
 ├── public/
@@ -181,13 +181,10 @@ npm test
 # Tests de la API (backend de auth y contenido)
 npm run test:api
 
-# Comprobar tipos de la API
-npm run typecheck:api
-
 # Tests con informe de cobertura -> coverage/
 npm run test:coverage
 
-# Lint (ESLint + angular-eslint; incluye api/)
+# Lint (ESLint + angular-eslint)
 npm run lint
 
 # Comprobar / aplicar formato (Prettier)
@@ -204,9 +201,8 @@ npm run format
 | `npm run build`             | Build de producción en `dist/` (config `production` por defecto)                                          |
 | `npm test`                  | Tests unitarios del frontend con Vitest. En terminal interactiva entra en **watch mode**                  |
 | `npm run test:api`          | Tests del backend (`api/`) con Vitest en entorno Node                                                     |
-| `npm run typecheck:api`     | Comprueba los tipos de `api/` con TypeScript                                                              |
 | `npx ng test --watch=false` | Tests del frontend en una sola pasada (lo que usa CI)                                                     |
-| `npm run lint`              | ESLint + angular-eslint sobre `src/` y `api/`                                                             |
+| `npm run lint`              | ESLint + angular-eslint sobre `src/`                                                                      |
 | `npm run format`            | Aplica Prettier a todo el repo                                                                            |
 | `npm run optimize:images`   | Optimiza los assets con **sharp**: heroes y variantes responsivas. Añade `-- --force` para regenerar todo |
 
@@ -238,7 +234,7 @@ La comparación de emails ignora mayúsculas y espacios. Para añadir o quitar u
 Las clases se guardan **cifradas** en el repo, para que el contenido no sea legible aunque el repositorio sea público. El flujo es:
 
 1. Edita `api/_private/classes.private.json` (está **ignorado por Git**, así que no se sube). `youtubeId` admite la **URL completa** de YouTube o solo el ID de 11 caracteres.
-2. Ejecuta `npm run encrypt:classes`: genera `api/_private/classes.enc.ts` (AES-256-GCM), que **sí** se commitea.
+2. Ejecuta `npm run encrypt:classes`: genera `api/_private/classes.enc.js` (AES-256-GCM), que **sí** se commitea.
 3. Haz commit de ese fichero generado.
 
 La función descifra en memoria usando `CONTENT_CLASSES_KEY`. La clave debe ser **la misma** en Vercel y en tu `.env.local`; si falta o no coincide, la sección aparece vacía (y se registra el error en los logs). Sube los vídeos a YouTube como **ocultos (unlisted)**.

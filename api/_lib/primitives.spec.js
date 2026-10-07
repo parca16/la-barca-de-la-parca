@@ -1,6 +1,6 @@
-import { clearCookie, parseCookie, serializeCookie } from './cookies';
-import { decodeOAuthState, encodeOAuthState } from './oauth-state';
-import { sanitizeReturnTo } from './return-to';
+import { clearCookie, parseCookie, serializeCookie } from './cookies.js';
+import { decodeOAuthState, encodeOAuthState } from './oauth-state.js';
+import { sanitizeReturnTo } from './return-to.js';
 
 describe('sanitizeReturnTo', () => {
   it('acepta rutas internas', () => {

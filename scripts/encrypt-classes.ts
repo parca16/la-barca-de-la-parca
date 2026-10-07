@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { encrypt, parseKey } from '../api/_lib/crypto';
+import { encrypt, parseKey } from '../api/_lib/crypto.js';
 
 // Carga `.env.local` para leer CONTENT_CLASSES_KEY igual que en desarrollo.
 try {
@@ -10,7 +10,7 @@ try {
 }
 
 const SOURCE = resolve('api/_private/classes.private.json');
-const TARGET = resolve('api/_private/classes.enc.ts');
+const TARGET = resolve('api/_private/classes.enc.js');
 
 const key = parseKey(process.env['CONTENT_CLASSES_KEY']);
 if (!key) {

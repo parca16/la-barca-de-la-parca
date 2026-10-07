@@ -1,8 +1,8 @@
-import { clearSessionCookie } from '../_lib/session';
-import { isSecureRequest, methodNotAllowed, type ApiRequest, type ApiResponse } from '../_lib/http';
+import { clearSessionCookie } from '../_lib/session.js';
+import { isSecureRequest, methodNotAllowed } from '../_lib/http.js';
 
 /** POST /api/auth/logout — invalida la sesión borrando la cookie. */
-export default function handler(req: ApiRequest, res: ApiResponse): void {
+export default function handler(req, res) {
   if (req.method !== 'POST') {
     methodNotAllowed(res, 'POST');
     return;
