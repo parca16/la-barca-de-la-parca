@@ -2,32 +2,12 @@
   padding: 0 0 2rem;
 }
 
-/* Cabecera de la sección. De momento sin imagen: fondo sólido de marca. */
+/* Cabecera de la sección: de momento sin imagen, fondo sólido de marca.
+   Reutiliza `.page-hero` (estilos globales) para tener el mismo tamaño que
+   el resto de cabeceras. */
 .contents-hero {
   background: #101319;
   border-bottom: 2px solid var(--accent-strong);
-  margin-left: calc(50% - 50vw - 12rem);
-  margin-right: calc(50% - 50vw - 12rem);
-  margin-bottom: 2.5rem;
-  padding: 8rem 2rem 2.5rem;
-  text-align: center;
-}
-
-.contents-hero h1 {
-  font-size: 2.6rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #fff;
-  margin-bottom: 0.5rem;
-}
-
-.contents-hero h1 .accent {
-  color: var(--accent);
-}
-
-.contents-subtitle {
-  color: #9a9a9a;
-  font-size: 1rem;
 }
 
 .contents-status {
@@ -129,24 +109,7 @@
   overflow: hidden;
 }
 
-@media (max-width: 900px) {
-  .contents-hero {
-    margin-left: calc(50% - 50vw - 2rem);
-    margin-right: calc(50% - 50vw - 2rem);
-  }
-}
-
 @media (max-width: 600px) {
-  .contents-hero {
-    margin-left: 0;
-    margin-right: 0;
-    padding: 6rem 1rem 2rem;
-  }
-
-  .contents-hero h1 {
-    font-size: 1.8rem;
-  }
-
   .contents-grid {
     grid-template-columns: 1fr;
   }
