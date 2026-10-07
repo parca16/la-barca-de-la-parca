@@ -78,7 +78,7 @@ Proyecto **independiente** dentro de `server/` (proyecto npm aparte) que recopil
 | Plantillas                           | **HTML** (templates de componentes Angular)                                                                 |
 | Estado / reactividad                 | **Signals** de Angular y control de flujo nativo; **RxJS** solo para eventos del router y del scroll        |
 | Backend (API auxiliar independiente) | **Node.js** + **Express** (JavaScript ESM)                                                                  |
-| Backend de la web (auth y contenido) | **Vercel Functions** (TypeScript) + **jose** para firmar la sesión                                          |
+| Backend de la web (auth y contenido) | **Vercel Functions** (TypeScript) + **node:crypto** para la sesión                                          |
 | Scraping y API                       | **axios** + **cheerio** (csstats.gg) y Steam Web API                                                        |
 | Tratamiento de imágenes              | **sharp** (conversión y optimización a `.webp`)                                                             |
 | Tests                                | **Vitest** (unitarios) + jsdom                                                                              |

@@ -1,5 +1,5 @@
-import { SignJWT, jwtVerify } from 'jose';
-import { parseCookie, clearCookie, serializeCookie } from './cookies';
+import { createHmac, timingSafeEqual } from 'node:crypto';
+import { clearCookie, parseCookie, serializeCookie } from './cookies';
 import { getSessionSecretBytes } from './env';
 import { getHeader, type ApiRequest } from './http';
 
@@ -12,34 +12,74 @@ export interface SessionUser {
   picture?: string;
 }
 
-/** Firma un JWT de sesión con HS256. El secreto se inyecta para poder testear. */
-export async function signSession(
+/**
+ * Firma de sesión con JWT HS256 implementado sobre `node:crypto`.
+ *
+ * Se evita una dependencia externa (como `jose`) para que la función de Vercel
+ * no arrastre nada que pueda fallar al cargarse en el runtime. El formato es un
+ * JWT estándar: `base64url(header).base64url(payload).base64url(firma)`.
+ */
+
+function base64UrlEncode(value: string): string {
+  return Buffer.from(value, 'utf8').toString('base64url');
+}
+
+function signBody(body: string, secret: Uint8Array): string {
+  return createHmac('sha256', secret).update(body).digest('base64url');
+}
+
+/** Firma un JWT de sesión. El secreto se inyecta para poder testear. */
+export function signSession(
   user: SessionUser,
   secret: Uint8Array,
   ttlSeconds = SESSION_TTL_SECONDS,
-): Promise<string> {
-  return new SignJWT({ email: user.email, name: user.name, picture: user.picture })
-    .setProtectedHeader({ alg: 'HS256' })
-    .setSubject(user.email)
-    .setIssuedAt()
-    .setExpirationTime(`${ttlSeconds}s`)
-    .sign(secret);
+): string {
+  const now = Math.floor(Date.now() / 1000);
+  const header = base64UrlEncode(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
+  const payload = base64UrlEncode(
+    JSON.stringify({
+      sub: user.email,
+      email: user.email,
+      name: user.name,
+      picture: user.picture,
+      iat: now,
+      exp: now + ttlSeconds,
+    }),
+  );
+
+  const body = `${header}.${payload}`;
+  return `${body}.${signBody(body, secret)}`;
 }
 
 /** Verifica un JWT de sesión. Devuelve `null` si no es válido o ha caducado. */
-export async function verifySession(
-  token: string,
-  secret: Uint8Array,
-): Promise<SessionUser | null> {
+export function verifySession(token: string, secret: Uint8Array): SessionUser | null {
   try {
-    const { payload } = await jwtVerify(token, secret, { algorithms: ['HS256'] });
-    const email = typeof payload['email'] === 'string' ? payload['email'] : payload.sub;
-    if (!email) return null;
+    const parts = token.split('.');
+    if (parts.length !== 3) return null;
+
+    const [header, payload, signature] = parts;
+    const expected = Buffer.from(signBody(`${header}.${payload}`, secret));
+    const provided = Buffer.from(signature);
+
+    if (provided.length !== expected.length || !timingSafeEqual(provided, expected)) {
+      return null;
+    }
+
+    const claims = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8')) as Record<
+      string,
+      unknown
+    >;
+
+    const exp = claims['exp'];
+    if (typeof exp === 'number' && exp < Math.floor(Date.now() / 1000)) return null;
+
+    const email = typeof claims['email'] === 'string' ? claims['email'] : claims['sub'];
+    if (typeof email !== 'string' || !email) return null;
 
     return {
       email,
-      name: typeof payload['name'] === 'string' ? payload['name'] : email,
-      picture: typeof payload['picture'] === 'string' ? payload['picture'] : undefined,
+      name: typeof claims['name'] === 'string' ? claims['name'] : email,
+      picture: typeof claims['picture'] === 'string' ? claims['picture'] : undefined,
     };
   } catch {
     return null;
@@ -55,7 +95,7 @@ export function clearSessionCookie(secure: boolean): string {
 }
 
 /** Devuelve el usuario de la sesión o `null` si la petición no trae una válida. */
-export async function getSessionUser(req: ApiRequest): Promise<SessionUser | null> {
+export function getSessionUser(req: ApiRequest): SessionUser | null {
   const token = parseCookie(getHeader(req, 'cookie'), SESSION_COOKIE);
   if (!token) return null;
   return verifySession(token, getSessionSecretBytes());
