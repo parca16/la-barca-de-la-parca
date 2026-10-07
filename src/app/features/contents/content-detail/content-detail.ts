@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DomSanitizer, type SafeResourceUrl } from '@angular/platform-browser';
 import { ClassVideo } from '../../../data/models/content.interface';
 import { getMap } from '../../../data/models/maps';
-import { youtubeEmbedUrl, youtubeThumbnail } from '../../../shared/youtube';
+import { youtubeEmbedUrl, youtubeThumbnail, youtubeWatchUrl } from '../../../shared/youtube';
 import { ContentsService } from '../contents.service';
 
 @Component({
@@ -41,9 +41,9 @@ export class ContentDetail {
     return getMap(video.map)?.name ?? video.map;
   });
   protected readonly tagList = computed(() => this.video()?.tags ?? []);
-  protected readonly youtubeWatchUrl = computed(() => {
+  protected readonly watchUrl = computed(() => {
     const video = this.video();
-    return video ? `https://www.youtube.com/watch?v=${video.youtubeId}` : '';
+    return video ? youtubeWatchUrl(video.youtubeId) : '';
   });
   /** El iframe solo se construye tras el primer clic (patrón facade). */
   protected readonly embedUrl = computed<SafeResourceUrl | null>(() => {

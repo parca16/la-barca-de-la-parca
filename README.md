@@ -229,12 +229,21 @@ La sección **Contenidos** se protege con Google OAuth 2.0 / OIDC. Para configur
 | `AUTH_ALLOWED_EMAILS`  | Emails autorizados separados por comas. Vacía = no entra nadie (fail closed).    |
 | `AUTH_SESSION_SECRET`  | Secreto de 32+ bytes para firmar la cookie de sesión.                            |
 | `AUTH_BASE_URL`        | URL base pública (local: `http://localhost:4200`; producción: la URL de Vercel). |
+| `CONTENT_CLASSES_KEY`  | Clave hex de 32 bytes para descifrar las clases (`npm run encrypt:classes`).     |
 
 La comparación de emails ignora mayúsculas y espacios. Para añadir o quitar un usuario basta con editar `AUTH_ALLOWED_EMAILS` y volver a desplegar.
 
 ### Añadir una clase
 
-Edita `api/_private/classes.ts` y añade una entrada al array `CLASSES`. Ese fichero no forma parte del bundle: se sirve solo desde `GET /api/content/classes`, protegido por sesión. Sube el vídeo a YouTube como **oculto (unlisted)** y copia solo el ID (11 caracteres) en `youtubeId`.
+Las clases se guardan **cifradas** en el repo, para que el contenido no sea legible aunque el repositorio sea público. El flujo es:
+
+1. Edita `api/_private/classes.private.json` (está **ignorado por Git**, así que no se sube). `youtubeId` admite la **URL completa** de YouTube o solo el ID de 11 caracteres.
+2. Ejecuta `npm run encrypt:classes`: genera `api/_private/classes.enc.ts` (AES-256-GCM), que **sí** se commitea.
+3. Haz commit de ese fichero generado.
+
+La función descifra en memoria usando `CONTENT_CLASSES_KEY`. La clave debe ser **la misma** en Vercel y en tu `.env.local`; si falta o no coincide, la sección aparece vacía (y se registra el error en los logs). Sube los vídeos a YouTube como **ocultos (unlisted)**.
+
+> Para regenerar la clave (rotación): genera una nueva, cámbiala en Vercel y en `.env.local`, y vuelve a ejecutar `npm run encrypt:classes`. El repo guarda el texto cifrado de cada versión, así que conviene hacerlo si alguna vez se filtra.
 
 ### CI
 

@@ -10,7 +10,11 @@ export interface ClassVideo {
   id: string;
   title: string;
   description: string;
-  /** Solo el ID de YouTube (11 caracteres), nunca la URL completa. */
+  /**
+   * ID de YouTube (11 caracteres) o la URL completa del vídeo. El frontend
+   * extrae el ID y construye él mismo la URL del reproductor, así que nunca se
+   * inyecta una URL libre en el iframe.
+   */
   youtubeId: string;
   /** Fecha ISO, p. ej. '2026-09-20'. */
   date: string;

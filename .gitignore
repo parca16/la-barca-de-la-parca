@@ -44,6 +44,9 @@ __screenshots__/
 .env.local
 .env*.local
 
+# Datos privados en claro de Contenidos (solo se commitea la versión cifrada)
+api/_private/classes.private.json
+
 # Vercel
 .vercel
 

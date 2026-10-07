@@ -49,12 +49,22 @@ export function extractYoutubeId(input: string | null | undefined): string | nul
   return null;
 }
 
-/** URL de la miniatura de un vídeo. */
-export function youtubeThumbnail(youtubeId: string): string {
-  return `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`;
+/** Resuelve un ID a partir de un ID o una URL de YouTube. */
+function resolveYoutubeId(value: string): string {
+  return extractYoutubeId(value) ?? value;
 }
 
-/** URL del reproductor embebido (sin cookies de seguimiento). */
-export function youtubeEmbedUrl(youtubeId: string): string {
-  return `https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0`;
+/** URL de la miniatura de un vídeo. Acepta un ID o una URL completa. */
+export function youtubeThumbnail(idOrUrl: string): string {
+  return `https://i.ytimg.com/vi/${resolveYoutubeId(idOrUrl)}/hqdefault.jpg`;
+}
+
+/** URL del reproductor embebido (sin cookies de seguimiento). Acepta ID o URL. */
+export function youtubeEmbedUrl(idOrUrl: string): string {
+  return `https://www.youtube-nocookie.com/embed/${resolveYoutubeId(idOrUrl)}?rel=0`;
+}
+
+/** URL pública para ver el vídeo en YouTube. Acepta un ID o una URL completa. */
+export function youtubeWatchUrl(idOrUrl: string): string {
+  return `https://www.youtube.com/watch?v=${resolveYoutubeId(idOrUrl)}`;
 }
