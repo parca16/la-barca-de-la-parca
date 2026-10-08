@@ -16,11 +16,6 @@ export class ContentDetail {
   private readonly router = inject(Router);
   private readonly service = inject(ContentsService);
   private readonly sanitizer = inject(DomSanitizer);
-  private readonly dateFormatter = new Intl.DateTimeFormat('es-ES', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-  });
 
   protected readonly video = signal<ClassVideo | null>(null);
   protected readonly loading = signal(true);
@@ -29,10 +24,6 @@ export class ContentDetail {
   protected readonly thumbnail = computed(() => {
     const video = this.video();
     return video ? youtubeThumbnail(video.youtubeId) : '';
-  });
-  protected readonly dateLabel = computed(() => {
-    const video = this.video();
-    return video ? this.dateFormatter.format(new Date(`${video.date}T00:00:00`)) : '';
   });
   protected readonly watchUrl = computed(() => {
     const video = this.video();

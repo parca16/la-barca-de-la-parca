@@ -57,22 +57,6 @@
 
     <header class="detail-header">
       <h1>{{ video.title }}</h1>
-      <p class="detail-meta">
-        <span>{{ dateLabel() }}</span>
-        @if (video.speaker) {
-          <span>· {{ video.speaker }}</span>
-        }
-        @if (video.durationMin) {
-          <span>· {{ video.durationMin }} min</span>
-        }
-      </p>
-    </header>
-
-    @if (video.description) {
-      <p class="detail-description">{{ video.description }}</p>
-    }
-
-    <div class="detail-actions">
       <a
         class="detail-youtube text-link"
         [href]="watchUrl()"
@@ -97,6 +81,10 @@
           <line x1="10" y1="14" x2="21" y2="3"></line>
         </svg>
       </a>
-    </div>
+    </header>
+
+    @if (video.description) {
+      <p class="detail-description">{{ video.description }}</p>
+    }
   }
 </article>
