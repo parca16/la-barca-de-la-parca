@@ -49,6 +49,32 @@ export function extractYoutubeId(input: string | null | undefined): string | nul
   return null;
 }
 
+/**
+ * Extrae el segundo de inicio de una URL de YouTube (`t` o `start`).
+ * Acepta segundos (`t=90`) o el formato `1h2m3s`. Devuelve `null` si no hay.
+ */
+export function extractYoutubeStart(input: string | null | undefined): number | null {
+  const value = (input ?? '').trim();
+  if (!value) return null;
+
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    return null;
+  }
+
+  const raw = url.searchParams.get('t') ?? url.searchParams.get('start');
+  if (!raw) return null;
+
+  if (/^\d+$/.test(raw)) return Number(raw);
+
+  const match = raw.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/i);
+  if (!match || (!match[1] && !match[2] && !match[3])) return null;
+
+  return Number(match[1] ?? 0) * 3600 + Number(match[2] ?? 0) * 60 + Number(match[3] ?? 0);
+}
+
 /** Resuelve un ID a partir de un ID o una URL de YouTube. */
 function resolveYoutubeId(value: string): string {
   return extractYoutubeId(value) ?? value;
@@ -60,11 +86,15 @@ export function youtubeThumbnail(idOrUrl: string): string {
 }
 
 /** URL del reproductor embebido (sin cookies de seguimiento). Acepta ID o URL. */
-export function youtubeEmbedUrl(idOrUrl: string): string {
-  return `https://www.youtube-nocookie.com/embed/${resolveYoutubeId(idOrUrl)}?rel=0`;
+export function youtubeEmbedUrl(idOrUrl: string, startSeconds?: number | null): string {
+  const start = startSeconds ?? extractYoutubeStart(idOrUrl);
+  const base = `https://www.youtube-nocookie.com/embed/${resolveYoutubeId(idOrUrl)}?rel=0`;
+  return start && start > 0 ? `${base}&start=${start}` : base;
 }
 
 /** URL pública para ver el vídeo en YouTube. Acepta un ID o una URL completa. */
-export function youtubeWatchUrl(idOrUrl: string): string {
-  return `https://www.youtube.com/watch?v=${resolveYoutubeId(idOrUrl)}`;
+export function youtubeWatchUrl(idOrUrl: string, startSeconds?: number | null): string {
+  const start = startSeconds ?? extractYoutubeStart(idOrUrl);
+  const base = `https://www.youtube.com/watch?v=${resolveYoutubeId(idOrUrl)}`;
+  return start && start > 0 ? `${base}&t=${start}s` : base;
 }

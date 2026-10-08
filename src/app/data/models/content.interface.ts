@@ -16,6 +16,11 @@ export interface ClassVideo {
    * inyecta una URL libre en el iframe.
    */
   youtubeId: string;
+  /**
+   * Segundo en el que debe arrancar el vídeo (para clases que enlazan a un
+   * capítulo concreto). Si es 0 o `undefined`, arranca desde el principio.
+   */
+  startSeconds?: number;
   /** Fecha ISO, p. ej. '2026-09-20'. */
   date: string;
   /** Quién imparte la clase. */
