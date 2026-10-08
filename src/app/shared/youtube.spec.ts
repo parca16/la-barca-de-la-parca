@@ -1,4 +1,10 @@
-import { extractYoutubeId, youtubeEmbedUrl, youtubeThumbnail, youtubeWatchUrl } from './youtube';
+import {
+  extractYoutubeId,
+  extractYoutubeStart,
+  youtubeEmbedUrl,
+  youtubeThumbnail,
+  youtubeWatchUrl,
+} from './youtube';
 
 const ID = 'dQw4w9WgXcQ';
 
@@ -34,6 +40,25 @@ describe('extractYoutubeId', () => {
   });
 });
 
+describe('extractYoutubeStart', () => {
+  it('lee el parámetro t en segundos', () => {
+    expect(extractYoutubeStart(`https://youtu.be/${ID}?t=1162`)).toBe(1162);
+    expect(extractYoutubeStart(`https://www.youtube.com/watch?v=${ID}&start=90`)).toBe(90);
+  });
+
+  it('lee el formato 1h2m3s', () => {
+    expect(extractYoutubeStart(`https://youtu.be/${ID}?t=1h2m3s`)).toBe(3723);
+    expect(extractYoutubeStart(`https://youtu.be/${ID}?t=2m30s`)).toBe(150);
+  });
+
+  it('devuelve null cuando no hay tiempo de inicio', () => {
+    expect(extractYoutubeStart(ID)).toBeNull();
+    expect(extractYoutubeStart(`https://youtu.be/${ID}`)).toBeNull();
+    expect(extractYoutubeStart('')).toBeNull();
+    expect(extractYoutubeStart(null)).toBeNull();
+  });
+});
+
 describe('youtube helpers', () => {
   it('construye la miniatura y el embed desde un ID', () => {
     expect(youtubeThumbnail(ID)).toBe(`https://i.ytimg.com/vi/${ID}/hqdefault.jpg`);
@@ -41,10 +66,24 @@ describe('youtube helpers', () => {
     expect(youtubeWatchUrl(ID)).toBe(`https://www.youtube.com/watch?v=${ID}`);
   });
 
-  it('acepta tambien una URL completa y extrae el ID', () => {
-    const url = `https://youtu.be/${ID}?t=5`;
+  it('acepta una URL completa y extrae el ID', () => {
+    const url = `https://youtu.be/${ID}?list=abc`;
     expect(youtubeThumbnail(url)).toBe(`https://i.ytimg.com/vi/${ID}/hqdefault.jpg`);
     expect(youtubeEmbedUrl(url)).toContain(`youtube-nocookie.com/embed/${ID}`);
     expect(youtubeWatchUrl(url)).toBe(`https://www.youtube.com/watch?v=${ID}`);
+  });
+
+  it('incluye el tiempo de inicio en el embed y en el enlace', () => {
+    const url = `https://youtu.be/${ID}?t=1162`;
+    expect(youtubeEmbedUrl(url)).toBe(
+      `https://www.youtube-nocookie.com/embed/${ID}?rel=0&start=1162`,
+    );
+    expect(youtubeWatchUrl(url)).toBe(`https://www.youtube.com/watch?v=${ID}&t=1162s`);
+    expect(youtubeWatchUrl(ID, 1162)).toBe(`https://www.youtube.com/watch?v=${ID}&t=1162s`);
+  });
+
+  it('ignora el tiempo 0 y los valores ausentes', () => {
+    expect(youtubeEmbedUrl(ID, 0)).not.toContain('start=');
+    expect(youtubeWatchUrl(ID, 0)).toBe(`https://www.youtube.com/watch?v=${ID}`);
   });
 });

@@ -36,13 +36,15 @@ export class ContentDetail {
   });
   protected readonly watchUrl = computed(() => {
     const video = this.video();
-    return video ? youtubeWatchUrl(video.youtubeId) : '';
+    return video ? youtubeWatchUrl(video.youtubeId, video.startSeconds) : '';
   });
   /** El iframe solo se construye tras el primer clic (patrón facade). */
   protected readonly embedUrl = computed<SafeResourceUrl | null>(() => {
     const video = this.video();
     if (!video || !this.playing()) return null;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(youtubeEmbedUrl(video.youtubeId));
+    return this.sanitizer.bypassSecurityTrustResourceUrl(
+      youtubeEmbedUrl(video.youtubeId, video.startSeconds),
+    );
   });
 
   constructor() {
