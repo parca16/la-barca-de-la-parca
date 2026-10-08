@@ -34,6 +34,14 @@ body {
   overflow-x: hidden;
 }
 
+/* Fondo oscuro a nivel de documento. Sin él, las vistas sin hero (p. ej. el
+   detalle de Contenidos) dejan ver el blanco por defecto y la navbar y los
+   títulos blancos quedan ilegibles. */
+body {
+  min-height: 100dvh;
+  background-color: var(--bg-page);
+}
+
 main {
   max-width: 1120px;
   margin: 0 auto;

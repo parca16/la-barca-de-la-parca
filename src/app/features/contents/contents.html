@@ -33,7 +33,9 @@
           <div class="content-info">
             <h2 class="content-title">{{ video.title }}</h2>
             <p class="content-meta">{{ video.dateLabel }}</p>
-            <p class="content-description">{{ video.description }}</p>
+            @if (video.description) {
+              <p class="content-description">{{ video.description }}</p>
+            }
           </div>
         </a>
       }
