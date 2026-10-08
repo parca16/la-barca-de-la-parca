@@ -10,6 +10,25 @@
   border-bottom: 2px solid var(--accent-strong);
 }
 
+/* Texto introductorio antes del listado (mismo estilo que el de Inicio). */
+.contents-intro {
+  color: #555;
+  font-size: 1.05rem;
+  max-width: 750px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.contents-intro p {
+  margin-bottom: 1rem;
+}
+
+.contents-intro p:last-child {
+  margin-bottom: 0;
+}
+
 .contents-status {
   text-align: center;
   color: #888;
@@ -110,6 +129,11 @@
 }
 
 @media (max-width: 600px) {
+  .contents-intro {
+    font-size: 0.95rem;
+    max-width: 100%;
+  }
+
   .contents-grid {
     grid-template-columns: 1fr;
   }
