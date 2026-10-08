@@ -4,6 +4,11 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  /* `main` limita el ancho y añade padding lateral; rompemos esa caja para que
+     la rejilla de fondo y el color cubran todo el viewport y no queden franjas
+     vacías a los lados. Mismo truco que usa `.page-hero`. */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
   padding: 7rem 1.5rem 3rem;
   overflow: hidden;
   background: var(--bg-page);
