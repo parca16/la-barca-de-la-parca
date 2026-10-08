@@ -63,11 +63,21 @@
   filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.7));
 }
 
+.detail-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
 .detail-header h1 {
+  flex: 1 1 auto;
   font-size: 2rem;
   color: #fff;
   line-height: 1.2;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0;
 }
 
 .detail-meta {
@@ -75,8 +85,10 @@
   font-size: 0.9rem;
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 0.35rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0;
+  text-align: right;
 }
 
 .detail-description {
@@ -85,6 +97,11 @@
   line-height: 1.7;
   margin-bottom: 1.75rem;
   white-space: pre-line;
+}
+
+.detail-actions {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .detail-youtube {
