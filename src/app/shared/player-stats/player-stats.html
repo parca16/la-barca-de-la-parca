@@ -1,0 +1,61 @@
+@if (loading()) {
+  <div class="tab-stats-state">
+    <p>Cargando estadísticas…</p>
+  </div>
+} @else if (error() === 'unauthorized') {
+  <div class="tab-stats-state">
+    <p>Inicia sesión para ver las estadísticas.</p>
+  </div>
+} @else if (error()) {
+  <div class="tab-stats-state">
+    <p>No se pudieron cargar las estadísticas.</p>
+  </div>
+} @else if (view(); as view) {
+  @if (view.isPrivate) {
+    <div class="tab-stats-state">
+      <p>Perfil privado en Leetify</p>
+    </div>
+  } @else {
+    <div class="tab-stats">
+      <div class="stats-kpis">
+        @for (kpi of view.kpis; track kpi.label) {
+          <div class="stats-kpi">
+            <span class="stats-kpi-label">{{ kpi.label }}</span>
+            <span
+              class="stats-kpi-value"
+              [class.pos]="kpi.tone === 'pos'"
+              [class.neg]="kpi.tone === 'neg'"
+              >{{ kpi.value }}</span
+            >
+          </div>
+        }
+      </div>
+      <div class="stats-skills">
+        @for (skill of view.skills; track skill.label) {
+          <div class="stats-skill">
+            <div class="stats-skill-head">
+              <span class="stats-skill-label">{{ skill.label }}</span>
+              <span class="stats-skill-value">{{ skill.value }}</span>
+            </div>
+            <div class="stats-skill-bar">
+              <div class="stats-skill-fill" [style.width.%]="skill.width"></div>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="stats-grid">
+        @for (item of view.highlights; track item.label) {
+          <div class="stats-cell">
+            <span class="stats-cell-label">{{ item.label }}</span>
+            <span class="stats-cell-value">{{ item.value }}</span>
+          </div>
+        }
+      </div>
+      <p class="stats-attribution">Datos: Leetify · actualizado {{ view.syncedLabel }}</p>
+    </div>
+  }
+} @else {
+  <div class="tab-stats-state">
+    <p>Sin datos</p>
+  </div>
+}

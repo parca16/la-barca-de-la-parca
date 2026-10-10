@@ -27,10 +27,11 @@ export function getBaseUrl(req) {
   return `${proto}://${host}`;
 }
 
-export function sendJson(res, status, body, cookies = []) {
+export function sendJson(res, status, body, cookies = [], headers = {}) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.setHeader('Cache-Control', 'no-store');
+  for (const [name, value] of Object.entries(headers)) res.setHeader(name, value);
   if (cookies.length > 0) res.setHeader('Set-Cookie', cookies);
   res.end(JSON.stringify(body));
 }

@@ -31,3 +31,16 @@ export function getAllowedEmails() {
 export function getSessionSecretBytes() {
   return new TextEncoder().encode(requireEnv('AUTH_SESSION_SECRET'));
 }
+
+/**
+ * API key de Leetify. Es opcional: su API pública responde sin clave, pero
+ * con límites de peticiones más agresivos. Con clave configurada sube el cupo.
+ */
+export function getLeetifyApiKey() {
+  return process.env['LEETIFY_API_KEY']?.trim() || null;
+}
+
+/** Base de la API pública de Leetify (se puede sobrescribir en tests). */
+export function getLeetifyApiBase() {
+  return process.env['LEETIFY_API_BASE']?.trim() || 'https://api-public.cs-prod.leetify.com';
+}

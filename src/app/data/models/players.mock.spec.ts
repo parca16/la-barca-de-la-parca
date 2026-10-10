@@ -50,4 +50,11 @@ describe('players.mock (Steam IDs)', () => {
       expect(steamIdDesdeUrl(player), `SteamID de ${player.alias}`).toBe(serverIds[player.alias]);
     }
   });
+
+  it('debería exponer steam64Id coherente con steamUrl y con el servidor', () => {
+    for (const player of frontendPlayers) {
+      expect(player.steam64Id, `steam64Id de ${player.alias}`).toBe(steamIdDesdeUrl(player));
+      expect(player.steam64Id, `steam64Id de ${player.alias}`).toBe(serverIds[player.alias]);
+    }
+  });
 });
