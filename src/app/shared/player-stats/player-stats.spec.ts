@@ -13,7 +13,7 @@ const mockStats: PlayerStatsData = {
   syncedAt: '2020-01-01T12:00:00.000Z',
   premier: 21983,
   leetifyRating: 1.14,
-  kda: 1.39,
+  kd: 1.06,
   winrate: 0.6333,
   totalMatches: 1950,
   skills: { aim: 79.95, positioning: 66.27, utility: 60.89 },
@@ -60,7 +60,11 @@ describe('PlayerStats', () => {
     const values = Array.from(compiled.querySelectorAll('.stats-kpi-value')).map((el) =>
       el.textContent?.trim(),
     );
-    expect(values).toEqual(['21.983', '+1,14', '1,39']);
+    expect(values).toEqual(['21.983', '+1,14', '1,06']);
+    const kpiLabels = Array.from(compiled.querySelectorAll('.stats-kpi-label')).map((el) =>
+      el.textContent?.trim(),
+    );
+    expect(kpiLabels).toContain('K/D');
   });
 
   it('etiqueta correctamente preaim y utilidad sin usar', () => {

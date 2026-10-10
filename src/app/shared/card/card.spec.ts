@@ -31,7 +31,7 @@ const mockStats: PlayerStats = {
   syncedAt: '2026-10-09T12:00:00.000Z',
   premier: 21983,
   leetifyRating: 1.14,
-  kda: 1.39,
+  kd: 1.39,
   winrate: 0.6333,
   totalMatches: 1950,
   skills: { aim: 79.95, positioning: 66.27, utility: 60.89 },

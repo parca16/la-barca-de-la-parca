@@ -4,9 +4,9 @@ import { getLeetifyApiBase, getLeetifyApiKey } from './env.js';
  * Cliente de la API pública de Leetify y normalización de las stats que
  * consume la pestaña "Estadísticas" de la tarjeta de jugador.
  *
- * Se consultan dos endpoints porque el perfil agregado no incluye KDA ni ADR:
+ * Se consultan dos endpoints porque el perfil agregado no incluye K/D ni ADR:
  *   - `GET /v3/profile`         → perfil, rangos, ratings y stats agregadas.
- *   - `GET /v3/profile/matches` → últimas ~100 partidas, para derivar KDA/ADR.
+ *   - `GET /v3/profile/matches` → últimas ~100 partidas, para derivar K/D y ADR.
  *
  * La extracción (`buildPlayerStats`) es pura y no hace red, para poder testearla
  * con fixtures. La descarga (`fetchPlayerStats`) sí hace red.
@@ -35,9 +35,9 @@ function toNumber(value) {
 }
 
 /**
- * Deriva KDA y ADR de las partidas devueltas por Leetify, sumando solo las
+ * Deriva K/D y ADR de las partidas devueltas por Leetify, sumando solo las
  * stats del jugador objetivo:
- *   KDA = (Σkills + Σassists) / Σdeaths
+ *   K/D = Σkills / Σdeaths
  *   ADR = Σtotal_damage / Σrounds_count
  * Cubre las últimas ~100 partidas, no el histórico completo. Devuelve `null`
  * en cada campo si no hay denominador.
@@ -45,7 +45,6 @@ function toNumber(value) {
 export function summarizeMatches(matches, steam64Id) {
   let kills = 0;
   let deaths = 0;
-  let assists = 0;
   let damage = 0;
   let rounds = 0;
 
@@ -55,14 +54,13 @@ export function summarizeMatches(matches, steam64Id) {
       if (stats?.steam64_id !== steam64Id) continue;
       kills += toNumber(stats.total_kills) ?? 0;
       deaths += toNumber(stats.total_deaths) ?? 0;
-      assists += toNumber(stats.total_assists) ?? 0;
       damage += toNumber(stats.total_damage) ?? 0;
       rounds += toNumber(stats.rounds_count) ?? 0;
     }
   }
 
   return {
-    kda: deaths > 0 ? (kills + assists) / deaths : null,
+    kd: deaths > 0 ? kills / deaths : null,
     adr: rounds > 0 ? damage / rounds : null,
   };
 }
@@ -76,7 +74,7 @@ export function buildPlayerStats(profile, matches, steam64Id, syncedAt) {
   const rating = safeProfile.rating ?? {};
   const ranks = safeProfile.ranks ?? {};
   const stats = safeProfile.stats ?? {};
-  const { kda, adr } = summarizeMatches(Array.isArray(matches) ? matches : [], steam64Id);
+  const { kd, adr } = summarizeMatches(Array.isArray(matches) ? matches : [], steam64Id);
 
   return {
     steam64Id,
@@ -86,7 +84,7 @@ export function buildPlayerStats(profile, matches, steam64Id, syncedAt) {
     syncedAt,
     premier: toNumber(ranks.premier),
     leetifyRating: toNumber(ranks.leetify),
-    kda,
+    kd,
     winrate: toNumber(safeProfile.winrate),
     totalMatches: toNumber(safeProfile.total_matches),
     skills: {
@@ -141,7 +139,7 @@ async function fetchLeetifyJson(path, fetchImpl, attempt = 1) {
 
 /**
  * Consulta el perfil y las partidas de un jugador y devuelve las stats ya
- * normalizadas. El perfil es imprescindible; si las partidas fallan, KDA y ADR
+ * normalizadas. El perfil es imprescindible; si las partidas fallan, K/D y ADR
  * quedan en `null` en lugar de tumbar toda la respuesta.
  */
 export async function fetchPlayerStats(steam64Id, options = {}) {

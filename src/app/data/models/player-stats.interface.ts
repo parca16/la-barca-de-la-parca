@@ -27,8 +27,8 @@ export interface PlayerStats {
   syncedAt: string;
   premier: number | null;
   leetifyRating: number | null;
-  /** KDA sobre las últimas ~100 partidas. */
-  kda: number | null;
+  /** K/D (kills/deaths) sobre las últimas ~100 partidas. */
+  kd: number | null;
   winrate: number | null;
   totalMatches: number | null;
   skills: PlayerSkills;

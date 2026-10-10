@@ -125,7 +125,7 @@ export class PlayerStats implements OnInit {
           value: rating === null ? DASH : signedFormatter.format(rating),
           tone: rating === null ? null : rating > 0 ? 'pos' : rating < 0 ? 'neg' : null,
         },
-        { label: 'KDA', value: formatDecimal(stats.kda, 2), tone: null },
+        { label: 'K/D', value: formatDecimal(stats.kd, 2), tone: null },
       ],
       skills: [
         {

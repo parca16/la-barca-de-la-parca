@@ -74,16 +74,16 @@ describe('normalizeSteam64', () => {
 });
 
 describe('summarizeMatches', () => {
-  it('deriva KDA y ADR solo con las stats del jugador objetivo', () => {
-    const { kda, adr } = summarizeMatches(matches, STEAM64);
-    // (30 kills + 10 assists) / 20 deaths = 2
-    expect(kda).toBeCloseTo(2, 5);
+  it('deriva K/D y ADR solo con las stats del jugador objetivo', () => {
+    const { kd, adr } = summarizeMatches(matches, STEAM64);
+    // 30 kills / 20 deaths = 1.5
+    expect(kd).toBeCloseTo(1.5, 5);
     // 3000 daño / 50 rondas = 60
     expect(adr).toBeCloseTo(60, 5);
   });
 
   it('devuelve null sin denominador', () => {
-    expect(summarizeMatches([], STEAM64)).toEqual({ kda: null, adr: null });
+    expect(summarizeMatches([], STEAM64)).toEqual({ kd: null, adr: null });
   });
 });
 
@@ -108,7 +108,7 @@ describe('buildPlayerStats', () => {
         sprayAccuracyPct: 45.85,
       },
     });
-    expect(stats.kda).toBeCloseTo(2, 5);
+    expect(stats.kd).toBeCloseTo(1.5, 5);
     expect(stats.highlights.adr).toBeCloseTo(60, 5);
   });
 
@@ -117,7 +117,7 @@ describe('buildPlayerStats', () => {
     expect(stats.privacyMode).toBe('private');
     expect(stats.premier).toBeNull();
     expect(stats.leetifyRating).toBeNull();
-    expect(stats.kda).toBeNull();
+    expect(stats.kd).toBeNull();
     expect(stats.highlights.adr).toBeNull();
     expect(stats.skills).toEqual({ aim: null, positioning: null, utility: null });
   });
@@ -143,7 +143,7 @@ describe('fetchPlayerStats', () => {
 
     const stats = await fetchPlayerStats(STEAM64, { fetchImpl });
     expect(stats.premier).toBe(21983);
-    expect(stats.kda).toBeCloseTo(2, 5);
+    expect(stats.kd).toBeCloseTo(1.5, 5);
     expect(stats.highlights.adr).toBeCloseTo(60, 5);
   });
 
@@ -158,7 +158,7 @@ describe('fetchPlayerStats', () => {
 
       const stats = await fetchPlayerStats(STEAM64, { fetchImpl });
       expect(stats.premier).toBe(21983);
-      expect(stats.kda).toBeNull();
+      expect(stats.kd).toBeNull();
       expect(stats.highlights.adr).toBeNull();
     } finally {
       if (previous === undefined) delete process.env['LEETIFY_MAX_RETRIES'];
