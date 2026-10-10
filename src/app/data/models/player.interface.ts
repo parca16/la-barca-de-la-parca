@@ -7,6 +7,7 @@ export interface Player {
   photoUrl: string;
   borderColor?: string;
   steamUrl?: string;
+  steam64Id?: string;
   faceitUrl?: string;
   abbrev?: string;
   photoPosition?: string;

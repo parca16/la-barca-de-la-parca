@@ -13,12 +13,13 @@ async function main(): Promise<void> {
     console.warn('Aviso: no hay .env.local; se usarán las variables del entorno actual.');
   }
 
-  const [login, callback, logout, me, classes] = await Promise.all([
+  const [login, callback, logout, me, classes, stats] = await Promise.all([
     import('../api/auth/login.js'),
     import('../api/auth/callback.js'),
     import('../api/auth/logout.js'),
     import('../api/auth/me.js'),
     import('../api/content/classes.js'),
+    import('../api/stats/[steam64].js'),
   ]);
 
   const routes: Record<string, Handler> = {
@@ -29,11 +30,34 @@ async function main(): Promise<void> {
     '/api/content/classes': classes.default as unknown as Handler,
   };
 
+  // Rutas dinámicas (params). Vercel rellena `req.query`, así que el servidor de
+  // desarrollo hace lo mismo para poder reutilizar los mismos handlers.
+  const dynamicRoutes: Array<{ pattern: RegExp; param: string; handler: Handler; label: string }> =
+    [
+      {
+        pattern: /^\/api\/stats\/([^/]+)\/?$/,
+        param: 'steam64',
+        handler: stats.default,
+        label: '/api/stats/:steam64',
+      },
+    ];
+
   // Servidor mínimo para desarrollo local que ejecuta los mismos handlers que
   // desplegará Vercel en `/api`. Se usa junto a `npm start` (proxy de Angular).
   const server = createServer((req, res) => {
     const pathname = new URL(req.url ?? '/', `http://localhost:${port}`).pathname;
-    const handler = routes[pathname];
+    let handler = routes[pathname];
+
+    if (!handler) {
+      for (const route of dynamicRoutes) {
+        const match = route.pattern.exec(pathname);
+        if (match) {
+          (req as { query?: Record<string, string> }).query = { [route.param]: match[1] };
+          handler = route.handler;
+          break;
+        }
+      }
+    }
 
     // Permite llamar a la API directamente desde el dev server de Angular.
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -61,7 +85,8 @@ async function main(): Promise<void> {
 
   server.listen(port, () => {
     console.log(`API de desarrollo en http://localhost:${port}`);
-    console.log('Rutas:', Object.keys(routes).join(', '));
+    const labels = [...Object.keys(routes), ...dynamicRoutes.map((route) => route.label)];
+    console.log('Rutas:', labels.join(', '));
   });
 }
 

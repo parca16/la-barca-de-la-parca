@@ -134,9 +134,7 @@
           </div>
         }
         @case ('stats') {
-          <div class="tab-stats-empty">
-            <p>Estadísticas no disponibles</p>
-          </div>
+          <app-player-stats [steam64Id]="player().steam64Id ?? ''" />
         }
       }
     </div>

@@ -1,6 +1,9 @@
+import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { Card } from './card';
 import { Player } from '../../data/models/player.interface';
+import { PlayerStats } from '../../data/models/player-stats.interface';
+import { Card } from './card';
 
 const mockPlayer: Player = {
   name: 'Alejo "Parca" Rivas',
@@ -12,12 +15,34 @@ const mockPlayer: Player = {
   borderColor: '#E9FF1F',
   abbrev: 'Parca',
   steamUrl: 'https://steamcommunity.com/profiles/76561198301504889',
+  steam64Id: '76561198301504889',
   faceitUrl: 'https://www.faceit.com/en/players/parca16',
   photoPosition: 'center 60%',
   posicionDesc: 'El cerebro del equipo.',
   virtudes: ['Liderazgo'],
   defectos: ['Headshots'],
   perfilPsicologico: 'Estable y metódico.',
+};
+
+const mockStats: PlayerStats = {
+  steam64Id: '76561198301504889',
+  name: 'Kevs',
+  privacyMode: 'public',
+  syncedAt: '2026-10-09T12:00:00.000Z',
+  premier: 21983,
+  leetifyRating: 1.14,
+  kda: 1.39,
+  winrate: 0.6333,
+  totalMatches: 1950,
+  skills: { aim: 79.95, positioning: 66.27, utility: 60.89 },
+  highlights: {
+    crosshairPlacement: 10.27,
+    headshotPct: 23.35,
+    utilityOnDeath: 488.59,
+    counterStrafingPct: 81.01,
+    adr: 88.1,
+    sprayAccuracyPct: 45.85,
+  },
 };
 
 describe('Card', () => {
@@ -28,9 +53,18 @@ describe('Card', () => {
     return fixture;
   }
 
+  function openStatsTab(fixture: ReturnType<typeof createCard>) {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const buttons = compiled.querySelectorAll<HTMLButtonElement>('.segmented-btn');
+    buttons[4].click();
+    fixture.detectChanges();
+    return compiled;
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Card],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     }).compileComponents();
   });
 
@@ -74,5 +108,70 @@ describe('Card', () => {
 
     const dark = createCard({ ...mockPlayer, borderColor: '#000000' }).nativeElement as HTMLElement;
     expect(dark.querySelector('.role-badge')?.classList.contains('role-light-bg')).toBe(false);
+  });
+
+  it('should request and render the player stats when opening the stats tab', () => {
+    const fixture = createCard();
+    const http = TestBed.inject(HttpTestingController);
+    const compiled = openStatsTab(fixture);
+
+    expect(compiled.querySelector('.tab-stats-state')?.textContent).toContain('Cargando');
+
+    http.expectOne(`/api/stats/${mockPlayer.steam64Id}`).flush({ stats: mockStats });
+    fixture.detectChanges();
+
+    expect(compiled.querySelectorAll('.stats-kpi').length).toBe(3);
+    expect(compiled.querySelectorAll('.stats-skill').length).toBe(3);
+    expect(compiled.querySelectorAll('.stats-cell').length).toBe(6);
+    expect(compiled.querySelector('.stats-attribution')?.textContent).toContain('Leetify');
+    http.verify();
+  });
+
+  it('should show an error message when the stats request fails', () => {
+    const fixture = createCard();
+    const http = TestBed.inject(HttpTestingController);
+    const compiled = openStatsTab(fixture);
+
+    http
+      .expectOne(`/api/stats/${mockPlayer.steam64Id}`)
+      .flush('boom', { status: 500, statusText: 'Server Error' });
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('.tab-stats-state')?.textContent).toContain(
+      'No se pudieron cargar',
+    );
+  });
+
+  it('should show the private profile message when Leetify hides the data', () => {
+    const fixture = createCard();
+    const http = TestBed.inject(HttpTestingController);
+    const compiled = openStatsTab(fixture);
+
+    http
+      .expectOne(`/api/stats/${mockPlayer.steam64Id}`)
+      .flush({ stats: { ...mockStats, privacyMode: 'private' } });
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('.tab-stats-state')?.textContent).toContain(
+      'Perfil privado en Leetify',
+    );
+  });
+
+  it('should not call the API twice for the same player', () => {
+    const fixture = createCard();
+    const http = TestBed.inject(HttpTestingController);
+    const compiled = fixture.nativeElement as HTMLElement;
+    const buttons = compiled.querySelectorAll<HTMLButtonElement>('.segmented-btn');
+
+    openStatsTab(fixture);
+    http.expectOne(`/api/stats/${mockPlayer.steam64Id}`).flush({ stats: mockStats });
+    fixture.detectChanges();
+
+    // Volver al perfil y reabrir la pestaña de stats no debe repetir la llamada
+    // (el componente se recrea, pero el servicio cachea el resultado).
+    buttons[0].click();
+    fixture.detectChanges();
+    openStatsTab(fixture);
+    http.expectNone(`/api/stats/${mockPlayer.steam64Id}`);
   });
 });

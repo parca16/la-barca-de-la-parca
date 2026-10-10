@@ -1,0 +1,158 @@
+.tab-stats-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.tab-stats-state p {
+  color: #555;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.tab-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.stats-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+.stats-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.85rem 1rem;
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stats-kpi-label {
+  font-size: 0.7rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.stats-kpi-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ddd;
+  font-family: var(--font-mono);
+}
+
+.stats-kpi-value.pos {
+  color: #22c55e;
+}
+
+.stats-kpi-value.neg {
+  color: #ef4444;
+}
+
+.stats-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.stats-skill {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stats-skill-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stats-skill-label {
+  color: #666;
+  font-weight: 600;
+}
+
+.stats-skill-value {
+  color: #ddd;
+  font-weight: 700;
+}
+
+.stats-skill-bar {
+  height: 6px;
+  background: var(--bg-2);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+}
+
+.stats-skill-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--border-hover), #ddd);
+  border-radius: 999px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.stats-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.6rem 0.8rem;
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+}
+
+.stats-cell-label {
+  font-size: 0.68rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.stats-cell-value {
+  font-size: 1.05rem;
+  color: #ddd;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.stats-attribution {
+  margin: 0;
+  font-size: 0.68rem;
+  color: #555;
+  text-align: right;
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 600px) {
+  .tab-stats-state p {
+    font-size: 0.9rem;
+  }
+  .stats-kpi-value {
+    font-size: 1.15rem;
+  }
+  .stats-cell-value {
+    font-size: 0.95rem;
+  }
+}

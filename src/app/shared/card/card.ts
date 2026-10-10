@@ -1,5 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { Player } from '../../data/models/player.interface';
+import { PlayerStats } from '../player-stats/player-stats';
 
 function isLightColor(hexColor?: string): boolean {
   if (!hexColor) return false;
@@ -13,7 +14,7 @@ function isLightColor(hexColor?: string): boolean {
 
 @Component({
   selector: 'app-card',
-  imports: [],
+  imports: [PlayerStats],
   templateUrl: './card.html',
   styleUrl: './card.css',
 })
