@@ -2,6 +2,10 @@
   <div class="tab-stats-state">
     <p>Cargando estadísticas…</p>
   </div>
+} @else if (error() === 'unauthorized') {
+  <div class="tab-stats-state">
+    <p>Inicia sesión para ver las estadísticas.</p>
+  </div>
 } @else if (error()) {
   <div class="tab-stats-state">
     <p>No se pudieron cargar las estadísticas.</p>

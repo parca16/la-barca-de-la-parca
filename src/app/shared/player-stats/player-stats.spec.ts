@@ -102,6 +102,22 @@ describe('PlayerStats', () => {
     );
   });
 
+  it('muestra el aviso de sesión cuando el endpoint responde 401', () => {
+    const fixture = TestBed.createComponent(PlayerStats);
+    fixture.componentRef.setInput('steam64Id', STEAM64);
+    fixture.detectChanges();
+    http = TestBed.inject(HttpTestingController);
+    http
+      .expectOne(`/api/stats/${STEAM64}`)
+      .flush({ error: 'unauthorized' }, { status: 401, statusText: 'Unauthorized' });
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.tab-stats-state')?.textContent).toContain(
+      'Inicia sesión para ver las estadísticas',
+    );
+  });
+
   it('no pide nada si no hay SteamID64', () => {
     const fixture = TestBed.createComponent(PlayerStats);
     fixture.componentRef.setInput('steam64Id', '');

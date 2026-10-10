@@ -1,18 +1,20 @@
 import { methodNotAllowed, sendJson } from '../_lib/http.js';
 import { getCachedPlayerStats, normalizeSteam64 } from '../_lib/leetify.js';
-import { getSessionUser } from '../_lib/session.js';
 
 /**
  * GET /api/stats/:steam64
  *
  * Devuelve las estadísticas de un jugador obtenidas de Leetify, ya normalizadas
- * para la pestaña "Estadísticas" de la tarjeta. Es privado: exige sesión válida
- * (la API key de Leetify vive solo en el servidor, nunca en el cliente).
+ * para la pestaña "Estadísticas" de la tarjeta.
+ *
+ * Es público: el dato ya lo es en Leetify (según `privacy_mode`) y la página del
+ * roster no requiere sesión. Se cachea en el CDN 30 min para no castigar el rate
+ * limit de Leetify. La API key, si existe, vive solo en el servidor.
  */
 
-// `private` porque la respuesta va detrás de sesión; evita que un CDN sirva
-// datos cacheados a una petición sin autenticar. El navegador sí la reutiliza.
-const CACHE_HEADER = 'private, max-age=1800, stale-while-revalidate=86400';
+// `s-maxage` delega la caché en el CDN; como la URL incluye el SteamID64, cada
+// jugador tiene su propia entrada.
+const CACHE_HEADER = 'public, s-maxage=1800, stale-while-revalidate=86400';
 
 /** Lee el SteamID64 del parámetro dinámico, con fallback a la URL si hiciera falta. */
 function readSteam64(req) {
@@ -29,12 +31,6 @@ function readSteam64(req) {
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     methodNotAllowed(res, 'GET');
-    return;
-  }
-
-  const user = getSessionUser(req);
-  if (!user) {
-    sendJson(res, 401, { error: 'unauthorized' });
     return;
   }
 

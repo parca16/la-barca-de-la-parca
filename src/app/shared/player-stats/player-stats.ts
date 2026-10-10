@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, computed, inject, input, signal } from '@angular/core';
 import { StatsService } from '../../core/stats/stats.service';
 import { PlayerStats as PlayerStatsData } from '../../data/models/player-stats.interface';
@@ -74,7 +75,7 @@ export class PlayerStats implements OnInit {
 
   protected readonly stats = signal<PlayerStatsData | null>(null);
   protected readonly loading = signal(true);
-  protected readonly error = signal(false);
+  protected readonly error = signal<'unauthorized' | 'generic' | null>(null);
 
   protected readonly view = computed<StatsView | null>(() => this.buildView(this.stats()));
 
@@ -90,8 +91,9 @@ export class PlayerStats implements OnInit {
         this.stats.set(stats);
         this.loading.set(false);
       },
-      error: () => {
-        this.error.set(true);
+      error: (error: unknown) => {
+        const status = error instanceof HttpErrorResponse ? error.status : 0;
+        this.error.set(status === 401 ? 'unauthorized' : 'generic');
         this.loading.set(false);
       },
     });
